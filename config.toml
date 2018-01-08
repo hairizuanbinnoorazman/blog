@@ -1,3 +1,13 @@
+baseurl = "https://www.example.org/"
+title = "Kiera"
+copyright = "Copyright &copy; 2017 - Author Name"
+canonifyurls = true
+theme = "kiera"
+
+paginate = 3
+
+summaryLength = 30
+enableEmoji = true
 pygmentsCodeFences = true
 
 googleAnalytics = "" #Google Analytics ID
@@ -5,8 +15,8 @@ googleAnalytics = "" #Google Analytics ID
 [author]
     name = "Hairizuan Noorazman"       #Author name
     github = "hairizuanbinnoorazman"     #Github username
-    linkedin = ""   #LinkedIn username
-    facebook = ""   #Facebook username
+    linkedin = "hairizuan-noorazman"   #LinkedIn username
+    facebook = "hairizuan.noorazman"   #Facebook username
     twitter = ""    #Twitter username
     instagram = ""  #Instagram username
 
