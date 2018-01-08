@@ -1,3 +1,14 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+pygmentsCodeFences = true
+
+googleAnalytics = "" #Google Analytics ID
+
+[author]
+    name = "Hairizuan Noorazman"       #Author name
+    github = "hairizuanbinnoorazman"     #Github username
+    linkedin = ""   #LinkedIn username
+    facebook = ""   #Facebook username
+    twitter = ""    #Twitter username
+    instagram = ""  #Instagram username
+
+[params]
+    tagline = "Experiment, Fail, Learn, Repeat"
