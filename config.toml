@@ -1,3 +1,4 @@
+pygmentsCodeFences = true
 baseurl = "https://frosty-mahavira-65c534.netlify.com"
 title = "Experiment, Fail, Learn, Repeat"
 copyright = "Copyright &copy; 2017 - Hairizuan Noorazman"
@@ -8,7 +9,6 @@ paginate = 3
 
 summaryLength = 30
 enableEmoji = true
-pygmentsCodeFences = true
 
 googleAnalytics = "" #Google Analytics ID
 
