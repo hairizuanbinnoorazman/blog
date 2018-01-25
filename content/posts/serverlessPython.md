@@ -24,6 +24,8 @@ However, if one is to write for those said AWS lambda functions, it gets complic
 order to utilize the full ecosystem, you would need to write cloud formation templates to spin up the 
 required architecture and permission systems to get the whole functionality working.
 
+# Using Serverless Framework for serverless applications
+
 This is where the serverless framework kind of comes in. Here's a link to their website:
 
 https://serverless.com/
