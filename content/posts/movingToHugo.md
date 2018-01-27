@@ -67,7 +67,12 @@ https://www.staticgen.com/
 
 ## Flexibility to customize
 
-So far, the platforms I've tried so far doesn't allow much customizations in terms of customizing look and feel of the site (not that I myself needed much customizations in terms of look and feel)
+So far, the platforms I've tried so far doesn't allow much customizations in terms of customizing look and feel of the site (not that I myself needed much customizations in terms of look and feel). However, I was a lot more concerned 
+regarding the capability to add metadata and custom analytics tracking to the site.
+
+I needed the site to be used for experimentation and using platforms don't really allow that level of experimentation.
+
+In Hugo, it is relatively easy to create a code snippet which can be embedded in the every section of the site - It becomes possible to switch between Google Analytics, Google Tag Manager or other analytics tags.
 
 ## Additional Remarks
 
