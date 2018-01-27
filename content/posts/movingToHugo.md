@@ -65,6 +65,10 @@ Here are some of the others that I'm kind of looking into and their links:
 But you know, if none of them tickle your fancy, you can always refer to this list right here:  
 https://www.staticgen.com/
 
+## Flexibility to customize
+
+So far, the platforms I've tried so far doesn't allow much customizations in terms of customizing look and feel of the site (not that I myself needed much customizations in terms of look and feel)
+
 ## Additional Remarks
 
 Note to my future self;  
