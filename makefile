@@ -4,4 +4,4 @@ build:
 test:
 	ls -a
 local:
-	hugo server -w
+	hugo server -w --disableFastRender
