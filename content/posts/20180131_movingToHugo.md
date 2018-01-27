@@ -8,7 +8,6 @@ date = "3000-01-20"
 categories = [
     "static-sites",
 ]
-image = ""
 +++
 
 After a long while being on some managed platform for writing blog posts, I decided to move out of that into one which would require myself to manage things on my own.
