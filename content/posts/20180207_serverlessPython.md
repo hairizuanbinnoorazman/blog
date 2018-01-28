@@ -55,6 +55,37 @@ We can start this using serverless by running the following command here:
 ```bash
 serverless create --template aws-python3
 ```
-This would create all of required templates files like 
+This would create all of required templates files like the `serverless.yml` file.
+
+We can then proceed to think of how to manage dependencies by using the `pipenv`
+
+Use the following command:
+
+```bash
+pipenv --three
+```
+
+This would install get the required files `Pipfile` and `Pipfile.lock`. At this stage, because there are files in the folder already, the tool would probably complain that there are files in that folder; just accept and force it to initialize those set of files. That would get the dependency management out of the way.
+
+The final piece of the puzzle is actually the capability to get the libraries that have C bindings into the Serverless application. There is a previous blog post which I went thorugh this before https://hairizuan.wordpress.com/2018/01/02/using-aws-lambda-for-data-science-projects-and-automations-part-2/ It should be part of a my previous blog. In short, if one is to try to just install those libraries normally, the library would fail to install and it becomes impossible to use that library. However, one can circumvent that by building that python library with C bindings in AWS Lambda's image which you can then import in and install it on AWS Lambda.
+
+This is done via a serverless plugin which would also need to be installed as well:
+
+```bash
+npm install --save serverless-python-requirements
+```
+
+One more thing that we would need to do is to create a AWS profile that can be used to deploy the application. This is done by following the directions in the link here:
+
+https://serverless.com/framework/docs/providers/aws/guide/credentials#using-aws-profiles
+
+Or, if you already have an AWS profile, you can use it by following this guide instead:
+
+https://serverless.com/framework/docs/providers/aws/guide/credentials#use-an-existing-aws-profile
+
+With that, we can finally get started with developing the application.
+
+
+
 
 
