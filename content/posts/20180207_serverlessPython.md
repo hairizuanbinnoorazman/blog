@@ -67,7 +67,7 @@ pipenv --three
 
 This would install get the required files `Pipfile` and `Pipfile.lock`. At this stage, because there are files in the folder already, the tool would probably complain that there are files in that folder; just accept and force it to initialize those set of files. That would get the dependency management out of the way.
 
-The final piece of the puzzle is actually the capability to get the libraries that have C bindings into the Serverless application. There is a previous blog post which I went thorugh this before https://hairizuan.wordpress.com/2018/01/02/using-aws-lambda-for-data-science-projects-and-automations-part-2/ It should be part of a my previous blog. In short, if one is to try to just install those libraries normally, the library would fail to install and it becomes impossible to use that library. However, one can circumvent that by building that python library with C bindings in AWS Lambda's image which you can then import in and install it on AWS Lambda.
+The final piece of the puzzle is actually the capability to get the libraries that have C bindings into the Serverless application. There is a previous blog post which I went thorugh this before https://hairizuan.wordpress.com/2018/01/02/using-aws-lambda-for-data-science-projects-and-automations-part-2/ It should be part of my previous blog. In short, if one is to try to just install those libraries normally, the library would fail to install and it becomes impossible to use that library. However, one can circumvent that by building that python library with C bindings in AWS Lambda's image which you can then import in and install it on AWS Lambda.
 
 This is done via a serverless plugin which would also need to be installed as well:
 
