@@ -5,7 +5,7 @@ tags = [
     "golang",
     "python",
 ]
-date = "2018-01-20"
+date = "2018-02-14"
 categories = [
     "conferences",
 ]
@@ -30,6 +30,8 @@ modern architecture technologies
   https://us.pycon.org/2018/  
 - Gophercon Singapore 2018 (May 2018)  
   Conference Link: https://2018.gophercon.sg/  
+- Pycon APAC 2018  (May 2018)  
+  https://pycon.sg/  
 - Dockercon 2018 (June 2018)  
   https://2018.dockercon.com/
 - UseR Conference (July 2018)  
