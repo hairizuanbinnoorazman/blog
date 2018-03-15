@@ -14,7 +14,7 @@ categories = [
 A list of conferences and meetups and exhibitions to look for especially in 2018:
 
 This kind of personal list that I'm keeping track; it mainly revolves around Golang, 
-modern architecture technologies
+modern architecture technologies e.g. Cloud technologies etc, Python and even R (One of my initial language, I still do keep a lookout of how it's doing nowadays.)
 
 # Conferences
 
