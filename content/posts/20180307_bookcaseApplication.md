@@ -23,7 +23,13 @@ The web application contains the following features:
 User Registration Flow
 - User sign ups with email and password. Email sent to user
 - User can go into portal (But does not permission to do plenty of stuff?) - user is still inactive
-- User activate emails by clicking on link
+- User activate emails by clicking on link in the email
+- User is now active
+
+User forgotten password
+- User clicks forget password
+- Email sent to user (Forgot password expiry activated with its respective token)
+- After clicking on email for forgot password email, if before the forgotten expiry time, allow the password change, else; no change to the password
 
 Initial thoughts on construction of the API layer:
 - Products (List, Get, Add, Subtract, Modify - qty,description,status,etc)
@@ -45,6 +51,9 @@ User
 - Record Creation Time
 - Permissions
 - isActive status
+- activationCode
+- forgotPasswordExpiry
+- forgotPasswordToken
 
 Permissions
 - ID
