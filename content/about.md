@@ -6,15 +6,11 @@ weight = "20"
 meta = "false"
 +++
 
-Hugo is a static site engine written in Go.
+Below is a collection of some of projects I've been working on. These are not code snippets but of tools/internal libraries I've built to solve issues that I have in the past
 
+# R
 
-It makes use of a variety of open source projects including:
+- rgoogleslides
 
-jwioioweionoinoeno
-
-- momomofmoemr
-- jkjkekrmwkm
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+# Golang
 
