@@ -24,6 +24,7 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   Video Link: https://www.rstudio.com/resources/webinars/#rstudioconf2018  
 - Fossasia Conference (March 2018)  
   https://2018.fossasia.org/
+  Video Link: https://engineers.sg/conference/fossasia-2018
 - Vue Conference (March 2018)  
   http://us.vuejs.org/
 - Pycon US 2018 (May 2018)  
