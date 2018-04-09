@@ -11,6 +11,7 @@ Below is a collection of some of projects I've been working on. These are not co
 # R
 
 - rgoogleslides
+- rgoogledrive
 
 # Golang
 
