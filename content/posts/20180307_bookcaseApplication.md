@@ -61,6 +61,7 @@ Fields
 - Last Login Time
 
 Some constraints set on the user struct:
+- ID: UUID. It has to be a UUID regex pattern during validation
 - First name: Must not be empty, must be less than 100 characters
 - Last name: Must not be empty, must be less than 100 characters
 - Email: Must follow the email regex (Includes @ and domain at the end)
@@ -78,6 +79,7 @@ Fields
 - Updated Time
 
 Some constraints set on the permissions struct:
+- ID: UUID. It has to be a UUID regex pattern during validation
 - Name of permission: Must not be empty, must be less than 150 characters
 - Description: Must not be empty, Text field is sql
 - Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
@@ -92,6 +94,7 @@ Fields
 - Updated Time
 
 Some constraints set on the role struct:
+- ID: UUID. It has to be a UUID regex pattern during validation
 - Name of role: Must not be empty, must contain any one of the following strings: ['admin', 'member', 'editor', 'view']
 - Description: Must not be empty, Text field
 
@@ -110,25 +113,53 @@ Fields
 - Long Description
 - Product Category (Foreign Key)
 - Product Subcategory (Foreign Key)
-- Created Time
-- Updated Time
-
-## Product Category
-- ProductCategoryID
-- Name of Product Category
-- Description
+- Status
 - Remarks
 - Created Time
 - Updated Time
 
+Some constraints
+- ID: UUID. It has to be a UUID regex pattern during validation
+- Name: Cannot be empty, Shorter than 150 characters
+- Short Description: Cannot be empty. Shorter than 150 characters
+- Long Description: Cannot be empty. Text field
+- Product Category: It has to be part of a valid product category
+- Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
+
+## Product Category
+
+Fields
+- ProductCategoryID
+- Name of Product Category
+- Description
+- Status
+- Remarks
+- Created Time
+- Updated Time
+
+Some constraints
+- ID: UUID. It has to be a UUID regex pattern during validation
+- Name: Cannot be empty, Shorter than 150 characters
+- Short Description: Cannot be empty. Shorter than 150 characters
+- Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
+
 ## Product Subcategory
+
+Fields
 - Product Subcategory ID
 - Name of Product Subcategory
 - Description
+- Status
 - Remarks
 - Product ID
 - Created Time
 - Updated Time
+
+Some constraints
+- ID: UUID. It has to be a UUID regex pattern during validation
+- Name: Cannot be empty, Shorter than 150 characters
+- Short Description: Cannot be empty. Shorter than 150 characters
+- Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
 
 ## Supplier ID 
 - ID
@@ -137,9 +168,11 @@ Fields
 - Supplier Main Contact
 - Supplier Secondary Contact
 - Supplier Email
-- Country
+- Address
 - Created Time
 - Updated Time
 
-
+Some constraints
+- ID: UUID. It has to be a UUID regex pattern during validation
+- Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
 
