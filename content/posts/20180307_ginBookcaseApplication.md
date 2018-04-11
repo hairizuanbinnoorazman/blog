@@ -17,7 +17,11 @@ This is an application based on a previous blog post on Bookcase application.
 
 Some of the below tool/libraries would be useful when added the Bookcase application
 
-- Viper (Reading Configuration Files)
+- (Viper)[https://github.com/spf13/viper] (Reading Configuration Files)
+- (Negroni)[https://github.com/urfave/negroni] (Middleware Management)
+- (Sendgrid)[https://github.com/sendgrid/sendgrid-go] (Transaction Email)
+- (JWT Tokens)[https://github.com/dgrijalva/jwt-go] (Auth token library)
+
 
 # Learning 1: Structuring the application
 
