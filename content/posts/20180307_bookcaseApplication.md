@@ -40,51 +40,100 @@ Initial thoughts on construction of the API layer:
 
 # List of database fields
 
-User
+## User
+
+Fields
 - ID
 - First Name
 - Last Name
 - Email
 - Password
-- Facebook ID
-- Twitter ID
-- Google ID
-- Record Creation Time
+- Facebook ID (Optional)
+- Twitter ID (Optional)
+- Google ID (Optional)
 - Permissions
 - isActive status
 - activationCode
 - forgotPasswordExpiry
 - forgotPasswordToken
+- Created Time
+- Updated Time
+- Last Login Time
 
-Permissions
+Some constraints set on the user struct:
+- First name: Must not be empty, must be less than 100 characters
+- Last name: Must not be empty, must be less than 100 characters
+- Email: Must follow the email regex (Includes @ and domain at the end)
+- Password: Password length > 8; Must contain at least small characters, Capital letters and a number
+
+## Permissions
+
+Fields
 - ID
 - Name of permission (UpdateProductField,ViewProductField,Public etc)
+- Description
+- Status
+- Remarks
+- Created Time
+- Updated Time
 
-Product Fields
+Some constraints set on the permissions struct:
+- Name of permission: Must not be empty, must be less than 150 characters
+- Description: Must not be empty, Text field is sql
+- Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
+
+## Role
+
+Fields
+- ID
+- Name of role
+- Description
+- Created Time
+- Updated Time
+
+Some constraints set on the role struct:
+- Name of role: Must not be empty, must contain any one of the following strings: ['admin', 'member', 'editor', 'view']
+- Description: Must not be empty, Text field
+
+## Role x Permission Mapping
+
+Fields (Many:Many relationship)
+- Role ID
+- Permission ID
+
+## Items
+
+Fields
 - ID
 - Name of Product
 - Short Description
 - Long Description
 - Product Category (Foreign Key)
 - Product Subcategory (Foreign Key)
-- Supplier ID
-
-Product Category
-- ProductCategoryID
-- Name of Product Category
 - Created Time
 - Updated Time
 
-Product Subcategory
+## Product Category
+- ProductCategoryID
+- Name of Product Category
+- Description
+- Remarks
+- Created Time
+- Updated Time
+
+## Product Subcategory
 - Product Subcategory ID
 - Name of Product Subcategory
+- Description
+- Remarks
 - Product ID
 - Created Time
 - Updated Time
 
-Supplier ID
+## Supplier ID 
 - ID
 - Supplier Name
+- Description
 - Supplier Main Contact
 - Supplier Secondary Contact
 - Supplier Email
