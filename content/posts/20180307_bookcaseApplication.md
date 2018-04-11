@@ -61,25 +61,26 @@ Permissions
 - Name of permission (UpdateProductField,ViewProductField,Public etc)
 
 Product Fields
-- ID (UUID)
+- ID
 - Name of Product
 - Short Description
 - Long Description
 - Product Category (Foreign Key)
 - Product Subcategory (Foreign Key)
-- Qty
-- Price
-- Cost Price
 - Supplier ID
 
 Product Category
 - ProductCategoryID
 - Name of Product Category
+- Created Time
+- Updated Time
 
 Product Subcategory
 - Product Subcategory ID
 - Name of Product Subcategory
 - Product ID
+- Created Time
+- Updated Time
 
 Supplier ID
 - ID
@@ -88,6 +89,8 @@ Supplier ID
 - Supplier Secondary Contact
 - Supplier Email
 - Country
+- Created Time
+- Updated Time
 
 
 
