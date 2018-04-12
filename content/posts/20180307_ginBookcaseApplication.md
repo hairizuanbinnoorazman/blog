@@ -17,10 +17,10 @@ This is an application based on a previous blog post on Bookcase application.
 
 Some of the below tool/libraries would be useful when added the Bookcase application
 
-- (Viper)[https://github.com/spf13/viper] (Reading Configuration Files)
-- (Negroni)[https://github.com/urfave/negroni] (Middleware Management)
-- (Sendgrid)[https://github.com/sendgrid/sendgrid-go] (Transaction Email)
-- (JWT Tokens)[https://github.com/dgrijalva/jwt-go] (Auth token library)
+- [Viper](https://github.com/spf13/viper) - Reading Configuration Files
+- [Negroni](https://github.com/urfave/negroni) - Middleware Management
+- [Sendgrid](https://github.com/sendgrid/sendgrid-go) - Transaction Email
+- [JWT Tokens](https://github.com/dgrijalva/jwt-go) - Auth token library
 
 
 # Learning 1: Structuring the application
@@ -37,6 +37,25 @@ We would do a few things when structuring the application:
 - Put all of our logic (or as much as possible) into our models; in this case, it would be structs.
 - Have a service layer that would deal with interfacing our model and logics with a persistance system (it could be something that could be stored in memory, a file system or even db). The service layer does nothing except to take the model/entity that it is suppose to 'service' and save/store it.
 - Our controller would consume the concrete service (defined through structs that have functions attached to it) and it would only be concerned about transport only.
+
+## TDD immediately available
+
+With such a structure, we can approach the app in TDD style. It's slightly unfortunate that we don't really have any complex algorithms to apply to really test the approach but this structure does provide an interesting structure to work with.
+
+From the blog post on the requirements of the bookcase application, we already have some sort of specs. We can convert the spec (constraints) on the model and get the tests out of the way. This video covers on how we can imagine this scenario. [TDD for those who don't need it](https://www.youtube.com/watch?v=a6oP24CSdUg)
+
+As a matter of convenience, we would you this pretty decent approach of create a list of tables of test cases that is to be tested with each model's implementation. Refer to this youtube video for inspiration on this. [Advanced Testing with Go](https://www.youtube.com/watch?v=8hQG7QlcLBk&t=2222s)
+
+## Additional challenges
+
+(Not yet implemented)
+
+For an additional challenge when making this applicaiton, we would try to see if we can add the following:
+- Utilize multiple data storage options. For some of the endpoints, we can see if we can make multiple implementations of the same service and make it easier to switch (or refactor) for 3rd party storage components.
+  - Redis
+  - MySQL
+  - Google Datastore
+- Create an endpoint which is customized for a view (a subset of a domain model or a subet of a joined data model). Test the implementation of such an endpoint.
 
 # Learning 2: Applying the decorator pattern
 
