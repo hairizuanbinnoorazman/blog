@@ -44,31 +44,34 @@ Doing the following adds plenty of extra code to your codebase. If you are sure 
 For some that would require breaking changes etc, one extra step that you can do is to actually add a note about depreciation of some functionality and add some information on why the function or variable is depreciated 
 
 5. Add a new field to a struct safely (Don't depreciate it yet - adding of new fields might result in unexpected behaviours?)
-   ```golang
-   type Planet struct {
-       Name   string  `json:"name"`
-       Radius float64 `json:"radius"`
-   }
 
-   type PlanetWithMass struct {
-       Planet
-       Mass float64 `json:"mass"`
-   }
-   ```
+```golang
+type Planet struct {
+    Name   string  `json:"name"`
+    Radius float64 `json:"radius"`
+}
+
+type PlanetWithMass struct {
+    Planet
+    Mass float64 `json:"mass"`
+}
+```
+
 6. Add a new parameter to a function - note (This is for temporary, once it is ok to do a major release, can clean out past versions)
-   ```golang
-   // Test1 is the old function - move code to new function
-   // Test1WithOwner is the new function
 
-   func Test1(name string){
-       // fmt.Println(name) - past code - move it to new function or a common function that has been extracted sufficiently.
-       Test2(name, "")
-   }
+```golang
+// Test1 is the old function - move code to new function
+// Test1WithOwner is the new function
 
-   func Test1WithOwner(name, owner string){
-       fmt.Println(name)
-       if owner != "" {
-           fmt.Println(owner)
-       }
-   }
-   ```
+func Test1(name string){
+    // fmt.Println(name) - past code - move it to new function or a common function that has been extracted sufficiently.
+    Test2(name, "")
+}
+
+func Test1WithOwner(name, owner string){
+    fmt.Println(name)
+    if owner != "" {
+        fmt.Println(owner)
+    }
+}
+```
