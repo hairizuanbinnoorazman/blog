@@ -38,5 +38,16 @@ We would do a few things when structuring the application:
 - Have a service layer that would deal with interfacing our model and logics with a persistance system (it could be something that could be stored in memory, a file system or even db). The service layer does nothing except to take the model/entity that it is suppose to 'service' and save/store it.
 - Our controller would consume the concrete service (defined through structs that have functions attached to it) and it would only be concerned about transport only.
 
+# Learning 2: Applying the decorator pattern
+
+For every application that is to be deployed, we have to do a few final steps before making the app fully production ready. All of such concerns affect all application (some would call it cross cutting concerns). Some of the things that is to be added would:
+- Logging (Different granularity of logging)
+- Application Metrics (Sending functions call count etc to a prometheus server)
+- Tracing (In microservices -> Opentracing)
+
+Some of the properties such as Circuit Breaking/Retry logic; it's vital to have them if we are in the microservices. Reason is because if we were to deploy such services in Kubernetes, we can rely on the istio or other service meshes which can deal it on the cluster level; we would be impacted by some latency but unless it's absolutely necessary to respond at blazing speeds, it is kind of resolved issue.
+
+
+
 
 

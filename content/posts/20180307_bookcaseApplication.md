@@ -175,4 +175,3 @@ Some constraints
 Some constraints
 - ID: UUID. It has to be a UUID regex pattern during validation
 - Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
-
