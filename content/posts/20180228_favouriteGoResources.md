@@ -14,7 +14,7 @@ This is a personal list of Golang Resources I like to keep track. This is a ever
 
 # Libraries
 
-- Libraries that help in handling web requests/authorization/authentication
+- Libraries that help in handling web applications/authorization/authentication
   - [Gin](https://github.com/gin-gonic/gin)
   - [Gorilla](https://github.com/gorilla/mux)
   - [Gokit](https://gokit.io/)
