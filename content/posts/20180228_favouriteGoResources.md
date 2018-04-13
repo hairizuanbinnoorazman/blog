@@ -21,6 +21,8 @@ This is a personal list of Golang Resources I like to keep track. This is a ever
   - [jwt-go](https://github.com/dgrijalva/jwt-go)
   - [buffalo](https://gobuffalo.io/en)
 - [tablewriter](https://github.com/olekukonko/tablewriter)
+- [terminal dashboard](https://github.com/gizak/termui)
+- [terminal dashboard for processes](https://github.com/cjbassi/gotop)
 
 # Tools
 
