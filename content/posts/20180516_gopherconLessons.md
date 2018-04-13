@@ -11,3 +11,5 @@ categories = [
     "golang",
 ]
 +++
+
+Just gonna dump a summarized version of some of the talks in Gophercon SG here for future reference purposes.
