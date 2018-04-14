@@ -66,7 +66,23 @@ For every application that is to be deployed, we have to do a few final steps be
 
 Some of the properties such as Circuit Breaking/Retry logic; it's vital to have them if we are in the microservices. Reason is because if we were to deploy such services in Kubernetes, we can rely on the istio or other service meshes which can deal it on the cluster level; we would be impacted by some latency but unless it's absolutely necessary to respond at blazing speeds, it is kind of resolved issue.
 
+# Learning 3: All fields in structs that are to be stored in DB need to be public
 
+Although it would ideal that certain fields such as password are set to private to prevent the property from being overwritten in a haphazard manner -> as well as to reduce the amount of exported fields, the fields need to public to allow functions and other packages to make use of them as well.
 
+This kind of affects any language which has public/private fields in their class/struct definitions; even java. A random fact while going through is this: In Java, there is a Hibernate orm library; the framework is able to access private libraries. It accesses them via reflection -> I would assume you would need to do the same thing here as well in golang world if you want to do same. However, this is adding unnecessary complexity to an application, making it slower as well as more fragile.
 
+Alternatively, we can rearrange the whole application to fit the need by changing the folder structure and package structure:
 
+List of folders in current version:
+- Models (Handles the domain structs as well as functions that does validation, checks and other calculations)
+- Services (Handles the integration of domain structs to 3rd party components such as APIs, libraries as well as DB)
+- Controllers (Calls the service by providing a concrete service method)
+
+Possible alternative way:
+- Domains (e.g. User)
+  - File that contain struct declarations
+  - File that implements the intergration between the DB and the structs
+  - Test files
+
+There are a few disadvantages between using the current approach vs the alternative approach; one of which is the restriction of utilizing external libraries and packages to help build our software. There is no guarantee that external packages are able to read private fields like hibernate does.
