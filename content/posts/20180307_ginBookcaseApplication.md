@@ -13,6 +13,12 @@ categories = [
 
 This is an application based on a previous blog post on Bookcase application.
 
+The link to the code base of the application:
+
+https://github.com/hairizuanbinnoorazman/golang-web-gin-book-store
+
+There is a chance that when you are on the code base, the application is not fully operational; I am still adding code to it to add functionality to the application
+
 # Learning 0: Tools/Libraries
 
 Some of the below tool/libraries would be useful when added the Bookcase application
