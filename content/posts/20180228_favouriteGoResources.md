@@ -37,6 +37,8 @@ This is a personal list of Golang Resources I like to keep track. This is a ever
 
 - Russ Cox's Blogs  
   https://research.swtch.com/  
+- Dave Cheney's Blog
+  https://dave.cheney.net
 
 # Video Tutorials
 
