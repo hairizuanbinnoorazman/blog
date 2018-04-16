@@ -54,7 +54,7 @@ As a matter of convenience, we would you this pretty decent approach of create a
 
 ## Additional challenges
 
-(Not yet implemented)
+(Not yet implemented in the code base - it will be slowly substituted in)
 
 For an additional challenge when making this applicaiton, we would try to see if we can add the following:
 - Utilize multiple data storage options. For some of the endpoints, we can see if we can make multiple implementations of the same service and make it easier to switch (or refactor) for 3rd party storage components.
