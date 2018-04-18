@@ -38,6 +38,20 @@ Initial thoughts on construction of the API layer:
 - Orders (List, Get, Add, Modify)
 - Subscriptions/Wishlist (List, Get, Add, Modify)
 
+Admin Layer (Roles) - Administration of store information
+- Auditor -> Can view all information - no edit
+- Company Management -> Can view all information - no edit
+- Store Manager -> Can view all information relating to his store - no edit
+- Store Admin -> Can view/edit/append some things that are part of his store
+- Store Supplier -> Can view/append some things that are part of his supplier
+- Store Worker -> Can view/edit/append some things that are part of that store (under approval for edits) - limited view
+
+Promotion System
+- Able to have flexible set of promotions in the store; e.g.
+  - 3 items for $2
+  - 20% storewide
+  - 15% if user bought a product from a certain subcategory from the store on a certain date
+
 # List of database fields
 
 ## User
@@ -67,29 +81,14 @@ Some constraints set on the user struct:
 - Email: Must follow the email regex (Includes @ and domain at the end)
 - Password: Password length > 8; Must contain at least small characters, Capital letters and a number
 
-## Permissions
-
-Fields
-- ID
-- Name of permission (UpdateProductField,ViewProductField,Public etc)
-- Description
-- Status
-- Remarks
-- Created Time
-- Updated Time
-
-Some constraints set on the permissions struct:
-- ID: UUID. It has to be a UUID regex pattern during validation
-- Name of permission: Must not be empty, must be less than 150 characters
-- Description: Must not be empty, Text field is sql
-- Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
-
 ## Role
 
 Fields
 - ID
 - Name of role
 - Description
+- Status (Is it active?)
+- Remarks
 - Created Time
 - Updated Time
 
@@ -97,6 +96,7 @@ Some constraints set on the role struct:
 - ID: UUID. It has to be a UUID regex pattern during validation
 - Name of role: Must not be empty, must contain any one of the following strings: ['admin', 'member', 'editor', 'view']
 - Description: Must not be empty, Text field
+- Status: Only the following strings are allowed in: ['active', 'inactive', 'depreciated']
 
 ## Role x Permission Mapping
 
