@@ -20,9 +20,12 @@ This is a personal list of Golang Resources I like to keep track. This is a ever
   - [Gokit](https://gokit.io/)
   - [jwt-go](https://github.com/dgrijalva/jwt-go)
   - [buffalo](https://gobuffalo.io/en)
-- [tablewriter](https://github.com/olekukonko/tablewriter)
-- [terminal dashboard](https://github.com/gizak/termui)
-- [terminal dashboard for processes](https://github.com/cjbassi/gotop)
+- [tablewriter - write tables in markdown](https://github.com/olekukonko/tablewriter)
+- [terminal dashboard - dashboard on bash](https://github.com/gizak/termui)
+- [terminal dashboard for processes - dashboard on bash but for processes](https://github.com/cjbassi/gotop)
+- [PromptUI - CLI Prompts](https://github.com/manifoldco/promptui)
+- [Cobra - CLI Toolkit](https://github.com/spf13/cobra)
+- [Configuration Management]()
 
 # Tools
 
@@ -45,4 +48,7 @@ This is a personal list of Golang Resources I like to keep track. This is a ever
 - Just for func youtube channel:  
   https://www.youtube.com/channel/UC_BzFbxG2za3bp5NRRRXJSw  
 - Golang UK Conference Videos:  
-  https://www.youtube.com/channel/UC9ZNrGdT2aAdrNbX78lbNlQ/videos  
+  https://www.youtube.com/channel/UC9ZNrGdT2aAdrNbX78lbNlQ/videos
+- Actor models Golang:  
+  https://www.youtube.com/watch?v=LHe1Cb_Ud_M  
+  https://www.youtube.com/watch?v=yCbon_9yGVs   
