@@ -5,7 +5,7 @@ tags = [
     "kubernetes",
     "conference",
 ]
-date = "2018-04-25"
+date = "2018-05-02"
 categories = [
     "kubernetes",
     "conference",
