@@ -5,7 +5,7 @@ tags = [
     "react",
     "styleguidist",
 ]
-date = "2018-05-09"
+date = "3018-05-09"
 categories = [
     "react",
     "styleguidist",
