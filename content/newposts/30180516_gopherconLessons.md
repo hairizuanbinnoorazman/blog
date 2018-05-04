@@ -34,3 +34,12 @@ Below are some of the more interesting points raised during the talk (View the f
 - Versioning in Golang has always been lacking
 - Golang community combined their efforts together to create a tool called `Dep` which is a package management tool which implements the usual package management that other languages like Ruby and Python have (bundler and pip respectively). Includes some sort of config file; `Gopkg.toml` file as well as as a lock file `Gopkg.lock` file.
 - Several use cases of how using Dep can result in fissures in package management ecosystem due to the fact that the tools, when asked to upgrade, kind of takes up the latest version of the package; even if the latest result in breakages etc
+
+## Go for Grab
+
+- Internally, they have a toolkit called `Grabkit` which they used for bootstrapping their microservice applications. The toolkit was inspired by `Gokit`
+- Talks on microservices and how the importance distributed applications became problems that had to be solved on a company wide level
+
+## The Lost Art of Bondage
+
+- Some C applications are just too expensive to be ported over to Golang; instead, bindings are introduced. Golang has a library called cGo which would interface with such C code. Examples of c code interfaced with that was brought up during the talk is Cuda
