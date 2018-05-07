@@ -43,7 +43,8 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
 - UseR Conference (July 2018)  
   https://user2018.r-project.org/
 - Google Cloud Next Conference (July 2018)  
-  https://cloud.withgoogle.com/next18/
+  Conference Link: https://cloud.withgoogle.com/next18/  
+  Conference Sessions: https://cloud.withgoogle.com/next18/sf/sessions  
 - Gophercon UK (August 2018)  
   Conference Link: https://www.golanguk.com/  
 - Gophercon Denver - main (August 2018)  
