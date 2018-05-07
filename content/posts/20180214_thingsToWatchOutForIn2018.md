@@ -31,6 +31,7 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   https://us.pycon.org/2018/  
 - Gophercon Singapore 2018 (May 2018)  
   Conference Link: https://2018.gophercon.sg/  
+  Video Links: https://engineers.sg/conference/gopherconsg-2018  
 - Kubecon + CloudNativecon 2018 Europe  
   Conference Link: https://events.linuxfoundation.org/events/kubecon-cloudnativecon-europe-2018/  
   Conference Videos: https://www.youtube.com/watch?v=OUYTNywPk-s&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo  

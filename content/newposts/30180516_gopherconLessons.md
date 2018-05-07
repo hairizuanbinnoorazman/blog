@@ -29,6 +29,9 @@ This is the list of talks provided in the reccent Gophercon Conference held in S
 
 Below are some of the more interesting points raised during the talk (View the full talk to understand the context on what and why a certain point was raised.)
 
+The list of videos from Gophercon can be found here:  
+https://engineers.sg/conference/gopherconsg-2018  
+
 ## Go with Versions
 
 - Versioning in Golang has always been lacking
