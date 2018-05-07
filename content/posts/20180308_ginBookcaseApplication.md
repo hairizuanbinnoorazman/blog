@@ -92,3 +92,49 @@ Possible alternative way:
   - Test files
 
 There are a few disadvantages between using the current approach vs the alternative approach; one of which is the restriction of utilizing external libraries and packages to help build our software. There is no guarantee that external packages are able to read private fields like hibernate does.
+
+# Learning 4: Inspiration from usage of GORM library
+
+The GORM library has a pretty nice way of handling relationships between model structs. An initial version of the design was quite restrictive: 
+
+Let's take an example of an item in the store:
+
+```go
+type Item struct {
+	ID            string
+	Name          string
+	Description   string
+	CategoryID    string
+	SubCategoryID string
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
+}
+```
+
+With the `CategoryID` and `SubCategoryID` there, it is kind of a way of how the data is related to those said models. However, this would mean that we can't manipulate the item's subcategory data of an item via the item struct. We would have to call it from the database to retrive the category struct which is linked to this item struct which we can then modify. There are too many steps involved.
+
+If one uses the GORM library and observe the way of how relationships is represented in the struct:
+
+```go
+type Item struct {
+	ID            string
+	Name          string
+	Description   string
+	Category      Category
+	CategoryID    string
+	SubCategory   SubCategory
+	SubCategoryID string
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
+}
+```
+
+We now see the `Category` and `SubCategory` struct also being part of the item struct. This would allow us to modify the item as one single entity which makes it more natural to manipulate etc.
+
+```go
+// We can query for parts of the Item struct this way:
+// retrivedItem is Item data retrieved from database
+fmt.Println(retrivedItem.Category.Name)
+```
+
+Notice that the `CategoryID` and `Subcategory` would still need to be defined. Without them, those foreign keys won't be stored in the database. Read more in the `GORM` documentation for more details.
