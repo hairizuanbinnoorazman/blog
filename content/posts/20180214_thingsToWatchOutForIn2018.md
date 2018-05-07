@@ -26,7 +26,8 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   Website: https://2018.fossasia.org/
   Video Link: https://engineers.sg/conference/fossasia-2018
 - Vue Conference (March 2018)  
-  http://us.vuejs.org/
+  Conference Site: http://us.vuejs.org/  
+  Conference Link: https://www.youtube.com/watch?v=AiF3XOu02-0&list=PLJNLwTPak6dj-HOz4eFrKDJsJSZsgvWPs&index=1  
 - Pycon US 2018 (May 2018)  
   https://us.pycon.org/2018/  
 - Gophercon Singapore 2018 (May 2018)  
