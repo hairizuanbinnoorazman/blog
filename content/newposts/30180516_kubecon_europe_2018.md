@@ -15,3 +15,7 @@ categories = [
 The following set of summaries are from the Kubecon and Cloud Native Con Europe in Denmark from 2-4 May 2018. 
 
 These summaries are from conference talks that I thought provided more interesting thinking points.
+
+The videos for the conference can be found here:  
+https://www.youtube.com/watch?v=OUYTNywPk-s&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo  
+
