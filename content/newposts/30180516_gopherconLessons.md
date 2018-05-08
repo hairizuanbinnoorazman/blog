@@ -49,6 +49,19 @@ https://engineers.sg/conference/gopherconsg-2018
     - Dependency Failure
     - Bad Data coming in/going through the system
 - https://github.com/gojektech/heimdall
+- The capability of a system of preventing faults turn to failures is called resilency
+- Ways to handle it:
+    - Timeouts (Never ever wait for a client/server forever)
+    - Retries (System that can eventually recover - don't need intervention to manually retry stuff)
+    - Circuit Breakers (Prevent stampeding herd all over system)
+    - Fallbacks (E.g. Does the service really need to be up; can a alternative be served in the mean time - third party integrations can have their alternatives be served when the primary integration failed.)
+    - Resilency Testing (Using chaos monkeys systems etc to do a test run to see what happens if stuff happened to the system)
+    - Rate limit/throttling (Prevent stampeding herd situation where failures in parts of the system don't cascade over to other parts of the system)
+    - Bulk heading
+    - Queueing (Queue slows down the system - reduce stress on the systems where it is not needed for fast and immediate responses)
+    - Monitoring/Alertings
+    - Canary releases (Release new versions of the software slowly - release to a small percentage and see if errors spike etc; if not, release to a bigger and bigger group until it becomes the version that is the majority of the system)
+    - Redundancies
 
 ## Go for Grab
 
