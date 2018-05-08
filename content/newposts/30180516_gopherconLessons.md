@@ -36,7 +36,9 @@ https://engineers.sg/conference/gopherconsg-2018
 
 - Versioning in Golang has always been lacking
 - Golang community combined their efforts together to create a tool called `Dep` which is a package management tool which implements the usual package management that other languages like Ruby and Python have (bundler and pip respectively). Includes some sort of config file; `Gopkg.toml` file as well as as a lock file `Gopkg.lock` file.
-- Several use cases of how using Dep can result in fissures in package management ecosystem due to the fact that the tools, when asked to upgrade, kind of takes up the latest version of the package; even if the latest result in breakages etc
+- Several use cases of how using Dep can result in fissures in package management ecosystem due to the fact that the tools, when asked to upgrade, kind of takes up the latest version of the package; even if the latest result in breakages etc - needed some locks to prevent it from taking up bad versions
+- Refer to the following commit for the full discusion on the `vgo` proposal:  
+  https://github.com/golang/go/issues/24301  
 
 ## Resiliency in Distributed Systems
 
@@ -67,6 +69,8 @@ https://engineers.sg/conference/gopherconsg-2018
 
 - Internally, they have a toolkit called `Grabkit` which they used for bootstrapping their microservice applications. The toolkit was inspired by `Gokit`
 - Talks on microservices and how the importance distributed applications became problems that had to be solved on a company wide level
+- Interesting point raised: _Make your functions accept context: you'll be glad you did_
+- Difficulty of doing debugging and root cause analysis - central logging systems as well as good monitoring and alerting systems would be helpful
 
 ## The Lost Art of Bondage
 
