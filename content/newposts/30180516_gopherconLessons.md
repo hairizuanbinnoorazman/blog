@@ -38,6 +38,18 @@ https://engineers.sg/conference/gopherconsg-2018
 - Golang community combined their efforts together to create a tool called `Dep` which is a package management tool which implements the usual package management that other languages like Ruby and Python have (bundler and pip respectively). Includes some sort of config file; `Gopkg.toml` file as well as as a lock file `Gopkg.lock` file.
 - Several use cases of how using Dep can result in fissures in package management ecosystem due to the fact that the tools, when asked to upgrade, kind of takes up the latest version of the package; even if the latest result in breakages etc
 
+## Resiliency in Distributed Systems
+
+- Microservice talk by Go-Jek
+- Fault vs Failures: A fault is a state where system is unhealthy but is still working; a failure would mean that users would not be able to interact with the system.
+- Fault could happen from:
+    - Database slowdown
+    - Memory leaks
+    - Blocked threads
+    - Dependency Failure
+    - Bad Data coming in/going through the system
+- https://github.com/gojektech/heimdall
+
 ## Go for Grab
 
 - Internally, they have a toolkit called `Grabkit` which they used for bootstrapping their microservice applications. The toolkit was inspired by `Gokit`
