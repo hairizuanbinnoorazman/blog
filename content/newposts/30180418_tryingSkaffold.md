@@ -10,3 +10,7 @@ categories = [
     "devops",
 ]
 +++
+
+The skaffold tool can be found here:  
+https://github.com/GoogleContainerTools/skaffold  
+
