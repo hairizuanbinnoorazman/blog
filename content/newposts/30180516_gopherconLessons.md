@@ -72,6 +72,12 @@ https://engineers.sg/conference/gopherconsg-2018
 - Interesting point raised: _Make your functions accept context: you'll be glad you did_
 - Difficulty of doing debugging and root cause analysis - central logging systems as well as good monitoring and alerting systems would be helpful
 
+## Optimize for Correctness
+
+- Article that was used in the presentation: https://github.com/ardanlabs/gotraining/blob/master/topics/go/README.md
+- More code == more bugs; lesser code is better
+- Every decision made comes at a cost, more abstractions might result in more complexity making it difficult to predict the performance of the code etc
+
 ## The Lost Art of Bondage
 
 - Some C applications are just too expensive to be ported over to Golang; instead, bindings are introduced. Golang has a library called cGo which would interface with such C code. Examples of c code interfaced with that was brought up during the talk is Cuda
