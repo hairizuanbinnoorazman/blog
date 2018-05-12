@@ -48,3 +48,22 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 - Additional links: https://medium.com/@mtreacher/writing-a-kubernetes-operator-a9b86f19bfb9
 - Operator Framework by core os: https://coreos.com/operators/
 - Github link to operators: https://github.com/operator-framework/operator-sdk
+
+## Kubernetes Project Update
+
+- Video Link: https://www.youtube.com/watch?v=2eAOx8E6-5Q
+- Security
+    - Network Policy
+    - Encrypted Secrets
+    - RBAC
+    - TLS Cert Rotation
+    - Pod Security Policy
+    - Threat Detection (Not really part of Kubernetes - GKE Cloud Security Command Centre)
+    - Sandbox Applications (Providing a tiny kernel for the container - gVisor)
+- Applications
+    - Batch Applications
+    - Workload Controllers, Local Storage
+    - GPU access
+    - Container Storage Interface
+    - (Mention about a Spark operator - a software which manages the running of a Spark cluster)
+- Experience
