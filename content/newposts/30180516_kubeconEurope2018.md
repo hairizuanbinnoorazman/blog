@@ -38,3 +38,13 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 - Github Link: https://github.com/cncf/landscape
 - Website Link: https://landscape.cncf.io/
 - Get the pdf versions of the landscape from Github
+
+## Accelerating Kubernetes Native Applications
+
+- Video Link: https://www.youtube.com/watch?v=8iQRJXJHiZ8
+- Operators is a concept that was build on Kubernetes providing the Custom Resource Definitions
+- Allows for specific application management; e.g. Managing the running of a database - if a database need to be resized, operators could be programmed to trigger snapshot before switching to a bigger pod which the data can be replicated in. (example only)
+- Reasons on why operators are kind of game changing: https://dzone.com/articles/why-kubernetes-operators-are-a-game-changer
+- Additional links: https://medium.com/@mtreacher/writing-a-kubernetes-operator-a9b86f19bfb9
+- Operator Framework by core os: https://coreos.com/operators/
+- Github link to operators: https://github.com/operator-framework/operator-sdk
