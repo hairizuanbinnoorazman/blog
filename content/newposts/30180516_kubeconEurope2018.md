@@ -34,4 +34,7 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 ## Cloud Native Landscape Intro 
 
 - Video Link: https://www.youtube.com/watch?v=_CFgSksTT54
-- 
+- Introduction to the cloud native landscape tools and github page
+- Github Link: https://github.com/cncf/landscape
+- Website Link: https://landscape.cncf.io/
+- Get the pdf versions of the landscape from Github
