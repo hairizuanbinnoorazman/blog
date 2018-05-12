@@ -1,5 +1,5 @@
 +++
-title = "Using Google Analytics in React Web Application"
+title = "Using Google Tag Manager in React Web Application"
 description = ""
 tags = [
     "golang",
