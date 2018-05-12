@@ -11,3 +11,9 @@ categories = [
     "google analytics",
 ]
 +++
+
+This is going to be a pretty short post but should prove to be useful if you are already familiar with tool.
+
+When one navigates through a normal server rendered website that is utilizing Google Tag Manager or Google Analytics (assuming that is is set up right), as the page loads, it would send a `page view` hit to the Google Analytics server. This is normal familiar behaviour for most people who used the tools.
+
+However, if the website is a single page application, the whole situation completely changes. 
