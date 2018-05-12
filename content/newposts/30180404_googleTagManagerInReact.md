@@ -20,3 +20,5 @@ However, if the website is a single page application, the whole situation comple
 
 Previously, solutions for these included creating virtual page views which is deeply embedded in the application. This kind of requires the development to roughly construct the page view hit which would be fired as a page view although the way its being done; it would be always like firing of tracking hit in response to events.
 
+
+

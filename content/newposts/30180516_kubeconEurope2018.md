@@ -19,3 +19,5 @@ These summaries are from conference talks that I thought provided more interesti
 The videos for the conference can be found here:  
 https://www.youtube.com/watch?v=OUYTNywPk-s&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo  
 
+Below are some of the talks that I found quite interesting (just my own preference)  
+I took some of my personal notes so that I don't need to rewatch the videos once more just to get the main point the video seem to talk about.s
