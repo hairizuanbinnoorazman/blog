@@ -2,7 +2,6 @@
 title = "Using Google Tag Manager in React Web Application"
 description = ""
 tags = [
-    "golang",
     "google analytics",
     "google tag manager",
 ]
