@@ -1,5 +1,5 @@
 +++
-title = "About Hugo"
+title = "About Me"
 date = "2014-04-09"
 menu = "main"
 weight = "20"
@@ -14,4 +14,7 @@ Below is a collection of some of projects I've been working on. These are not co
 - rgoogledrive
 
 # Golang
+
+- [tasker](https://github.com/hairizuanbinnoorazman/tasker)
+- [sample gin bookcase application](https://github.com/hairizuanbinnoorazman/golang-web-gin-book-store)
 
