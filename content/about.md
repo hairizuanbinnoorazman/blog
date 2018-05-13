@@ -10,8 +10,8 @@ Below is a collection of some of projects I've been working on. These are not co
 
 # R
 
-- rgoogleslides
-- rgoogledrive
+- [rgoogleslides](https://github.com/hairizuanbinnoorazman/rgoogleslides)
+- [rgoogledrive](https://github.com/hairizuanbinnoorazman/googledrive)
 
 # Golang
 
