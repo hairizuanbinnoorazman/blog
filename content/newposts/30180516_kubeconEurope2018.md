@@ -79,3 +79,17 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 - When companies are big, moving and innovating becomes expensive (its not a technology problem but more of a human, community, company problem). So essentially, one can consider this as _innovation tokens_; tokens that should only be spent wisely, else failure would be result.
 - Choose boring technology. http://mcfunley.com/choose-boring-technology
 - One way to reduce risk is to run the applications on 2 parallel stacks but it is very expensive in terms of complexity and human effort. When doing this, one needs note of the costs of doing this kind of test
+- Such tests have an impact on cost - might be good to rope in the people with this on the test being run, the hypothesis of what that should be happening and the benefits that the company will have
+
+## Container-Native dev and ops experience
+
+- Video Link: https://www.youtube.com/watch?v=0sh2aWdfBxA
+- Talk about the following tool: https://github.com/Azure/draft
+
+## Container Native observability & security from Google Cloud
+
+- Video Link: https://www.youtube.com/watch?v=8fSNDxA_irY
+- Talk about the following tool: gVisor - this tool is a fix for the Dirty Cow vulnerability
+- Stackdriver support - Deep prometheus integration - It can import metrics stats over from it to stackdriver to provide the one glass pane to be able to view all applications being monitored in one tool
+- Podcast: https://kubernetespodcast.com/
+- Blog post talking about podcast: https://cloudplatform.googleblog.com/2018/05/introducing-kubernetes-podcast-from-google.html
