@@ -76,3 +76,6 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 - Tools out there kind of follow the same cycle: Genesis -> Custom Built solutions -> Product Offering -> Commodity.
 - Chart from here: https://medium.com/wardleymaps/anticipation-89692e9b0ced
 - Link to whole blog post: https://medium.com/wardleymaps
+- When companies are big, moving and innovating becomes expensive (its not a technology problem but more of a human, community, company problem). So essentially, one can consider this as _innovation tokens_; tokens that should only be spent wisely, else failure would be result.
+- Choose boring technology. http://mcfunley.com/choose-boring-technology
+- One way to reduce risk is to run the applications on 2 parallel stacks but it is very expensive in terms of complexity and human effort. When doing this, one needs note of the costs of doing this kind of test
