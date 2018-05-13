@@ -66,4 +66,6 @@ I took some of my personal notes so that I don't need to rewatch the videos once
     - GPU access
     - Container Storage Interface
     - (Mention about a Spark operator - a software which manages the running of a Spark cluster)
-- Experience
+    - Stackdriver. Integrates deeply with Prometheus
+- Developer Experience
+    - Skaffold (Allows debug tool to be attached allowing interactive debugging with custom deployments)
