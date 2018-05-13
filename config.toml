@@ -1,13 +1,13 @@
 pygmentsCodeFences = true
-baseurl = "https://frosty-mahavira-65c534.netlify.com"
+baseurl = "https://www.hairizuan.com"
 title = "Experiment, Fail, Learn, Repeat"
 copyright = "Copyright &copy; 2017 - Hairizuan Noorazman"
 canonifyurls = true
 theme = "kiera"
 
-paginate = 3
+paginate = 10
 
-summaryLength = 30
+summaryLength = 100
 enableEmoji = true
 
 googleAnalytics = "" #Google Analytics ID
