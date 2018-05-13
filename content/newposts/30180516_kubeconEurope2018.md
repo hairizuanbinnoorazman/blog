@@ -69,3 +69,10 @@ I took some of my personal notes so that I don't need to rewatch the videos once
     - Stackdriver. Integrates deeply with Prometheus
 - Developer Experience
     - Skaffold (Allows debug tool to be attached allowing interactive debugging with custom deployments)
+
+## The Challenges of Migrating 150+ microservices
+
+- Video Link: https://www.youtube.com/watch?v=H06qrNmGqyE
+- Tools out there kind of follow the same cycle: Genesis -> Custom Built solutions -> Product Offering -> Commodity.
+- Chart from here: https://medium.com/wardleymaps/anticipation-89692e9b0ced
+- Link to whole blog post: https://medium.com/wardleymaps
