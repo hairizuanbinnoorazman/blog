@@ -1,6 +1,2 @@
 [context.production.environment]
   HUGO_VERSION = "0.32"
-
-[[redirects]]
-  from = "https://hairizuan.com"
-  to = "https://www.hairizuan.com"
