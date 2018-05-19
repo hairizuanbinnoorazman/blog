@@ -4,11 +4,13 @@ description = ""
 tags = [
     "conference",
     "golang",
+    "kubernetes",
 ]
 date = "2018-05-16"
 categories = [
     "conference",
     "golang",
+    "kubernetes",
 ]
 +++
 
