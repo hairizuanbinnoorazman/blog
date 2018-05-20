@@ -1,6 +1,6 @@
 +++
 title = "Opinion piece - Moving to Hugo"
-description = ""
+description = "Experiences from moving a blog from the Wordpress platform to utilizing Hugo"
 tags = [
     "static-sites",
 ]
