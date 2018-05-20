@@ -1,6 +1,6 @@
 +++
 title = "Using Google Tag Manager in React Web Application"
-description = ""
+description = "Getting tracking to work via GTM in Single Page Applications such as React applications"
 tags = [
     "google analytics",
     "google tag manager",
