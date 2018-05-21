@@ -1,6 +1,6 @@
 +++
 title = "Things to watch out for in 2018"
-description = ""
+description = "A list of conferences that I personally keep at eye out for. Particularly conferences pertaining to Kubernetes, contianers, Golang"
 tags = [
     "golang",
     "python",
@@ -36,6 +36,7 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   Conference Videos: https://www.youtube.com/watch?v=OUYTNywPk-s&list=PLj6h78yzYM2N8GdbjmhVU65KYm_68qBmo  
 - Pycon US 2018 (May 2018)  
   Conference Link: https://us.pycon.org/2018/  
+  Video Links: https://www.youtube.com/channel/UCsX05-2sVSH7Nx3zuk3NYuQ  
 - Pycon APAC 2018  (May 2018)  
   https://pycon.sg/  
 - Dockercon 2018 (June 2018)  
