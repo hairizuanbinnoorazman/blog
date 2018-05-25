@@ -1,6 +1,6 @@
 +++
 title = "Opinion piece - Moving to Hugo"
-description = "Experiences from moving a blog from the Wordpress platform to utilizing Hugo"
+description = "Experiences from moving a blog from the Wordpress to Hugo"
 tags = [
     "static-sites",
 ]
@@ -16,16 +16,17 @@ A few reasons kind of came up which motivated such a decision:
 
 ## Blog posts being Code Centric
 
-Blog post being too code-centric and all those managed platforms somehow managed to irritate me when it comes to creating them. 
+Blog post being too code-centric and all those managed platforms somehow managed to irritate me when it comes to creating them.
 
-I've tried a couple, e.g. Blogger (I'm guessing it's a Google product but somehow, I'm not feeling that polish there), Wordpress and Medium. Wordpress was nice but it gets pretty complicated when I wish to add more code centric material; it 
+I've tried a couple, e.g. Blogger (I'm guessing it's a Google product but somehow, I'm not feeling that polish there), Wordpress and Medium. Wordpress was nice but it gets pretty complicated when I wish to add more code centric material; it
 always requires myself to actually go in and adjust it on my own.
 
 Seeing this, it kind of makes sense to just use markdown for my blogging. I don't need any of those fancy features, styling and they may actually get in the way. As an example, here is an example excerpt of some code snippets that we can actually write here.
 
 It's just markdown, so if you write documentation for code projects or update code snippets in Github issues, this is definitely down your alley...
 
-A Golang snippet  
+A Golang snippet
+
 ```go
 package main
 
@@ -45,11 +46,11 @@ the one being used to write this blog right here.
 
 Here are some of the others that I'm kind of looking into and their links:
 
-- Hugo  
+* Hugo  
   https://gohugo.io/
-- Jekyll (For all time's sake I guess?)  
+* Jekyll (For all time's sake I guess?)  
   https://jekyllrb.com/
-- Gatsby JS (Was laughing at that name. Kind of reminded me of a hair product brand which has a bunch of funny ads)  
+* Gatsby JS (Was laughing at that name. Kind of reminded me of a hair product brand which has a bunch of funny ads)  
   https://www.gatsbyjs.org/
 
 But you know, if none of them tickle your fancy, you can always refer to this list right here:  
@@ -59,7 +60,7 @@ After working with one or two CRM solutions so far, I've found it kind of troubl
 
 ## Flexibility to customize
 
-So far, the platforms I've tried so far doesn't allow much customizations in terms of customizing look and feel of the site (not that I myself needed much customizations in terms of look and feel). However, I was a lot more concerned 
+So far, the platforms I've tried so far doesn't allow much customizations in terms of customizing look and feel of the site (not that I myself needed much customizations in terms of look and feel). However, I was a lot more concerned
 regarding the capability to add metadata and custom analytics tracking to the site.
 
 I needed the site to be used for experimentation and using platforms don't really allow that level of experimentation.
