@@ -1,6 +1,6 @@
 +++
 title = "Serverless Python"
-description = ""
+description = "Serverless python deployed on AWS"
 tags = [
     "serverless",
     "python",
@@ -42,7 +42,7 @@ By installing it globally, we can now use it easily across any folder as we plea
 
 ### Installing pipenv
 
-Another tool mentioned above as well is `pipenv`. Since in this blog post, we will be developing using python, we might want to look into the good approaches of using python. There are many advantages of using this tool - you can see the list of advantages here on the website: https://docs.pipenv.org/. 
+Another tool mentioned above as well is `pipenv`. Since in this blog post, we will be developing using python, we might want to look into the good approaches of using python. There are many advantages of using this tool - you can see the list of advantages here on the website: https://docs.pipenv.org/.
 
 One reason for myself using the tool is that it ensures that the right dependencies as well as the right underlying dependencies are installed for the application. This may not seem too obvious at first or second glance but when you've been playing around with some of those massive python libraries that import a whole bunch of other python dependencies, it always seem much easier to break the build due to some problematic underlying dependencies that one your own app's dependency depend on. (#dependenception anyone?)
 
@@ -55,6 +55,7 @@ We can start this using serverless by running the following command here:
 ```bash
 serverless create --template aws-python3
 ```
+
 This would create all of required templates files like the `serverless.yml` file.
 
 We can then proceed to think of how to manage dependencies by using the `pipenv`
@@ -84,8 +85,3 @@ Or, if you already have an AWS profile, you can use it by following this guide i
 https://serverless.com/framework/docs/providers/aws/guide/credentials#use-an-existing-aws-profile
 
 With that, we can finally get started with developing the application.
-
-
-
-
-
