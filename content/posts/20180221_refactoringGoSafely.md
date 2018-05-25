@@ -1,6 +1,6 @@
 +++
 title = "Refactoring Go Safely"
-description = "Ways to handle old code safely without breaking functionality along the way"
+description = "Refactoring Golang code without introducing breaking too much breaking changes"
 tags = [
     "golang",
 ]
