@@ -1,6 +1,6 @@
 +++
 title = "Favourite Golang Resources"
-description = "Some of my go to resources when it comes to learning and writing Golang code"
+description = "Some of my Golang resources, links, videos and github repositories"
 tags = [
     "golang",
 ]
