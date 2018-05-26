@@ -1,6 +1,6 @@
 +++
 title = "Using Google Tag Manager in React Web Application"
-description = "Getting tracking to work via GTM in Single Page Applications such as React applications"
+description = "Google Tag Manager in React Web Application"
 tags = [
     "google analytics",
     "google tag manager",
@@ -28,7 +28,6 @@ I'm gonna switch to talking about Google Tag Manager now which is the main tool 
 
 Within Google Tag Manager, there is a set of predefined trigger called `history change`. This is the one we would need to take note as we delve into how React applications handle page changes in their applications. In React Single Page Applications, we would normally use a library called `React Router DOM` which in turns utilizes the `history` library which is then handled by browser. Read the below webpage for more information.
 
-https://developer.mozilla.org/en-US/docs/Web/API/History_API  
+https://developer.mozilla.org/en-US/docs/Web/API/History_API
 
 With that in mind, all we need to do is to set up a Google Analytics Tag as usual but instead of the normal trigger of firing off on every single page, we would just need to change it to trigger on every history page. This would be sufficient to get all the required page data into Google Analytics tool.
-

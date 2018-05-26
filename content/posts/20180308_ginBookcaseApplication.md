@@ -1,6 +1,6 @@
 +++
 title = "A sample bookcase application case via Gin Golang Framework"
-description = ""
+description = "Web application using Golang"
 tags = [
     "golang",
 ]
@@ -23,11 +23,10 @@ There is a chance that when you are on the code base, the application is not ful
 
 Some of the below tool/libraries would be useful when added the Bookcase application
 
-- [Viper](https://github.com/spf13/viper) - Reading Configuration Files
-- [Negroni](https://github.com/urfave/negroni) - Middleware Management
-- [Sendgrid](https://github.com/sendgrid/sendgrid-go) - Transaction Email
-- [JWT Tokens](https://github.com/dgrijalva/jwt-go) - Auth token library
-
+* [Viper](https://github.com/spf13/viper) - Reading Configuration Files
+* [Negroni](https://github.com/urfave/negroni) - Middleware Management
+* [Sendgrid](https://github.com/sendgrid/sendgrid-go) - Transaction Email
+* [JWT Tokens](https://github.com/dgrijalva/jwt-go) - Auth token library
 
 # Learning 1: Structuring the application
 
@@ -40,9 +39,10 @@ Unfortunately, typing a database to the model object has several consequences; o
 Rather than needing end to end testing, we will just focus on the part that would really need such tests; which would be the logic. One can assume that the saving of data into the databases or other persistent system as of now.
 
 We would do a few things when structuring the application:
-- Put all of our logic (or as much as possible) into our models; in this case, it would be structs.
-- Have a service layer that would deal with interfacing our model and logics with a persistance system (it could be something that could be stored in memory, a file system or even db). The service layer does nothing except to take the model/entity that it is suppose to 'service' and save/store it.
-- Our controller would consume the concrete service (defined through structs that have functions attached to it) and it would only be concerned about transport only.
+
+* Put all of our logic (or as much as possible) into our models; in this case, it would be structs.
+* Have a service layer that would deal with interfacing our model and logics with a persistance system (it could be something that could be stored in memory, a file system or even db). The service layer does nothing except to take the model/entity that it is suppose to 'service' and save/store it.
+* Our controller would consume the concrete service (defined through structs that have functions attached to it) and it would only be concerned about transport only.
 
 ## TDD immediately available
 
@@ -57,18 +57,20 @@ As a matter of convenience, we would you this pretty decent approach of create a
 (Not yet implemented in the code base - it will be slowly substituted in)
 
 For an additional challenge when making this applicaiton, we would try to see if we can add the following:
-- Utilize multiple data storage options. For some of the endpoints, we can see if we can make multiple implementations of the same service and make it easier to switch (or refactor) for 3rd party storage components.
-  - Redis
-  - MySQL
-  - Google Datastore
-- Create an endpoint which is customized for a view (a subset of a domain model or a subet of a joined data model). Test the implementation of such an endpoint.
+
+* Utilize multiple data storage options. For some of the endpoints, we can see if we can make multiple implementations of the same service and make it easier to switch (or refactor) for 3rd party storage components.
+  * Redis
+  * MySQL
+  * Google Datastore
+* Create an endpoint which is customized for a view (a subset of a domain model or a subet of a joined data model). Test the implementation of such an endpoint.
 
 # Learning 2: Applying the decorator pattern
 
 For every application that is to be deployed, we have to do a few final steps before making the app fully production ready. All of such concerns affect all application (some would call it cross cutting concerns). Some of the things that is to be added would:
-- Logging (Different granularity of logging)
-- Application Metrics (Sending functions call count etc to a prometheus server)
-- Tracing (In microservices -> Opentracing)
+
+* Logging (Different granularity of logging)
+* Application Metrics (Sending functions call count etc to a prometheus server)
+* Tracing (In microservices -> Opentracing)
 
 Some of the properties such as Circuit Breaking/Retry logic; it's vital to have them if we are in the microservices. Reason is because if we were to deploy such services in Kubernetes, we can rely on the istio or other service meshes which can deal it on the cluster level; we would be impacted by some latency but unless it's absolutely necessary to respond at blazing speeds, it is kind of resolved issue.
 
@@ -81,21 +83,23 @@ This kind of affects any language which has public/private fields in their class
 Alternatively, we can rearrange the whole application to fit the need by changing the folder structure and package structure:
 
 List of folders in current version:
-- Models (Handles the domain structs as well as functions that does validation, checks and other calculations)
-- Services (Handles the integration of domain structs to 3rd party components such as APIs, libraries as well as DB)
-- Controllers (Calls the service by providing a concrete service method)
+
+* Models (Handles the domain structs as well as functions that does validation, checks and other calculations)
+* Services (Handles the integration of domain structs to 3rd party components such as APIs, libraries as well as DB)
+* Controllers (Calls the service by providing a concrete service method)
 
 Possible alternative way:
-- Domains (e.g. User)
-  - File that contain struct declarations
-  - File that implements the intergration between the DB and the structs
-  - Test files
+
+* Domains (e.g. User)
+  * File that contain struct declarations
+  * File that implements the intergration between the DB and the structs
+  * Test files
 
 There are a few disadvantages between using the current approach vs the alternative approach; one of which is the restriction of utilizing external libraries and packages to help build our software. There is no guarantee that external packages are able to read private fields like hibernate does.
 
 # Learning 4: Inspiration from usage of GORM library
 
-The GORM library has a pretty nice way of handling relationships between model structs. An initial version of the design was quite restrictive: 
+The GORM library has a pretty nice way of handling relationships between model structs. An initial version of the design was quite restrictive:
 
 Let's take an example of an item in the store:
 

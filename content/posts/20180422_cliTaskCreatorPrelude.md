@@ -1,6 +1,6 @@
 +++
 title = "Let's use CLI to create Tasks!!"
-description = ""
+description = "CLI to create tasks made with Golang"
 tags = [
     "golang",
 ]
@@ -20,11 +20,11 @@ Before starting out on writing out the CLI tool, we would first need to plan out
 
 In our case, we should be able to substitute the platform for the different platforms we are targeting against
 
-- Allow one to create tasks on platform with labels and deadline
-- Allow one to list tasks on platform for a specific user
-- Allow one to list tasks for a project 
-- Allow one to create tasks on multiple platforms at the same time
-- Allow one to copy tasks across platforms
+* Allow one to create tasks on platform with labels and deadline
+* Allow one to list tasks on platform for a specific user
+* Allow one to list tasks for a project
+* Allow one to create tasks on multiple platforms at the same time
+* Allow one to copy tasks across platforms
 
 The struct could be described as follows - we can't load up too many fields as it will make it not inter-operable across multiple task management platforms.
 
@@ -64,8 +64,8 @@ tasker cp -originTool="asana" -id="12" -destTool="github"
 
 Some of the tasks can be made easier by using some sort of config file to be able to control the behaviour of the tool, although there would make it hard to understand what's happening. Some of the things to think about would be:
 
-- Set a primary tool and list the rest of secondary tools
-- Have a setting that would allow one to set whether they would want the issue to be created only on primary tool but not on the secondary tool/vice-versa
+* Set a primary tool and list the rest of secondary tools
+* Have a setting that would allow one to set whether they would want the issue to be created only on primary tool but not on the secondary tool/vice-versa
 
 # Actual implementation
 
