@@ -28,7 +28,7 @@ With that, let's see if there are way and methods in order to reduce that debt o
 Here are some of the ways to do so:
 
 - [Use git to properly manage such automation scripts](#using-git)
-- Ensure package versioning is introduced/added
+- [Ensure package versioning is introduced/added](#package-versioning)
 - Comments that explain why rather than what
 - Prefer vectorized operations as compared to loops
 - Add testing on algorithms
@@ -38,12 +38,35 @@ Here are some of the ways to do so:
 
 ### Using Git
 
-Git is not github (Repeat this 3 times to yourself). Most people get their first taste of git via Github and it is quite understandable to relate git to github. However, git is just tool that helps with version control of any text-based related document (it does binary as well but it's not as useful in that regard)
+Git is not github (Repeat this 3 times to yourself). Most people get their first taste of git via Github and it is quite understandable to relate git to github. However, git is just tool that helps with version control of any text-based related document (it does binary as well but it's not as useful in that regard). Once one install git, you can use `git init` and with that, you've kind of have yourself a local repository that you can play around and control.
+
+With git, we can do experimentation with the code base. This is done by branching our code and testing our changes and assumptions on alternative branches. If those tests turn out faulty or the assumptions that we have are wrong, we could just as easily revert it back.
+
+### Package versioning
+
+Package versioning is one of those problems that is not a problem until you get bitten by one of those versioning problems; but once you get bitten, it is really painful to recover from. You can probably feel such pains by volunteering to upgrade a 5-7 year old django or ruby or rails that have not been touch or undergo heavy maintainance. I swear you will definitely feel like rage quiting half way through.
+
+Part of the problem of attempting to upgrade such applications is that different versions of packages used by applications would result in some packages having conflicting versions.
+
+Let's have an example of a web application requiring the following dependencies:
+
+- package A (v1.0.0) -> dependant on package C (v0.1.0)
+- pacakge B (v1.0.0) -> dependant on package C (v0.1.0)
+
+Let's say we found out that there is an update in package A which requires an upgrade for package C.
+
+- package A (v1.1.0) -> dependant on package C (v0.2.0)
+- pacakge B (v1.0.0) -> dependant on package C (*v0.1.0*)
+
+Now, package B would also need to upgrade since its also dependant on package C. But what if the scenario is such that package B's author has not been upgrading that package and it the upgrade of version 0.2.0 of package C causes failure to package B. Now there's a conflict in package added to the project.
+
+
 
 ## Survived the initial hell
 
 The initial hell involved the main writing of the scripts. This involves getting your hands dirty with coding the applications. As mentioned, the initial requirements gathering as well as initial versions of the script are the easy bits. Now this next section won't be as important as the parts in initial help but they do definitely help. There's a reason why we are here; we're here to automate everything and if we still have to manually run the tasks, it would mean that there is plenty of parts that can be improved.
 
+- Using docker to package the solution up
 - Deploying code on linux machines and putting sudo on it
 - Running code as serverless (Functions as a service)
 - Using tools such as Airflow to vizually manage tasks 
