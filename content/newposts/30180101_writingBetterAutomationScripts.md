@@ -19,3 +19,10 @@ Let's go several scenarios on some of the more important bits to consider when d
 
 ## The Beginning
 
+The beginning for most people, departments or even companies would usually mean just writing a script to quickly pull in the numbers and dumping it into an output file. The output file could be a excel file, csv file or other formats with the aim of such files being fed to a vizualization tool off sorts.
+
+
+
+## Survived the initial hell
+
+## 
