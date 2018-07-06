@@ -27,8 +27,24 @@ With that, let's see if there are way and methods in order to reduce that debt o
 
 Here are some of the ways to do so:
 
-- Use git to properly managed such automation scripts
+- [Use git to properly manage such automation scripts](#using-git)
+- Ensure package versioning is introduced/added
+- Comments that explain why rather than what
+- Prefer vectorized operations as compared to loops
+- Add testing on algorithms
+- Decouple data sources from the script
+- Designing a proper configuration management for the script
+- Automate documentation
+
+### Using Git
+
+Git is not github (Repeat this 3 times to yourself). Most people get their first taste of git via Github and it is quite understandable to relate git to github. However, git is just tool that helps with version control of any text-based related document (it does binary as well but it's not as useful in that regard)
 
 ## Survived the initial hell
 
-## 
+The initial hell involved the main writing of the scripts. This involves getting your hands dirty with coding the applications. As mentioned, the initial requirements gathering as well as initial versions of the script are the easy bits. Now this next section won't be as important as the parts in initial help but they do definitely help. There's a reason why we are here; we're here to automate everything and if we still have to manually run the tasks, it would mean that there is plenty of parts that can be improved.
+
+- Deploying code on linux machines and putting sudo on it
+- Running code as serverless (Functions as a service)
+- Using tools such as Airflow to vizually manage tasks 
+- Running tasks in a platform (Kubernetes)
