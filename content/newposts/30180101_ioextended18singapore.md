@@ -53,7 +53,18 @@ There are two chatbot talks in this segment:
 - IO Extended 2018 extended chatbot
 - Eddy the eagle chatbot
 
-The chatbots are 
+The main technology powering the chatbots is this: **DialogFlow**
+
+When a chatbot receives a text from a user, it needs to sent it to a "server" for processing. One of the cheaper ways to handle these are via the cloud functions (serverless option). After doing the initial processing, the text can be sent over to dialogflow which would then retrieve and categorize what intent does that mean. The intent values are returned to the serverless function which would then respond to the user accordingly.
+
+IO Extended 2018 chatbot mainly revolves around only dialogflow and firebase cloud functions. However, the Eddy the eagle chatbot shows how chatbot can truly be useful to everyday life. The Eddy the eagle chatbot aim is to be able to allow students at a school to quickly look up lists of homework or lesson schedules rather than going through a bunch of links just to retrieve the information they need.
+
+Links to additional resources:
+- https://dialogflow.com/
+- https://firebase.google.com/docs/functions/
+- https://www.slideshare.net/SohitGatiganti/eddy-the-eagle-the-student-chatbot-104725786
+- https://github.com/sohit39/SAS_Chatbot
+- https://github.com/yogendra/io-ext-sg-2018
 
 ### Android Jetpack
 
