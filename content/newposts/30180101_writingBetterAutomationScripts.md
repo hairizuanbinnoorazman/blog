@@ -60,7 +60,9 @@ Let's say we found out that there is an update in package A which requires an up
 
 Now, package B would also need to upgrade since its also dependant on package C. But what if the scenario is such that package B's author has not been upgrading that package and it the upgrade of version 0.2.0 of package C causes failure to package B. Now there's a conflict in package added to the project.
 
+Imagine this on the scale of an app where there could be hundreds of packages and each of packages have their dependencies; the problem now has become an exponential one.
 
+When it comes to languages like Python, there are various tools that handle this. The `requirements.txt` file was one of the better ways of doing it but ever since the `pipenv` package came out, that method is definitely the better way of handling package versioning in a project. Further details won't be available here but in a another blog post.
 
 ## Survived the initial hell
 
