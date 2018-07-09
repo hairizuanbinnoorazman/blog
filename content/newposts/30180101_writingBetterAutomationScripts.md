@@ -30,8 +30,8 @@ Here are some of the ways to do so:
 - [Use git to properly manage such automation scripts](#using-git)
 - [Ensure package versioning is introduced/added](#package-versioning)
 - [Comments that explain why rather than what](#proper-commenting)
-- Prefer vectorized operations as compared to loops
-- Add testing on algorithms
+- [Prefer vectorized operations as compared to loops](#vectorized-operations)
+- [Add testing on algorithms](#testing-algorithms)
 - Decouple data sources from the script
 - Designing a proper configuration management for the script
 - Automate documentation
@@ -89,6 +89,14 @@ def a_random_function(random_number):
 ```
 
 With the above comment, we now understand why the comment was added that. We would have eventually understand what the function is doing from the function documentation but we wouldn't know why the random number has a condition check for more than 82 there unless context was provided.
+
+### Vectorized Operations
+
+--Example Text--
+
+### Testing Algorithms
+
+--Example Text--
 
 ## Survived the initial hell
 
