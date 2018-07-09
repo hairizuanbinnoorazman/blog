@@ -29,7 +29,7 @@ Here are some of the ways to do so:
 
 - [Use git to properly manage such automation scripts](#using-git)
 - [Ensure package versioning is introduced/added](#package-versioning)
-- Comments that explain why rather than what
+- [Comments that explain why rather than what](#proper-commenting)
 - Prefer vectorized operations as compared to loops
 - Add testing on algorithms
 - Decouple data sources from the script
@@ -63,6 +63,32 @@ Now, package B would also need to upgrade since its also dependant on package C.
 Imagine this on the scale of an app where there could be hundreds of packages and each of packages have their dependencies; the problem now has become an exponential one.
 
 When it comes to languages like Python, there are various tools that handle this. The `requirements.txt` file was one of the better ways of doing it but ever since the `pipenv` package came out, that method is definitely the better way of handling package versioning in a project. Further details won't be available here but in a another blog post.
+
+### Proper Commenting
+
+Comments are generic way of adding context to codebases. Sometimes, due to structures of code, comments are used to explain what that section is trying to do. Unfortunately, using comments this way is not the most effective way of using them - when code needs comments in order to explain what it's trying to do, its a sign that there is a need to do some sort of abstraction on that section of the script; e.g. breaking that section out into a separate function.
+
+Instead, it is much more vital to actually use comments to explain **why** a certain section of code was introduced. People usually get the what of code, and this is generally read from the code itself rather than trusting the comment section blindly. The **whys** allows one to understand more context of why the code base on designed in a certain way.
+
+Some example comments could be:
+
+```python
+def a_random_function(random_number):
+    """
+    Checks and returns a corrected ID from the database
+    :param random_number: An integer that is the ID of the record being checked
+    :type random_number: int
+    :returns: An integer representing the corrected ID for reference
+    """
+    # Refer to #182. Check for random number more than 82 is necessary as the database did not record values for that record ID
+    # Closest match for this was to record 72 which would have returned 77
+    if random_number > 82:
+        return 77
+    else:
+        return random_number + 5
+```
+
+With the above comment, we now understand why the comment was added that. We would have eventually understand what the function is doing from the function documentation but we wouldn't know why the random number has a condition check for more than 82 there unless context was provided.
 
 ## Survived the initial hell
 
