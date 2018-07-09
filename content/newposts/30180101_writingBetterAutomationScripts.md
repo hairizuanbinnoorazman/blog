@@ -27,14 +27,16 @@ With that, let's see if there are way and methods in order to reduce that debt o
 
 Here are some of the ways to do so:
 
-- [Use git to properly manage such automation scripts](#using-git)
-- [Ensure package versioning is introduced/added](#package-versioning)
-- [Comments that explain why rather than what](#proper-commenting)
-- [Prefer vectorized operations as compared to loops](#vectorized-operations)
-- [Add testing on algorithms](#testing-algorithms)
-- Decouple data sources from the script
-- Designing a proper configuration management for the script
-- Automate documentation
+- [The Beginning](#the-beginning)
+    - [Using Git](#using-git)
+    - [Package versioning](#package-versioning)
+    - [Proper Commenting](#proper-commenting)
+    - [Vectorized Operations](#vectorized-operations)
+    - [Testing Algorithms](#testing-algorithms)
+    - [Decoupled Data Sources](#decoupled-data-sources)
+    - [Proper Config Management](#proper-config-management)
+    - [Automate Documentation](#automate-documentation)
+- [Survived the initial hell](#survived-the-initial-hell)
 
 ### Using Git
 
@@ -95,6 +97,18 @@ With the above comment, we now understand why the comment was added that. We wou
 --Example Text--
 
 ### Testing Algorithms
+
+--Example Text--
+
+### Decoupled Data Sources
+
+--Example Text--
+
+### Proper Config Management
+
+--Example Text--
+
+### Automate Documentation
 
 --Example Text--
 
