@@ -17,16 +17,6 @@ Acquiring the initial set of requirements and writing such automation scripts is
 
 Let's go several scenarios on some of the more important bits to consider when doing automations at that stage.
 
-## The Beginning
-
-The beginning for most people, departments or even companies would usually mean just writing a script to quickly pull in the numbers and dumping it into an output file. The output file could be a excel file, csv file or other formats with the aim of such files being fed to a vizualization tool off sorts.
-
-Scripts serve to be the greatest blessing and curse at the same of such teams. Due to their flexibility, one can make scripts to essentially automate every aspect of their jobs (Generating that dreaded report every week, downloading reports from email and saving it in some folder on some online storage for the team). As a result of that flexibility, that would mean that scripts can easily become more complex that expected which leads to eventual huge amounts of technical teams for engineers team to handle.
-
-With that, let's see if there are way and methods in order to reduce that debt or make such jobs slightly easier.
-
-Here are some of the ways to do so:
-
 - [The Beginning](#the-beginning)
     - [Using Git](#using-git)
     - [Package versioning](#package-versioning)
@@ -37,6 +27,16 @@ Here are some of the ways to do so:
     - [Proper Config Management](#proper-config-management)
     - [Automate Documentation](#automate-documentation)
 - [Survived the initial hell](#survived-the-initial-hell)
+
+## The Beginning
+
+The beginning for most people, departments or even companies would usually mean just writing a script to quickly pull in the numbers and dumping it into an output file. The output file could be a excel file, csv file or other formats with the aim of such files being fed to a vizualization tool off sorts.
+
+Scripts serve to be the greatest blessing and curse at the same of such teams. Due to their flexibility, one can make scripts to essentially automate every aspect of their jobs (Generating that dreaded report every week, downloading reports from email and saving it in some folder on some online storage for the team). As a result of that flexibility, that would mean that scripts can easily become more complex that expected which leads to eventual huge amounts of technical teams for engineers team to handle.
+
+With that, let's see if there are way and methods in order to reduce that debt or make such jobs slightly easier.
+
+Here are some of the ways to do so:
 
 ### Using Git
 
