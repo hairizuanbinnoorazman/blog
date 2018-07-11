@@ -70,6 +70,11 @@ Links to additional resources:
 
 Links for this session:
 - https://android.jlelse.eu/introduction-to-android-architecture-components-with-kotlin-room-livedata-1839c17597e
+- https://github.com/googlesamples/android-sunflower
+- https://github.com/googlesamples/android-UniversalMusicPlayer
+- https://github.com/googlesamples/android-architecture-components
+- https://codelabs.developers.google.com/?cat=Android
+- https://developer.android.com/topic/libraries/architecture/
 
 ### Exoplayer Customization
 
@@ -80,3 +85,10 @@ Links to some of the resources out there
 - https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP
 
 ### Kotlin and Java
+
+Getting kotlin and java to play nice while developing an android application
+
+Additonal References:
+
+- https://developer.android.com/kotlin/ktx
+- https://github.com/android/android-ktx
