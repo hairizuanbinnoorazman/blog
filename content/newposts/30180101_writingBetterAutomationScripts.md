@@ -58,7 +58,7 @@ Let's have an example of a web application requiring the following dependencies:
 Let's say we found out that there is an update in package A which requires an upgrade for package C.
 
 - package A (v1.1.0) -> dependant on package C (v0.2.0)
-- pacakge B (v1.0.0) -> dependant on package C (*v0.1.0*)
+- pacakge B (v1.0.0) -> dependant on package C (_v0.1.0_)
 
 Now, package B would also need to upgrade since its also dependant on package C. But what if the scenario is such that package B's author has not been upgrading that package and it the upgrade of version 0.2.0 of package C causes failure to package B. Now there's a conflict in package added to the project.
 
@@ -94,7 +94,8 @@ With the above comment, we now understand why the comment was added that. We wou
 
 ### Vectorized Operations
 
---Example Text--
+- Begin about control flow (for loops etc)
+- Talk about pandas apply functionality
 
 ### Testing Algorithms
 
@@ -119,5 +120,5 @@ The initial hell involved the main writing of the scripts. This involves getting
 - Using docker to package the solution up
 - Deploying code on linux machines and putting sudo on it
 - Running code as serverless (Functions as a service)
-- Using tools such as Airflow to vizually manage tasks 
+- Using tools such as Airflow to vizually manage tasks
 - Running tasks in a platform (Kubernetes)
