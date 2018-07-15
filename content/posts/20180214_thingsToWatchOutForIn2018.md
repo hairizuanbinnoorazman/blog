@@ -7,7 +7,7 @@ tags = [
 ]
 date = "2018-02-14"
 categories = [
-    "conferences",
+    "conference",
 ]
 +++
 
