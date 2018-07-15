@@ -39,9 +39,10 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   Video Links: https://www.youtube.com/channel/UCsX05-2sVSH7Nx3zuk3NYuQ
 - Pycon APAC 2018 (May 2018)  
   https://pycon.sg/  
+  Video Links:  
   https://engineers.sg/conference/pycon-apac-2018
 - Dockercon 2018 (June 2018)  
-  https://2018.dockercon.com/
+  https://2018.dockercon.com/  
   Video Links:  
   https://www.youtube.com/watch?v=RnWXOAplvjY&list=PLkA60AVN3hh96Ef6GljWoGpXPG23rN7tQ
 - Scipy 2018  
