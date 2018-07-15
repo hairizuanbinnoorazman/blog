@@ -18,13 +18,13 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
 
 # Conferences
 
-- RStudio Conference (January 2018)  
-  Conference Details: https://www.rstudio.com/conference/  
-  Materials: https://github.com/rstudio/rstudio-conf/tree/master/2018  
-  Video Link: https://www.rstudio.com/resources/webinars/#rstudioconf2018
-- Fossasia Conference (March 2018)  
-  Website: https://2018.fossasia.org/
-  Video Link: https://engineers.sg/conference/fossasia-2018
+- RStudio Conference (January 2018)
+  - Conference Details: https://www.rstudio.com/conference/
+  - Materials: https://github.com/rstudio/rstudio-conf/tree/master/2018
+  - Video Link: https://www.rstudio.com/resources/webinars/#rstudioconf2018
+- Fossasia Conference (March 2018)
+  - Website: https://2018.fossasia.org/
+  - Video Link: https://engineers.sg/conference/fossasia-2018
 - Vue Conference (March 2018)  
   Conference Site: http://us.vuejs.org/  
   Conference Link: https://www.youtube.com/watch?v=AiF3XOu02-0&list=PLJNLwTPak6dj-HOz4eFrKDJsJSZsgvWPs&index=1
