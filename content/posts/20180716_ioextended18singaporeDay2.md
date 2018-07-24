@@ -22,20 +22,60 @@ List of talks
 
 ### Going to gRPC from REST
 
-Sample
+Some resource links:
+
+- https://grpc.io
+- https://grpc.io/community/
+- https://github.com/grpc
+- https://github.com/grpc-ecosystem
+  - Multiple middlewares
+  - Integrations with monitoring (e.g. Prometheus)
 
 ### Machine Learning - 101
 
-Sample
+Some resource links:
+
+- Standford's CS229 by Prof Andrew Y. Ng  
+  https://www.youtube.com/watch?v=UzxYlbK2c7E
+- Tensorflow tutorial  
+  https://developers.google.com/machine-learning/crash-course
+- Shogun Toolbox  
+  http://www.shogun-toolbox.org/page/features
+- http://daoudclarke.github.io/machine-learning-practice.html
+- http://www-bcf.usc.edu/~gareth/ISL/
+- http://stanford.edu/~cpiech/cs221/handouts/kmeans.html
+- https://ipython-books.github.io/81-getting-started-with-scikit-learn/
 
 ### Web Things
 
-Sample
+- AMP Packager  
+  https://github.com/ampproject/amppackager
+- AMP Stories  
+  https://www.ampproject.org/stories/
+- AMP Stories Components  
+  https://www.ampproject.org/docs/reference/components/amp-story
+- Experimental: chrome://flags/#enable-desktop-pwas
+- WebXr  
+  https://webxr.io/webar-playground/app/
+
+Some resource links:
+
+- https://www.ampproject.org/
+- https://codelabs.developers.google.com
+- https://developers.google.com
+- https://github.com/immersive-web
 
 ### Android Things
 
-Sample
+Some resource links:
+
+- https://g.co/iotdev
+- https://iot.google.com
+- https://developer.android.com/things
 
 ### Pivotal Cloud Foundry on GCP
 
-Sample
+Some resource links:
+
+- https://pivotal.io/platform
+- https://pivotal.io/platform/pivotal-application-service
