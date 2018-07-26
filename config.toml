@@ -7,7 +7,7 @@ theme = "kiera"
 
 paginate = 10
 
-summaryLength = 100
+summaryLength = 30
 enableEmoji = true
 
 googleAnalytics = "" #Google Analytics ID
