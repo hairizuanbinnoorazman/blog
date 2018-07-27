@@ -5,7 +5,7 @@ copyright = "Copyright &copy; 2017 - Hairizuan Noorazman"
 canonifyurls = true
 theme = "kiera"
 
-paginate = 10
+paginate = 50
 
 summaryLength = 30
 enableEmoji = true
