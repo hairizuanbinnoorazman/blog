@@ -144,7 +144,6 @@ I will provide several set of blog posts on how to do it the various languages:
 
 - R Documentation Generation (Coming soon)
 - Python Documentation Generation (Coming soon)
-- Golang Documentation Generation (Coming soon)
 
 However, let's say that the above documentation generation are ones that other members of the team is not appreciative of. They would want to have something where they themselves can contribute as well. Although it is tempting to start using document editors such as Microsoft Word or sth, it would still prove to be a bad choice in the long run. Part of the reason is that code bases evolve along time. This would mean documentation would also need to evolve along side it.
 
