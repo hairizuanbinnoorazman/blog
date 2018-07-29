@@ -127,20 +127,33 @@ We can instead write logic to check that the data would contain certain paramete
 
 I will provide another blog post on how to do this effectively.
 
+- Decoupling data sources R (Coming soon)
+- Decoupling data sources Python (Coming soon)
+
 ### Proper Config Management
 
 --Example Text--
 
 ### Automate Documentation
 
---Example Text--
+A common way of how people document the coding process is **not to do it** but rather to do it as an after thought. It is sometimes done during handover process or on request by some manager etc. Doing documentation this way makes it such a dreaded process. Yet it such an important process but when it is done months after the coding work is done or on request, there are going to gaps in the knowledge being captured in the documentation.
+
+After being in the field for quite a while, I am of the opinion that code documentation should never be created in a separate tool or even in a separate document. Documentation should be put together with the codebase. This would kind of ensure that as code gets updated, the documentation should be updated as well. Processes can then be put in to ensure that every code change that alters the definition and functionality would require a documentation change.
+
+I will provide several set of blog posts on how to do it the various languages:
+
+- R Documentation Generation (Coming soon)
+- Python Documentation Generation (Coming soon)
+- Golang Documentation Generation (Coming soon)
+
+However, let's say that the above documentation generation are ones that other members of the team is not appreciative of. They would want to have something where they themselves can contribute as well. Although it is tempting to start using document editors such as Microsoft Word or sth, it would still prove to be a bad choice in the long run. Part of the reason is that code bases evolve along time. This would mean documentation would also need to evolve along side it.
 
 ## Survived the initial hell
 
 The initial hell involved the main writing of the scripts. This involves getting your hands dirty with coding the applications. As mentioned, the initial requirements gathering as well as initial versions of the script are the easy bits. Now this next section won't be as important as the parts in initial help but they do definitely help. There's a reason why we are here; we're here to automate everything and if we still have to manually run the tasks, it would mean that there is plenty of parts that can be improved.
 
 - Using docker to package the solution up
-- Deploying code on linux machines and putting sudo on it
+- Deploying code on linux machines and putting cron on it
 - Running code as serverless (Functions as a service)
 - Using tools such as Airflow to vizually manage tasks
 - Running tasks in a platform (Kubernetes)
