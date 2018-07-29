@@ -103,7 +103,29 @@ With the above comment, we now understand why the comment was added that. We wou
 
 ### Decoupled Data Sources
 
---Example Text--
+This is the one pain point that is not completely obvious to people when they create the initial versions of the data automation processing scripts. Most of the time, scripts that automate data processing don't last very long; such scripts are used to solve a temporary problem and once the problem is kind of "solved", it is then handed over to proper engineering teams who would re-engineer it for proper use.
+
+However, what if the situation is one where you are the one who has the maintain the scripts for long periods of time. What would you need to consider?
+
+A few things can easily come to mind:
+
+- Data sources that change across time. Maybe the initial prototypes were done via csv files that some manager in the company. However, the frequency where the manager who has access to the data is too slow and you would want to get faster and more frequent access to the data. The database access is provided to you. Now the problem becomes how to make sure that the data being pulled out does not result in your automation scripts breaking. There would be plenty of checks just to ensure that the right data and the right form is coming in.
+- Ensuring that the data sources has the right set of columns for use. This means testing the data to ensure certain columns exist for manipulation further down the line. This is especially important when data sources go through "human hands". The worst form of data sources are one that manually and lovingly constructed by people. Part of the reason of why this happen is naiveness. People assume scripts are robust enough to be able to handle column changes and addition of columns etc but that is where most scripts start to fail. Even shifting the column order can easily break scripts that rely on index numbers etc.
+
+One way to combat this problem is to write the script which abstracts the reading of the data sources out from the main algorithmic part of the script. So instead of just writing this:
+
+```python
+import pandas as pd
+
+data = pd.read_csv("some-sample.csv")
+data = data.groupby('A').sum()
+```
+
+This is where we are putting a few assumptions already. It is assumed that the data being loaded in from `some-sample.csv` already has column and still has column A. (This may not be true. A rename of this would already break this)
+
+We can instead write logic to check that the data would contain certain parameters etc but it would begin to pollute the main script even further.
+
+I will provide another blog post on how to do this effectively.
 
 ### Proper Config Management
 
