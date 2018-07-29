@@ -1,5 +1,5 @@
 +++
-title = "Decoupling data sources in Python"
+title = "Table Driven Tests in python"
 description = ""
 tags = [
     "python",
@@ -10,5 +10,3 @@ categories = [
     "automation",
 ]
 +++
-
-TODO: Add to wrritingBetterAutomationScripts
