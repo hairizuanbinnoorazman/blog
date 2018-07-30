@@ -132,7 +132,17 @@ I will provide another blog post on how to do this effectively.
 
 ### Proper Config Management
 
---Example Text--
+Every data script has its own set of ways to allow for script configuration. Some scripts are written in a sophisticated manner such the script exposes a command line tool which takes a configuration flags as input. This configuration flags affects the runtime behaviour of the script.
+
+Alternatively, another way of how one could possibly control the runtime of such scripts is to have it read configuration files. Common configuration files are json, yaml and even text based files but in the case of data manipulation, sometimes, one would need to provide data mapping files (which you can consider it as some sort of configuration file as well.)
+
+One of the worst ways of doing configurations is to do it in a format which doesn't allow you to track changes between versions of configuration managements. Text based configuration files are fine; e.g. csv, text, json and yaml files. However, if one uses binary based formats, it makes it really really hard to replicate and reproduce configurations and the various script runs.
+
+One may think: "Is managing config management that important?" and my answer to that is to try maintaining a script where there is no single source of truth of configurations. It makes hard and almost close to impossible to ensure to replicate that same exact configuration which would produce the error that the user of the script described before. If one uses tools that provide some sort of versions (or named versioning), it would allow it to be much easier to handle such issues.
+
+By default text based formats are immediately ok for use once it is coupled together with git. One can checkin such configuration files which can be maintained and managed accordingly with easy retrieval. (E.g. You can create a new branch for each new configuration? - different run == different script?)
+
+Also, equally important is not only to know the exact configuration of configuration to replicate and reproduce a specified run but to only to understand how the configuration requirements changes across time. Knowing this would allow a developer to understand some of the underlying assumptions when designing the configuration (the awkward keys in the configuration) being there etc
 
 ### Automate Documentation
 
