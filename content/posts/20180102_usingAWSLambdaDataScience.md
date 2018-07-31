@@ -1,5 +1,5 @@
 +++
-title = "Using AWS Lambda for Data Science Projects and Automations"
+title = "Using AWS Lambda for Data Science Projects and Automations 2"
 description = "AWS Lambda for Data Science Projects which involves the usage of python and it numerical libraries"
 tags = [
     "python",
