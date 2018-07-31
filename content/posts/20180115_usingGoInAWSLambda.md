@@ -3,10 +3,12 @@ title = "Using Go in AWS Lambda"
 description = "Go in AWS Lambda before AWS official support"
 tags = [
     "go",
+    "serverless",
 ]
 date = "2018-01-15"
 categories = [
     "go",
+    "serverless",
 ]
 +++
 
