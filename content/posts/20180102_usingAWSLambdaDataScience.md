@@ -17,7 +17,7 @@ Using AWS Lambda for Data Science Projects and Automations - Part 1
 
 Let's deploy a serverless application!
 
-Problem Statement
+Problem Statement:  
 The application we would be trying out this time will do the following:
 
 > "Read csv files when it is loaded into S3, load via the pandas package, sum the numeric sum and then send the result of that analysis into Slack."
@@ -33,9 +33,9 @@ Let's break the problem into smaller bits which we can then try out.
 
 ## Load up the Requests Package
 
-_Gotcha: You cannot just install python packages on a AWS Lambda function. You will need to load up the installed libraries together with your codebase_
+**Gotcha: You cannot just install python packages on a AWS Lambda function. You will need to load up the installed libraries together with your codebase**
 
-_Gotcha: If you use the API Gateway, ensure that output is right. In the case here, you would need a dictionary with the Content-Type and StatusCode._
+**Gotcha: If you use the API Gateway, ensure that output is right. In the case here, you would need a dictionary with the Content-Type and StatusCode.**
 
 For the latest codebase to handle this:
 https://github.com/hairizuanbinnoorazman/demonstration/tree/master/trying_aws_lambda/raw/requests_example
@@ -106,7 +106,7 @@ def lambda_handler(event, context):
 
 ## Load up the Pandas Package
 
-_Gotcha: The approach above to load the requests package cannot be used to load the pandas package. We need to build the c-bindings behind the pandas library which mean that we kind of need to know the machine that is used to run lambda._
+**Gotcha: The approach above to load the requests package cannot be used to load the pandas package. We need to build the c-bindings behind the pandas library which mean that we kind of need to know the machine that is used to run lambda.**
 
 After running the deploy.sh script in the container, we would need to kind of run a 'hackish' command.
 
@@ -184,11 +184,11 @@ If we keep pretty much everything the same from the previous example, we can jus
 
 ## Read event value when AWS S3 is triggered
 
-_Gotcha: Ensure that the name of the csv file does not contain spaces or other special characters. The event values somehow alter the names of such files which results in issues when the AWS Lambda function is triggered._
+**Gotcha: Ensure that the name of the csv file does not contain spaces or other special characters. The event values somehow alter the names of such files which results in issues when the AWS Lambda function is triggered.**
 
-_Gotcha: Don't mess up when creating the S3 trigger._
+**Gotcha: Don't mess up when creating the S3 trigger.**
 
-_Gotcha: A major issue is setting the permissions right. If you don't set the permissions right, the function will keep complaining that it doesn't have the permissions needed to access the resources it needs to run e.g. S3 or Cloud Logs. One of the worst things that happened while I was experimenting this was that I accidentally disable cloud logging as well as S3 access for a lambda function. The lambda function is rendered useless and there isn't even logs to even indicate that!! So yea, try not to fiddle with permissions to much, but rather get familiar with it and get it right._
+**Gotcha: A major issue is setting the permissions right. If you don't set the permissions right, the function will keep complaining that it doesn't have the permissions needed to access the resources it needs to run e.g. S3 or Cloud Logs. One of the worst things that happened while I was experimenting this was that I accidentally disable cloud logging as well as S3 access for a lambda function. The lambda function is rendered useless and there isn't even logs to even indicate that!! So yea, try not to fiddle with permissions to much, but rather get familiar with it and get it right.**
 
 We would changing and prepping up the example such that it would be closer to what we would expect of this. We would have a S3 trigger to ping us the csv files which would then read and run our 'analysis'.
 
