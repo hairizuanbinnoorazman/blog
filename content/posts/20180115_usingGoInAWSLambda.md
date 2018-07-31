@@ -89,7 +89,7 @@ https://github.com/hairizuanbinnoorazman/demonstration/tree/master/trying_aws_la
 I can only think of very few reasons to want to do this; due to the nature of AWS Lambda where code might take a while to start running (e.g. cold start problem), there is no point having extremely efficient code. Unless you are doing extremely heavy compute stuff and python or any other language supported by AWS Lambda that can help resolve the issue, would this go kind of help a little. Other than that, it might be better to just play along with what AWS Lambda provides us.
 
 If you would prefer an explanation and an example of this, you might want to watch this clip.  
-https://www.youtube.com/watch?v=lcyNjgEG9H8
+{{< youtube lcyNjgEG9H8 >}}
 
 However, with the upcoming support provided by AWS, it is probably uncessary to do all these weird hackaround. We can upload the Go Code straight into AWS Lambda and then have it execute accordingly.
 
