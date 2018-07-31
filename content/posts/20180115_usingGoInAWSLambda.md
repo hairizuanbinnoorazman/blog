@@ -26,7 +26,7 @@ env GOOS=linux GOARCH=amd64 go build main.go
 
 There would generate an executable that can run on the machine that built it but it should on linux machines just fine.
 
-In python, we would just wrap that executable and call it accordingly:
+In python, we would just wrap that executable and call it accordingly. To put it simply; since AWS didn't really support Golang runtime then, we could create the binary that was compatible with the AWS OS that is used to host AWS Lambda and then have the python code in the available python runtime run it. Essentially, any language that produces a binary that can be executed on a machine can be put here as long as the right values are being put in.
 
 ```python
 from __future__ import print_function
@@ -88,3 +88,9 @@ I can only think of very few reasons to want to do this; due to the nature of AW
 
 If you would prefer an explanation and an example of this, you might want to watch this clip.  
 https://www.youtube.com/watch?v=lcyNjgEG9H8
+
+However, with the upcoming support provided by AWS, it is probably uncessary to do all these weird hackaround. We can upload the Go Code straight into AWS Lambda and then have it execute accordingly.
+
+Even with all that simplicity, it would ideal to actually rely on serverless framework to actually help do the administrative portions of the serverless functions. There are many things to consider when writing serverless functions, one of which is to set up the required security roles. If the functions are dependent on queues etc, it would requiring work to administrate all that additional functionality.
+
+Naturally, as programmers, we would have all those work automated away, which could mean writing ansible scripts or even cloud formation scripts (specific AWS). However, one can just rely on the serverless framework to do all that heavy work.
