@@ -4,7 +4,7 @@ description = "Go in AWS Lambda before AWS official support"
 tags = [
     "go",
 ]
-date = "2018-01-31"
+date = "2018-01-15"
 categories = [
     "go",
 ]
