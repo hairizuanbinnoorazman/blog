@@ -1,12 +1,14 @@
 +++
 title = "Rendering diagrams in Hugo"
-description = ""
+description = "Converting text descriptions to diagram via the mermaid.js library on Hugo"
 tags = [
     "hugo",
+    "mermaid",
 ]
 date = "2018-08-02"
 categories = [
     "hugo",
+    "mermaid",
 ]
 +++
 
