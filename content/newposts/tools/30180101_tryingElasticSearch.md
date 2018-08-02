@@ -9,3 +9,8 @@ categories = [
     "elasticsearch",
 ]
 +++
+
+- Golang library
+- Elasticsearch
+- Sniffing issues - Publish address that are different from expected?
+- Dockerized it
