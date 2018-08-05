@@ -10,3 +10,5 @@ categories = [
     "automation",
 ]
 +++
+
+TODO: Add to wrritingBetterAutomationScripts
