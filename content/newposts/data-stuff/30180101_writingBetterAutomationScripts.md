@@ -94,6 +94,8 @@ With the above comment, we now understand why the comment was added that. We wou
 
 ### Vectorized Operations
 
+When one starts programming for the first time, the usual way of having a piece of code run across each item in a set of items would be to use loop. In our case, we can imagine each row of a dataframe (this term can be appied across both R and Python)
+
 - Begin about control flow (for loops etc)
 - Talk about pandas apply functionality
 
