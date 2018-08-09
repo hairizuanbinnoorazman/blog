@@ -22,8 +22,8 @@ Let's go several scenarios on some of the more important bits to consider when d
     - [Package versioning](#package-versioning)
     - [Proper Commenting](#proper-commenting)
     - [Vectorized Operations](#vectorized-operations)
-    - [Testing Algorithms](#testing-algorithms)
     - [Decoupled Data Sources](#decoupled-data-sources)
+    - [Testing Algorithms](#testing-algorithms)
     - [Proper Config Management](#proper-config-management)
     - [Automate Documentation](#automate-documentation)
 - [Survived the initial hell](#survived-the-initial-hell)
@@ -94,14 +94,42 @@ With the above comment, we now understand why the comment was added that. We wou
 
 ### Vectorized Operations
 
-When one starts programming for the first time, the usual way of having a piece of code run across each item in a set of items would be to use loop. In our case, we can imagine each row of a dataframe (this term can be appied across both R and Python)
+When one starts programming for the first time, the usual way of having a piece of code run across each item in a set of items would be to use loop. In our case, we can imagine each row of a dataframe (this term can be appied across both R and Python) as an item in a set of items (a set of rows together forms a dataframe). Looping works fine across smaller dataframes and it appear easier to understand but when there is huge amounts of manipulation needed for each dataframe, one can get easily confused.
 
-- Begin about control flow (for loops etc)
-- Talk about pandas apply functionality
+Let's have a naive example. Let's say we would want to add a new column to a dataset that adds two columns together.
 
-### Testing Algorithms
+This is via loops
 
---Example Text--
+```python
+import pandas as pd
+
+df = pd.read_csv("initial.csv")
+# Let's assume that the new column is in column 5
+df['newColumn'] = 0
+for i in range(0, len(df)):
+  df.iloc[4, i] = df.iloc[3, i] + df.iloc[2, i]
+```
+
+This is via python's pandas apply
+
+```python
+import pandas as pd
+
+df = pd.read_csv("initial.csv")
+df['newColumn'] = df.apply(lambda x: x['columnTarget1'] + x['columnTarget2'], axis=1)
+```
+
+Compare the two above, the latter code is more succint and to the point. Setting up loops makes it really hard to read the code and the focus of the code would become one where there is a need to have the maintainer of the script ensure that the loops are set up right. The natural naive approach is to go with the former where one just loops over the rows whereas the latter approach is harder to understand conceptually but once understood, it becomes way easier to read and debug.
+
+This leads to my point about vectorized operations. In the former piece of python code, having code that loops, fetch the data by index, manipulates them accordingly and then put the value back to the dataframe by index. Most of the work to do this is on the python level which means that is a limit to how fast it can go. The loop can only work on one item at a time. If you think about it on a naive level, how would you want the operation be done faster? Ideally we would want the work to be done on multiple items at the same time in a parallel fashion.
+
+This is where vectorized operations kind of come in. To put it simply, vectorized operations is computation done on an array instead of an item at where one time. Refer to this link on wikipedia: https://en.wikipedia.org/wiki/Array_programming
+
+When we use functions provided in pandas (under the hood it uses numpy), it would actually have that operation vectorized which means we can do our computation work way faster. Try proving to yourself by creating a huge dataset and then attempt to manipulate the dataset via loops and via the functions that pandas offers; you will see that pandas outperforms the loop based approach especially if the datasets get bigger.
+
+Hence, as much as possible, if you are already using the pandas library, just go ahead and utilize as much of the functions that pandas provide until it is really impossible to do so with it. (It is really hard to do so, there are a whole bunch of functions that you wouldn't even imagine it being within the library)
+
+One common case that often come up is that we would need to add data across rows but there for one of the rows, the data that we would need to use to add it is in the previous row. If you think about it, with the row based and column based ways of how calculations are done in pandas, it would appear as though it would impossible to do calculations unless one can specify how to have to refer to the previous row for row-wise calculation. However, an interesting way to see it is that all we need to do is to pull the data downwards by 1 row and then handle the cases when the data is not available. This can be done by the lag/lead methods available in pandas library in python and dplyr library in R.
 
 ### Decoupled Data Sources
 
@@ -131,6 +159,19 @@ I will provide another blog post on how to do this effectively.
 
 - Decoupling data sources R (Coming soon)
 - Decoupling data sources Python (Coming soon)
+
+### Testing Algorithms
+
+After having all the above in place, we would begin to write algorithms. This is would be heart and meat of our script. This would be where we would encode our business logic and express how the data is to be manipulated in order for us to get the findings that we would need to decide the next move for the business.
+
+Algorithms that are written need to be tested, especially for the corner cases that we would expect; we would need to write a whole bunch of test cases and we somehow need to make it easier to add additional test cases in the future should the need arises.
+
+In the golang community, there is a interesting concept called table driven tests; it involves setting up an array like structure which one can easily append additional records to it to set new test cases. The test would involve going through each of the test case and check against each one of them to see if the response of the algorithms meets the required spec that we would specify.
+
+I will provide another blog post of an example of how to do this effectively.
+
+- table driven tests in Python
+- table driven tests in R
 
 ### Proper Config Management
 
