@@ -2,13 +2,12 @@
 title = "Trying out skaffold"
 description = "Trying out skaffold"
 tags = [
-    "golang",
+    "go",
     "kubernetes",
 ]
-date = "2018-08-10"
+date = "2018-08-09"
 categories = [
-    "golang",
-    "devops",
+    "go",
     "kubernetes",
 ]
 +++
