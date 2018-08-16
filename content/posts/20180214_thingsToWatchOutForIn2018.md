@@ -54,8 +54,9 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   - Conference Link: https://www.golanguk.com/
 - Gophercon Denver - main (August 2018)
   - Conference Link: http://gophercon.com
-- AWS Re:invent Conference (Usually in Nov-Dec)
-- Kubecon | Nativecon 2018 North Amertica
+- AWS Re:invent Conference (November 2018)
+  - Conference Link: https://reinvent.awsevents.com/
+- Kubecon | Nativecon 2018 North Americe (December 2018)
   - Event Page: https://events.linuxfoundation.org/events/kubecon-cloudnativecon-north-america-2018/
 
 Some Resources to follow to learn when the next conference will come:
