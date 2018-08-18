@@ -54,6 +54,8 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   - Conference Link: https://www.golanguk.com/
 - Gophercon Denver - main (August 2018)
   - Conference Link: http://gophercon.com
+- Google Cloud Summit Singapore (September 2018)
+  - Event Page: https://cloudplatformonline.com/2018-Summit-Singapore-Home.html
 - AWS Re:invent Conference (November 2018)
   - Conference Link: https://reinvent.awsevents.com/
 - Kubecon | Nativecon 2018 North Americe (December 2018)
