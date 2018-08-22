@@ -12,7 +12,7 @@ categories = [
 ]
 +++
 
-Meetup.com is a pretty nice site to setup meetups and sharings on technologies. The platform is pretty nice and easy to use when it comes to bookings but sometimes, the data provided by its web interface is not sufficient nor does it fit our use case. In this case, let's say you are trying to understand the trend of the number of people attending a meetup. To an organizer, an important thing to him/her is to understand what kind of actions would lead to higher turnups/registrations for a meetup.
+Meetup.com is a pretty nice site to setup meetups and sharings on technologies. The platform is pretty nice and easy to use when it comes to bookings but sometimes, the data provided by its web interface is not sufficient nor does it fit our use case. In this case, let's say you are trying to understand the trend of the number of people attending a meetup. To an organizer, an important thing to him/her is to understand what kind of actions would lead to higher turnups/registrations for a meetup. So, by the end of this post, hopefully we would be able to have a pretty decently priced (free if possible) solution for an analytics solution which would only be called occasionally.
 
 There a few ways to solve this, but in this post, we'll be focusing mainly on the third and last option.
 
@@ -30,4 +30,21 @@ In the overall big picture, it would be best to move such scripts from running o
 
 ## Using free platform compute resources
 
+The Google platform provides several free resources for computation work. The list of free resources are available here for your convenience.
+
+https://cloud.google.com/free/
+
+An example of how this free computation can be done would be have the code be hosted on Google App Engine. API endpoints or cron jobs could be set up which could then be used my chat applications or mobile applications. The data could be processed and outputed into the various chat applications or data applications out there.
+
 ## Using Serverless solutions
+
+A possible solution would be the usage of serverless solution. In the Google Cloud Platform world, that would be the usage of the Google Cloud Functions tool. It was recently announced to be in General Availability for Node.js 6 runtimes during the Google Cloud Next 2018 event. However, the interesting/exciting bit was the portion where the bit where it was mentioned that the python runtime is being supported in beta availability.
+
+You can look to its release page for further information regarding this. Look to the July 24 release notes:  
+https://cloud.google.com/functions/docs/release-notes
+
+So with python support, we can now start to write python applications/scripts that can utilize this.
+
+So, before getting started, we would want to wonder on why use this rather than using our compute engine or app engine etc. One strong reason is the nature of the application we are building here. In our case, we would running the script/application occasionally (sometimes only needing like a few seconds of compute each day). This would mean that it doesn't make sense to have the need to start a beefy compute engine service just to do that work. However, it would still be nice to be able to have an API be able available 24/7 which can be called in our convenience.
+
+Seeing that Google Cloud Functions are priced in the 100ms interval (different amount of memory being used would lead to slight differences in pricing), this would give us tight granular control over the amount of money we spend on this, making this a cheap and viable option for us to use.
