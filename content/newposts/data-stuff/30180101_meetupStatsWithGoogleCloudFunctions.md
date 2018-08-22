@@ -22,7 +22,11 @@ There a few ways to solve this, but in this post, we'll be focusing mainly on th
 
 ## Using R and Python Scripts
 
-The first easy approach is to just have a python or R script which would then extract the values from the meetup api, which would then
+The first easier approach is to just have a python or R script which would then extract the values from the meetup api, which would then be able to pull the values in and then manipulate the values accordingly to be able generate the graphs that we need for analysis.
+
+This solution is easy to start with although working with scripts makes it difficult to have such analysis done on demand. Seeing that this information would ideal to be made available at any time, having the solution this way would be that the one who generate the analysis needs to have access to a computer that has the R or Python runtimes available.
+
+In the overall big picture, it would be best to move such scripts from running on a local computer which relies on a person manually needing to run it to running it on a server as an api. This would allow it to be consumed by chat applications or mobile applications that would make it easier obtaining the data for analysis.
 
 ## Using free platform compute resources
 
