@@ -120,15 +120,51 @@ def hello_get(request):
     return 'Hello, World!'
 ```
 
-It was imported and run with no issues.
+It should be easy to import and run with no issues
 
 ### Deploying GCF Python app via Google Cloud Repositories
 
-random
+There are various ways to deploy a Google Cloud Function. At the moment, one can just type the code straight into its editor, or put a zip file either into Google Cloud Functions directly or via Google Cloud Storage. At the last alternative way would be to set it up with Google Cloud Source Repositories.
+
+<picture>
+
+The Google Cloud Source Repositories is an interesting approach. Rather than having to zip up files and folders and ship it into S3 etc, one can just point the Google Cloud Function to consume it from the repo directly. The nice bit is that one can easily set up Google Cloud Source Repositories to mirror off more traditional places of hosting the codebase, e.g. Github or Bitbucket. The option allows code to be mirrored over.
+
+<picture>
+
+It is not exactly necessary to have a bunch of pictures to show how to setup mirroring in Google Cloud Source Repositories. The forms in the tool is quite easy and intuitive to understand; one can just click through without going through any documentation to set this workflow up.
+
+We can then deploy code from a specific branch, tag and even the folder. It is possible to specify all of such details which makes this a pretty flexible and easy solution. Refer to the link below for more details on this:
+
+https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 
 ### Setting up CI/CD pipelines via use of Google Cloud Builder
 
-random
+Seeing that it is possible to just use the `gcloud` cli tool to be able to deploy the solution, this would mean that we can replicate that same effort via using the Google Cloud Builder tool.
+
+The Google Cloud Builder is kind of Google's answer to build systems at scale. Just think of it simply of how a company would evolve when they are using their build systems:
+
+- Developer starts of with using Jenkins as it is standard build tool in the industry.
+- As time goes by, more builds are needed on Jenkins. It is essentially to have Jenkins work in a master and slave configuration, where the master would allocate build jobs to the slaves which wouold build the apps for deployment
+- Too many configurations, libraries, and junk put into Jenkins; build system evolve to utilize docker to build docker containers in order to encapsulte the different app and its dependencies from each other.
+
+Google Cloud Build is kind of the last step; a scalable build solution which is managed by the platform. One would need to use a `cloudbuild.yaml` file in order to specify the different steps needed to build the applications which can then be sent to the target platform.
+
+For example, for Google Cloud Functions, the following configuration is helpful:
+
+```yaml
+steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "beta",
+        "functions",
+        "deploy",
+        "{function name}",
+        "--region=asia-northeast1",
+        "--source=https://source.developers.google.com/projects/{projectid}/repos/{repo name}/moveable-aliases/{branch name}/paths/{path name}",
+        "--trigger-http",
+```
 
 ### Integration with Slack Slash commands
 
@@ -142,3 +178,5 @@ If the article above is too long to read, this section would provide the whole l
   https://cloud.google.com/free/
 - Simple Python Application on Google Cloud Functions tool  
   https://cloud.google.com/functions/docs/tutorials/http
+- Deploying a Google Cloud Functions via gcloud CLI  
+  https://cloud.google.com/sdk/gcloud/reference/functions/deploy
