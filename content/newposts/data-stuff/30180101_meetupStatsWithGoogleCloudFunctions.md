@@ -1,6 +1,6 @@
 +++
 title = "Getting Meetup Stats with Google Cloud Functions"
-description = ""
+description = "Getting Meetup Stats with Google Cloud Functions"
 tags = [
     "python",
 ]
@@ -23,7 +23,11 @@ There a few ways to solve this, but in this post, we'll be focusing mainly on th
     - [Deploying GCF Python app via Google Cloud Repositories](#deploying-gcf-python-app-via-google-cloud-repositories)
     - [Setting up CI/CD pipelines via use of Google Cloud Builder](#setting-up-cicd-pipelines-via-use-of-google-cloud-builder)
     - [Integration with Slack Slash commands](#integration-with-slack-slash-commands)
+- [Getting the full picture from more complete code](#getting-the-full-picture-from-more-complete-code)
 - [List of links for TLDR](#list-of-links-for-tldr)
+    - [Google Cloud Documentation Links](#google-cloud-documentation-links)
+    - [Slack Documentation Links](#slack-documentation-links)
+    - [Other Links](#other-links)
 
 ## Using R and Python Scripts
 
@@ -166,13 +170,61 @@ steps:
         "--trigger-http",
 ```
 
+Some of the weird things while setting up CI/CD with Google Cloud Build:
+
+- If command is called without using region: It would redeploy but to a different region (So its necessary to specify this here). The assumption here is that it is using some sort of default region.
+- If command is called without source, it would redeploy but the source repo would not change. It just seem to redeploy the same copy of the codebase
+- The general assumption here is that the params specified here needs to be used such that if you were to do an initial deploy. There is no sense of "previous state" of the application being deployed before.
+- Permissions is big pain point here - no all permissions required are mentioned in the documentation. To get it working, the minimum set of permissions needed are:
+  - Cloud Build Service Account
+  - Cloud Function Developer
+  - Cloud Function Service Agent
+- (Continuing on permission) This is on the assumption that the we are deploying Google Cloud Functions via usage of the source repositories in Google Source Repositories. If we are to do it by sending a zip over Google Cloud Storage, it might be nceessary to see if we need to add permissions to read and write to Google Cloud Storage here.
+
 ### Integration with Slack Slash commands
 
-random
+So, we have a working http api that we can curl with. How can we make it really accessible anytime. One way would be to link it up with Slack. With Slack, there is an interesting capability to have slash commands which would then allow it to be integrate with other external APIs. The Slack slash command would call a post request to hit against the API specified with a form body request. The form body request would contain all kinds of information including which channel the slack command is called from etc
+
+As usual before we get started, we need to handle permissions; so go to the following url: https://api.slack.com/apps. After which, activate the following features:
+
+- Incoming webhooks
+- Slash commands
+- Permissions (Some of the features will be auto-turned on when the feature is activated)
+  - Access information about user's public channels
+  - Send messages as bot
+  - Send messages as service
+  - Post to specific channels
+  - Upload and modify files
+  - Add Slash commands
+
+Once we have that, we would be able to interact with Slack's API.
+
+The following is a simple python function that sends a message to a channel on Slack
+
+```python
+def send_text_to_channel(slack_token, slack_channel_id, text):
+    upload_url = "https://slack.com/api/chat.postMessage"
+    data = {"token": slack_token,
+            "channel": slack_channel_id,
+            "text": text}
+
+    response = requests.post(upload_url, params=data)
+
+    if response.status_code != 200:
+        raise Exception(json.dumps({"error": "Unable to send text"}))
+```
+
+One can potentially just rely on external 3rd party slack library but seeing that we are only going to use a subset of features, it wouldn't make too much sense to hunt for a good library to use Slack
+
+## Getting the full picture from more complete code
+
+To get a fuller picture of how the whole thing works, the full source code on this is available publically here: https://github.com/hairizuanbinnoorazman/meetup-stats
 
 ## List of links for TLDR
 
-If the article above is too long to read, this section would provide the whole list of links to get started with using Google Cloud Functions and its family of tools to create a Slack slash command that can pull meetup stats on a Slack channel
+If the article above is too long to read, this section would provide the whole list of links to get started with using Google Cloud Functions and its family of tools to create a Slack slash command that can pull meetup stats on a Slack channel.
+
+### Google Cloud Documentation Links
 
 - List of free simple Google Platform items that can be used (includes quota available etc)  
   https://cloud.google.com/free/
@@ -180,3 +232,16 @@ If the article above is too long to read, this section would provide the whole l
   https://cloud.google.com/functions/docs/tutorials/http
 - Deploying a Google Cloud Functions via gcloud CLI  
   https://cloud.google.com/sdk/gcloud/reference/functions/deploy
+
+### Slack Documentation Links
+
+- Slack API  
+  https://api.slack.com/apps
+- Slack Slash Commands Documentation  
+  https://api.slack.com/slash-commands
+
+### Other Links
+
+- Github Repository to the working code for this  
+  https://github.com/hairizuanbinnoorazman/meetup-stats
+- [Link](/posts/20180729_googleNext2018) to a summary of some videos from Google Cloud Next (non-exhaustive)
