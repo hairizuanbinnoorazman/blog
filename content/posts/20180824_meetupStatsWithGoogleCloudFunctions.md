@@ -4,7 +4,7 @@ description = "Getting Meetup Stats with Google Cloud Functions"
 tags = [
     "python",
 ]
-date = "3018-03-14"
+date = "2018-08-24"
 categories = [
     "python",
     "automation",
@@ -19,15 +19,15 @@ There a few ways to solve this, but in this post, we'll be focusing mainly on th
 - [Using R and Python Scripts](#using-r-and-python-scripts)
 - [Using free platform compute resources](#using-free-platform-compute-resources)
 - [Using Serverless solutions](#using-serverless-solutions)
-    - [Creating a GCF Python app](#creating-a-gcf-python-app)
-    - [Deploying GCF Python app via Google Cloud Repositories](#deploying-gcf-python-app-via-google-cloud-repositories)
-    - [Setting up CI/CD pipelines via use of Google Cloud Builder](#setting-up-cicd-pipelines-via-use-of-google-cloud-builder)
-    - [Integration with Slack Slash commands](#integration-with-slack-slash-commands)
+  - [Creating a GCF Python app](#creating-a-gcf-python-app)
+  - [Deploying GCF Python app via Google Cloud Repositories](#deploying-gcf-python-app-via-google-cloud-repositories)
+  - [Setting up CI/CD pipelines via use of Google Cloud Builder](#setting-up-cicd-pipelines-via-use-of-google-cloud-builder)
+  - [Integration with Slack Slash commands](#integration-with-slack-slash-commands)
 - [Getting the full picture from more complete code](#getting-the-full-picture-from-more-complete-code)
 - [List of links for TLDR](#list-of-links-for-tldr)
-    - [Google Cloud Documentation Links](#google-cloud-documentation-links)
-    - [Slack Documentation Links](#slack-documentation-links)
-    - [Other Links](#other-links)
+  - [Google Cloud Documentation Links](#google-cloud-documentation-links)
+  - [Slack Documentation Links](#slack-documentation-links)
+  - [Other Links](#other-links)
 
 ## Using R and Python Scripts
 
