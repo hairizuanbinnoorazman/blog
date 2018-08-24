@@ -130,11 +130,11 @@ It should be easy to import and run with no issues
 
 There are various ways to deploy a Google Cloud Function. At the moment, one can just type the code straight into its editor, or put a zip file either into Google Cloud Functions directly or via Google Cloud Storage. At the last alternative way would be to set it up with Google Cloud Source Repositories.
 
-<picture>
+![gcf_sources](/20180824_meetupStatsWithGoogleCloudFunctions/gcf_sources.png)
 
 The Google Cloud Source Repositories is an interesting approach. Rather than having to zip up files and folders and ship it into S3 etc, one can just point the Google Cloud Function to consume it from the repo directly. The nice bit is that one can easily set up Google Cloud Source Repositories to mirror off more traditional places of hosting the codebase, e.g. Github or Bitbucket. The option allows code to be mirrored over.
 
-<picture>
+![gcf_sources](/20180824_meetupStatsWithGoogleCloudFunctions/gcf_repo_settings.png)
 
 It is not exactly necessary to have a bunch of pictures to show how to setup mirroring in Google Cloud Source Repositories. The forms in the tool is quite easy and intuitive to understand; one can just click through without going through any documentation to set this workflow up.
 
@@ -181,6 +181,8 @@ Some of the weird things while setting up CI/CD with Google Cloud Build:
   - Cloud Function Service Agent
 - (Continuing on permission) This is on the assumption that the we are deploying Google Cloud Functions via usage of the source repositories in Google Source Repositories. If we are to do it by sending a zip over Google Cloud Storage, it might be nceessary to see if we need to add permissions to read and write to Google Cloud Storage here.
 
+![gcf_sources](/20180824_meetupStatsWithGoogleCloudFunctions/cloud_builder_permissions.png)
+
 ### Integration with Slack Slash commands
 
 So, we have a working http api that we can curl with. How can we make it really accessible anytime. One way would be to link it up with Slack. With Slack, there is an interesting capability to have slash commands which would then allow it to be integrate with other external APIs. The Slack slash command would call a post request to hit against the API specified with a form body request. The form body request would contain all kinds of information including which channel the slack command is called from etc
@@ -196,6 +198,10 @@ As usual before we get started, we need to handle permissions; so go to the foll
   - Post to specific channels
   - Upload and modify files
   - Add Slash commands
+
+![gcf_sources](/20180824_meetupStatsWithGoogleCloudFunctions/slack_features.png)
+
+![gcf_sources](/20180824_meetupStatsWithGoogleCloudFunctions/slack_permissions.png)
 
 Once we have that, we would be able to interact with Slack's API.
 
@@ -230,8 +236,12 @@ If the article above is too long to read, this section would provide the whole l
   https://cloud.google.com/free/
 - Simple Python Application on Google Cloud Functions tool  
   https://cloud.google.com/functions/docs/tutorials/http
+- Google Cloud Functions Pricing  
+  https://cloud.google.com/functions/pricing
 - Deploying a Google Cloud Functions via gcloud CLI  
   https://cloud.google.com/sdk/gcloud/reference/functions/deploy
+- Google Cloud Builder Documentation  
+  https://cloud.google.com/cloud-build/docs/
 
 ### Slack Documentation Links
 
@@ -239,6 +249,8 @@ If the article above is too long to read, this section would provide the whole l
   https://api.slack.com/apps
 - Slack Slash Commands Documentation  
   https://api.slack.com/slash-commands
+- Slack Incoming Webhook Documentation
+  https://api.slack.com/incoming-webhooks
 
 ### Other Links
 
