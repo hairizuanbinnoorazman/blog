@@ -4,7 +4,7 @@ description = "Interesting Points from Kubecon/Nativecon 2017"
 tags = [
     "conference",
 ]
-date = "2018-01-02"
+date = "2018-01-08"
 categories = [
     "conference",
 ]
