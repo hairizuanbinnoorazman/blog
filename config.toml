@@ -12,6 +12,9 @@ enableEmoji = true
 
 googleAnalytics = "" #Google Analytics ID
 
+[permalinks]
+    posts = "/:title/"
+
 [author]
     name = "Hairizuan Noorazman"       #Author name
     github = "hairizuanbinnoorazman"     #Github username

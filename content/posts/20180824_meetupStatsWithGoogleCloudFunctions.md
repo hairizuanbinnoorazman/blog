@@ -10,6 +10,9 @@ categories = [
     "automation",
     "serverless",
 ]
+aliases = [
+    "/posts/20180824_meetupstatswithgooglecloudfunctions/"
+]
 +++
 
 Meetup.com is a pretty nice site to setup meetups and sharings on technologies. The platform is pretty nice and easy to use when it comes to bookings but sometimes, the data provided by its web interface is not sufficient nor does it fit our use case. In this case, let's say you are trying to understand the trend of the number of people attending a meetup. To an organizer, an important thing to him/her is to understand what kind of actions would lead to higher turnups/registrations for a meetup. So, by the end of this post, hopefully we would be able to have a pretty decently priced (free if possible) solution for an analytics solution which would only be called occasionally.
