@@ -10,6 +10,9 @@ categories = [
     "go",
     "kubernetes",
 ]
+aliases = [
+    "/posts/20180810_tryingSkaffold/"
+]
 +++
 
 When developing application that are meant to be deployed to the Kubernetes platform, it involves a bunch of steps on top of your usual local development work:

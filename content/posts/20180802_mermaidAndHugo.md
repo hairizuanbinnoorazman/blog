@@ -10,6 +10,9 @@ categories = [
     "hugo",
     "mermaid",
 ]
+aliases = [
+    "/posts/20180802_mermaidAndHugo/"
+]
 +++
 
 There is an interesting Javascript project that allows one to use just plain old text and convert those said text into diagrams.
