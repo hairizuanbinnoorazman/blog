@@ -28,34 +28,33 @@ Here's how to set it up:
 
 ## Creating a Google Cloud Service Account
 
-1.  Go to the following link to access Google Cloud . If you haven't registered for it before, just follow the drill of signing up for the service before you'll be able to access it. http://console.cloud.google.com/
-2.  You do not need to have billing enabled for this. We are only going to create a service account which happens to be free.
-3.  Click on the top left hand corner to access the menu
+- Go to the following link to access Google Cloud . If you haven't registered for it before, just follow the drill of signing up for the service before you'll be able to access it. http://console.cloud.google.com/
+- You do not need to have billing enabled for this. We are only going to create a service account which happens to be free.
+- Click on the top left hand corner to access the menu
 
 ![gcloud-menu](/20170321_usingServiceAccountsWithRGA/gcloud-menu.png)
 
-4.  Click on API manager
+- Click on API manager
 
-![gcloud-menu](/20170321_usingServiceAccountsWithRGA/gcloud-menu2.png)
+![gcloud-menu2](/20170321_usingServiceAccountsWithRGA/gcloud-menu2.png)
 
-5.  On this page, you can choose to support your own app credentials in order to support your RGA script. Select to enable to analytics API (this is the v3 of the Google Analytics API which RGA was still at during the time of writing this post)
+- On this page, you can choose to support your own app credentials in order to support your RGA script. Select to enable to analytics API (this is the v3 of the Google Analytics API which RGA was still at during the time of writing this post)
 
-![gcloud-menu](/20170321_usingServiceAccountsWithRGA/credentials.png)
+![gcloud-credentials](/20170321_usingServiceAccountsWithRGA/gcloud-credentials.png)
 
-6.  Click on the credentials (see above image). After which, you should see the next image
+- Click on the credentials (see above image). After which, you should see the next image
 
-![gcloud-menu](/20170321_usingServiceAccountsWithRGA/credentials2.png)
+![gcloud-credentials2](/20170321_usingServiceAccountsWithRGA/gcloud-credentials2.png)
 
-7.  You will need to follow the next set of instructions to get your service account
-    - Go to Oauth Consent Screen and fill up your product name (This seems to be only one that is necessary for now). You will need to do this or else you will not be allowed to create a service account.
-    - Go back to the credentials selection (similar to the image above) and choose to make a new service account. You should see the following screen.
+- You will need to follow the next set of instructions to get your service account
+  - Go to Oauth Consent Screen and fill up your product name (This seems to be only one that is necessary for now). You will need to do this or else you will not be allowed to create a service account.
+  - Go back to the credentials selection (similar to the image above) and choose to make a new service account. You should see the following screen.
+  - You do not need to give your account any Google Cloud Compute Role but do give it a smart enough name. We would go with the default JSON key selection. After you do that, you can then create Create button. At this point, you will automatically download a json file (service account key) - DO NOT EVER LOSE IT. BUT IF YOU DO, JUST MAKE ANOTHER ONE.
 
-![gcloud-menu](/20170321_usingServiceAccountsWithRGA/serviceacc.png)
+![gcloud-serviceacc](/20170321_usingServiceAccountsWithRGA/gcloud-serviceacc.png)
 
-    You do not need to give your account any Google Cloud Compute Role but do give it a smart enough name. We would go with the default JSON key selection. After you do that, you can then create Create button. At this point, you will automatically download a json file (service account key) - DO NOT EVER LOSE IT. BUT IF YOU DO, JUST MAKE ANOTHER ONE.
-
-8.  Take note of the Service account email (<Your service account name>@<Your project).iam.gserviceaccount.com
-9.  That kind of concludes on the making of a Google Cloud Service Account
+- Take note of the Service account email (<Your service account name>@<Your project).iam.gserviceaccount.com
+- That kind of concludes on the making of a Google Cloud Service Account
 
 ## Adding Service Account Credentials into Google Analytics
 
