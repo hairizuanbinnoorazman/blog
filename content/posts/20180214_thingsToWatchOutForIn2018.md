@@ -52,10 +52,13 @@ modern architecture technologies e.g. Cloud technologies etc, Python and even R 
   - Conference Sessions: https://cloud.withgoogle.com/next18/sf/sessions
 - Gophercon UK (August 2018)
   - Conference Link: https://www.golanguk.com/
+  - Video Link: https://www.youtube.com/watch?v=2mgKDqD5Ga8&list=PLDWZ5uzn69ewsMyuGjVsAnpQIjyud1Cv9
 - Gophercon Denver - main (August 2018)
   - Conference Link: http://gophercon.com
 - Google Cloud Summit Singapore (September 2018)
   - Event Page: https://cloudplatformonline.com/2018-Summit-Singapore-Home.html
+- Jenkins World 2018
+  - Event Page: https://www.cloudbees.com/devops-world/san-francisco
 - AWS Re:invent Conference (November 2018)
   - Conference Link: https://reinvent.awsevents.com/
 - Kubecon | Nativecon 2018 North America (December 2018)
