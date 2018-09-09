@@ -26,7 +26,7 @@ So late last year, I had some fortune in having some free time to put together a
 
 https://github.com/hairizuanbinnoorazman/rgoogleslides
 
-It is not on CRAN yet although I plan to tidy it up and move it there as soon as I have more free time to work on this further. (Update: It's not on CRAN: https://cran.r-project.org/web/packages/rgoogleslides/index.html)
+It is not on CRAN yet although I plan to tidy it up and move it there as soon as I have more free time to work on this further. (Update: It's now on CRAN: https://cran.r-project.org/web/packages/rgoogleslides/index.html)
 
 So before we end this post, let me quickly go through one of the more major functions within this package.
 
