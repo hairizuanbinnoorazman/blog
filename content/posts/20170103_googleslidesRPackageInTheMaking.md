@@ -16,7 +16,7 @@ categories = [
 
 Some time late last year, the Googleslides API was announced by Google. This was a pretty exciting piece of news; one that took so long to come.
 
-{{< ref "20161119_slidesAPIannouncedByGoogle.md" >}}
+[Slides API Announced By Google]({{< ref "20161119_slidesAPIannouncedByGoogle.md" >}})
 
 With the API now available, everyone who wanted to automate the "presentation slide" work could now effectively make such slides with scripts, thereby removing the last barrier when it comes to presenting data to people. If you had some kind of script that already does a lot of the heavy lifting of manipulating the data from the various data sources into relevant tables, then all you need is to add a few more lines to then be able to send the data straight to slides. (YES!! No more mundane work of changing numbers in monthly slides)
 
