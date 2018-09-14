@@ -4,7 +4,7 @@ description = "Kubernetes on Ubuntu Virtual Machines via lxc and snap"
 tags = [
     "kubernetes",
 ]
-date = "3018-03-14"
+date = "2018-09-15"
 categories = [
     "kubernetes",
 ]
