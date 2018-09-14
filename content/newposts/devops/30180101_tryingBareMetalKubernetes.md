@@ -10,7 +10,7 @@ categories = [
 ]
 +++
 
-This post details steps to trying out Kubernetes in a bare Google Virtual Machine (but the following steps should work for most Debian/Ubuntu virtual machines). This deploys a single node Kubernetes cluster (evidently don't think of using this for production)
+This post details my naive attempt to bring up a Kubernetes cluster on a VM. These steps to try out Kubernetes in a bare Google Virtual Machine (but the following steps should work for most Debian/Ubuntu virtual machines). This deploys a single node Kubernetes cluster (naturally don't think of using this for production)
 
 `lxc` is the client to lxd which runs linux containers. https://en.wikipedia.org/wiki/LXC. The conjure-up tool would install kubernetes via linux commands
 
@@ -62,6 +62,40 @@ conjure-up kubernetes
 # Network: flannel
 ```
 
+The generated lxd init file
+
+```yaml
+config: {}
+networks:
+  - config:
+      ipv4.address: auto
+      ipv6.address: none
+    description: ""
+    managed: false
+    name: lxdbr0
+    type: ""
+storage_pools:
+  - config: {}
+    description: ""
+    name: default
+    driver: dir
+profiles:
+  - config: {}
+    description: ""
+    devices:
+      eth0:
+        name: eth0
+        nictype: bridged
+        parent: lxdbr0
+        type: nic
+      root:
+        path: /
+        pool: default
+        type: disk
+    name: default
+cluster: null
+```
+
 The `conjure-up` command takes a while to run. It depends on virtual machine's network. The faster the network, the faster this can be deployed. After waiting for a while, the kubernetes
 
 ## Testing out kubernetes cluster
@@ -75,23 +109,21 @@ kubectl expose deployments lol --type NodePort --port 80
 kubectl exec -it {{ lol1-pod-name }} /bin/bash
 ```
 
+Within the container, we can test against `lol` container to see if it would be able to provide the default nginx http page.
+
 ```bash
 apt update
 apt install curl
 curl {{ ip address of lol }}:80
 ```
 
-Notes:
+Unfortunately, till date, I haven't been able to expose the kubernetes cluster any traffic from the outside world. There several tactics that one can try but none of them work for me. It could be misconfiguration from my part. Networking is a serious pain here and there are many solutions that could potentially solve the issue but I'm not exactly sure why or why not something would work.
 
-Enable forwarding on your linux box:
-Allow specific (or all of it) packets to traverse your router
-As someone stated, as netfilter is a stateless firewall, allow traffic for already established connections
-Change the source address on packets going out to the internet
+Some of the possible actions to get traffic to the cluster. However, I couldn't get any of them to work here:
 
-```bash
-echo 1 > /proc/sys/net/ipv4/ip_forward
-iptables -A FORWARD -i wlan1 -o wlan0 -j ACCEPT
-iptables -A FORWARD -i wlan0 -o wlan1 -m state --state ESTABLISHED,RELATED \
-            -j ACCEPT
-iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
-```
+- Using iptables. A lot of custom configuration. I've tred using FORWARD, manipulating the ACCEPT and even attempted REDIRECT but none seem to work
+- Using Nodeports but its definitely not the most ideal solution here. It exposes really weird ports: 30000+ range. There is a high possibility that such ports are blocked in company networks so it wouldn't really make much sense to try it out here.
+- Using Kubernetes Ingress. Requires a domain name for it to work well. This is also a whole bunch of configuration work but the main issue here is that we're not too sure if any traffic that is hitting the host machine is actually hitting the kubernetes cluster. It's hard to inspect for that - tools are definitely needed to check for this.
+- Using externalip and externalname. These resources would not be managed by Kubernetes, however, I'm not too sure why these aren't working as expected as well
+
+I will still attempt to play around with this tool for deploying Kubernetes clusters but finding a solution to expose the traffic out would take a while
