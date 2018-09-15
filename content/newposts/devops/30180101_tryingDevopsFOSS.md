@@ -21,6 +21,7 @@ An attempt to use much more FOSS software to handle all our services. Some of th
 - minio. For running of oss blob storage. Less reliance on cloud storage solutions
 - hadoop + spark. This is to handle big data jobs
 - airflow. This is to handle data orchestration across services
+- cms systems. https://github.com/ponzu-cms/ponzu
 
 Lets's make it even more challenging and have multiple scenarios for this:
 
