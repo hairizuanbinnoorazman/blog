@@ -18,3 +18,5 @@ https://en.wikipedia.org/wiki/File_system
 - zfs
 - dir
 - FUSE
+- glusterfs
+- ceph
