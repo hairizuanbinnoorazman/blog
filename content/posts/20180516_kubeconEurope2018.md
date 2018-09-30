@@ -31,6 +31,7 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 - [The Challenges of Migrating 150+ microservices](#the-challenges-of-migrating-150-microservices)
 - [Container-Native dev and ops experience](#container-native-dev-and-ops-experience)
 - [Container Native observability & security from Google Cloud](#container-native-observability--security-from-google-cloud)
+- [Continuously Deliver your Kubernetes Infrastructure](#continuously-deliver-your-kubernetes-infrastructure)
 
 ## Anatomy of a Production Kubernetes Outage
 
@@ -98,8 +99,13 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 
 ## Container Native observability & security from Google Cloud
 
-- Video Link: https://www.youtube.com/watch?v=8fSNDxA_irY
+{{< youtube 8fSNDxA_irY >}}
+
 - Talk about the following tool: gVisor - this tool is a fix for the Dirty Cow vulnerability
 - Stackdriver support - Deep prometheus integration - It can import metrics stats over from it to stackdriver to provide the one glass pane to be able to view all applications being monitored in one tool
 - Podcast: https://kubernetespodcast.com/
 - Blog post talking about podcast: https://cloudplatform.googleblog.com/2018/05/introducing-kubernetes-podcast-from-google.html
+
+## Continuously Deliver your Kubernetes Infrastructure
+
+{{< youtube 1xHmCrd8Qn8 >}}
