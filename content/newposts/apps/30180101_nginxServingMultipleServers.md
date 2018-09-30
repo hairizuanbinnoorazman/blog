@@ -44,7 +44,7 @@ var portNum = 8002
 
 func sayHello(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Say Hello to %v", portNum)
-	msg := fmt.Sprintf("Application Hello port %v", portNum)
+	msg := fmt.Sprintf("Application port: %v", portNum)
 	w.Write([]byte(msg))
 }
 
@@ -192,4 +192,4 @@ curl localhost/test3
 
 ## Final thoughts
 
-With the above, we can potentially mix and match the rules on the server that can provide us the configuration we want.
+With the above, we can potentially mix and match the rules on the server that can provide us the configuration we want. In the case above, we have an nginx ingress that would send the traffic inside our server to the multiple backends but if you think it from a multi server point of view; that would make more sense. Imaging going to a service provider, and the provider offered several ip address that you would need to call. To get your job done, it would require you could call these multiple ip addressees -> that would be a hard to use service.
