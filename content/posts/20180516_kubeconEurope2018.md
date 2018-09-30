@@ -35,7 +35,8 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 
 ## Anatomy of a Production Kubernetes Outage
 
-- Video Link: https://www.youtube.com/watch?v=OUYTNywPk-s
+{{< youtube OUYTNywPk-s >}}
+
 - Production Outage occured
 - Blog Post: https://community.monzo.com/t/resolved-current-account-payments-may-fail-major-outage-27-10-2017/26296/95?u=alexs
 - Another blog post: https://community.monzo.com/t/anatomy-of-a-production-kubernetes-outage-presentation/37331
@@ -44,7 +45,8 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 
 ## Cloud Native Landscape Intro
 
-- Video Link: https://www.youtube.com/watch?v=_CFgSksTT54
+{{< youtube _CFgSksTT54 >}}
+
 - Introduction to the cloud native landscape tools and github page
 - Github Link: https://github.com/cncf/landscape
 - Website Link: https://landscape.cncf.io/
@@ -52,7 +54,8 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 
 ## Accelerating Kubernetes Native Applications
 
-- Video Link: https://www.youtube.com/watch?v=8iQRJXJHiZ8
+{{< youtube 8iQRJXJHiZ8 >}}
+
 - Operators is a concept that was build on Kubernetes providing the Custom Resource Definitions
 - Allows for specific application management; e.g. Managing the running of a database - if a database need to be resized, operators could be programmed to trigger snapshot before switching to a bigger pod which the data can be replicated in. (example only)
 - Reasons on why operators are kind of game changing: https://dzone.com/articles/why-kubernetes-operators-are-a-game-changer
@@ -62,7 +65,8 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 
 ## Kubernetes Project Update
 
-- Video Link: https://www.youtube.com/watch?v=2eAOx8E6-5Q
+{{< youtube 2eAOx8E6-5Q >}}
+
 - Security
   - Network Policy
   - Encrypted Secrets
@@ -83,7 +87,8 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 
 ## The Challenges of Migrating 150+ microservices
 
-- Video Link: https://www.youtube.com/watch?v=H06qrNmGqyE
+{{< youtube H06qrNmGqyE >}}
+
 - Tools out there kind of follow the same cycle: Genesis -> Custom Built solutions -> Product Offering -> Commodity.
 - Chart from here: https://medium.com/wardleymaps/anticipation-89692e9b0ced
 - Link to whole blog post: https://medium.com/wardleymaps
@@ -94,7 +99,8 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 
 ## Container-Native dev and ops experience
 
-- Video Link: https://www.youtube.com/watch?v=0sh2aWdfBxA
+{{< youtube 0sh2aWdfBxA >}}
+
 - Talk about the following tool: https://github.com/Azure/draft
 
 ## Container Native observability & security from Google Cloud
@@ -109,3 +115,17 @@ I took some of my personal notes so that I don't need to rewatch the videos once
 ## Continuously Deliver your Kubernetes Infrastructure
 
 {{< youtube 1xHmCrd8Qn8 >}}
+
+- Philosophy for setting kubernetes clusters
+  - No pet clusters (No special custom configuration for 80 clusters)
+  - Always provide the latest stable Kubernetes version
+  - Continuous and non-disruptive cluster updates
+  - "Fully" automated operations (Able to redeploy by just doing PRs)
+- Cluster setup
+  - Provision in AWS via cloud formation
+  - Etcd stack outside Kubernetes
+  - Container Linux
+  - Multi-AZ worker nodes
+  - HA control plane setup behind ELB
+  - Cluster configuration in git
+  - e2e test on Jenkins
