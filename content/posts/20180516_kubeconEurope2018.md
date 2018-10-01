@@ -129,3 +129,22 @@ I took some of my personal notes so that I don't need to rewatch the videos once
   - HA control plane setup behind ELB
   - Cluster configuration in git
   - e2e test on Jenkins
+- Cluster registry
+  - List of clusters available of access
+- https://github.com/zalando-incubator/kubernetes-on-aws
+- https://github.com/zalando-incubator/cluster-lifecycle-manager
+- Multiple "channels" of Kubernetes
+  - Cluster upgrade moves from dev, alpha, beta clusters
+  - dev (Cluster to play around with)
+  - alpha (Main infrastructure cluster that is used by infrastructure team for testing)
+  - beta (Main cluster rest of org uses)
+  - Has e2e tests
+  - Conformance tests (https://github.com/cncf/k8s-conformance)
+  - Statefulset tests (Test attachment volumes - testing to use redis cluster?)
+  - Has monitoring on each cluster to ensure behaviour
+  - https://github.com/mikkeloscar/kubernetes-e2e
+- Hints for running e2e tests
+  - Run with flake attempts=2. Some tests can fail due to autoscaling
+  - Update e2e images with each release of Kubernetes
+  - Disable broken e2e tests with -skip parameter
+  - Remove completed pods from kube-system to make room for other pods of testing to enter (To save money)
