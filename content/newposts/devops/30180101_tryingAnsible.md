@@ -51,7 +51,7 @@ Look to the ansible documentation for more details on how to get installation do
       - git
 ```
 
-All of the ansible configuration can put into a single file.
+All of the ansible configuration can put into a single file. For basic scenarios, that would be fine but for more complicated scenarios, it might be more advisable to actually follow some of the recommended folder structures that the website recommends: https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html. The best practises is how the ansible uses the folder names to intepret the various playbooks and variables names used.
 
 ## Scenario
 
@@ -59,3 +59,5 @@ All of the ansible configuration can put into a single file.
 - A queue service. This is so that in the case where traffic gets too big for the whole web binary to handle it, we can split the services apart with no apparent problem
 - A database service. This is to store our stateful data inside
 - Multiple task services. Same as mentioned in the queue service. If necessary, this would be to allow us to send the task service to another server
+
+In our case, let's install a simple web application service. This would be accompanied with a NATS queue service and a MySQL database. At the same time, let's have several task workers to pick up items from queue. The sample applications will be written in Go for our case.
