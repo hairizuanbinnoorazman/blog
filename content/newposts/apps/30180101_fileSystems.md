@@ -20,3 +20,4 @@ https://en.wikipedia.org/wiki/File_system
 - FUSE
 - glusterfs
 - ceph
+- dm-crypt
