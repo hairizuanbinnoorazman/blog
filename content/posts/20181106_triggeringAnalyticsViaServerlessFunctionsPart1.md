@@ -1,5 +1,5 @@
 +++
-title = "Triggering analytics via Serverless Functions"
+title = "Triggering analytics via Serverless Functions Part 1"
 description = "Using Google Cloud Functions with Google Cloud Storage triggers to invoke analytics workloads"
 tags = [
     "python",
@@ -23,7 +23,7 @@ However, rather than keep going on how awesome the FAAS model for running worklo
 
 ## Scenario
 
-![scenario](/20181106_triggerAnalyticsViaServerlessFunctions/process_diagram.png)
+![scenario](/20181106_triggerAnalyticsViaServerlessFunctionsPart1/process_diagram.png)
 
 Let's imagine that we have the following scenario. We have a main analytics department that needs to compile a report from 3 other departments. Let's have this main analytics department be nicknamed **main**. For the rest of the reports, they would be produced by **team A**, **team B** and **team C** respectively. (E.g. **team A** would produce the **report A**). The usual workflow for this is the following:
 
@@ -57,7 +57,7 @@ And here's where part 1 of the solution can kind of come in; Google Cloud Functi
 
 You can view the following possible options on the various triggers one could use while creating the cloud function:
 
-![scenario](/20181106_triggerAnalyticsViaServerlessFunctions/triggers.png)
+![scenario](/20181106_triggerAnalyticsViaServerlessFunctionsPart1/triggers.png)
 
 Now that we have our trigger setup, we can then write our function which would run in order to check our data.
 
