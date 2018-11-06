@@ -1,6 +1,6 @@
 +++
 title = "Writing better automation scripts"
-description = ""
+description = "Using good engineering practises like Git, testing, decoupled algorithms for maintainable scripts"
 tags = [
     "python",
 ]
