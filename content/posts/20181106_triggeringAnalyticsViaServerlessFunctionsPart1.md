@@ -3,11 +3,13 @@ title = "Triggering analytics via Serverless Functions Part 1"
 description = "Using Google Cloud Functions with Google Cloud Storage triggers to invoke analytics workloads"
 tags = [
     "python",
+    "google cloud",
 ]
 date = "2018-11-06"
 categories = [
     "python",
     "automation",
+    "google cloud",
 ]
 +++
 
