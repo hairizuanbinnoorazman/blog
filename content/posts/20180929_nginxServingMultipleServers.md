@@ -2,12 +2,12 @@
 title = "Using nginx to serve as ingress to multiple servers"
 description = "Using nginx to serve as an ingress to multiple web servers"
 tags = [
-    "go",
+    "golang",
     "nginx",
 ]
 date = "2018-09-29"
 categories = [
-    "go",
+    "golang",
     "nginx",
 ]
 +++
