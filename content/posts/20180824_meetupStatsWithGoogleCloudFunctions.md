@@ -3,12 +3,14 @@ title = "Getting Meetup Stats with Google Cloud Functions"
 description = "Getting Meetup Stats with Google Cloud Functions"
 tags = [
     "python",
+    "google cloud",
 ]
 date = "2018-08-24"
 categories = [
     "python",
     "automation",
     "serverless",
+    "google cloud",
 ]
 aliases = [
     "/posts/20180824_meetupstatswithgooglecloudfunctions/"
