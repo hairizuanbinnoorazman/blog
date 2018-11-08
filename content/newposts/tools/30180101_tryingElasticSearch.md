@@ -13,4 +13,5 @@ categories = [
 - Golang library
 - Elasticsearch
 - Sniffing issues - Publish address that are different from expected?
+- Running Elasticsearch in cluster mode
 - Dockerized it
