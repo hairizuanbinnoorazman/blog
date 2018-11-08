@@ -2,11 +2,13 @@
 title = "Trying Google Cloud Build"
 description = ""
 tags = [
-    "elasticsearch",
+    "devops",
+    "google cloud",
 ]
 date = "3018-03-14"
 categories = [
     "devops",
+    "google cloud",
 ]
 +++
 
