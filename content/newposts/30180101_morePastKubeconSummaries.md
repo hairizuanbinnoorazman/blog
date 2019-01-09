@@ -1,0 +1,70 @@
++++
+title = "More Kubecon Summaries from the past"
+description = "Summaries of Kubecon and Nativecon videos from 2017 and before"
+tags = [
+    "kubernetes",
+]
+date = "3018-05-02"
+categories = [
+    "kubernetes",
+]
++++
+
+Below are summaries of some of the videos from Kubecon/Nativecon that might be useful. Past videos might sometimes be useful as they might cover critical basic topics and concepts. Those basic topics and concepts would be hard to find again in more recent conferences.
+
+- [Writing a Custom Controller: Extending the Functionality of Your Cluster](#writing-a-custom-controller-extending-the-functionality-of-your-cluster)
+- [Extending the Kubernetes API: What the Docs Don't Tell You](#extending-the-kubernetes-api-what-the-docs-dont-tell-you)
+- [Using Kubernetes API from Go](#using-kubernetes-api-from-go)
+- [Extending Kubernetes 101](#extending-kubernetes-101)
+- [Certifik8s: All You Need to Know About Certificates in Kubernetes](#certifik8s-all-you-need-to-know-about-certificates-in-kubernetes)
+- [Effective RBAC](#effective-rbac)
+- [Helm Chart Patterns](#helm-chart-patterns)
+- [Kubernetes Feature Prototyping with External Controllers and Custom Resource Definitions](#kubernetes-feature-prototyping-with-external-controllers-and-custom-resource-definitions)
+
+## Writing a Custom Controller: Extending the Functionality of Your Cluster
+
+{< youtube "\_BuqPMlXfpE" >}
+
+- CloudNativecon 2017 Europe
+
+## Extending the Kubernetes API: What the Docs Don't Tell You
+
+{< youtube PYLFZVv68lM >}
+
+- CloudNativecon 2017 North America
+
+## Using Kubernetes API from Go
+
+{< youtube QIMz4V9WxVc >}
+
+- CloudNativecon 2018 North America
+
+## Extending Kubernetes 101
+
+{< youtube yn04ERW0SbI >}
+
+- CloudNativecon 2017 North America
+
+## Certifik8s: All You Need to Know About Certificates in Kubernetes
+
+{< youtube gXz4cq3PKdg >}
+
+- CloudNativecon 2017 North America
+
+## Effective RBAC
+
+{< youtube Nw1ymxcLIDI >}
+
+- CloudNativecon 2017 North America
+
+## Helm Chart Patterns
+
+{< youtube WugC_mbbiWU >}
+
+- CloudNativecon 2017 North America
+
+## Kubernetes Feature Prototyping with External Controllers and Custom Resource Definitions
+
+{< youtube fnSNPgwXcUc >}
+
+- CloudNativecon 2017 North America
