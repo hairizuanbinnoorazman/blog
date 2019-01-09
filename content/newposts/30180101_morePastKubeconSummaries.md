@@ -20,6 +20,9 @@ Below are summaries of some of the videos from Kubecon/Nativecon that might be u
 - [Effective RBAC](#effective-rbac)
 - [Helm Chart Patterns](#helm-chart-patterns)
 - [Kubernetes Feature Prototyping with External Controllers and Custom Resource Definitions](#kubernetes-feature-prototyping-with-external-controllers-and-custom-resource-definitions)
+- [Self-Hosted Kubernetes: How and Why](#self-hosted-kubernetes-how-and-why)
+- [kubeadm Cluster Creation Internals: From Self-Hosting to Upgradability and HA](#kubeadm-cluster-creation-internals-from-self-hosting-to-upgradability-and-ha)
+- [Kube-native Postgres](#kube-native-postgres)
 
 ## Writing a Custom Controller: Extending the Functionality of Your Cluster
 
@@ -66,5 +69,23 @@ Below are summaries of some of the videos from Kubecon/Nativecon that might be u
 ## Kubernetes Feature Prototyping with External Controllers and Custom Resource Definitions
 
 {< youtube fnSNPgwXcUc >}
+
+- CloudNativecon 2017 North America
+
+## Self-Hosted Kubernetes: How and Why
+
+{< youtube jIZ8NaR7msI >}
+
+- CloudNativecon 2017 North America
+
+## kubeadm Cluster Creation Internals: From Self-Hosting to Upgradability and HA
+
+{< youtube YCOWQIFVAbg >}
+
+- CloudNativecon2017 North America
+
+## Kube-native Postgres
+
+{< youtube Zn1vd7sQ_bc >}
 
 - CloudNativecon 2017 North America
