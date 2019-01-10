@@ -40,7 +40,18 @@ Below are summaries of some of the videos from Kubecon/Nativecon that might be u
 
 {< youtube QIMz4V9WxVc >}
 
-- CloudNativecon 2018 North America
+- CloudNativecon 2017 North America
+- Refer to the following page for more info: https://kubernetes.io/docs/concepts/overview/components/#addons
+- Kubernetes Master
+  - API Server
+  - etcd
+  - Scheduler
+  - Controller Manager
+  - Cloud Provider Controller
+- Worker
+  - Kubelet
+  - Kube-proxy
+  - CRI
 
 ## Extending Kubernetes 101
 
