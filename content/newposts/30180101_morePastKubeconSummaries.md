@@ -48,10 +48,21 @@ Below are summaries of some of the videos from Kubecon/Nativecon that might be u
   - Scheduler
   - Controller Manager
   - Cloud Provider Controller
-- Worker
+- Kubernetes Worker
   - Kubelet
   - Kube-proxy
   - CRI
+- Custom Controller can talk to api server which can be used to handle custom resources on Kubernetes
+- Codebase: https://github.com/alena1108/kubecon2017
+  - Monitor k8s nodes
+  - Alert when storage occupied by images/changes
+- Some potential tools that were used:
+  - [go-skel](https://github.com/rancher/go-skel)
+  - [trash](https://github.com/rancher/trash)
+  - [dapper](https://github.com/rancher/dapper)
+- When using `client-go` vendor, ensure you're using a compatible version with the kubernetes cluster. https://github.com/kubernetes/client-go
+  - Need to decide to run as part of cluster/outside cluster
+  - One way when developing apps that is meant to run cluster and shorten development cycle is to run outside cluster, and when it's time to release it, try it out in cluster. Reduce development lifecycle by not requiring developer to keep trying the app out by pushing each change into cluster; can just compile binary and immediately run it.
 
 ## Extending Kubernetes 101
 
