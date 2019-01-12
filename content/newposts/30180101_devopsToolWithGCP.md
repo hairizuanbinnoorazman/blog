@@ -1,6 +1,6 @@
 +++
 title = "Devops Tools with Google Cloud Platform"
-description = "Summaries of Kubecon and Nativecon videos from 2017 and before"
+description = "Using devops tooling to make it easier to deploy applications to Cloud Platforms"
 tags = [
     "google-cloud",
 ]
