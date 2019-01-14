@@ -4,7 +4,7 @@ description = "Using devops tooling to make it easier to deploy applications to 
 tags = [
     "google-cloud",
 ]
-date = "3019-01-14"
+date = "2019-01-14"
 categories = [
     "google-cloud",
 ]
