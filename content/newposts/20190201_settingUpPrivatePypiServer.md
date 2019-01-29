@@ -3,10 +3,12 @@ title = "Setting up a Private Pypi Server"
 description = "Setting up a Private Pypi Server using Docker on Google Cloud Platform"
 tags = [
     "google-cloud",
+    "python",
 ]
 date = "2019-02-01"
 categories = [
     "google-cloud",
+    "python",
 ]
 +++
 
