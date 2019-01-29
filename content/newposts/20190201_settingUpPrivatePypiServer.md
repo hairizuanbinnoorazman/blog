@@ -4,7 +4,7 @@ description = "Setting up a Private Pypi Server using Docker on Google Cloud Pla
 tags = [
     "google-cloud",
 ]
-date = "3018-05-02"
+date = "2019-02-01"
 categories = [
     "google-cloud",
 ]
@@ -89,3 +89,40 @@ After this step, you can just run the following to install the sample package. I
 ```bash
 pipenv install sample
 ```
+
+## Additional thoughts
+
+As I was sharing this with other engineers, a few mention about how using pip and pipenv tools, you can potentially just install the package directly from the git repository by itself. This is possible and can be done for both public and private python git repositories.
+
+However, after doing a few quick tests on this, I kind of realized that installing python packages via this way will lead to me losing intellisense for the entire package when I am coding it in Visual Studio Code. (Not sure about other editors, didn't exactly try them). For a small package, the lost of intellisense while coding might be ok but if this was a big package; this is gonna be a huge drawback. I'm currently heavily reliant on this intellisense systems and if its not able to point the next possible direction which I can take my code in, it'll just hamper my progress significantly.
+
+Another minus point for installing python packages directly from git repositories is that they don't seem to install package sub-dependencies alongside the targeted package. Take an example `pandas`. The `pandas` python library is heavily dependent on a `numpy` python package. However, if you try to install directly via git repositories, this error would come up:
+
+```bash
+Obtaining pandas from git+https://github.com/pandas-dev/pandas#egg=pandas
+  Cloning https://github.com/pandas-dev/pandas to /Users/XXX/.local/share/virtualenvs/url-checker-VRYs4T2O/src/pandas
+    Complete output from command python setup.py egg_info:
+    Traceback (most recent call last):
+      File "/Users/XXX/.local/share/virtualenvs/url-checker-VRYs4T2O/lib/python3.7/site-packages/pkg_resources/__init__.py", line 357, in get_provider
+        module = sys.modules[moduleOrReq]
+    KeyError: 'numpy'
+
+    During handling of the above exception, another exception occurred:
+
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/Users/XXX/.local/share/virtualenvs/url-checker-VRYs4T2O/src/pandas/setup.py", line 737, in <module>
+        ext_modules=maybe_cythonize(extensions, compiler_directives=directives),
+      File "/Users/XXX/.local/share/virtualenvs/url-checker-VRYs4T2O/src/pandas/setup.py", line 480, in maybe_cythonize
+        numpy_incl = pkg_resources.resource_filename('numpy', 'core/include')
+      File "/Users/XXX/.local/share/virtualenvs/url-checker-VRYs4T2O/lib/python3.7/site-packages/pkg_resources/__init__.py", line 1142, in resource_filename
+        return get_provider(package_or_requirement).get_resource_filename(
+      File "/Users/XXX/.local/share/virtualenvs/url-checker-VRYs4T2O/lib/python3.7/site-packages/pkg_resources/__init__.py", line 359, in get_provider
+        __import__(moduleOrReq)
+    ModuleNotFoundError: No module named 'numpy'
+
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /Users/XXX/.local/share/virtualenvs/url-checker-VRYs4T2O/src/pandas/
+```
+
+I'm guessing that during python packaging, it does some work to inform the `pip` tool regarding the dependencies of the package as well.
