@@ -17,6 +17,13 @@ https://www.facebook.com/hairizuan.noorazman
 
 # Talks
 
+## Introduction to Cloud Run
+
+An introduction to Google Cloud Run, a newly announced serverless solution which allows one to deploy any runtime and any software and let Google manage it. The main piece of this presentation is a demonstration of how to deploy a service onto Google Cloud Run via Google Cloud Console GUI
+
+Event Link: https://www.meetup.com/GCPUGSG/events/259734957/
+Slides: https://docs.google.com/presentation/d/1M8EhARDBY33IefEz356NhdUkkSyUZo1tHZBkMt-NtpE
+
 ## Triggering analytics with serverless functions
 
 Using the various serverless functions to trigger different workflows. Demonstrate the usage of different triggers from Google Cloud Platform to run analytical workloads. Presented during Google Cloud Devfest 2018, October 2018
