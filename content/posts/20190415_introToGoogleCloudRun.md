@@ -4,11 +4,13 @@ description = "Serverless solution by deploying Docker containers on Google Clou
 tags = [
     "google-cloud",
     "serverless",
+    "r",
 ]
 date = "2019-04-15"
 categories = [
     "google-cloud",
     "serverless",
+    "r",
 ]
 +++
 
