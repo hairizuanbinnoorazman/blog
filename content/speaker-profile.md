@@ -23,6 +23,7 @@ An introduction to Google Cloud Run, a newly announced serverless solution which
 
 Event Link: https://www.meetup.com/GCPUGSG/events/259734957/
 Slides: https://docs.google.com/presentation/d/1M8EhARDBY33IefEz356NhdUkkSyUZo1tHZBkMt-NtpE
+Blog Post: https://www.hairizuan.com/introduction-to-google-cloud-run/
 
 ## Triggering analytics with serverless functions
 
