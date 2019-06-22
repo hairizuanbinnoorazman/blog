@@ -21,16 +21,16 @@ https://www.facebook.com/hairizuan.noorazman
 
 An introduction to stackdriver, a feature in the Google Cloud Platform. It provides monitoring, logging, profiling services. A golang web application is used an example to demonstrate on how to get such capbilities set up.
 
-Event Link: https://www.meetup.com/GCPUGSG/events/258359490/
-Slides: https://docs.google.com/presentation/d/1JtV8N9in039VdtJzz7XN4UcxGHYuowxJQ0b8TOfGn54
+Event Link: https://www.meetup.com/GCPUGSG/events/258359490/  
+Slides: https://docs.google.com/presentation/d/1JtV8N9in039VdtJzz7XN4UcxGHYuowxJQ0b8TOfGn54  
 Video Recording: https://engineers.sg/video/google-cloud-next-2019-singapore-using-stackdriver-effectively--3402
 
 ## Introduction to Cloud Run
 
 An introduction to Google Cloud Run, a newly announced serverless solution which allows one to deploy any runtime and any software and let Google manage it. The main piece of this presentation is a demonstration of how to deploy a service onto Google Cloud Run via Google Cloud Console GUI
 
-Event Link: https://www.meetup.com/GCPUGSG/events/259734957/
-Slides: https://docs.google.com/presentation/d/1M8EhARDBY33IefEz356NhdUkkSyUZo1tHZBkMt-NtpE
+Event Link: https://www.meetup.com/GCPUGSG/events/259734957/  
+Slides: https://docs.google.com/presentation/d/1M8EhARDBY33IefEz356NhdUkkSyUZo1tHZBkMt-NtpE  
 Blog Post: https://www.hairizuan.com/introduction-to-google-cloud-run/
 
 ## Triggering analytics with serverless functions
