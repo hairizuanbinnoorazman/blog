@@ -53,6 +53,7 @@ Slides: https://docs.google.com/presentation/d/1H05sgx7W83_NlNV2cGdjBUBsU1q1PuRS
 
 An overview of a variety of concepts such as docker containers as well as Kubernetes terminology which is needed before introducing someone to the Kubernetes tool. Presented during Google Devfest Singapore 2017, October 2017
 
+Event Link: http://www.gdg-sg.org/2017/10/gdg-devfest-2017.html  
 Slides: https://docs.google.com/presentation/d/1KW9jwpD10vNm7itrDZD8m0X9zya8jwISl_bPpYcw1_M
 
 ## From Analysis to Boardroom: Google Slides presentations via R
@@ -60,3 +61,5 @@ Slides: https://docs.google.com/presentation/d/1KW9jwpD10vNm7itrDZD8m0X9zya8jwIS
 Went through the reasons for automating analysis work and provided several code snippets on how to get automated analysis when using the R programming language. Presented during Google IO Extended 2017 event, July 2017
 
 This is a Demo only session. No slides are available here.
+
+Event Link: https://peatix.com/event/258914
