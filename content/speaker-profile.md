@@ -17,6 +17,13 @@ https://www.facebook.com/hairizuan.noorazman
 
 # Talks
 
+## GCSFuse; Heard of it
+
+An lightning talk to give an introduction to GCSFuse and the Fuse common interface.
+
+Event Link: https://www.meetup.com/GCPUGSG/events/262726983/  
+Slides: https://docs.google.com/presentation/d/1MWEhJIHRgO60Bc-4HhjdIFSA1L2Z3aOu1lIZl6fWVqE
+
 ## Introduction to Stackdriver
 
 An introduction to stackdriver, a feature in the Google Cloud Platform. It provides monitoring, logging, profiling services. A golang web application is used an example to demonstrate on how to get such capbilities set up.
