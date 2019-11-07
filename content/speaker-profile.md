@@ -17,6 +17,13 @@ https://www.facebook.com/hairizuan.noorazman
 
 # Talks
 
+## Generating videos from slides on applications served from Google Cloud Run
+
+Using Google Cloud Run to create a bunch of services which when combined together would convert presentation slide pdfs and scripts (not programming script but a script on what to say during a presentation) into a video. The following set of services is build by using Google Cloud Run and Google Text to Speech and Google Cloud Storage and Google Datastore; all deployed via Google Cloud Build
+
+Event Link: https://events.withgoogle.com/la-kopi-serverless/  
+Slides: https://docs.google.com/presentation/d/1Vuv7C1rNGbKdOvpJji5QNiqwvsPvHF6uWzNNEsIthlQ/  
+
 ## GCSFuse; Heard of it
 
 An lightning talk to give an introduction to GCSFuse and the Fuse common interface.
