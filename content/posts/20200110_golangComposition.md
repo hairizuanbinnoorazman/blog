@@ -264,3 +264,142 @@ DD3 Miao
 Apparently, it would recurse down the embedded structs and use the first `Miao` function observed.
 
 If somehow, `DD1` also implements the `Miao` function, that it would it be expected that the `DD3 Miao` would not be printed but `DD1 Miao` would be printed instead.
+
+```golang
+package main
+
+import (
+	"fmt"
+)
+
+type AAA interface {
+	Hahax()
+}
+
+type BBB interface {
+	Miao()
+}
+
+type CCC interface {
+	AAA
+	BBB
+}
+
+type DD1 struct{}
+
+func (z DD1) Hahax() {
+	fmt.Println("DD1 Hahax")
+}
+
+func (z DD1) Miao() {
+	fmt.Println("DD1 Miao")
+}
+
+type DD2 struct {
+	DD3
+}
+
+type DD3 struct{}
+
+func (z DD3) Miao() {
+	fmt.Println("DD3 Miao")
+}
+
+type ZZZ struct {
+	DD1
+	DD2
+}
+
+func (z ZZZ) Hahax() {
+	fmt.Println("ZZZ Hahax")
+}
+
+func Printer(c CCC) {
+	c.Hahax()
+	c.Miao()
+}
+
+func main() {
+	z := ZZZ{}
+	Printer(z)
+}
+
+```
+
+The following is the output for this piece of code:
+
+```bash
+ZZZ Hahax
+DD1 Miao
+
+```
+
+Let's remove `DD3` from the latest iteration of the code and also have `DD2` also implement the `Miao` function. That would make it confusing - which `Miao` function should be used when since `DD1` and `DD2` embedded struct appear to be on the same level?
+
+```golang
+package main
+
+import (
+	"fmt"
+)
+
+type AAA interface {
+	Hahax()
+}
+
+type BBB interface {
+	Miao()
+}
+
+type CCC interface {
+	AAA
+	BBB
+}
+
+type DD1 struct{}
+
+func (z DD1) Hahax() {
+	fmt.Println("DD1 Hahax")
+}
+
+func (z DD1) Miao() {
+	fmt.Println("DD1 Miao")
+}
+
+type DD2 struct {}
+
+func (z DD2) Miao() {
+	fmt.Println("DD2 Miao")
+}
+
+type ZZZ struct {
+	DD1
+	DD2
+}
+
+func (z ZZZ) Hahax() {
+	fmt.Println("ZZZ Hahax")
+}
+
+func Printer(c CCC) {
+	c.Hahax()
+	c.Miao()
+}
+
+func main() {
+	z := ZZZ{}
+	Printer(z)
+}
+
+```
+
+We now have the following:
+
+```bash
+./prog.go:52:9: ZZZ.Miao is ambiguous
+./prog.go:52:9: cannot use z (type ZZZ) as type CCC in argument to Printer:
+	ZZZ does not implement CCC (missing Miao method)
+
+```
+
+Even the golang runtime becomes unsure of which one to run and it panics.
