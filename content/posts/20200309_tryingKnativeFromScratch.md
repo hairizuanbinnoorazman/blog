@@ -45,6 +45,10 @@ Naturally, the easiest are the ones that are provided by Cloud Providers.
 
 In our case, let's say if we are to do it manually via kubeadm, we would first need to create 3 VMs on Google Cloud. We would then need to run the following commannds in sequence in order to get the kubernetes cluster up and running. The first part is to install the container runtime on the machines.
 
+In order to support nodeport in the kubernetes cluster we would be creating, we would need to add a network tag to all of them. Network Tag: "nodeports".
+
+Also, since we are going to have the gce instance to contact the various google cloud platform to create the relevant volumes/load balancers, it is important that we state that the instance should have more permissions. For more granular control, you can follow the blog post stated above, but for simplicity sake, we would just set the instance to have full api access.
+
 Here are some additional references when trying to get a kubernetes cluster up in gce vms.
 
 References: https://medium.com/@stephane.beuret/kubeadm-on-gce-14df27d67bf5
@@ -66,7 +70,7 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    stable"
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 ```
 
 The next step is to install kubeadm which would install the tool that would assist to install kubernetes binaries on the machines.
@@ -89,8 +93,8 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-systemctl daemon-reload
-systemctl restart kubelet
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
 ```
 
 Save this in the /etc/kubernetes/cloud-config on all 3 nodes
@@ -113,7 +117,7 @@ kind: InitConfiguration
 bootstrapTokens:
   - groups:
       - system:bootstrappers:kubeadm:default-node-token
-    token: this.is.a.test
+    token: 123456.test123456789012
     ttl: 24h0m0s
     usages:
       - signing
@@ -170,8 +174,8 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "X.X.X.X:6443"
-    token: this.is.a.test
+    apiServerEndpoint: "104.154.52.149:6443" # Private ip address
+    token: 123456.test123456789012
     unsafeSkipCAVerification: true
 nodeRegistration:
   kubeletExtraArgs:
@@ -190,6 +194,7 @@ kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=
 
 ```bash
 # Hacks:
+# If you want to do a single node kubernetes "cluster" but still want load balancer
 # Reference: https://github.com/kubernetes/kubernetes/issues/65618
 # Remove the following line:
 # node-role.kubernetes.io/master
@@ -197,6 +202,10 @@ kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=
 ```
 
 ## Installing Istio
+
+```bash
+
+```
 
 ```bash
 
