@@ -174,7 +174,7 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "104.154.52.149:6443" # Private ip address
+    apiServerEndpoint: "X.X.X.X:6443" # Private ip address
     token: 123456.test123456789012
     unsafeSkipCAVerification: true
 nodeRegistration:
