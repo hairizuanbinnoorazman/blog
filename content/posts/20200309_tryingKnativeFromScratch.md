@@ -80,6 +80,7 @@ The next step is to install kubeadm which would install the tool that would assi
 ```bash
 # Installing kubeadm
 # Reference: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+# For debian 9 - can skip?
 sudo apt-get install -y iptables arptables ebtables
 sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
 sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
@@ -95,18 +96,24 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
+# Not necessary for debian machines
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
+```
+
+```bash
+# Run the following command to prep it for flannel CNI use
+sysctl net.bridge.bridge-nf-call-iptables=1
 ```
 
 Save this in the /etc/kubernetes/cloud-config on all 3 nodes
 
 ```text
 [Global]
-project-id = "XXX"
+project-id = "XXXX"
 node-tags = nodeports
 node-instance-prefix = "test"
-multizone = false
+multizone = true
 ```
 
 Save this as gce.yaml on the machine that is designated as the master node.
@@ -133,11 +140,11 @@ nodeRegistration:
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 networking:
-  podSubnet: 192.168.0.0/16
+  podSubnet: 10.244.0.0/16
 apiServer:
   certSANs:
-    - X.X.X.X # External IP
-    - X.X.X.X # Internal IP
+    - X.X.X.X # Public IP Address of VM machine that is meant to be master
+    - X.X.X.X # Private IP Addresss of VM machine that is meant to be master
     - 10.96.0.1
   extraArgs:
     cloud-provider: "gce"
@@ -167,8 +174,13 @@ The next step would be to install the networking overlay as well as to allow you
 
 ```bash
 export KUBECONFIG=/etc/kubernetes/admin.conf
-kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
 kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
+```bash
+# Cleanup network plugins
+rm -r /etc/cni/net.d/
 ```
 
 ```yaml
@@ -176,7 +188,7 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "X.X.X.X:6443"
+    apiServerEndpoint: "10.128.0.41:6443"
     token: 123456.test123456789012
     unsafeSkipCAVerification: true
 nodeRegistration:
@@ -190,7 +202,7 @@ kubeadm join --config join.yaml
 ```
 
 ```bash
-kubectl run nginx --image=nginx --port=80
+kubectl run --image=nginx --port=80 nginx
 kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=80 --target-port=80
 ```
 
@@ -208,6 +220,23 @@ kubectl expose deployment nginx-nodesport --type=NodePort --name=nginx-nodeport 
 # To force it to say that this node can be used as a backend for a load balancer.
 ```
 
+**Important Note**
+
+https://github.com/kubernetes/kubeadm/issues/1776
+
+Calico doesn't seem to work well here. So don't use calico. Try using flannel instead
+
+```bash
+# Don't use calico here
+kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
+```
+
+**Another important note**
+
+In the case of trying to debug why coredns not starting
+
+https://github.com/coredns/deployment/issues/87
+
 ## Installing Istio
 
 ```bash
@@ -218,22 +247,22 @@ istioctl verify-install
 istioctl manifest apply --set profile=demo --set addonComponents.grafana.enabled=true
 ```
 
-```bash
-wget https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz
-```
-
-````
-
-```bash
-
-````
-
 ## Installing Knative
 
 And now, we finally come to knative, the final piece of the technology puzzle in order to unlock deployment serverless like workloads into our Kubernetes cluster.
 
-Knative is reliant
+Knative is reliant on the previous set of technologies deployed above (although you have choices to switch out your "service mesh" layer).
+
+Refer to the following document for full instructions and details: https://knative.dev/docs/install/any-kubernetes-cluster/
 
 ```bash
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving-crds.yaml
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving-core.yaml
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving-istio.yaml
+kubectl --namespace istio-system get service istio-ingressgateway
 
+# Refer to the section on real dns - since xip.io cannot be used here -> load balancer appears to be internal load balancer
+
+# Watch the pods for deployment
+kubectl get pods --namespace knative-serving
 ```
