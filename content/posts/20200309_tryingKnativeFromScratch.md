@@ -99,9 +99,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 # Not necessary for debian machines
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
-```
 
-```bash
 # Run the following command to prep it for flannel CNI use
 sysctl net.bridge.bridge-nf-call-iptables=1
 ```
@@ -115,6 +113,8 @@ node-tags = nodeports
 node-instance-prefix = "test"
 multizone = true
 ```
+
+From this point onwards, we would need save the files/run commands in particular machines. Let's have the machines be called either master nodes or worker nodes.
 
 Save this as gce.yaml on the machine that is designated as the master node.
 
@@ -166,22 +166,12 @@ controllerManager:
 With that, we can now begin to try to initialize kubeadm to begin starting the required kubernetes services.
 
 ```bash
+# Run it on master node
 sudo su
 kubeadm init --config gce.yaml
 ```
 
-The next step would be to install the networking overlay as well as to allow you to schedule pods on the master node.
-
-```bash
-export KUBECONFIG=/etc/kubernetes/admin.conf
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
-kubectl taint nodes --all node-role.kubernetes.io/master-
-```
-
-```bash
-# Cleanup network plugins
-rm -r /etc/cni/net.d/
-```
+Add this to your worker node
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
@@ -197,19 +187,40 @@ nodeRegistration:
   taints: []
 ```
 
+And then run this command on each of your worker node in order to form the full cluster
+
 ```bash
 kubeadm join --config join.yaml
 ```
 
-```bash
-kubectl run --image=nginx --port=80 nginx
-kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=80 --target-port=80
-```
+The next step would be to install the networking overlay as well as to allow you to schedule pods on the master node.
 
 ```bash
+export KUBECONFIG=/etc/kubernetes/admin.conf
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+# This is not necessary in our case as we already remove taints from our deployment
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
+Let's try to deploy some apps to see if it works. This step is the most vital before proceeding on. If any of these "tests" fail, you cannot deploy istio nor knative.
+
+```bash
+# Deploy a service and ensure it can connect to internet
+kubectl run --image=nginx --port=80 nginx
+kubectl exec -it nginx /bin/bash
+# Within container
+apt update # If this fails -> your networking requires a fixin'
+
+# Deploy a service with a load balancer
+kubectl run --image=nginx --port=80 nginx
+kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=80 --target-port=80
+
+# Deploy a service with nodeport expose
 kubectl run nginx-nodesport --image=nginx --port=80
 kubectl expose deployment nginx-nodesport --type=NodePort --name=nginx-nodeport --port=80
 ```
+
+**If you're attempting to link load balancer to single node**
 
 ```bash
 # Hacks:
@@ -220,7 +231,7 @@ kubectl expose deployment nginx-nodesport --type=NodePort --name=nginx-nodeport 
 # To force it to say that this node can be used as a backend for a load balancer.
 ```
 
-**Important Note**
+**Important Note: Calico don't seem to work well here**
 
 https://github.com/kubernetes/kubeadm/issues/1776
 
@@ -231,11 +242,20 @@ Calico doesn't seem to work well here. So don't use calico. Try using flannel in
 kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 ```
 
-**Another important note**
+**Another important note: Old CNI config haunt current attempts to start cluster**
 
 In the case of trying to debug why coredns not starting
 
 https://github.com/coredns/deployment/issues/87
+
+Use some of the debugging steps here to find out why.
+
+One possible reason is leftover effects of previous CNI left behind. We would need to remove it
+
+```bash
+# Cleanup network plugins
+rm -r /etc/cni/net.d/
+```
 
 ## Installing Istio
 
