@@ -45,7 +45,9 @@ Naturally, the easiest are the ones that are provided by Cloud Providers.
 
 In our case, let's say if we are to do it manually via kubeadm, we would first need to create 3 VMs on Google Cloud. We would then need to run the following commannds in sequence in order to get the kubernetes cluster up and running. The first part is to install the container runtime on the machines.
 
-In order to support nodeport in the kubernetes cluster we would be creating, we would need to add a network tag to all of them. Network Tag: "nodeports".
+In order to support nodeport in the kubernetes cluster we would be creating, we would need to add a network tag to all of them. Network Tag: "nodeports". Ports 30000-32767 needs to be made available for these.
+
+At the same time, in order to provide external kubectl access from outside world to the cluster, we would need to create another network tag that opens the firewalls to port 6443 for these instances. We have the network tags be "kube-api" for this.
 
 Also, since we are going to have the gce instance to contact the various google cloud platform to create the relevant volumes/load balancers, it is important that we state that the instance should have more permissions. For more granular control, you can follow the blog post stated above, but for simplicity sake, we would just set the instance to have full api access.
 
@@ -104,7 +106,7 @@ Save this in the /etc/kubernetes/cloud-config on all 3 nodes
 project-id = "XXX"
 node-tags = nodeports
 node-instance-prefix = "test"
-multizone = true
+multizone = false
 ```
 
 Save this as gce.yaml on the machine that is designated as the master node.
@@ -136,7 +138,7 @@ apiServer:
   certSANs:
     - X.X.X.X # External IP
     - X.X.X.X # Internal IP
-    - 10.96.0.1 # No idea - can try removing this
+    - 10.96.0.1
   extraArgs:
     cloud-provider: "gce"
     cloud-config: "/etc/kubernetes/cloud-config"
@@ -174,7 +176,7 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "X.X.X.X:6443" # Private ip address
+    apiServerEndpoint: "10.128.0.14:6443"
     token: 123456.test123456789012
     unsafeSkipCAVerification: true
 nodeRegistration:
@@ -193,6 +195,11 @@ kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=
 ```
 
 ```bash
+kubectl run nginx-nodesport --image=nginx --port=80
+kubectl expose deployment nginx-nodesport --type=NodePort --name=nginx-nodeport --port=80
+```
+
+```bash
 # Hacks:
 # If you want to do a single node kubernetes "cluster" but still want load balancer
 # Reference: https://github.com/kubernetes/kubernetes/issues/65618
@@ -204,12 +211,22 @@ kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=
 ## Installing Istio
 
 ```bash
-
+cd /usr/local/bin
+curl -L https://istio.io/downloadIstio | sh -
+export PATH="$PATH:/usr/local/bin/istio-1.5.0/bin"
+istioctl verify-install
+istioctl manifest apply --set profile=demo --set addonComponents.grafana.enabled=true
 ```
 
 ```bash
-
+wget https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz
 ```
+
+````
+
+```bash
+
+````
 
 ## Installing Knative
 
