@@ -220,7 +220,7 @@ kubectl run nginx-nodesport --image=nginx --port=80
 kubectl expose deployment nginx-nodesport --type=NodePort --name=nginx-nodeport --port=80
 ```
 
-**If you're attempting to link load balancer to single node**
+### If you're attempting to link load balancer to single node
 
 ```bash
 # Hacks:
@@ -231,7 +231,7 @@ kubectl expose deployment nginx-nodesport --type=NodePort --name=nginx-nodeport 
 # To force it to say that this node can be used as a backend for a load balancer.
 ```
 
-**Important Note: Calico don't seem to work well here**
+### Important Note: Calico don't seem to work well here
 
 https://github.com/kubernetes/kubeadm/issues/1776
 
@@ -242,7 +242,7 @@ Calico doesn't seem to work well here. So don't use calico. Try using flannel in
 kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 ```
 
-**Another important note: Old CNI config haunt current attempts to start cluster**
+### Another important note: Old CNI config haunt current attempts to start cluster
 
 In the case of trying to debug why coredns not starting
 
