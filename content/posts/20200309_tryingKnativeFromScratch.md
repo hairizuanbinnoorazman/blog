@@ -176,7 +176,7 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "10.128.0.14:6443"
+    apiServerEndpoint: "X.X.X.X:6443"
     token: 123456.test123456789012
     unsafeSkipCAVerification: true
 nodeRegistration:
