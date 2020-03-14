@@ -101,7 +101,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 
 # Run the following command to prep it for flannel CNI use
-sysctl net.bridge.bridge-nf-call-iptables=1
+sudo sysctl net.bridge.bridge-nf-call-iptables=1
 ```
 
 Save this in the /etc/kubernetes/cloud-config on all 3 nodes
@@ -178,7 +178,7 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "10.128.0.41:6443"
+    apiServerEndpoint: "X.X.X.X:6443"
     token: 123456.test123456789012
     unsafeSkipCAVerification: true
 nodeRegistration:
@@ -214,6 +214,12 @@ apt update # If this fails -> your networking requires a fixin'
 # Deploy a service with a load balancer
 kubectl run --image=nginx --port=80 nginx
 kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service --port=80 --target-port=80
+
+# Editing the load balancer to make the connections external
+annotations:
+    networking.gke.io/load-balancer-type: External
+# https://github.com/kubernetes/legacy-cloud-providers/blob/8dfcb684d422483a0bc1ea84008859a5f7950b3a/gce/gce_loadbalancer.go#L218
+# https://github.com/kubernetes/legacy-cloud-providers/blob/66bed784d14dbdc0d4a9ae192b1e137e9e295f30/gce/gce_annotations.go#L79
 
 # Deploy a service with nodeport expose
 kubectl run nginx-nodesport --image=nginx --port=80
