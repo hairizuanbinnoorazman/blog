@@ -230,6 +230,20 @@ kubectl run nginx-nodesport --image=nginx --port=80
 kubectl expose deployment nginx-nodesport --type=NodePort --name=nginx-nodeport --port=80
 ```
 
+## Getting private gcr.io docker images into the cluster
+
+Not all apps that we need to run on the cluster would be available publicly. Let's say if we have our private apps in our own private registry. How are we able to pull them into the cluster.
+
+General rule of thumb for this issue is that if you can pull the images into the machine; you can deploy that into the kubernetes cluster
+
+```bash
+gcloud auth configure-docker
+docker pull gcr.io/<PROJECT ID>/<IMAGE NAME>
+
+# Run image in kubernetes cluster
+kubectl run private-image --image=gcr.io/<PROJECT ID>/<IMAGE NAME>
+```
+
 ### If you're attempting to link load balancer to single node
 
 ```bash
@@ -356,6 +370,8 @@ kubectl get pods --namespace knative-eventing
 kubectl get pods --namespace knative-monitoring
 ```
 
+Alter the DNS records for the config map in order to start knative serving to the right ip address
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -367,6 +383,8 @@ data:
   # *.{ip}.xip.io to {ip}.
   X.X.X.X.xip.io: ""
 ```
+
+We can try to deploy an nginx container but we realize that it won't work. Issues for that is added here.
 
 ```yaml
 # https://github.com/knative/serving/issues/3809
@@ -384,6 +402,8 @@ spec:
         - image: nginx
 ```
 
+Instead, we can try with the yaml below
+
 ```yaml
 apiVersion: serving.knative.dev/v1 # Current version of Knative
 kind: Service
@@ -399,6 +419,34 @@ spec:
           env:
             - name: TARGET # The environment variable printed out by the sample app
               value: "Go Sample v1"
+```
+
+### Logging and Monitoring in Knative
+
+If you deploy the monitoring stack in knative, you would get both the grafana + prometheus as well as the ELK stack as well which would serve as the logging and monitoring platforms.
+
+For the grafana dashboard, we can immediately view it by looking at services available, and then going to nodeport where the dashboard is exposed.
+
+To get to view the kibana ui, we would need to first edit all the nodes in the cluster to enable the fluentd daemon to run on it
+
+```bash
+# Add this line under the labels
+beta.kubernetes.io/fluentd-ds-ready: "true"
+
+# Verify the nodes that has this daemonset running
+kubectl get nodes --selector beta.kubernetes.io/fluentd-ds-ready=true
+kubectl get daemonset fluentd-ds --namespace knative-monitoring
+```
+
+Then, get local kubectl access to the cluster.
+
+Run the following command:
+
+```bash
+kubectl proxy
+
+# Then, go to the following link:
+http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana
 ```
 
 ## Additional debugging steps
@@ -428,7 +476,7 @@ However, it is then noted that you can't exactly ping the ip address of the kube
 After further researching, found out that the way to access such data is via the following:
 
 ```bash
-TOKEN=$(kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='default')].data.token}"|base64 --decode)
+TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 curl -H "Authorization: Bearer $TOKEN" --insecure https://10.96.0.1/api/v1/namespaces/knative-serving/configmaps/config-domain
 ```
 
