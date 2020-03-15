@@ -121,6 +121,7 @@ Save this as gce.yaml on the machine that is designated as the master node.
 Note: We need to create google compute engine instance group: test-group-manager => load balancer can only be attached to instance groups
 
 ```yaml
+# Configuration: https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
 bootstrapTokens:
@@ -139,8 +140,8 @@ nodeRegistration:
 ---
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
-networking:
-  podSubnet: 10.244.0.0/16
+# networking:
+#   podSubnet: "10.32.0.0/12"
 apiServer:
   certSANs:
     - X.X.X.X # Public IP Address of VM machine that is meant to be master
@@ -197,7 +198,10 @@ The next step would be to install the networking overlay as well as to allow you
 
 ```bash
 export KUBECONFIG=/etc/kubernetes/admin.conf
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+# Flannel network (not fully tested)
+# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
 # This is not necessary in our case as we already remove taints from our deployment
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
@@ -265,12 +269,68 @@ rm -r /etc/cni/net.d/
 
 ## Installing Istio
 
+Next step in the march to get knative working on the cluster would be to install some sort of service mesh (component to control the traffic of the application)
+
+We'll first go for a basic setup (with no sidecar injection before trying out the full blown istio components)
+
 ```bash
-cd /usr/local/bin
-curl -L https://istio.io/downloadIstio | sh -
-export PATH="$PATH:/usr/local/bin/istio-1.5.0/bin"
-istioctl verify-install
-istioctl manifest apply --set profile=demo --set addonComponents.grafana.enabled=true
+# https://knative.dev/v0.12-docs/install/installing-istio/
+export ISTIO_VERSION=1.3.6
+curl -L https://git.io/getLatestIstio | sh -
+cd istio-${ISTIO_VERSION}
+for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-system
+  labels:
+    istio-injection: disabled
+EOF
+```
+
+The next step is to actually install helm since helm is needed to install the istio component
+
+```bash
+wget https://get.helm.sh/helm-v3.1.2-linux-amd64.tar.gz
+tar -xvzf helm-v3.1.2-linux-amd64.tar.gz
+cd linux-amd64
+chmod +x helm
+mv helm /usr/local/bin/helm
+```
+
+The final step is to do finally apply the istio component and get all the istio components working
+
+```bash
+# A lighter template, with just pilot/gateway.
+# Based on install/kubernetes/helm/istio/values-istio-minimal.yaml
+helm template --namespace=istio-system \
+  --set prometheus.enabled=false \
+  --set mixer.enabled=false \
+  --set mixer.policy.enabled=false \
+  --set mixer.telemetry.enabled=false \
+  `# Pilot doesn't need a sidecar.` \
+  --set pilot.sidecar=false \
+  --set pilot.resources.requests.memory=128Mi \
+  `# Disable galley (and things requiring galley).` \
+  --set galley.enabled=false \
+  --set global.useMCP=false \
+  `# Disable security / policy.` \
+  --set security.enabled=false \
+  --set global.disablePolicyChecks=true \
+  `# Disable sidecar injection.` \
+  --set sidecarInjectorWebhook.enabled=false \
+  --set global.proxy.autoInject=disabled \
+  --set global.omitSidecarInjectorConfigMap=true \
+  --set gateways.istio-ingressgateway.autoscaleMin=1 \
+  --set gateways.istio-ingressgateway.autoscaleMax=2 \
+  `# Set pilot trace sampling to 100%` \
+  --set pilot.traceSampling=100 \
+  --set global.mtls.auto=false \
+  install/kubernetes/helm/istio \
+  > ./istio-lean.yaml
+
+kubectl apply -f istio-lean.yaml
 ```
 
 ## Installing Knative
@@ -279,16 +339,138 @@ And now, we finally come to knative, the final piece of the technology puzzle in
 
 Knative is reliant on the previous set of technologies deployed above (although you have choices to switch out your "service mesh" layer).
 
-Refer to the following document for full instructions and details: https://knative.dev/docs/install/any-kubernetes-cluster/
+Refer to the following document for full instructions and details: https://knative.dev/v0.12-docs/install/knative-with-any-k8s/
 
 ```bash
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving-crds.yaml
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving-core.yaml
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.13.0/serving-istio.yaml
-kubectl --namespace istio-system get service istio-ingressgateway
+kubectl apply --selector knative.dev/crd-install=true \
+--filename https://github.com/knative/serving/releases/download/v0.12.0/serving.yaml \
+--filename https://github.com/knative/eventing/releases/download/v0.12.0/eventing.yaml \
+--filename https://github.com/knative/serving/releases/download/v0.12.0/monitoring.yaml
 
-# Refer to the section on real dns - since xip.io cannot be used here -> load balancer appears to be internal load balancer
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.12.0/serving.yaml \
+--filename https://github.com/knative/eventing/releases/download/v0.12.0/eventing.yaml \
+--filename https://github.com/knative/serving/releases/download/v0.12.0/monitoring.yaml
 
-# Watch the pods for deployment
 kubectl get pods --namespace knative-serving
+kubectl get pods --namespace knative-eventing
+kubectl get pods --namespace knative-monitoring
 ```
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-domain
+  namespace: knative-serving
+data:
+  # xip.io is a "magic" DNS provider, which resolves all DNS lookups for:
+  # *.{ip}.xip.io to {ip}.
+  X.X.X.X.xip.io: ""
+```
+
+```yaml
+# https://github.com/knative/serving/issues/3809
+# https://github.com/knative/serving/issues/2142
+# https://medium.com/@frederic.lavigne/moving-a-cloud-foundry-app-to-knative-on-ibm-cloud-c0787e3611f1
+apiVersion: serving.knative.dev/v1 # Current version of Knative
+kind: Service
+metadata:
+  name: helloworld-go # The name of the app
+  namespace: default # The namespace the app will use
+spec:
+  template:
+    spec:
+      containers:
+        - image: nginx
+```
+
+```yaml
+apiVersion: serving.knative.dev/v1 # Current version of Knative
+kind: Service
+metadata:
+  name: helloworld-go-1 # The name of the app
+  namespace: default # The namespace the app will use
+spec:
+  template:
+    spec:
+      containerConcurrency: 1
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+          env:
+            - name: TARGET # The environment variable printed out by the sample app
+              value: "Go Sample v1"
+```
+
+## Additional debugging steps
+
+While creating this article, I experimented quite a bit. Tried installing latest istio and knative (didn't work). Tried using Calico CNI (partly because that is the first CNI in the list on kubeadm page - this didn't work as well)
+
+If you're here for the guide to successfully deploy knative on Google Compute Engine nodes - you don't need to read this portion. But if you wish to explore and debug further issues, you can continue reading.
+
+### Attempting to deploy latest knative on latest istio (as of March 2020)
+
+Istio was at 1.5 and knative at 0.13
+
+Issue - custom domain job always in error. It was complaining that it was unable to reach the kubernetes api server.
+
+Initial investigation assumed that this was because of CNI issues
+
+```
+https://github.com/kubernetes-sigs/metrics-server/issues/375
+https://github.com/kubernetes/kubeadm/issues/1817
+
+# The url being accessed
+https://10.96.0.1:443/api/v1/namespaces/knative-serving/configmaps/config-domain
+```
+
+However, it is then noted that you can't exactly ping the ip address of the kubernetes apiserver. Iptables rules have been setup to ignore such traffic. Also, if you run busybox and then run `nslookup kubernetes` -> the pods is able to resolve the addresses, but it is unable to reach it.
+
+After further researching, found out that the way to access such data is via the following:
+
+```bash
+TOKEN=$(kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='default')].data.token}"|base64 --decode)
+curl -H "Authorization: Bearer $TOKEN" --insecure https://10.96.0.1/api/v1/namespaces/knative-serving/configmaps/config-domain
+```
+
+However, it is vital that the pod has the capability to query the apiserver regarding that. If you had not supplied the tokens, you are deemed as an anonymous user -> which automatically prevents you from pulling any data out of the pod.
+
+Within the pod, it is possible to attach a service account to the pod (knative-serving already creating `controller` and `default` service accounts). The service accounts will somewhat indicate what api data can be pulled from apiserver.
+
+In order to debug further, tried to create the following yaml files that would attempt to provide the required roles and capabiltiies to the service account so that it can pull the required data but still having issues with that.
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: knative-role
+  namespace: knative-serving
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - secrets
+      - configmaps
+    verbs:
+      - get
+      - watch
+      - list
+```
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: knative-role-binding
+  namespace: knative-serving
+roleRef:
+  kind: Role
+  name: knative-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: controller
+    namespace: knative-serving
+```
+
+The conclusion from this is that further investigation need to be done to find out why that specific component is not fetching the config map as expected.
