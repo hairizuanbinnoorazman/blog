@@ -351,6 +351,11 @@ kubectl apply -f istio-lean.yaml
 
 And now, we finally come to knative, the final piece of the technology puzzle in order to unlock deployment serverless like workloads into our Kubernetes cluster.
 
+We would be experimenting with several unique features of Knative:
+
+- Scale to zero on 0 traffic
+- Traffic splitting between multiple versions of an application
+
 Knative is reliant on the previous set of technologies deployed above (although you have choices to switch out your "service mesh" layer).
 
 Refer to the following document for full instructions and details: https://knative.dev/v0.12-docs/install/knative-with-any-k8s/
@@ -402,7 +407,7 @@ spec:
         - image: nginx
 ```
 
-Instead, we can try with the yaml below
+Instead, we can try with the yaml below.
 
 ```yaml
 apiVersion: serving.knative.dev/v1 # Current version of Knative
@@ -419,6 +424,36 @@ spec:
           env:
             - name: TARGET # The environment variable printed out by the sample app
               value: "Go Sample v1"
+```
+
+After multiple versions - we can try alter the above file to the following -> this would allow us to have traffic splitting between various versions of an application
+
+```yaml
+# With reference from the following page: https://github.com/knative/docs/blob/master/docs/serving/samples/traffic-splitting/split_sample.yaml
+apiVersion: serving.knative.dev/v1 # Current version of Knative
+kind: Service
+metadata:
+  name: helloworld-go-1 # The name of the app
+  namespace: default # The namespace the app will use
+spec:
+  template:
+    spec:
+      containerConcurrency: 1
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+          env:
+            - name: TARGET # The environment variable printed out by the sample app
+              value: "Go Sample v2"
+  traffic:
+    - tag: current
+      revisionName: helloworld-go-1-bzzgf
+      percent: 50
+    - tag: first
+      revisionName: helloworld-go-1-dhfhq
+      percent: 50
+    - tag: latest
+      latestRevision: true
+      percent: 0
 ```
 
 ### Logging and Monitoring in Knative
@@ -522,3 +557,6 @@ subjects:
 ```
 
 The conclusion from this is that further investigation need to be done to find out why that specific component is not fetching the config map as expected.
+
+helloworld-go-1-dhfhq  
+helloworld-go-1-bzzgf
