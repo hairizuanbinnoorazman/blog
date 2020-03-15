@@ -446,10 +446,10 @@ spec:
               value: "Go Sample v2"
   traffic:
     - tag: current
-      revisionName: helloworld-go-1-bzzgf
+      revisionName: helloworld-go-1-xxxxx
       percent: 50
     - tag: first
-      revisionName: helloworld-go-1-dhfhq
+      revisionName: helloworld-go-1-xxxxx
       percent: 50
     - tag: latest
       latestRevision: true
@@ -557,6 +557,3 @@ subjects:
 ```
 
 The conclusion from this is that further investigation need to be done to find out why that specific component is not fetching the config map as expected.
-
-helloworld-go-1-dhfhq  
-helloworld-go-1-bzzgf
