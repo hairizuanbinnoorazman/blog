@@ -51,6 +51,12 @@ At the same time, in order to provide external kubectl access from outside world
 
 Also, since we are going to have the gce instance to contact the various google cloud platform to create the relevant volumes/load balancers, it is important that we state that the instance should have more permissions. For more granular control, you can follow the blog post stated above, but for simplicity sake, we would just set the instance to have full api access.
 
+So to summarize, we need to to do following manual steps on google cloud console gui:
+
+- Create nodeports firewall rule
+- Create kube-api firewall rule
+- Create VM with firewall rule configured AND have all access to Google APIs
+
 Here are some additional references when trying to get a kubernetes cluster up in gce vms.
 
 References: https://medium.com/@stephane.beuret/kubeadm-on-gce-14df27d67bf5
@@ -100,7 +106,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 
-# Run the following command to prep it for flannel CNI use
+# Run the following command to prep it for weavenet CNI use
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
 ```
 
@@ -363,18 +369,22 @@ Knative is reliant on the previous set of technologies deployed above (although 
 Refer to the following document for full instructions and details: https://knative.dev/v0.12-docs/install/knative-with-any-k8s/
 
 ```bash
+# Installing the knative CRDs
 kubectl apply --selector knative.dev/crd-install=true \
 --filename https://github.com/knative/serving/releases/download/v0.12.0/serving.yaml \
---filename https://github.com/knative/eventing/releases/download/v0.12.0/eventing.yaml \
 --filename https://github.com/knative/serving/releases/download/v0.12.0/monitoring.yaml
+#--filename https://github.com/knative/eventing/releases/download/v0.12.0/eventing.yaml \
 
+
+# Getting the knative components to run
 kubectl apply --filename https://github.com/knative/serving/releases/download/v0.12.0/serving.yaml \
---filename https://github.com/knative/eventing/releases/download/v0.12.0/eventing.yaml \
 --filename https://github.com/knative/serving/releases/download/v0.12.0/monitoring.yaml
+#--filename https://github.com/knative/eventing/releases/download/v0.12.0/eventing.yaml \
+
 
 kubectl get pods --namespace knative-serving
 kubectl get pods --namespace knative-eventing
-kubectl get pods --namespace knative-monitoring
+#kubectl get pods --namespace knative-monitoring
 ```
 
 Alter the DNS records for the config map in order to start knative serving to the right ip address. Reference: https://knative.dev/v0.12-docs/install/installing-istio/
