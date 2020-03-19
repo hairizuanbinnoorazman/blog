@@ -466,7 +466,7 @@ spec:
 
 Refer to the following url: https://github.com/sgotti/knative-docs/tree/master/serving/samples/helloworld-go
 
-We would adjust the helloworld app by making it such that application would take a longer time to respond to requests.
+We would adjust the helloworld app by making it such that application would take a longer time to respond to requests. We would be adding code such that it would do a sleep before responding back to the request -> somewhat simulating the event where web requests are taking a while to complete.
 
 ```go
 package main
