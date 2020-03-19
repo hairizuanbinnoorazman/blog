@@ -293,6 +293,18 @@ Next step in the march to get knative working on the cluster would be to install
 
 We'll first go for a basic setup (with no sidecar injection before trying out the full blown istio components)
 
+The first step is to actually install helm since helm is needed to install the istio component
+
+```bash
+wget https://get.helm.sh/helm-v3.1.2-linux-amd64.tar.gz
+tar -xvzf helm-v3.1.2-linux-amd64.tar.gz
+cd linux-amd64
+chmod +x helm
+mv helm /usr/local/bin/helm
+```
+
+Then, we would need to run the following commands to get istio in:
+
 ```bash
 # https://knative.dev/v0.12-docs/install/installing-istio/
 export ISTIO_VERSION=1.3.6
@@ -307,16 +319,6 @@ metadata:
   labels:
     istio-injection: disabled
 EOF
-```
-
-The next step is to actually install helm since helm is needed to install the istio component
-
-```bash
-wget https://get.helm.sh/helm-v3.1.2-linux-amd64.tar.gz
-tar -xvzf helm-v3.1.2-linux-amd64.tar.gz
-cd linux-amd64
-chmod +x helm
-mv helm /usr/local/bin/helm
 ```
 
 The final step is to do finally apply the istio component and get all the istio components working
