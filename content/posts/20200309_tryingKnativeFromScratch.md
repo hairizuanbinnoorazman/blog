@@ -355,6 +355,8 @@ We would be experimenting with several unique features of Knative:
 
 - Scale to zero on 0 traffic
 - Traffic splitting between multiple versions of an application
+- Accessing tag versions of an application
+- Watch auto-scaled services as it handles load
 
 Knative is reliant on the previous set of technologies deployed above (although you have choices to switch out your "service mesh" layer).
 
@@ -375,7 +377,12 @@ kubectl get pods --namespace knative-eventing
 kubectl get pods --namespace knative-monitoring
 ```
 
-Alter the DNS records for the config map in order to start knative serving to the right ip address
+Alter the DNS records for the config map in order to start knative serving to the right ip address. Reference: https://knative.dev/v0.12-docs/install/installing-istio/
+
+```bash
+# Edit the following file
+kubectl edit cm config-domain --namespace knative-serving
+```
 
 ```yaml
 apiVersion: v1
@@ -385,7 +392,7 @@ metadata:
   namespace: knative-serving
 data:
   # xip.io is a "magic" DNS provider, which resolves all DNS lookups for:
-  # *.{ip}.xip.io to {ip}.
+  # *.{ip}.xip.io to {ip}. => We would need to use the istio-ingressgateway ip address
   X.X.X.X.xip.io: ""
 ```
 
@@ -418,7 +425,6 @@ metadata:
 spec:
   template:
     spec:
-      containerConcurrency: 1
       containers:
         - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
           env:
@@ -456,6 +462,91 @@ spec:
       percent: 0
 ```
 
+### Testing out scaling
+
+Refer to the following url: https://github.com/sgotti/knative-docs/tree/master/serving/samples/helloworld-go
+
+We would adjust the helloworld app by making it such that application would take a longer time to respond to requests.
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+	"strconv"
+	"time"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	log.Print("Hello world received a request.")
+	defer log.Print("End hello world request")
+	target := os.Getenv("TARGET")
+	if target == "" {
+		target = "NOT SPECIFIED"
+	}
+	waitTimeEnv := os.Getenv("WAIT_TIME")
+	waitTime, _ := strconv.Atoi(waitTimeEnv)
+	log.Printf("Sleeping for %v", waitTime)
+	time.Sleep(time.Duration(waitTime) * time.Second)
+	fmt.Fprintf(w, "Hello World: %s!\n", target)
+}
+
+func main() {
+	log.Print("Hello world sample started.")
+
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":8080", nil)
+}
+
+```
+
+With the following app, we can provide it a `WAIT_TIME` environment variable that would allow us to control the amount of time for the app to return a response to the request. For completeness sake, the Dockerfile is also added here as well.
+
+```Dockerfile
+FROM golang
+ADD . /go/src/github.com/knative/docs/helloworld
+RUN go install github.com/knative/docs/helloworld
+ENTRYPOINT /go/bin/helloworld
+EXPOSE 8080
+```
+
+We can proceed to build and push this a registry
+
+```bash
+docker build -t gcr.io/XXXX/helloworld:v1
+docker push gcr.io/XXXX/helloworld:v1
+```
+
+We can then alter the knative configuration for this app in order to try scaling examples
+
+```yaml
+apiVersion: serving.knative.dev/v1 # Current version of Knative
+kind: Service
+metadata:
+  name: helloworld-go-1 # The name of the app
+  namespace: default # The namespace the app will use
+spec:
+  template:
+    spec:
+      containerConcurrency: 1 # Take note of this
+      containers:
+        - image: gcr.io/XXXX/helloworld
+          env:
+            - name: TARGET # The environment variable printed out by the sample app
+              value: "Go Sample v2"
+            - name: WAIT_TIME
+              value: "2"
+```
+
+This would create a pod that would respond to a web request in 2s. If one is loading that service with 3 requests/second, 1 pod won't be sufficient to handle the requests, so knative autoscales the service out to handle the traffic.
+
+For a more proper load testing tools, one can consider other tools like [vegeta](https://github.com/tsenart/vegeta) and [apache benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html)
+
+Note: To view extreme cases where 20 requests/s come in at the same time etc, do ensure that the cluster has enough resources to handle it. If there is insufficient resources, the cluster may begin to starve critical components in order to fulfil and complete web requests.
+
 ### Logging and Monitoring in Knative
 
 If you deploy the monitoring stack in knative, you would get both the grafana + prometheus as well as the ELK stack as well which would serve as the logging and monitoring platforms.
@@ -483,6 +574,8 @@ kubectl proxy
 # Then, go to the following link:
 http://localhost:8001/api/v1/namespaces/knative-monitoring/services/kibana-logging/proxy/app/kibana
 ```
+
+Tracing is also available via this link: http://localhost:8001/api/v1/namespaces/istio-system/services/zipkin:9411/proxy/zipkin/ -> make sure you run the kubectl proxy command first before accessing this.
 
 ## Additional debugging steps
 
