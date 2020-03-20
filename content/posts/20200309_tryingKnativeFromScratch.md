@@ -662,3 +662,86 @@ subjects:
 ```
 
 The conclusion from this is that further investigation need to be done to find out why that specific component is not fetching the config map as expected.
+
+### Lessons from a failed deploy
+
+```bash
+root@test-instance-1:~# kubeadm init --config gce.yaml
+W0320 09:43:56.874106   27922 validation.go:28] Cannot validate kube-proxy config - no validator is available
+W0320 09:43:56.874182   27922 validation.go:28] Cannot validate kubelet config - no validator is available
+[init] Using Kubernetes version: v1.17.4
+[preflight] Running pre-flight checks
+        [WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setu
+p/cri/
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [test-instance-1 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10
+.128.0.13 10.128.0.13 35.194.27.204 10.96.0.1]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [test-instance-1 localhost] and IPs [10.128.0.13 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [test-instance-1 localhost] and IPs [10.128.0.13 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[controlplane] Adding extra host path mount "cloud" to "kube-apiserver"
+[controlplane] Adding extra host path mount "cloud" to "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[controlplane] Adding extra host path mount "cloud" to "kube-apiserver"
+[controlplane] Adding extra host path mount "cloud" to "kube-controller-manager"
+W0320 09:44:03.363012   27922 manifests.go:214] the default kube-apiserver authorization-mode is "Node,RBAC"; using "Node,RBAC"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[controlplane] Adding extra host path mount "cloud" to "kube-apiserver"
+[controlplane] Adding extra host path mount "cloud" to "kube-controller-manager"
+W0320 09:44:03.364224   27922 manifests.go:214] the default kube-apiserver authorization-mode is "Node,RBAC"; using "Node,RBAC"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[kubelet-check] It seems like the kubelet isn't running or healthy.
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10248/healthz' failed with error: Get http://localhost:10248/healthz: dial tcp [::1]:10248: connect: connection refused.
+[kubelet-check] It seems like the kubelet isn't running or healthy.
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10248/healthz' failed with error: Get http://localhost:10248/healthz: dial tcp [::1]:10248: connect: connection refused.
+[kubelet-check] It seems like the kubelet isn't running or healthy.
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10248/healthz' failed with error: Get http://localhost:10248/healthz: dial tcp [::1]:10248: connect: connection refused.
+[kubelet-check] It seems like the kubelet isn't running or healthy.
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10248/healthz' failed with error: Get http://localhost:10248/healthz: dial tcp [::1]:10248: connect: connection refused.
+```
+
+One location to check during this failure is to check the logs of the kubelet
+
+```bash
+Mar 20 12:34:22 test-instance-1 systemd[1]: kubelet.service: Service hold-off time over, scheduling restart.
+Mar 20 12:34:22 test-instance-1 systemd[1]: Stopped kubelet: The Kubernetes Node Agent.
+Mar 20 12:34:22 test-instance-1 systemd[1]: Started kubelet: The Kubernetes Node Agent.
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: Flag --cgroup-driver has been deprecated, This parameter should be set via the config file specified by the Kubelet's --config flag. See https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/ for more information.
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: Flag --cgroup-driver has been deprecated, This parameter should be set via the config file specified by the Kubelet's --config flag. See https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/ for more information.
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: I0320 12:34:22.288202   13216 server.go:416] Version: v1.17.4
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: W0320 12:34:22.288527   13216 plugins.go:115] WARNING: gce built-in cloud provider is now deprecated. The GCE provider is deprecated and will be removed in a future release
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: I0320 12:34:22.288699   13216 gce.go:265] Using GCE provider config &{Global:{TokenURL: TokenBody: ProjectID:healty-rarity-238313 NetworkProjectID: NetworkName: SubnetworkName: SecondaryRangeName: NodeTags:[nodeports] NodeInstancePrefix:test Regional:false Multizone:true APIEndpoint: ContainerAPIEndpoint: LocalZone: AlphaFeatures:[]}}
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: I0320 12:34:22.293316   13216 gce.go:866] Using existing Token Source &oauth2.reuseTokenSource{new:google.computeSource{account:"", scopes:[]string(nil)}, mu:sync.Mutex{state:0, sema:0x0}, t:(*oauth2.Token)(nil)}
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: W0320 12:34:22.426969   13216 gce.go:475] Could not retrieve network "default"; err: googleapi: Error 404: The resource 'projects/XXXX-238313' was not found, notFound
+Mar 20 12:34:22 test-instance-1 kubelet[13216]: F0320 12:34:22.465969   13216 server.go:273] failed to run Kubelet: could not init cloud provider "gce": unexpected response listing zones: googleapi: Error 404: The resource 'projects/projects/XXXX-238313' was not found, notFound
+Mar 20 12:34:22 test-instance-1 systemd[1]: kubelet.service: Main process exited, code=exited, status=255/n/a
+Mar 20 12:34:22 test-instance-1 systemd[1]: kubelet.service: Unit entered failed state.
+Mar 20 12:34:22 test-instance-1 systemd[1]: kubelet.service: Failed with result 'exit-code'.
+^C
+
+```
+
+The logs would indicated reasons for failure, which in this case, is a type in project id -> Note the resource projects/XXXX-238313 line that mentioned that the project cannot be found.
