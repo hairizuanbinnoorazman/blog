@@ -32,6 +32,20 @@ https://eli.thegreenplace.net/2019/unix-domain-sockets-in-go/
 
 This seems to be a more effective way for processes to communicate with each other. As mentioned in the article, seeing that tcp do have overheads for communications that only send small messages to each other, it would make complete sense for communications to be done for unix sockets. Also, commmuncation would come from kubelet to the storage driver. Both binaries/processes are local => hence, there is little need to ensure that the communication channels need to ensure that it can accept communication from outside the node.
 
+### Volumes mounted in containers
+
+Volumes in docker are mounted into the container via a linux system call: Mount
+
+https://github.com/moby/sys/blob/master/mount/mounter_linux.go#L30
+
+Even if storage systems are over nfs, there is code to handle such scenarios.
+
+A basic use of it would be here if one is to call it via CLI:  
+https://linuxize.com/post/how-to-mount-and-unmount-file-systems-in-linux/
+
+More complex scenarios when it comes to mounts:  
+https://unix.stackexchange.com/questions/198542/what-happens-when-you-mount-over-an-existing-folder-with-contents
+
 ### GRPC
 
 GRPC seems to be the most common way of how CSI components communicate with each other.
@@ -46,6 +60,9 @@ And this would be hardest one to do among all of the tasks. A whole variety conc
 
 The main doc for this:  
 https://kubernetes-csi.github.io/docs/developing.html
+
+The specification itself is here:  
+https://github.com/container-storage-interface/spec/blob/master/spec.md#rpc-interface
 
 However, the blog only cover higher ideas that don't cover the details. In order to understand that, it would be good to go read sample code for a sample storage driver: hostpath-plugin
 
