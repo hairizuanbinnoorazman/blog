@@ -46,6 +46,9 @@ https://linuxize.com/post/how-to-mount-and-unmount-file-systems-in-linux/
 More complex scenarios when it comes to mounts:  
 https://unix.stackexchange.com/questions/198542/what-happens-when-you-mount-over-an-existing-folder-with-contents
 
+However, if we read on further, kubernetes doesn't exactly seem to use the mounting capabilities available by docker to mount the volumes. It has its own mechanism for mounting volumes into the container. That would explain how other runtimes which don't have easy volume support as docker can be supported to run in k8s.  
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/
+
 ### GRPC
 
 GRPC seems to be the most common way of how CSI components communicate with each other.
@@ -67,6 +70,9 @@ https://github.com/container-storage-interface/spec/blob/master/spec.md#rpc-inte
 However, the blog only cover higher ideas that don't cover the details. In order to understand that, it would be good to go read sample code for a sample storage driver: hostpath-plugin
 
 https://github.com/kubernetes-csi/csi-driver-host-path
+
+This is one of the better blog posts that describe end to end process of what happens when a CSI plugin is used.  
+https://medium.com/velotio-perspectives/kubernetes-csi-in-action-explained-with-features-and-use-cases-4f966b910774
 
 This driver dynamically creates volumes on host file system on kube nodes.
 
