@@ -3,6 +3,7 @@ title = "Trying Distributed Tracing with Jaeger"
 description = "Trying Distributed Tracing with Jaeger"
 tags = [
     "google-cloud",
+    "kubernetes",
 ]
 date = "2020-04-04"
 categories = [
