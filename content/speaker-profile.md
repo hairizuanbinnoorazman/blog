@@ -8,7 +8,7 @@ meta = "false"
 
 # Bio
 
-Hairizuan is a software developer at Acronis as part of the Search Team. He is a avid fan of tools and technologies and has dabbled in various programming languages such as Golang, Python and R. Prior to working at Acronis, he worked at Sparkline where he worked on tools and applications that deal with digital marketing technologies such as Google Analytics and Google Tag Manager.
+Hairizuan is a Devops Engineer at Acronis. He is a avid fan of tools and technologies and has dabbled in various programming languages such as Golang, Python and R. He is currently one of the co-organizer for the GDG Cloud Singapore meetup group.
 
 # Social Profiles
 
@@ -22,7 +22,7 @@ https://www.facebook.com/hairizuan.noorazman
 Using Google Cloud Run to create a bunch of services which when combined together would convert presentation slide pdfs and scripts (not programming script but a script on what to say during a presentation) into a video. The following set of services is build by using Google Cloud Run and Google Text to Speech and Google Cloud Storage and Google Datastore; all deployed via Google Cloud Build
 
 Event Link: https://events.withgoogle.com/la-kopi-serverless/  
-Slides: https://docs.google.com/presentation/d/1Vuv7C1rNGbKdOvpJji5QNiqwvsPvHF6uWzNNEsIthlQ/  
+Slides: https://docs.google.com/presentation/d/1Vuv7C1rNGbKdOvpJji5QNiqwvsPvHF6uWzNNEsIthlQ/
 
 ## GCSFuse; Heard of it
 
