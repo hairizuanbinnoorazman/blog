@@ -17,6 +17,14 @@ https://www.facebook.com/hairizuan.noorazman
 
 # Talks
 
+## Interesting Features in GKE
+
+Covering on Workload Identity, Config Connector, Managed Application Delivery etc
+
+Event Link: https://www.meetup.com/GDG-Cloud-Singapore/events/270423553/  
+Slides: https://docs.google.com/presentation/d/1ptjcfpRuoKGqAsSr7O-USulBEcu9JdQpEZ3y3yQ7Tuk/edit?usp=sharing  
+Video Recording: https://www.youtube.com/watch?v=xlWX7iNKag8
+
 ## Generating videos from slides on applications served from Google Cloud Run
 
 Using Google Cloud Run to create a bunch of services which when combined together would convert presentation slide pdfs and scripts (not programming script but a script on what to say during a presentation) into a video. The following set of services is build by using Google Cloud Run and Google Text to Speech and Google Cloud Storage and Google Datastore; all deployed via Google Cloud Build
