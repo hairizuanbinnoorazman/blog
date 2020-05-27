@@ -25,6 +25,16 @@ Event Link: https://www.meetup.com/GDG-Cloud-Singapore/events/270423553/
 Slides: https://docs.google.com/presentation/d/1ptjcfpRuoKGqAsSr7O-USulBEcu9JdQpEZ3y3yQ7Tuk/edit?usp=sharing  
 Video Recording: https://www.youtube.com/watch?v=xlWX7iNKag8
 
+## Quick tour of Knative
+
+A quick tour around the internals of how Knative works under the hood. Knative is the platform that powers Google Cloud Run; this talk explores the various pieces of technologies that one would need to run if one starts from just plain old Virtual Machines.
+
+Note: Video Recording of demo this time failed (due to typo)
+
+Event: Fosassia 2020  
+Blog: https://www.hairizuan.com/trying-knative-from-scratch/  
+Video Recording: https://youtu.be/F71rvTQ8unA
+
 ## Generating videos from slides on applications served from Google Cloud Run
 
 Using Google Cloud Run to create a bunch of services which when combined together would convert presentation slide pdfs and scripts (not programming script but a script on what to say during a presentation) into a video. The following set of services is build by using Google Cloud Run and Google Text to Speech and Google Cloud Storage and Google Datastore; all deployed via Google Cloud Build
