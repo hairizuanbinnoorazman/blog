@@ -1,5 +1,5 @@
 pygmentsCodeFences = true
-baseurl = "https://www.hairizuan.com"
+baseurl = "https://www.hairizuan.com/"
 title = "Experiment, Fail, Learn, Repeat"
 copyright = "Copyright &copy; 2017 - Hairizuan Noorazman"
 canonifyurls = true
