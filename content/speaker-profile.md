@@ -25,6 +25,14 @@ Event Link: https://www.meetup.com/GDG-Cloud-Singapore/events/270423553/
 Slides: https://docs.google.com/presentation/d/1ptjcfpRuoKGqAsSr7O-USulBEcu9JdQpEZ3y3yQ7Tuk/edit?usp=sharing  
 Video Recording: https://www.youtube.com/watch?v=xlWX7iNKag8
 
+## Introduction to Skaffold
+
+Introductory session to skaffold, reasons for using it as well as how to quickly get started with the tool
+
+Event Link: https://www.meetup.com/GDG-Cloud-Singapore/events/264449620/  
+Event Link: https://www.meetup.com/Singapore-Kubernetes-User-Group/events/268492981/  
+Video: https://www.youtube.com/watch?v=xNq-aFohfgk
+
 ## Quick tour of Knative
 
 A quick tour around the internals of how Knative works under the hood. Knative is the platform that powers Google Cloud Run; this talk explores the various pieces of technologies that one would need to run if one starts from just plain old Virtual Machines.
@@ -64,6 +72,7 @@ An introduction to Google Cloud Run, a newly announced serverless solution which
 Event Link: https://www.meetup.com/GCPUGSG/events/259734957/  
 Event Link: https://www.meetup.com/gdg-singapore/events/261587580/  
 Slides: https://docs.google.com/presentation/d/1M8EhARDBY33IefEz356NhdUkkSyUZo1tHZBkMt-NtpE  
+Video: https://www.youtube.com/watch?v=n1wtjEmb7eI  
 Blog Post: https://www.hairizuan.com/introduction-to-google-cloud-run/
 
 ## Triggering analytics with serverless functions
