@@ -4,7 +4,7 @@ description = "Helm hooks configurations that have confusing behaviours during u
 tags = [
     "kubernetes",
 ]
-date = "2020-09-12"
+date = "2020-09-11"
 categories = [
     "kubernetes",
 ]
