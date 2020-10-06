@@ -33,10 +33,16 @@ The tool is built with heavy inspiration from how kubernetes does things. We hav
 
 The tool kind of fulfils my goals:
 
-- Allow me to pass the syncing job to the tool and let it handle, allowing me to achive a "always" updated
+- Allow me to pass the syncing job to the tool and let it handle, allowing me to achive a "always" updated description of webinar details
 - Explore the various APIs and Google APIs and Auth and see how they can all work together
 
+The tool accepts a large configuration file where one passes all require application configuration - e.g. frequency of when to check and update the target platforms, a switch to turn off features of the tool where necessary (in the case the tool screws up something very very badly).
+
+The tool eventually writes out the details of the events that it is managing into a file which can then be manipulated by the user. Ideally, we would want to touch this file as minimally as possible because this would be our "main" file which we would use to compare with the details on target platforms. Currently, it is a huge pain to "create" an event, there is plenty of copy and pasting that needs to be done. Hopefully, some functionality will be added to cover the this effort in the future.
+
 Unfortunately, the tool is still young (and with that, expect bugs) - so I wouldn't expect it to handle the more "critical" webinars. But for the more regular meetups, it should generally be ok for the automation to handle it.
+
+As a plus, the binary also includes functionality to retrive a list of links from a Google Slides presentation and present it in a yaml file. Afterwhich, the user of the binary can "replace" the links on the slides. This functionality is kind of built in order to do a bulk link shortener operation on the Google Slides operation (another kind of troublesome task that is done to ensure link are not a huge mess on screen)
 
 ## The ROADMAP forward
 
