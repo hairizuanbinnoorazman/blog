@@ -20,6 +20,13 @@ https://www.youtube.com/channel/UCLEQc99oEczCVVls5kDv8FA
 
 # Talks
 
+## Kubernetes HPA with Custom Metrics
+
+A demo of how to utilize an application's custom metrics
+
+Slides: https://docs.google.com/presentation/d/159fA2Q12nSaldHD--0Ypln_tzruVNiM36edAAUaRoY0/edit?usp=sharing  
+Video Recording: https://www.youtube.com/watch?v=IxDqs7387YI
+
 ## Interesting Features in GKE
 
 Covering on Workload Identity, Config Connector, Managed Application Delivery etc
