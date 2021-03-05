@@ -1,5 +1,5 @@
 +++
-title = "Lessons from building Slides to Video App"
+title = "Lessons from building Slides to Video App - Part 1"
 description = "Lessons from building Slides to Video App. A review on Application structure, devops practises, CI practises"
 tags = [
     "golang",
