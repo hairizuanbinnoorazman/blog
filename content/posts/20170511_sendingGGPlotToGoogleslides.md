@@ -12,6 +12,16 @@ categories = [
 ]
 +++
 
+IMPORTANT:  
+THE FOLLOWING BLOG POST IS OUTDATED. THERE IS AN UPDATE TO GOOGLESLIDES API WHICH DISABLE USAGE OF GOOGLE DRIVE IMAGES. NOW ALL IMAGES HAS TO BE FROM PUBLIC SOURCES. THERE IS A FEATURE REQUEST TICKET CREATED TO ADD THIS FUNCTIONALITY BACK BUT THERE IS A HIGH LIKELIHOOD IT WONT BE BACK FOR A LONG TIME
+
+ALSO, A NEW PUBLIC GOOGLEDRIVE PACKAGE IS AVAILABLE FOR USE - PLEASE USE THAT ONE INSTEAD FOR UPLOADING ANY ASSETS
+
+REFER TO THE FOLLOWING TICKET:  
+https://github.com/hairizuanbinnoorazman/rgoogleslides/issues/28
+
+---------------------------
+
 Let's say you're an analyst and you want to automate your workflow to send your analysis into Googleslides without much involvement from your part; what would you do?
 
 Well, its now possible by using a combination of the googledrive R package as well as the rgoogleslides package.
