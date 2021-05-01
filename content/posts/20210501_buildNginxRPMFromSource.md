@@ -12,6 +12,8 @@ categories = [
 
 NOTE: As software advances, some of the commands shown below may become depreciated/irrelevant. If one encounters errors - check the output logs to see what the issue is (e.g. missing library? missing dependency? wrong folder structure due to being unable to find a file)
 
+For the following commands below, we need to run the following code on a machine running Centos OS 7 or in a VM running Centos OS 7. We cannot run it in docker. This is because systemd is not exactly available/useable in docker - there are hacks, but its better to just proceed on to just run these in a Virtual Machine
+
 These are some notes when it comes to building Nginx RPM for centos use. This can be used to further customize Nginx RPM
 
 Create a Google Compute Engine with Centos 7 OS
