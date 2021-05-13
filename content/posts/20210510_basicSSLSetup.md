@@ -1,10 +1,10 @@
 +++
-title = "Basic SSL Setup"
-description = "Basic SSL Setup - a note to self when setting up SSL certificates in the future"
+title = "Basic SSL Setup - server and client SSL certificate setup"
+description = "Basic SSL Setup - a note to self when setting up SSL certificates in the future - server and client SSL certificate setup"
 tags = [
     "nginx",
 ]
-date = "2021-03-15"
+date = "2021-05-10"
 categories = [
     "nginx",
 ]
