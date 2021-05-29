@@ -20,6 +20,12 @@ https://www.youtube.com/channel/UCLEQc99oEczCVVls5kDv8FA
 
 # Talks
 
+## Introduction to Cloud
+
+Talk on introducing people unfamiliar with cloud to cloud technologies/platforms. Used angle of understanding cloud from feature set available
+
+Video Stream: https://www.twitch.tv/videos/1039052712
+
 ## Kubernetes HPA with Custom Metrics
 
 A demo of how to utilize an application's custom metrics
