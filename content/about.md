@@ -15,6 +15,9 @@ Below is a collection of some of projects I've been working on. These are not co
 
 # Golang
 
+- [Slides to Video Tool](https://github.com/hairizuanbinnoorazman/slides-to-video)
+- [Syncer Tool](https://github.com/hairizuanbinnoorazman/syncer)
+- [Sample Golang Apps](https://github.com/hairizuanbinnoorazman/Go_Programming)
 - [tasker](https://github.com/hairizuanbinnoorazman/tasker)
 - [sample gin bookcase application](https://github.com/hairizuanbinnoorazman/golang-web-gin-book-store)
 
