@@ -10,11 +10,15 @@ categories = [
 ]
 +++
 
-This post is just some notes I took down while attempting to deploy third party applications during my course of work/side projects. This is definitely not an exhaustive list of items to consider but definitely some of the more obvious features that companies would look out for and consider when attempting to install such third party apps and operate it on their infrastructure.
+This is definitely not an exhaustive list of items to consider but definitely some of the more obvious features that client side users would look out for and consider when attempting to install such third party apps and operate it on their infrastructure.
+
+This list was compiled while I was attempting to deploy third party applications during my course of work/side projects.
+
+From this point onwards, we would need to assume that when we are building applications here - we would be referring to the point that such applications are targeted to be deployed on client side (someone else would take that application and deploy/manage it on their architecture).
 
 ## Data Management
 
-When building third party applications, we may need to store state in some cases. Data needs to be stored in some way such as in a database or object storage or in simple files. In this case, we shouldn't exactly assume that we would know what kind of databases that users of the application would usually use. Some users face restrictions in what kind of databases they could deploy into production. Others might predict that they would use the app heavily and they would be confident that their database of choice would be able to handle it as compared to what we may choose.
+When building applications, we may need to store state in some cases. Data needs to be stored in some way such as in a database or object storage or in simple files. In this case, we shouldn't exactly assume that we would know what kind of databases that users of the application would usually use. Some users face restrictions in what kind of databases they could deploy into production. Others might predict that they would use the app heavily and they would be confident that their database of choice would be able to handle it as compared to what we may choose.
 
 In order to allow the usage of multiple types of database, we may need to consider either building that support of multiple databases from the beginning or allow users to build plugins that can be used alongside the application to store the data in the user's own preferred database.
 
@@ -28,9 +32,11 @@ To sum it all, here are some questions to ponder when considering the data manag
 
 ## Deployment
 
-Ideally, if we're the users of these third party apps, we wouldn't want to build up the deployment artifacts on our own while trying to deploy these apps. There are various aspects that we need to consider when building such artifacts (e.g. dependencies required, security requirements, configuration/initialization files to be created)
+Ideally, if we're the users of these apps, we wouldn't want to build up the deployment artifacts on our own while trying to deploy them. There are too many aspects that they would need to consider when building such artifacts (e.g. dependencies required, security requirements, configuration/initialization files to be created) and if users are expected to think of these concerns, that would be make it harder for them to adopt into their companies. (Unless there is a strong compelling reason to use them)
 
-With that, if we are to be the builders of these third party apps that are aimed to be deployed at client infrastructures, we would need to be in charge of building such artifacts. The unfortunate thing is, we won't know what is the 
+With that, if we are to be the builders of these apps that are aimed to be deployed at client infrastructures, it would be ideal for usto be in charge of building such artifacts. The unfortunate thing is, we won't know what is the target platforms users of these application would be using. They could be using plain old bare metal servers or virtual machines. They could go slightly fancy and be using Kubernetes or other container based deployment platforms.
+
+Here are some examples of types of artifacts one may think to provide:
 
 - Docker images
 - Helm chart
@@ -46,6 +52,8 @@ We would also need to consider that the binaries could be deployed on various co
 For these artifacts, we would need to consider where those artifacts would be made available on. E.g. for docker images, should be put into Dockerhub? Will the frequency of the updates 
 
 In some of the cases such as the helm chart and kustomize scripts - we may need to ensure that the configuration is setup in a flexible manner to ensure that users of these artifacts would be to customize the installation according to their requirements and architecture.
+
+On top of that, if the application takes up a configuration file in order to alter and adjust the behaviour of the application, a significant amount of time and labour would be needed to document all of such behaviours down in order to inform users how the application can be modified to suite their user's needs.
 
 ## Permission systems
 
@@ -65,10 +73,14 @@ Some of the aspects that we need to consider:
 
 - Providing monitoring methodology. Currently, prometheus is one of the popular tools that is being monitor applications and tools. This can be done by providing a prometheus endpoints
 - Flexibility to define where the application would send the logs to (e.g. should logs be sent to a file? Or should logs be sent stdout?)
-- Level of logs to be provided by the application
+- Level of logs that can be pulled from the application. In many companies, they would utilize some sort of centralized log collecting mechanism. This mechanism does have limits - these limits could be physical limits (storage space) or cost limits (storage of logs in the cloud platforms). By default, applications should run with minimal logs but there should be flags and configurations to allow debug of such logs in order to understand how the application work from the outside
 - Formatting of logs. At times, some companies may have decided to go for json formatted log formatting to standardize it across applications/components. One reason to do so is to make it easier for their centralized logging system to parse such logs to do analysis on such logs
-- Providing of distributed traces to understand the application further although this not exactly too important
+- Providing of distributed traces to understand the application further although this particular functionality is not too important
 - In the case where we provide docker images to be used for deployment. It would be ideal to ensure the image is secure as per user's company's requirements. One way is to utilize small minimalistic base images: e.g. https://github.com/GoogleContainerTools/distroless or alpine images or slim images. Just do know that using these minimalistic images make it harder to build such artifacts (tooling/dependencies may be missing in such minimalistic images)
+- In the case where the application is being updated, is there a smooth upgrade track that users can follow in order to safely upgrade the application without losing the data being stored in the application?
+- As much as we would want users to continue using the application, there are cases where they would need to migrate off the tool. Maybe we would need to consider a way to export the data out of the tool?
+- Our previous point, it's mentioned that it would be good to consider a capability to export data out of the tool where necessary. It might be good to also take into mind of maybe a feature/need where data can be imported into the application
+- There are cases where the application that we may be building would provide a frontend. In general, we would just define the paths of such frontend sites without too much worry. However, there are cases where some users would want to put these applications behind proxy and would want to direct users to the application via a prefix path. To support this need, we would need to have a feature to allow users to define if the application would have some sort of prefix path for all the endpoints/frontend of the application
 
 ## Scalability
 
@@ -77,8 +89,8 @@ In some cases, some of the applications might turn out popular in the client's c
 Some points to think about:
 
 - A guide on how to scale out application. If application is to be deployed on Kubernetes with a helm chart, one can utilize the HorizontalPodAutoscaler resource and define some default values that clients can kind of use
-- It might be good to provide which metrics can be used/based on to scale out the application. We can scale an application based on its CPU usage or Memory usage. However, we can also go with something slightly controversial (e.g. number of items in a queue). However, the target platform needs to have that mechanism to do that sort of scaling.
-- Does the application need to rely on cluster mode? Ideally, it would be best to avoid setting up cluster capability since that would make it really hard to maintain/test such applications. In my own opinion, having clustering in application is reserved for stateful applications which doesn't apply for many applications
+- It might be good to provide which metrics can be used/based on to scale out the application. We can scale an application based on its CPU usage or Memory usage. However, we can also go with something slightly more controversial metrics (e.g. number of items in a queue). However, the platform that hosts this needs to be able to support this capability.
+- Does the application need to able to form a cluster if needed? Ideally, it would be best to avoid setting up cluster capability since that would make it really hard to maintain/test such applications. In my own opinion, clustering in application is reserved for stateful applications which doesn't apply for many applications
 
 ## Implemented Examples
 
