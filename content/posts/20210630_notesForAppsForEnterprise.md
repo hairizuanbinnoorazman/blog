@@ -49,7 +49,7 @@ Here are some examples of types of artifacts one may think to provide:
 
 We would also need to consider that the binaries could be deployed on various computer architectures such as 32 bit systems, 64 bit systems or arm systems.
 
-For these artifacts, we would need to consider where those artifacts would be made available on. E.g. for docker images, should be put into Dockerhub? Will the frequency of the updates 
+For these artifacts, we would need to consider where those artifacts would be made available on. E.g. for docker images, should be put into Dockerhub? How frequent will the updates be for the docker images? What sort of version scheme would you be following? (follow app versioning? - but what if there is a need to change docker image base layers but not the application itself? How will it be handled?)
 
 In some of the cases such as the helm chart and kustomize scripts - we may need to ensure that the configuration is setup in a flexible manner to ensure that users of these artifacts would be to customize the installation according to their requirements and architecture.
 
