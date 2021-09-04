@@ -23,9 +23,9 @@ https://github.com/hairizuanbinnoorazman/Go_Programming/tree/master/Environment/
 
 There are various ways to install such components on Kubernetes. The direct way is to set create the Kubernetes manifests and directly apply it on the cluster via `kubectl apply -f <file names>`. However, it can be kind of a hassle to do so for many manifest files where there are many repeated variables (e.g. namespace, labels etc). That is where other templating projects come up to solve to make it easy to "template" out said Kubernetes manifest files. One is [Kustomize](https://kustomize.io/). Another templating tool to deal with installing stuff is [Helm](https://helm.sh/). For this post, Helm will be the most that is mostly used here.
 
-For Helm, it is assumed that **Helm 3** is being used here. Helm 2 is pretty outdated and most of the charts now mostly have instructions on how to install their respective charts but with instructions assuming you have Helm 3.
+For Helm, it is assumed that **Helm 3** is being used here. Helm 2 is pretty much outdated and most of the charts out there now mostly have instructions on how to install their respective charts with instructions assuming you have Helm 3.
 
-There may be further updates in the future - the updates will go into the codebase mentioned above.
+There may be further updates in the future for the installation of this observabiltiy tools - the updates will go into the codebase mentioned above.
 
 ## Install Metrics Component
 
@@ -56,6 +56,60 @@ helm upgrade --install -f prom.yaml kube-prometheus-stack prometheus-community/k
 
 The full list of options is available in Charts folder of the respective Chart:  
 https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+
+To view Prometheus UI, we can run the following command:  
+
+```bash
+kubectl port-forward service/kube-prometheus-stack-prometheus 9090
+```
+
+![prometheus](/20210901_settingUpObservabilityGKE/prometheus.png)
+
+One of the important pages on Prometheus UI is the "targets" page. As much as possible, we would to reduce the number of unhealthy targets
+
+![prometheus-targets](/20210901_settingUpObservabilityGKE/prometheus-targets.png)
+
+The prometheus stack also deploys a Grafana dashboard as well. We can access it by port-forwarding one of localhost to port 3000 or sth for the Grafana service.
+
+```bash
+kubectl port-forward service/kube-prometheus-stack-grafana 3000:80
+```
+
+![grafana](/20210901_settingUpObservabilityGKE/grafana.png)
+
+The admin username and password can be found in the following secret: `kube-prometheus-stack-grafana`. It is actually set in the helm chart - so if you wanted to set a different root/admin password. We can then run the following command to view what is being used to set the username and password.
+
+```bash
+kubectl get secrets kube-prometheus-stack-grafana  -oyaml
+```
+
+The output for the above secret (not the full secret yaml definition) would show this:
+
+```yaml
+apiVersion: v1
+data:
+  admin-password: cHJvbS1vcGVyYXRvcg==
+  admin-user: YWRtaW4=
+  ldap-toml: ""
+kind: Secret
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kube-prometheus-stack
+    meta.helm.sh/release-namespace: default
+...
+  name: kube-prometheus-stack-grafana
+  namespace: default
+  resourceVersion: "3410"
+  uid: ff19912e-43fd-47c6-a97a-aec8fb687a87
+type: Opaque
+```
+
+The username and password looks like gibberish but its just base64 encoded. We can reveal actual values by running the following commands:
+
+```bash
+echo -n cHJvbS1vcGVyYXRvcg== | base64 --decode
+echo -n YWRtaW4= | base64 --decode
+```
 
 ## Install Objects Storage
 
