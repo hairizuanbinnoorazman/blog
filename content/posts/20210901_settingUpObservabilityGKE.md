@@ -132,6 +132,97 @@ helm upgrade --install -f minio.yaml minio-operator minio/minio-operator
 The default values yaml file for minio operator:  
 https://github.com/minio/operator/blob/master/helm/minio-operator/values.yaml
 
+By default, Minio doesn't come with any initial default buckets. Also, at the same time, it does seem that the Minio Operator Helm chart doesn't contain any capability to be able provision bucket on initial deploy. Hence, we would need to script this out on our end to create the buckets accordingly.
+
+A simple way would be to utilize the `minio/mc` image. It contains the `mc` CLI tool that would interact with the Minio Cluster. The slightly tricky part is to have this image connect to the Minio cluster and this is defined in the following Configmap and Job. The configmap would provide a `config.json` file that is actually used by the `mc` cli tool. We would replace the default `config.json` file - which would then allow us to create the buckets.
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-config
+data:
+  config.json: |
+    {
+      "version": "10",
+      "aliases": {
+        "yahoo": {
+          "url": "http://minio1-hl.default.svc.cluster.local:9000",
+          "accessKey": "minio",
+          "secretKey": "minio123",
+          "api": "s3v4",
+          "path": "auto"
+        }
+      }
+    }
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: make-bucket-testtest
+spec:
+  template:
+    spec:
+      containers:
+      - name: mc
+        image: minio/mc
+        args: ['mb', '--ignore-existing', 'yahoo/testtest']
+        # For debugging
+        # args: ['admin', 'info', 'yahoo']
+        volumeMounts:
+          - mountPath: /root/.mc/config.json
+            name: mc-config
+            subPath: config.json
+      restartPolicy: Never
+      volumes:
+        - configMap:
+            defaultMode: 0777
+            name: mc-config
+          name: mc-config
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: make-bucket-haha
+spec:
+  template:
+    spec:
+      containers:
+      - name: mc
+        image: minio/mc
+        args: ['mb', '--ignore-existing', 'yahoo/haha']
+        # For debugging
+        # args: ['admin', 'info', 'yahoo']
+        volumeMounts:
+          - mountPath: /root/.mc/config.json
+            name: mc-config
+            subPath: config.json
+      restartPolicy: Never
+      volumes:
+        - configMap:
+            defaultMode: 0777
+            name: mc-config
+          name: mc-config
+```
+
+We can view the Minio UI via the following command:
+
+```bash
+kubectl port-forward service/minio1-console 9090
+```
+
+![minio-console](/20210901_settingUpObservabilityGKE/minio-console.png)
+
+The username and password for this can be found here:
+
+```bash
+kubectl get secrets minio1-secret  -oyaml
+```
+
+![minio-dashboard](/20210901_settingUpObservabilityGKE/minio-dashboard.png)
+
+![minio-buckets](/20210901_settingUpObservabilityGKE/minio-buckets.png)
+
 ## Install Logging Stack
 
 There is a new player in town when it comes to the logging game. It's Loki and I believe it is also provided by the same team that provided Grafana and other observability tooling.
