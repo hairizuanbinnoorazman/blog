@@ -10,7 +10,9 @@ categories = [
 ]
 +++
 
-These are some notes that I took while taking my driving license in Singapore at CDC from August 2019 to December 2019. Some of the advice may/may not apply to you when learning to drive - so take all advice with a grain of salt.
+These are some notes that I took while taking my driving license - Class 3 in Singapore at CDC from August 2019 to December 2019. Some of the advice may/may not apply to you when learning to drive - so take all advice with a grain of salt.
+
+Some of the advice below may also apply to those from Class 3A but most likely can skip all the bits regarding clutch control. That would make certain stages way easier - especially slope
 
 ## Reminders
 
@@ -41,7 +43,7 @@ List of important things to take note (Read them just before going for TP practi
 - Make sure in gear 1
 - Check mirror and blindspot
 - Check blindspot
-- Release hanrbrake
+- Release handbrake
 
 # Slope
 
@@ -79,7 +81,7 @@ List of important things to take note (Read them just before going for TP practi
 # S course
 
 - You should not be at the centre of the road at the end
-- Be more on the right of the road at the end - else might hit kerb when turning out
+- Be more on the right of the road at the end - else rear left wheel might hit kerb when turning out
 - Check blindspot before turning out
 
 # Direction change
@@ -94,14 +96,14 @@ List of important things to take note (Read them just before going for TP practi
 - Reverse till required mark
 - Check left blind spot before turning steering wheel
 - Ensure parallel to kerb inside
-- If too left, move out to the right before turning left out
+- If too left, move out to the right before turning left out. If you do not this, your rear left wheel will go over the kerb
 - If too right, its ok
 
 # Perpendicular parking (near s course)
 
 - Be closer to the line
 - Move till next parking at kerb at shoulder
-- Begin to turn when black bar in rear window touches right rear corner of carpark
+- Begin to turn when black bar in rear window touches right rear corner of parking spot
 
 # Perpendicular parking (near crank course)
 
@@ -122,7 +124,7 @@ List of important things to take note (Read them just before going for TP practi
 
 # Parallel parking
 
-- Kerb side stop - dont too close
+- Kerb side stop - don't be too close
 - Left signal
 - Stop when side mirror at stop line or sign to next bay
 - Put to reverse
@@ -141,9 +143,16 @@ List of important things to take note (Read them just before going for TP practi
 - switch to 1st gear
 - straighten vehicle/wheel
 - put to neutral and handbrake on
+- await for approval from tester/instructor
 - when going out... DO IT SLOWLY. USE CLUTCH ON-OFF TECHNIQUE
 
 # Parallel parking corrections
 
 - If rear wheel not in, move forward as much as you can
 - Full lock left, move as far back as you need and straighten vehicle
+
+# Experiences during test
+
+- Car being used in practical driving lesson is vastly different from the cars used in TP. Cars used in TP seem to generally have more effective brake/clutch system. Judge the quality of brakes/clutch/accelerator accordingly - that is why the pre-practise round before actual TP is very important - it is to get used to the car
+- After practise round (will be accompanied by random instructor - not much advice/tips will be given - only a quick test of circuit + external road) - you will stop vehicle infront of main lobby of CDC driving school and will be asked to get off. Instructor will be parking the car (there will be instructions on where you will find your car provided)
+- When tester and you are in the car, you will need to start the vehicle, do safety checks and then leave the parking lot (don't forget to turn out of parking lot by reference of shoulder) - check that traffic is clear before leaving parking lot.
