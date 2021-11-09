@@ -66,11 +66,38 @@ This approach resulted in a weight loss of 110kg to 95kg over the course of 8 mo
 
 ## Experiment 3: Long term fasting
 
+Similar to the situation in the previous phases, my weight started to stagnate and fluctuate up and down for quite a while. I'd imagine that the rate of weight loss at this stage based on my previous phase's approach would eventually lead to weight loss but its just really really slow - my guess is that with a lighter body, my energy requirements (also calorie requirement) went down as well. I guess one way is to actually go the miserable route and cut calories and finally start moving alot more?
+
+Unless...
+
+Video on a dude's experience on a 5 day fast
+{{< youtube ER1o2nL5bEc >}}
+
+I came across the following video by accident and now, I started going down the rabbit hole of why he did it (even though he's kind of already in shape etc). And then, I came across the following videos as well.
+
 Video on Fasting benefits
 {{< youtube RuOvn4UqznU >}}
 
 Video on How to slow aging on Veritasium Youtube Channel  
 {{< youtube QRt7LjqJ45k >}}
+
+There were a lot of more videos on this topic that expected. A lot of them were from "nutritional experts" or "health experts" that would explain to do "ACTIVITY X" or eat "ITEM X" and it will heal you and stuff but that never appeal to me. The one that is a lot of interesting is the ones where the commentary is covered by Doctors (at least they proclaim to be on video). They claim stuff but they would also inject in some scientific information that kind of coincides with how I learnt when I was still in University.
+
+Let me list down some points here:
+
+- Glucose enters the body after digestion from starches etc (Broken down from starch, sucrose etc)
+- Too much glucose in the blood stream is bad, so the body produces insulin as a response to it
+- Insulin response informs cells to take up glucose to build up chains of glycogen
+- Any further excess of glucose is converted to fat (Didn't exactly learnt how in school). According to some random article I read online, apparent high insulin in the blood will tell adipose fat cells to take up glucose for storage - https://www.nih.gov/news-events/news-releases/nih-study-shows-how-insulin-stimulates-fat-cells-take-glucose
+- I guess in computer terms, I'd imagine glycogen as some sort of energy "cache" and fat as some sort of energy "disk"
+- High insulin levels prevents energy usage from fat cells; as long as insulin levels remain high, fat remains locked up. (I guess with this, the caloric model of handling weight loss is kind of broken-ish)
+- Hunger is just a hormonal response and can be handled/controlled. Being hungry doesn't exactly mean one is "out of energy"; it sometimes just mean that that's the usual time to eat or maybe blood sugar dipped slightly below usual levels (before glycogen/fat stores) unlocked
+
+This is partially why intermittent fasting/long term fasting kind of work when it comes to losing weight - it reduces/forces insulin levels to be low and with that, we can tap into the vast energy stores in the fat cells. I tried a couple of times of doing the long term fasts and experience usual goes as follows:
+
+- Day 1: Feel great - no issue with hunger (since I'm already intermittent fasting anyway)
+- Day 2: Hunger pangs start to come in; maybe have slight headache (could be from fuel switch for brain from glucose to ketones? maybe?)
+- Day 3-5: Feel ok during the day but sometimes, hard to sleep. Caffeine is way more effective in the fasted stated state that the fed state
 
 ## Afterthoughts
 
