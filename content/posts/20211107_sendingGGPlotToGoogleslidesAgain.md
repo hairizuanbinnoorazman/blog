@@ -158,5 +158,12 @@ request <- rgoogleslides::add_create_image_request(url = signedURL, page_element
 response <- rgoogleslides::commit_to_slides(slide_id, request)
 ```
 
+## Suggestions
+
+A few suggestions while trying to use the following mechanism as a common operating framework to automate sending of plots to Googleslides
+
+- Set a shorter expiry time of the Signed URLs to 5-10 minutes (depending on how long before script can be completed)
+- Set a lifecycle rule on objects to be "deleted" after 1 day of expiry. This reduces the need to cleanup the images from the bucket. The storage bucket is just a "cache" for the images, we generally would be regenerating the images for future plots from the code base.
+
 
 
