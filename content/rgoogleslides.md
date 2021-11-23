@@ -1,5 +1,6 @@
 +++
 title = "R Googleslides Package"
+description = "R Googleslides package privacy policy"
 date = "2019-01-01"
 weight = "20"
 meta = "false"

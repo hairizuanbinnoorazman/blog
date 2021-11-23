@@ -1,5 +1,6 @@
 +++
 title = "About Me"
+description = "List of projects that I handled"
 date = "2014-04-09"
 menu = "main"
 weight = "20"

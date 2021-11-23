@@ -1,5 +1,6 @@
 +++
 title = "Speaker Profile"
+description = "Social Media lists and list of talks that was done in the past"
 date = "2019-01-01"
 menu = "main"
 weight = "20"
