@@ -1,4 +1,5 @@
-build: dynpages
+build:
+	make dynpages
 	rm -rf public
 	hugo
 test:
