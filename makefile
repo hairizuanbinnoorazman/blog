@@ -12,6 +12,8 @@ dynpages:
 		mv sample.min.js ../static/sample/sample.min.js && \
 		rm sample.js
 tester:
-	echo test
+	cd tools && echo test && \
+	echo test2 && \
+	echo test3
 	
 
