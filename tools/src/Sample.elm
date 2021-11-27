@@ -2,6 +2,7 @@ module Sample exposing (Model, Msg(..), init, main, subscriptions, update, view)
 
 import Browser
 import Html exposing (Html, button, div, p, text)
+import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 
 
@@ -39,8 +40,8 @@ view : Model -> Html Msg
 view model =
     div []
         [ p [] [ text ("Value: " ++ String.fromInt model.value) ]
-        , button [ onClick Increment ] [ text "+" ]
-        , button [ onClick Decrement ] [ text "-" ]
+        , button [ style "height" "50px", style "width" "100px", onClick Increment ] [ text "+" ]
+        , button [ style "height" "50px", style "width" "100px", onClick Decrement ] [ text "-" ]
         ]
 
 
