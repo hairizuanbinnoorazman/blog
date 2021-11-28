@@ -3,7 +3,7 @@
 <html lang="{{ .Site.LanguageCode | default "en" }}">
 
 <head>
-  <title>{{ .Site.Title }}</title>
+  <title>{{ .Params.title | default .Site.Title  }}</title>
   {{ partial "analytics" . }}
   {{ partial "meta" . }}
   {{ partial "header_includes" . -}}
@@ -13,9 +13,9 @@
 <body>
   <div id="container">
     <header>
-      <h1>
+      <h2>
                 <a href="{{ relURL "/" }}">{{ .Site.Title | markdownify }}</a>
-            </h1>
+            </h2>
 
       <ul id="social-media">
         {{ if .Site.Author.twitter }}
