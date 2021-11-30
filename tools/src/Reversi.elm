@@ -23,6 +23,8 @@ subscriptions model =
 
 type alias Model =
     { cellState : List (List CellState)
+    , whiteScore : Int
+    , blackScore : Int
     }
 
 
@@ -46,7 +48,7 @@ init =
         blackFirst =
             [ Empty, Empty, Empty, Black, White, Empty, Empty, Empty ]
     in
-    ( Model [ emptyRow, emptyRow, emptyRow, whiteFirst, blackFirst, emptyRow, emptyRow, emptyRow ], Cmd.none )
+    ( Model [ emptyRow, emptyRow, emptyRow, whiteFirst, blackFirst, emptyRow, emptyRow, emptyRow ] 0 0, Cmd.none )
 
 
 type Msg
@@ -65,10 +67,14 @@ renderCell cellState =
             div standardCell []
 
         PotentialBlack ->
-            div standardCell []
+            div standardCell
+                [ div [ style "opacity" "20%", style "height" "90%", style "width" "90%", style "border-radius" "50%", style "background" "black" ] []
+                ]
 
         PotentialWhite ->
-            div standardCell []
+            div standardCell
+                [ div [ style "opacity" "20%", style "height" "90%", style "width" "90%", style "border-radius" "50%", style "background" "white" ] []
+                ]
 
         White ->
             div standardCell
