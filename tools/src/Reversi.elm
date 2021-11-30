@@ -58,7 +58,7 @@ renderCell : CellState -> Html Msg
 renderCell cellState =
     let
         standardCell =
-            [ style "display" "flex", style "height" "50px", style "width" "50px", style "background" "green", style "border" "solid 1px black", style "justify-content" "center", style "align-items" "center"]
+            [ style "display" "flex", style "height" "50px", style "width" "50px", style "background" "green", style "border" "solid 1px black", style "justify-content" "center", style "align-items" "center" ]
     in
     case cellState of
         Empty ->
@@ -71,29 +71,29 @@ renderCell cellState =
             div standardCell []
 
         White ->
-            div standardCell [
-                div [ style "height" "90%", style "width" "90%", style "border-radius" "50%", style "background" "white" ] []
-            ]
+            div standardCell
+                [ div [ style "height" "90%", style "width" "90%", style "border-radius" "50%", style "background" "white" ] []
+                ]
 
         Black ->
-            div standardCell [
-                div [ style "height" "90%", style "width" "90%", style "border-radius" "50%", style "background" "black" ] []
-            ]
+            div standardCell
+                [ div [ style "height" "90%", style "width" "90%", style "border-radius" "50%", style "background" "black" ] []
+                ]
 
 
 renderRow : List CellState -> Html Msg
 renderRow rowCellState =
-    div [ style "display" "flex", style "height" "52px", style "border" "0px", style "margin" "0px", style "padding" "0px",  style "flex-direction" "row"] (List.map renderCell rowCellState)
+    div [ style "display" "flex", style "height" "52px", style "border" "0px", style "margin" "0px", style "padding" "0px", style "flex-direction" "row" ] (List.map renderCell rowCellState)
 
 
 renderGrid : List (List CellState) -> Html Msg
 renderGrid gridCellState =
-    div [ ] (List.map renderRow gridCellState)
+    div [] (List.map renderRow gridCellState)
 
 
 view : Model -> Html Msg
 view model =
-    div [ style "display" "flex",  style "flex-direction" "column" ]
+    div [ style "display" "flex", style "flex-direction" "column" ]
         [ renderGrid model.cellState
         ]
 
