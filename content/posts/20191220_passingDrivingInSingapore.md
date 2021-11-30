@@ -14,6 +14,8 @@ These are some notes that I took while taking my driving license - Class 3 in Si
 
 Some of the advice below may also apply to those from Class 3A but most likely can skip all the bits regarding clutch control. That would make certain stages way easier - especially slope
 
+{{< ads_header >}}
+
 ## Reminders
 
 List of important things to take note (Read them just before going for TP practical test)
