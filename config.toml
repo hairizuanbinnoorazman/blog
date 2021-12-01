@@ -4,6 +4,7 @@ title = "Experiment, Fail, Learn, Repeat"
 copyright = "Copyright &copy; 2017 - Hairizuan Noorazman"
 canonifyurls = true
 theme = "kiera"
+disqusShortname = 'www-hairizuan-com'
 
 paginate = 50
 
