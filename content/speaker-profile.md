@@ -17,7 +17,7 @@ https://www.linkedin.com/in/hairizuan-noorazman/
 https://www.facebook.com/hairizuan.noorazman
 
 Is one of the co-host for the webinars hosted on GDG Cloud Singapore Webinar  
-https://www.youtube.com/channel/UCLEQc99oEczCVVls5kDv8FA
+https://www.youtube.com/c/GDGCloudSingapore
 
 # Talks
 
