@@ -22,3 +22,7 @@ Below is a collection of some of projects I've been working on. These are not co
 - [tasker](https://github.com/hairizuanbinnoorazman/tasker)
 - [sample gin bookcase application](https://github.com/hairizuanbinnoorazman/golang-web-gin-book-store)
 
+# Web
+
+- Maintenance of GDG Cloud Singapore Website: https://www.gcpugsg.com/
+
