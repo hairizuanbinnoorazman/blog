@@ -1,8 +1,9 @@
 +++
-title = "Writing better automation scripts"
-description = "Using good engineering practises like Git, testing, decoupled algorithms for maintainable scripts"
+title = "Best practices for Python scripting - Building Reliable Data Science Workflows"
+description = "Using best practises for Python scripting such as Version Control (Git), Unit Testing, decoupled algorithms for maintainable scripts"
 tags = [
     "python",
+    "automation",
 ]
 date = "2018-10-15"
 categories = [
