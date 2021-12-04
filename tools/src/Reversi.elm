@@ -1,10 +1,10 @@
 module Reversi exposing (..)
 
+import Array2D
 import Browser
 import Html exposing (Html, button, div, p, text)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
-import Array2D
 
 
 main : Program () Model Msg
@@ -41,13 +41,13 @@ init : ( Model, Cmd Msg )
 init =
     let
         emptyRow =
-            List.repeat 8  Empty
+            List.repeat 8 Empty
 
         whiteFirst =
-            (List.repeat 3 Empty) ++ [White, Black] ++ (List.repeat 3 Empty)
+            List.repeat 3 Empty ++ [ White, Black ] ++ List.repeat 3 Empty
 
         blackFirst =
-            (List.repeat 3 Empty) ++ [Black, White] ++ (List.repeat 3 Empty)
+            List.repeat 3 Empty ++ [ Black, White ] ++ List.repeat 3 Empty
     in
     ( Model [ emptyRow, emptyRow, emptyRow, whiteFirst, blackFirst, emptyRow, emptyRow, emptyRow ] 0 0, Cmd.none )
 
@@ -55,10 +55,10 @@ init =
 type Msg
     = Increment
     | Decrement
-    
+
 
 possiblePlay : CellState -> Array2D.Array2D CellState -> CellState
-possiblePlay playerCellState currentGrid = 
+possiblePlay playerCellState currentGrid =
     Empty
 
 
