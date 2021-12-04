@@ -1,0 +1,7 @@
+
+<div id="bmi-calculator"></div>
+<link rel="stylesheet" href="/css/bmi.css">
+<script src="{{ "toolsjs/bmicalculator.min.js" | relURL}}"></script>
+<script>
+    app = Elm.BMICalculator.init({ node: document.getElementById("bmi-calculator") });
+</script>
