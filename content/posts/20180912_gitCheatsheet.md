@@ -1,5 +1,5 @@
 +++
-title = "Using git"
+title = "Git Cheatsheet"
 description = "Using the various git commands such as git init, git checkout, git rebase etc"
 tags = [
     "git",
