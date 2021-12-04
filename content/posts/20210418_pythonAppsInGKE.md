@@ -3,10 +3,18 @@ title = "Python Flask Apps in Kubernetes"
 description = "Python Flask Apps in Kubernetes (GKE - Google Kubernetes Engine). Sample python flask app in docker containers, pushed to google container registry (gcr.io) and deployed into Kubernetes. App tested locally with docker-compose tool"
 tags = [
     "google cloud",
+    "python",
+    "microservices",
+    "kubernetes",
+    "docker",
 ]
 date = "2021-04-18"
 categories = [
     "google cloud",
+    "python",
+    "microservices",
+    "kubernetes",
+    "docker",
 ]
 +++
 
