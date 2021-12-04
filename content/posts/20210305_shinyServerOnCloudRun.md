@@ -1,6 +1,6 @@
 +++
-title = "Deploying R Shiny Server to Cloud Run"
-description = "Deploying R Shiny Server to Cloud Run. A dashboard tool that remains cheap to deploy and operate"
+title = "Cloud Run Websocket support now allows you to deploy a R Shiny Server as a serverless app to GCP Cloud Run"
+description = "Cloud Run Websocket support now allows you to deploy a R Shiny Server - a dashboard hosting tool to host R Shiny dashhboards - as a serverless app to GCP Cloud Run"
 tags = [
     "google cloud",
 ]
