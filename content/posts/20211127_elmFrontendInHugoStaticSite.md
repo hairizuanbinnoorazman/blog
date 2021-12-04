@@ -65,6 +65,8 @@ With that, I'm currently experimenting with adding such functionality coded in E
 
 The demonstrated elm component is below the horizontal line. It only has a simple functionality as the main aim is just to demonstrate that it is possible to embed such code into hugo in the first place. (Although it's done in a pretty hacky way)
 
+The application stores a counter and displays it to you, the user. If you click on the "+" button, the value of the counter rise by 1 and if you click on the "-" button, the value of the counter drops by 1.
+
 ---
 
 {{< sample >}}
