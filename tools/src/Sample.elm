@@ -1,4 +1,4 @@
-module Sample exposing (Model, Msg(..), init, main, subscriptions, update, view)
+module Sample exposing (Msg(..), init, main, subscriptions, update, view)
 
 import Browser
 import Html exposing (Html, button, div, p, text)
