@@ -1,6 +1,6 @@
 +++
-title = "Python Flask Apps in GKE"
-description = "Python Flask Apps in GKE. Showing how python microservices are deployed and tested"
+title = "Python Flask Apps in Kubernetes"
+description = "Python Flask Apps in Kubernetes (GKE - Google Kubernetes Engine). Sample python flask app in docker containers, pushed to google container registry (gcr.io) and deployed into Kubernetes. App tested locally with docker-compose tool"
 tags = [
     "google cloud",
 ]
@@ -10,7 +10,7 @@ categories = [
 ]
 +++
 
-This are some notes in the case where one wants to deploy a bunch of python "microservices" to a GKE cluster. These notes emphasize on the basics rather than the various nuances of running a "production" grade python application.
+This are some notes in the case where one wants to deploy a bunch of python "microservices" to a Google Kubernetes Engine cluster. These notes emphasize on the basics rather than the various nuances of running a "production" grade python application.
 
 This is our python flask application that we would deploy - a simple flask app
 
@@ -38,7 +38,7 @@ Werkzeug==1.0.1
 requests==2.25.1
 ```
 
-Since we're deploying it to GKE, we would need to create a container out of it. So this would be dockerfile for it
+Since we're deploying it to Google Kubernetes Engine, we would need to create a container out of it. We will do this by using Docker. In order to build the docker container, we would need to create a dockerfile for it:
 
 ```Dockerfile
 FROM python:3.6
@@ -48,7 +48,7 @@ COPY . .
 CMD python sample-flask-app.py
 ```
 
-To deploy such an application to GKE, we can run the following commands. (Once we have our GKE cluster and we have connected to it - our kubectl tool can access and query/modify the cluster accordingly)
+To deploy such an application to Google Kubernetes Engine, we can run the following commands. (Once we have our Google Kubernetes Engine cluster and we have connected to it - our kubectl tool can access and query/modify the cluster accordingly)
 
 ```bash
 # Building the image
@@ -63,10 +63,10 @@ docker tag sample-app gcr.io/XXX/sample-app:v1
 # Push to Google Container Registry
 docker push gcr.io/XXX/sample-app:v1
 
-# Create a "deployment" in GKE
+# Create a "deployment" in Google Kubernetes Engine
 kubectl create deployment sample-app --image gcr.io/XXX/sample-app:v1
 
-# Create a "service" in GKE
+# Create a "service" in Google Kubernetes Engine
 # Wait for the ip address and curl against it
 kubectl create service loadbalancer sample-app --tcp=80:8080
 ```
