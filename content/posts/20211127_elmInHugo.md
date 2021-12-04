@@ -1,6 +1,6 @@
 +++
-title = "Elm in Hugo"
-description = "Elm component embedding in Hugo"
+title = "Elm Frontend in Hugo Static Site"
+description = "Elm Frontend component embedded in Hugo Static Site"
 tags = [
     "hugo",
     "elm",
