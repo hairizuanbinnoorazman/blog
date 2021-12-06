@@ -7,4 +7,8 @@ weight = "20"
 meta = "false"
 +++
 
-UNDER CONSTRUCTION
+The following page lists out all the tools that are being built and then embeded to this blog
+
+## Lifestyle
+
+- [BMI Calculator](/bmi-calculator)
