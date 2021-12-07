@@ -6,7 +6,7 @@ tags = [
     "elm",
     "golang",
 ]
-date = "3021-12-06"
+date = "2021-12-20"
 categories = [
     "hugo",
     "elm",
@@ -49,11 +49,11 @@ c := cors.New(cors.Options{
 
 Do note that the configuration here is "very bad" - essentially, an "allow all" kind of configuration. For testing purposes, it may be ok but we definitely need to clamp down on what origins can contact the server and what methods it can use to access as well. We would definitely need to ensure that only the right frontend can access the backend.
 
-## Checking frontend creating websocket connection
+## Checking frontend while creating websocket connection
 
 There is no "protection" mechanism to prevent the browser from making unauthorized access to any server. Any of such protection mechanism has to be implemented on the backend - which is our Golang server.
 
-By default, the library being used here "gorilla/websocket", will at least minimally ensure that the frontend calling the backend is at least of the same domain. In order to accomodate the usage of Elm, this is why we need to add the following modification:
+By default, the library being used here "gorilla/websocket", will at least minimally ensure that the frontend calling the backend is at least of the same domain. In order to accomodate the usage of Elm, we would need to add the following modification:
 
 ```go
 var upgrader = websocket.Upgrader{
@@ -69,13 +69,15 @@ var upgrader = websocket.Upgrader{
 }
 ```
 
-The important function (without which, we can't use Elm to run our "chat" application) is the CheckOrigin function. If it is not modified, we would be seeing the following issue: 
+The important function (without which, we can't use Elm to run our "chat" application) is the `CheckOrigin` function. If it is not modified, we would be seeing the following issue: 
 
 ```bash
 upgrade:websocket: request origin not allowed by Upgrader.CheckOrigin
 ```
 
-There are a few approached that we can use to check whether to allow the establishment of the websocket connection - one way is to check for the domain where this is request from etc. Another way that I thought that can be done is to pass sort of http header as we're trying to establish the websocket connection - but it does seem like that possible. The easier way to pass all there extra data is via cookies (which it seems to be passed the moment the websocket is attempted to be established.)
+There are a few approaches that we can use to check whether to allow the establishment of the websocket connection - one way is to check for the domain where this is request from etc. Another way that I thought that could be done is to pass sort of http header as we're trying to establish the websocket connection - but it does seem like that approach may not be possible. 
+
+The easier way to pass all the extra data that is required to establish and initalize the websocket connection is via cookies (which it seems to be passed the moment the websocket is attempted to be established).
 
 This was why we have a route to create the cookie (which we will describe in the next section)
 
@@ -216,11 +218,11 @@ update msg model =
 
 ```
 
-The important bit is embedding it into HTML. There is no proper support for websockets in Elm but we can have the Elm application interface with the websockets via Ports. Refer to this on Elm documentation: https://guide.elm-lang.org/interop/ports.html
+The important bit is embedding it into HTML. There is no proper support for websockets in Elm but we can have the Elm application interface with javascript via Ports. Refer to this on Elm documentation: https://guide.elm-lang.org/interop/ports.html
 
 The Elm code here is almost the same as the one provided by the guide.
 
-For the html piece - will be providing what would be created if one would to add it to a hugo shortcode:
+For the html piece - O will be providing what would be created if one would to add it to a hugo shortcode:
 
 ```html
 <div id="chat"></div>
@@ -237,5 +239,6 @@ For the html piece - will be providing what would be created if one would to add
 </script>
 ```
 
-We would load our generated javascript of our Elm codebase and have that loaded up javascript start an app. We would then create a websocket which would then interact with the app - as messages go in and out of the app - the string will be fed into application which would then be rendered onto the screen.
+We would load our generated javascript of our Elm codebase and have that load up our generated javascript and start an app. We would then create a websocket which would then interact with the app - as messages go in and out of the app - the string will be fed into application which would then be rendered onto the screen.
 
+The following Elm application is pretty simple and doesn't take into question such as - in the case, we need to authenticate the user before establishing the websocket connection; how do we dynamically create the websocket only when we've checked within elm that the user has already "logged" in.
