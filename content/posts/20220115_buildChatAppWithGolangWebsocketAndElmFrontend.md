@@ -14,19 +14,23 @@ categories = [
 ]
 +++
 
-While building Elm based frontends, I decided to take the opportunity to learn on how to craft a chat application. Truthfully, I've never really built one before (nor do I need to). But it does seem like an interesting programming exercise to kind of go thru - in order to understand how such applications are built, deployed, scaled and managed. For the frontend, I'm mostly set to use Elm (probably you've seen a previous post on my "dislike" for other Javascript based frameworks (essentially all the popular ones in the market). For backend, I will probably stick to Golang since that is the language I'm most comfortable with (all hail statically typed languages)
+While building Elm based frontends, I decided to take the opportunity to learn on how to craft a chat application. Truthfully, I've never really built one before (nor do I need to). But it does seem like an interesting programming exercise to kind of go thru - in order to understand how such applications are built, deployed, scaled and managed. For the frontend, I'm mostly set to use Elm (probably you've seen a [previous post](/elm-frontend-in-hugo-static-site) on my "dislike" for other Javascript based frameworks, which is essentially all the popular ones in the market). For backend, I will probably stick to Golang since that is the language I'm most comfortable with (all hail statically typed languages)
 
-The full code base for this can be found here:  
+The backend code base for the chat application can be found here:  
 https://github.com/hairizuanbinnoorazman/Go_Programming/tree/master/Web/basicWebsocket
 
-The following code is modified from the example:  
+The backend code is modified from the example:  
 https://github.com/gorilla/websocket/tree/master/examples/chat
 
-The main aim is to be able to create some sort of Elm component that can be embedded into a html page. Unfortunately, I will not be making a this Elm component to be embedded in this blog post as the it feels like there isn't enough features to showcase it (although, there are plenty of interesting items that one can come around during development work.)
+For the codebase, we're heavily using various components from the gorilla golang libraries - including the `gorilla/mux` library and the `gorilla/securecookie` library. You'll probably understand why those libraries are used as you continue reading on this blog post.
+
+The main aim of this sample chat application is to be able to create some sort of Elm component that can be embedded into a html page. Unfortunately, I will not be making a this Elm component to be embedded in this blog post as the it feels like there isn't enough features to showcase it (although, there are plenty of interesting items that one can come around during development work). Most likely, in the futre, there will be another blog post that will include the demonstration as well as other interesting features I intend to add to such sample application (e.g. making chat messages persistent, allow creating of multiple chat rooms etc).
+
+The rest of the sections of the blog post will not be covering on each detail in the codebase but instead will be covering on the more interesting aspects of the codebase. Most of this sections are the parts where I kind of tripped over while building the Golang application backend.
 
 ## Adding CORS
 
-The first step is to make it possible for our Elm component to talk to our backend. This is done via CORS (Cross Origin Resource Sharing). This happens as domain of frontend is different as compared to the backend - hence, by default, it shouldn't be trusted.
+The first step is to make it possible for our Elm component to talk to our backend. This is done via CORS (Cross Origin Resource Sharing). This happens due to the domain of frontend is different as compared to the backend - hence, by default, it shouldn't be trusted. A reminder here that the frontend is build with Elm and is injected to a html page as a Single Page Application (SPA)
 
 In Golang, we can easily resolve this by importing some sort of CORS library. Refer to the codebase highlighted below - you can find this in the `main.go` file of the folder of the repo.
 
@@ -43,7 +47,7 @@ c := cors.New(cors.Options{
 ...
 ```
 
-Do note that the configuration here is "very bad" - essentially, an allow all kind of configuration. For testing purposes, it may be ok but we definitely need to clamp down on what origins can contact the server and what methods it can use to access as well.
+Do note that the configuration here is "very bad" - essentially, an "allow all" kind of configuration. For testing purposes, it may be ok but we definitely need to clamp down on what origins can contact the server and what methods it can use to access as well. We would definitely need to ensure that only the right frontend can access the backend.
 
 ## Checking frontend creating websocket connection
 
