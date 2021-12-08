@@ -24,3 +24,6 @@ So, currently taking the lazy way by just generating the `*.min.js` files are du
 
 Regarding image optimization - the following blog post is a good guide:  
 https://alexlakatos.com/web/2020/07/17/hugo-image-processing/
+
+Refer to the last comment in this page:  
+https://discourse.gohugo.io/t/are-asset-pipelines-working-on-netlify-for-anyone/12953/10
