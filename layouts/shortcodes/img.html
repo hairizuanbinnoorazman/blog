@@ -1,0 +1,9 @@
+{{/* get file that matches the filename as specified as src="" in shortcode */}}
+{{ $src := resources.GetMatch (.Get "src") }}
+
+{{ $mediumw := default "1200x q100 webp" }}
+{{ .Scratch.Set "medium" ($src.Resize $mediumw) }}
+{{ $medium := .Scratch.Get "medium" }}
+
+{{/* only use images smaller than or equal to the src (original) image size */}}
+<img src="{{ $medium.RelPermalink }}" {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{ end }} loading="lazy">
