@@ -1,5 +1,6 @@
 toolname?=Sample
 modtoolname=`echo $(toolname) | tr A-Z a-z`
+ipaddr=`ipconfig getifaddr en0`
 
 build:
 	rm -rf public
@@ -7,7 +8,7 @@ build:
 test:
 	ls -a
 local:
-	hugo server -w --disableFastRender
+	hugo server --baseURL="$(ipaddr)"  --bind="0.0.0.0" -w --disableFastRender
 dynpages:
 	cd tools && \
 	elm make --optimize --output=$(modtoolname).js ./src/$(toolname).elm && \
