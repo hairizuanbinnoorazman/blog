@@ -1,5 +1,5 @@
 {{/* get file that matches the filename as specified as src="" in shortcode */}}
-{{ $src := resources.GetMatch (.Get "src") }}
+{{ $src := resources.Get (.Get "src") }}
 
 {{ $mediumw := default "1200x q100 webp" }}
 {{ .Scratch.Set "medium" ($src.Resize $mediumw) }}
