@@ -2,6 +2,6 @@
   HUGO_VERSION =  "0.89.4"
 
 [[redirects]]
-  from = "/api/lta-datamall"
-  to = "https://bus-arrival-sj5kqt5fxq-as.a.run.app"
+  from = "/api/lta-datamall/*"
+  to = "https://bus-arrival-sj5kqt5fxq-as.a.run.app/api/lta-datamall"
   force = false
