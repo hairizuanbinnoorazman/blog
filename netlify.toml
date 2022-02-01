@@ -3,5 +3,5 @@
 
 [[redirects]]
   from = "/api/lta-datamall/*"
-  to = "https://bus-arrival-sj5kqt5fxq-as.a.run.app/api/lta-datamall"
+  to = "https://bus-arrival-sj5kqt5fxq-as.a.run.app/api/lta-datamall/:splat"
   force = false
