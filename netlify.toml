@@ -4,4 +4,4 @@
 [[redirects]]
   from = "/api/lta-datamall"
   to = "https://bus-arrival-sj5kqt5fxq-as.a.run.app"
-  force = true
+  force = false
