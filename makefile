@@ -8,7 +8,7 @@ build:
 test:
 	ls -a
 local:
-	hugo server --baseURL="$(ipaddr)"  --bind="0.0.0.0" -w --disableFastRender
+	hugo server --baseURL="$(ipaddr)"  --bind="0.0.0.0" -p 8000 -w --disableFastRender
 dynpages:
 	cd tools && \
 	elm make --optimize --output=$(modtoolname).js ./src/$(toolname).elm && \
