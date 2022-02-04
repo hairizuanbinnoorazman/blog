@@ -1,0 +1,15 @@
+<div id="busarrival"></div>
+<script src="{{ "toolsjs/busarrival.min.js" | relURL}}"></script>
+<script>
+    var storedData = localStorage.getItem('bus-stops');
+    if (storedData == null) {
+        storedData = ''
+    };
+    app = Elm.BusArrival.init({ 
+        node: document.getElementById("busarrival"),
+        flags: {'busStopIDs': storedData}
+    });
+    app.ports.storeBusStopID.subscribe(function(message) {
+        localStorage.setItem('bus-stops', message)
+    });
+</script>
