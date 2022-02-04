@@ -4,7 +4,7 @@ description = "Security and Operationability of an application is probably more 
 tags = [
     "personal",
 ]
-date = "2022-02-07"
+date = "2022-02-15"
 categories = [
     "personal",
 ]
