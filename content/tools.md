@@ -12,3 +12,4 @@ The following page lists out all the tools that are being built and then embeded
 ## Lifestyle
 
 - [BMI Calculator](/bmi-calculator)
+- [Bus Arrival](/bus-arrival-app-singapore)
