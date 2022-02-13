@@ -39,20 +39,20 @@ I guess some would say that weight of clothes does affect the measurement but I 
 
 ## Experiment 1: Cut breakfast
 
-I started watching a whole of youtube video that kind of questions the importance of breakfast - which I can kind of agree on. Why is breakfast "the most important meal" of the day? Why do we need 3 meals a day? Does breakfast being "the most important meal" mean that it has to be rich with calories/nutrients?
+I started watching a whole bunch of youtube videos that kind of questions the importance of breakfast - which I can kind of agree on. Why is breakfast "the most important meal" of the day? Why do we need 3 meals a day? Does breakfast being "the most important meal" mean that it has to be rich with calories/nutrients?
 
 This was one of the videos that started that whole thing:  
 {{< youtube 9Ffceu672c4 >}}
 
 Thinking about it, by skipping one meal - that would kind of reduce the amount of calories being consumed for the day. That is kind of convenient thing for me when I'm trying to lose weight. Rather than trying to reduce amount of food per meal, it would actually be way easier (accounting-wise) to just cut a meal and eat as normally for lunch and dinner.
 
-With this, my weight kind of dropped from peak weight of 130kg to 110kg over 6 months. 
+With this somewhat minor change, my weight kind of dropped from peak weight of 130kg to 110kg over 6 months. 
 
 ## Experiment 2: Intermittent fasting
 
-Weight loss from the previous weight loss "experiment" started not to have too much impact anymore. My weight start fluctuating up and down; there is no trend that can be observed. It's as though the body has already determined the weight it wants to abide to and sticks to it as much as possible.
+Weight loss from the previous weight loss "experiment" started not to have much impact anymore. My weight start fluctuating up and down; there is no further downtrend that can be observed. It's as though the body has already determined the weight it wants to abide to and sticks to it as much as possible.
 
-This was when videos on intermittent fasting starting coming out (even on reputable mainstream Singapore media - CNA)
+This was when videos on intermittent fasting starting coming out (even on mainstream Singapore media - CNA)
 
 {{< youtube QNJ3fJT2qY8 >}}
 
@@ -60,7 +60,7 @@ The only difference between what I was already doing and intermittent fasting is
 
 Seeing the minor difference in current diet as well as the videos that mention potential health benefits of intermittent fasting, I've thought to myself: "why not give it a shot?". And with that, I made my transition to try that diet.
 
-As expected, similar to experiment 1 of just cutting breakfast, initial weight loss rate is high at first. However, weight loss eventually plateau. I still can try to push weight down using this approach but the weight loss rate is sometimes not high enough to warrant the amount of effort to do so. What would work here would be to actually eat healthily and to begin some sort of exercise regimen to continue the weight loss but it does seem like "too much effort" to continue
+As expected, similar to experiment 1 of just cutting breakfast, initial weight loss rate is high at first. However, weight loss eventually plateaus. I still can try to push weight down using this approach but the weight loss rate is sometimes not high enough to warrant the amount of effort to do so. What would work here would be to actually eat healthily and to begin some sort of exercise regimen to continue the weight loss but it does seem like "too much effort" to continue
 
 This approach resulted in a weight loss of 110kg to 95kg over the course of 8 months
 
@@ -99,8 +99,12 @@ This is partially why intermittent fasting/long term fasting kind of work when i
 - Day 2: Hunger pangs start to come in; maybe have slight headache (could be from fuel switch for brain from glucose to ketones? maybe?)
 - Day 3-5: Feel ok during the day but sometimes, hard to sleep. Caffeine is way more effective in the fasted stated state that the fed state
 
+Naturally, the longer the fast, the faster the weight tanks (still a goal till this day). I'm close to my healthy BMI range and I just need to continue on this journey for a couple of months before finally just maintaining my weight and food intake. Apparently, one thing I've found out was that for Asian males; the BMI to target for is 23.0, which is really quite low - I've previously thought it was 25.0 but apparently, further studies pointed that it is better for asians to aim for lower BMI due to different body builds. If you wish to calculate your BMI, you can try using this mini tool that I've built for myself: [BMI Calculator](/bmi-calculator)
+
+Another effect that kind of came along with these experiments is that I actually prefer to be in a "hungry" state rather than a "fed" state. While being in the "hungry" state, I'd feel more active and my mind is sharper and I feel way more motivated as compared to the "fed" state. In the "fed" state - it always felt like as though I'm in sort of a "food coma" kind of state - movements being quite sluggish and all I want to do is to just lie down and do nothing for the whole day. However, these are just my feelings on how I feel my body is at that point of time; who knows, it could just be a placebo effect from watching all those youtube videos on long term fasting.
+
 ## Afterthoughts
 
-This whole weight loss has been a huge learning journey; the part nes that actually surprised me the most was the one about the food pyramid. I still remembered when I was young, I kind of thought that the following the food pyramid is kind of the way to get a healthy body. That, as well as plenty of exercise. Who would have known that there was a huge dark secret behind all those food recommendations.
+This whole weight loss has been a huge learning journey; the part that actually surprised me the most was the one about the food pyramid. I still remembered when I was young, I kind of thought that the following the food pyramid is kind of the way to get a healthy body. That, as well as plenty of exercise. Who would have known that there was a huge dark secret behind all those food recommendations.
 
-Nowadays, food recommendations are quite complex and they change every other year. A while back, they were saying all fats are bad but now certains fats are good but plenty of them are bad. 
+Nowadays, food recommendations are quite complex and they change every other year. A while back, they were saying all fats are bad but now certains fats are good but plenty of them are bad. So rather than following all that "recommendations" which changes every once in a while, why not stick to something that works well for me; which in this case is the whole fasting routine and all.
