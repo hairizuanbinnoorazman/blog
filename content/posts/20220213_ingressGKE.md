@@ -170,3 +170,19 @@ In order to test this out, we can then add the address of the ip address that wa
 ```
 
 Append the above to the mentioned file. Be careful when handling this file, other programmes could have added entries to the file and manipulating the `/etc/hosts` file without any care may cause issues with said programmes. You can try avoiding this by making a backup of the `/etc/hosts` file just in case. If things go south, you can replace the altered `/etc/hosts` with the backup file.
+
+We can now run curl on domains `yahoo.example.com` and `lola.example.com` and it should be able to return an expected response from the deployed application
+
+```bash
+curl yahoo.example.com
+
+# Response
+# Hello World: Yahoo!                       
+```
+
+```bash
+curl lola.example.com
+
+# Response
+# Hello World: Lola!
+```
