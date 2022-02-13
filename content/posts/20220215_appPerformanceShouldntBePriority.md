@@ -10,7 +10,7 @@ categories = [
 ]
 +++
 
-NOTE: This post is only my personal view during my course of work across application development and devoloper operations roles across multiple roles and multiple companies and side projects. This might probably sound like random rambling to a software developer that is working in the industry but sometimes, it gets pretty irritating where people throw reasons that certain decisions should be made for "performance" sake.
+NOTE: This post is only my personal view during my course of work across application development and devoloper operations roles across multiple roles and multiple companies and side projects. This might probably sound like random rambling to a software developer that is working in the industry but sometimes, it gets pretty irritating where people throw reasons that certain decisions should be made for "performance" and provide vague reasons for it.
 
 When one creates a application, there are various concerns that they need to focus on in order to safely get it into production. Definitely the main concern would be the development of the business logic -  this is needed to be developed in order to help the company make money/save money. This should be priority one; all other concerns are some sort of secondary to that initial goal. Some of the other concerns that we need to also take into account would be:
 - Application security
