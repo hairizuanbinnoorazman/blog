@@ -4,7 +4,7 @@ description = "Using various techniques to reduce weight such as reducing number
 tags = [
     "personal",
 ]
-date = "3022-03-05"
+date = "2022-04-05"
 categories = [
     "personal",
 ]
