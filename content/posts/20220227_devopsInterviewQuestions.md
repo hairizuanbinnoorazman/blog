@@ -24,8 +24,12 @@ I will update this post as time goes by - if there is more information on this
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
   - [How is isolation achieved in Docker?](#how-is-isolation-achieved-in-docker)
   - [How does volume mounting work in Docker?](#how-does-volume-mounting-work-in-docker)
+  - [Assume you have an application that requires MySQL database. Assume that the app and database is deployed in 2 separated containers. Why can't the application use "localhost:3306" to connect to the database?](#assume-you-have-an-application-that-requires-mysql-database-assume-that-the-app-and-database-is-deployed-in-2-separated-containers-why-cant-the-application-use-localhost3306-to-connect-to-the-database)
 - [Kubernetes](#kubernetes)
   - [What is the architecture of Kubernetes?](#what-is-the-architecture-of-kubernetes)
+  - [What are some of the ways to expose application endpoints within k8s externally?](#what-are-some-of-the-ways-to-expose-application-endpoints-within-k8s-externally)
+  - [What's the difference between statefulsets and deployments? And how does statefulsets allow databases to be deployed safely into Kubernetes?](#whats-the-difference-between-statefulsets-and-deployments-and-how-does-statefulsets-allow-databases-to-be-deployed-safely-into-kubernetes)
+  - [How does a external network request reach into a pod via Ingress?](#how-does-a-external-network-request-reach-into-a-pod-via-ingress)
   - [How is volume mounting handled in Kubernetes?](#how-is-volume-mounting-handled-in-kubernetes)
   - [What is a headless service?](#what-is-a-headless-service)
   - [When creating operator - how are reconcilition loops started?](#when-creating-operator---how-are-reconcilition-loops-started)
@@ -49,13 +53,18 @@ Coming
 
 Docker CLI will communicate with Docker local "server" daemon, reference: https://github.com/docker/cli/blob/cf8c4bab6477ef62122bda875f80d8472005010d/vendor/github.com/docker/docker/client/container_create.go#L54
 
-- From docker-cli repo (a "post" request call) -> moby/moby repo
+- From docker-cli repo (a "post" request call to create container) -> moby/moby repo
+- daemon pkg -> createContainer call which then calls specific os specific settings.
 - daemon pkg -> createContainerOSSpecificSettings
 - volume/service pkg -> Ask volume service to create -> Ask volume store to create -> Ask volume driver to create -> (Default Mac docker volume plugin uses local -> Creates directory and sets permission)
 - container pkg -> AddMountPointWithVolume (just object representation)
 - daemon pkg -> populateVolumes
 - Calls Volume mounts from moby/sys repo
 - Final unix mount command: https://github.com/moby/sys/blob/main/mount/mounter_linux.go#L30
+
+### Assume you have an application that requires MySQL database. Assume that the app and database is deployed in 2 separated containers. Why can't the application use "localhost:3306" to connect to the database?
+
+Coming
 
 
 {{< ads_header >}}
@@ -81,6 +90,28 @@ Node components
 - container runtime
 
 Reference: https://kubernetes.io/docs/concepts/overview/components/
+
+
+### What are some of the ways to expose application endpoints within k8s externally?
+
+- Ingress
+  - Depends on how the Kubernetes cluster is setup and its cloud environment
+  - In Google Kubernetes Engine, a load balancer is actually created and routes are created onto it. The routes that reflect back into the cluster; providing a single external IP address that routes based on the ingresses defined.
+- Nodeports
+  - Specified within Kubernetes Service objects
+  - Maps the ports exposed from the container to port on host machine on reserved ports of 30000-32768
+- Load Balancer
+  - Specified within Kubernetes Service objects
+  - In a cloud based environment, there will be a controller monitoring the service objects being created that requests for load balancers. It will communicate with its own respective clouds to create a load balancer and attach the external load balancer to that service.
+
+
+### What's the difference between statefulsets and deployments? And how does statefulsets allow databases to be deployed safely into Kubernetes?
+
+Coming
+
+### How does a external network request reach into a pod via Ingress?
+
+Coming
 
 ### How is volume mounting handled in Kubernetes?
 
