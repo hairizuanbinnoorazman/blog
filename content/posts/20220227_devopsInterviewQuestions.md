@@ -31,6 +31,8 @@ I will update this post as time goes by - if there is more information on this
   - [When creating operator - how are reconcilition loops started?](#when-creating-operator---how-are-reconcilition-loops-started)
 
 
+{{< ads_header >}}
+
 ## Docker
 
 ### What's the difference between COPY and ADD?
@@ -54,6 +56,9 @@ Docker CLI will communicate with Docker local "server" daemon, reference: https:
 - daemon pkg -> populateVolumes
 - Calls Volume mounts from moby/sys repo
 - Final unix mount command: https://github.com/moby/sys/blob/main/mount/mounter_linux.go#L30
+
+
+{{< ads_header >}}
 
 ## Kubernetes
 
