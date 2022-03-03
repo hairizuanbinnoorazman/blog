@@ -82,6 +82,8 @@ Control plane components
 - kube-controller-manager (has multiple controller for various k8s assets e.g. jobs, endpoints etc)
 - kube-scheduler (handles scheduling of pods taking into account of taints, annotations, constraints, affinities)
 - cloud-controller-manager (manager that would communicate with the hosting provider)
+- cAdvisor (component that actual pull metrics about container cpu/metrics from cgroup linux fs)
+- heapster/metrics server (to be used to serve metrics about k8s components, taken up by kube-apiserver etc - to handle horizontal pod autoscaling etc)
 
 Node components
 
@@ -107,7 +109,10 @@ Reference: https://kubernetes.io/docs/concepts/overview/components/
 
 ### What's the difference between statefulsets and deployments? And how does statefulsets allow databases to be deployed safely into Kubernetes?
 
-Coming
+- Statefulsets has ordinal number at the back of pod name
+- Stable pod name/name reference (can call specific pod in the stateful set)
+- Pods in statefulsets can be accessed via headless services (no IP address for that service, you can access a specific pod via that service)
+- If there are volumes to be mounted to it (via Persistent Volumes + Persistent Volume Claim) - each pod will have its own volume (unlike deployment where the persistent volume/volume claim is shared across the pods in deployment)
 
 ### How does a external network request reach into a pod via Ingress?
 
@@ -119,7 +124,12 @@ Coming
 
 ### What is a headless service?
 
-Coming
+- A kubernetes service that does not set a IP address for that Kubernetes service
+- Done by setting clusterIP to None
+- In `nslookup <service name>`, it will list all IP address behind that service name
+- Example of how headless service is useful
+  - GRPC application that would utilize that absorbs all IP address where GRPC would load balance the applications across the pods
+  - Use also for Statefulful set applications. To hit one of the pod via headless service - `<pod name>.<full service name>`
 
 ### When creating operator - how are reconcilition loops started?
 
