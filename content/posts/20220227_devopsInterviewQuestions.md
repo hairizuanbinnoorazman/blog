@@ -20,6 +20,11 @@ Weirdly enough, a lot of the questions gather are usually "fringe" edge cases th
 
 I will update this post as time goes by - if there is more information on this
 
+- [Generic](#generic)
+  - [What happens when a user accesses a website from a website browser?](#what-happens-when-a-user-accesses-a-website-from-a-website-browser)
+  - [What's the difference between threads and processes?](#whats-the-difference-between-threads-and-processes)
+  - [How do we monitor Java applications?](#how-do-we-monitor-java-applications)
+  - [What is Swap space used for?](#what-is-swap-space-used-for)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
   - [How is isolation achieved in Docker?](#how-is-isolation-achieved-in-docker)
@@ -27,6 +32,7 @@ I will update this post as time goes by - if there is more information on this
   - [Assume you have an application that requires MySQL database. Assume that the app and database is deployed in 2 separated containers. Why can't the application use "localhost:3306" to connect to the database?](#assume-you-have-an-application-that-requires-mysql-database-assume-that-the-app-and-database-is-deployed-in-2-separated-containers-why-cant-the-application-use-localhost3306-to-connect-to-the-database)
 - [Kubernetes](#kubernetes)
   - [What is the architecture of Kubernetes?](#what-is-the-architecture-of-kubernetes)
+  - [We usually disable swap space when running Kubernetes 1.21 and earlier. Why?](#we-usually-disable-swap-space-when-running-kubernetes-121-and-earlier-why)
   - [What are some of the ways to expose application endpoints within k8s externally?](#what-are-some-of-the-ways-to-expose-application-endpoints-within-k8s-externally)
   - [What's the difference between statefulsets and deployments? And how does statefulsets allow databases to be deployed safely into Kubernetes?](#whats-the-difference-between-statefulsets-and-deployments-and-how-does-statefulsets-allow-databases-to-be-deployed-safely-into-kubernetes)
   - [How does a external network request reach into a pod via Ingress?](#how-does-a-external-network-request-reach-into-a-pod-via-ingress)
@@ -34,6 +40,31 @@ I will update this post as time goes by - if there is more information on this
   - [What is a headless service?](#what-is-a-headless-service)
   - [When creating operator - how are reconcilition loops started?](#when-creating-operator---how-are-reconcilition-loops-started)
 
+
+{{< ads_header >}}
+
+## Generic
+
+### What happens when a user accesses a website from a website browser?
+
+Coming
+
+- DNS Resolving
+- SSL Handshake
+- Fetch HTML from website (could come from server/CDN/Cached Responses in Load Balancer)
+- While rendering HTML, fetch javascripts, images etc
+
+### What's the difference between threads and processes?
+
+Coming
+
+### How do we monitor Java applications?
+
+Coming
+
+### What is Swap space used for?
+
+Coming
 
 {{< ads_header >}}
 
@@ -93,6 +124,13 @@ Node components
 
 Reference: https://kubernetes.io/docs/concepts/overview/components/
 
+
+
+### We usually disable swap space when running Kubernetes 1.21 and earlier. Why?
+
+Coming
+
+https://kubernetes.io/blog/2021/08/09/run-nodes-with-swap-alpha/
 
 ### What are some of the ways to expose application endpoints within k8s externally?
 
