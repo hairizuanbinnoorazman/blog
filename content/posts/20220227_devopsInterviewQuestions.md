@@ -25,6 +25,7 @@ I will update this post as time goes by - if there is more information on this
   - [What's the difference between threads and processes?](#whats-the-difference-between-threads-and-processes)
   - [How do we monitor Java applications?](#how-do-we-monitor-java-applications)
   - [What is Swap space used for?](#what-is-swap-space-used-for)
+  - [What are Huge pages in linux used for?](#what-are-huge-pages-in-linux-used-for)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
   - [How is isolation achieved in Docker?](#how-is-isolation-achieved-in-docker)
@@ -63,6 +64,10 @@ Coming
 Coming
 
 ### What is Swap space used for?
+
+Coming
+
+### What are Huge pages in linux used for?
 
 Coming
 
