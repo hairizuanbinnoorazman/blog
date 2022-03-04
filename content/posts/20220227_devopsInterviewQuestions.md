@@ -72,7 +72,10 @@ I will update this post as time goes by - if there is more information on this
 
 ### What's the difference between threads and processes?
 
-Coming
+- Process is any program in execution vs threads being a segment of process
+- Process are "heavy" and takes a while to start while threads are setup way faster
+- Process have memory mapped different between processes but threads in a process share the same memory space
+- (E.g. A golang application will run in a process which would setup 1 or more threads which would run goroutines that would manage threads by the Golang runtime)
 
 ### How do we monitor Java applications?
 
