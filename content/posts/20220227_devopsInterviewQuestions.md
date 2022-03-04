@@ -48,12 +48,27 @@ I will update this post as time goes by - if there is more information on this
 
 ### What happens when a user accesses a website from a website browser?
 
-Coming
-
 - DNS Resolving
+  - Check again local's `/etc/hosts` file to determine first level of dns resolve
+  - Reach out the dhcp server (if it was setup)
+  - If dhcp not available, reach out to further out to provider/etc or other root authorative name servers
+  - All above would be skip if dns server to be lookup-ed is set in network configurations (e.g. 8.8.8.8, 8.8.4.4, 1.1.1.1)
 - SSL Handshake
+  - If website to be accessed is accessed via https
+  - Refer to the following website for more details
+    - Client Hello (Includes TLS version that client browser support + random string client)
+    - Server Hello (Sends SSL cert with public key + cipher version chosen + random string from server)
+    - Authentication (Client checks if SSL cert valid - e.g. not expired, valid chain of certs, trusted certs)
+    - Premaster secret (Client generates a premaster secrets and encrypts with server public key and sends it over to server - can only be decrypted with server's private key)
+    - Private key used (Server decrypts premaster secret)
+    - Session key created (Both client and server generate session key using random client string, random server string and premaster key)
+    - Client ready
+    - Server ready
+    - Handshake complete
 - Fetch HTML from website (could come from server/CDN/Cached Responses in Load Balancer)
 - While rendering HTML, fetch javascripts, images etc
+  - Javascript could be used to fetch results from APIs etc.
+  - To prevent security issues, CORS rules are set in place in browser, difficult to call APIs across domains
 
 ### What's the difference between threads and processes?
 
@@ -61,7 +76,9 @@ Coming
 
 ### How do we monitor Java applications?
 
-Coming
+- Java applications are generally wrapped in its own runtime; in a Java Virtual Machine. A normal monitoring solution that attempts to monitor the server/container that runs the Java application will not reflect the true reality of how much memory that the Java application is actually using.
+- Java application (at least JDK 8) - usually reserves a block on memory on startup
+- Certain monitoring solutions such as prometheus would require such sort of exporter to export JVM metrics to show the true state of Java application
 
 ### What is Swap space used for?
 
