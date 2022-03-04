@@ -85,7 +85,7 @@ I will update this post as time goes by - if there is more information on this
 
 ### What is Swap space used for?
 
-Coming
+In servers, there is a limit to how much memory that is available for the server to use (which includes running of important kernel level functionality). However, there are cases where the amount of memory on the memory is not sufficient. Swap space is essentially "disk space" where memory chunks are stored temporarily. Access to it is was slower (Memory access speeds >>> physical storage) - these might induce latency hits on application etc
 
 ### What are Huge pages in linux used for?
 
