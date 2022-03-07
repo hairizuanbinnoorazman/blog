@@ -26,6 +26,8 @@ I will update this post as time goes by - if there is more information on this
   - [How do we monitor Java applications?](#how-do-we-monitor-java-applications)
   - [What is Swap space used for?](#what-is-swap-space-used-for)
   - [What are Huge pages in linux used for?](#what-are-huge-pages-in-linux-used-for)
+  - [What is the difference between TCP/UDP?](#what-is-the-difference-between-tcpudp)
+  - [What are the fallacies of distributed computing?](#what-are-the-fallacies-of-distributed-computing)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
   - [How is isolation achieved in Docker?](#how-is-isolation-achieved-in-docker)
@@ -91,6 +93,31 @@ In servers, there is a limit to how much memory that is available for the server
 
 Coming
 
+### What is the difference between TCP/UDP?
+
+TCP = Transmission Control Protocol  
+UDP = User Datagram Protocol  
+
+- TCP is connection based while UDP isn't. No need for UDP to initiate connection etc, can immediately send data over the wire
+- TCP is able to sequence while UDP is not
+- TCP is able to guarantee that transmission of data is done successfully but UDP is unable to
+- TCP is able to check for correctness that data is sent successfully, UDP doesn't need to
+- UDP faster than TCP (from lack of overhead)
+- Usage:
+  - TCP is used for HTTP/HTTPS, SMTP, FTP etc
+  - UDP is used for video streaming, VoIP, DNS?
+
+### What are the fallacies of distributed computing?
+
+- The network is reliable
+- Latency is zero
+- Bandwidth is infinite
+- The network is secure
+- Topology doesn't change
+- There is one administrator
+- Transport cost is zero
+- The network is homogeneous
+
 {{< ads_header >}}
 
 ## Docker
@@ -153,8 +180,11 @@ Reference: https://kubernetes.io/docs/concepts/overview/components/
 
 ### We usually disable swap space when running Kubernetes 1.21 and earlier. Why?
 
-Coming
+Swap space is essentially disk space which is a temporary place that memory "overflows" into. Disk is way way slower as compared to memory - enabling this make the performance of application extremely variable and unstable; we'll not be super sure which container has its memory written onto disk etc.
 
+As mentioned in a blog post on Kubernetes blogs, there is a check to ensure that swap space is disabled (kubelet will not start if this check fails - or if you just ignore the checks)
+
+Reference:  
 https://kubernetes.io/blog/2021/08/09/run-nodes-with-swap-alpha/
 
 ### What are some of the ways to expose application endpoints within k8s externally?
