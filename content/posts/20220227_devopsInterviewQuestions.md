@@ -28,6 +28,7 @@ I will update this post as time goes by - if there is more information on this
   - [What are Huge pages in linux used for?](#what-are-huge-pages-in-linux-used-for)
   - [What is the difference between TCP/UDP?](#what-is-the-difference-between-tcpudp)
   - [What are the fallacies of distributed computing?](#what-are-the-fallacies-of-distributed-computing)
+  - [Any useful guidelines when deciding on what metrics that application should have?](#any-useful-guidelines-when-deciding-on-what-metrics-that-application-should-have)
   - [What are some useful linux commands?](#what-are-some-useful-linux-commands)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
@@ -127,6 +128,16 @@ UDP = User Datagram Protocol
 - There is one administrator
 - Transport cost is zero
 - The network is homogeneous
+
+### Any useful guidelines when deciding on what metrics that application should have?
+
+https://medium.com/thron-tech/how-we-implemented-red-and-use-metrics-for-monitoring-9a7db29382af
+
+RED - Rate, Error %, Duration of request
+USE - Usage, Saturation %, Error %
+
+USE might be used for systems/metrics that have a "maximum" - e.g. storage etc
+RED might be used for something that comes at a rate and theoretically have "no limits" - e.g. requests made to an application
 
 ### What are some useful linux commands?
 
@@ -304,4 +315,5 @@ How do we start debugging an application that is deployed on Kubernetes
 - If issue with other components connecting to it
   - Check if can enter shell of image
   - `kubectl exec -it <pod name> -- /bin/bash`
-  - Can check if application works
+  - Can check if application works from within application
+  - Run same check from other pods
