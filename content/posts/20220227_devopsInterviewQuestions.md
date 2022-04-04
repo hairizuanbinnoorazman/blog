@@ -28,6 +28,7 @@ I will update this post as time goes by - if there is more information on this
   - [What are Huge pages in linux used for?](#what-are-huge-pages-in-linux-used-for)
   - [What is the difference between TCP/UDP?](#what-is-the-difference-between-tcpudp)
   - [What are the fallacies of distributed computing?](#what-are-the-fallacies-of-distributed-computing)
+  - [What are some useful linux commands?](#what-are-some-useful-linux-commands)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
   - [How is isolation achieved in Docker?](#how-is-isolation-achieved-in-docker)
@@ -89,9 +90,17 @@ I will update this post as time goes by - if there is more information on this
 
 In servers, there is a limit to how much memory that is available for the server to use (which includes running of important kernel level functionality). However, there are cases where the amount of memory on the memory is not sufficient. Swap space is essentially "disk space" where memory chunks are stored temporarily. Access to it is was slower (Memory access speeds >>> physical storage) - these might induce latency hits on application etc
 
+Swap starts to get used more and more as space get used more and more, making the system more and more slower. You can see the impact of this on CPU - kernal need to spend a few cycles to move data around from storage back to memory to compute before dumping the results back into disk.
+
 ### What are Huge pages in linux used for?
 
-Coming
+Data is moved from slower storage to memory - this whole operation is all managed in blocks call pages. A typically page is 4Ki - essentially, memory is moved around and loaded up in 4Ki blocks at one time. I'd imagine that more data intensive applications would need to rely on this mechanism; sometimes, if the loading of data from storage is too slow, might be better to switch to using faster storages or loading larger chunks of data (at the cost of moving more data into memory)
+
+One cost to take note of when handling is that memory chunk that is loaded in is quite big - kernel need to make space for it. As large chunks get allocated/deallocated, the memory will get more and more fragmented - kernel need to compact it to give it more space. (Expect CPU to go up)
+
+E.g. Hadoop performance degradation with THP (but partly from bug) - https://www.ghostar.org/2015/02/transparent-huge-pages-on-hadoop-makes-me-sad/
+
+I'd assume huge pages are less useful nowadays with SSD (this would be useful in the past). SSD is way faster than HDD so that should be the first optimization rather than looking at huge pages as the first optimization
 
 ### What is the difference between TCP/UDP?
 
@@ -117,6 +126,42 @@ UDP = User Datagram Protocol
 - There is one administrator
 - Transport cost is zero
 - The network is homogeneous
+
+### What are some useful linux commands?
+
+Not in terms of importance:
+
+```bash
+# Management of components
+sudo systemctl status <component>
+sudo systemctl list-unit-files | grep enabled
+
+# Viewing logs etc of components
+sudo journalctl -u <component> -f --since "10 minutes ago" --no-pager
+
+# Viewing which folder is taking the most logs
+sudo du -sh $(ls)
+
+# Viewing performance at the moment (For quick debugging)
+top
+
+# Handling permission issues
+sudo chmod +x <binary file>
+sudo chown <user>:<group> <binary file>
+
+# Viewing file
+vim # Use j, k commands to jump up and down
+head
+tail
+less
+
+# Network commands
+ifconfig
+ping
+nslookup
+dig
+tcpdump #only if traffic is http or non-encrypted
+```
 
 {{< ads_header >}}
 
