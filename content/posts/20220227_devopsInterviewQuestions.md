@@ -43,6 +43,7 @@ I will update this post as time goes by - if there is more information on this
   - [How is volume mounting handled in Kubernetes?](#how-is-volume-mounting-handled-in-kubernetes)
   - [What is a headless service?](#what-is-a-headless-service)
   - [When creating operator - how are reconcilition loops started?](#when-creating-operator---how-are-reconcilition-loops-started)
+  - [Debugging steps for Kubernetes Applications](#debugging-steps-for-kubernetes-applications)
 
 
 {{< ads_header >}}
@@ -278,3 +279,29 @@ Reference: https://github.com/kubernetes-sigs/controller-runtime/blob/master/pkg
 Reference for watch documentation: https://kubernetes.io/docs/reference/using-api/api-concepts/#efficient-detection-of-changes
 
 Possible youtube video on details of this: https://www.youtube.com/watch?v=PLSDvFjR9HY
+
+### Debugging steps for Kubernetes Applications
+
+How do we start debugging an application that is deployed on Kubernetes
+
+- Ensure that application works fine locally (can compile and can run without issues)
+- Ensure that application works fine after its packaged in docker image
+- Check Kubernetes manifest files/Helm chart to make sure that it works fine (make sure right ports are set)
+- Check describe of pods if pods fail to start
+  - `kubectl describe <pod name>`
+  - Check health and readiness checks
+  - Describe of pods could say that secrets/configmaps missing
+  - Could be lack of resources in cluster
+  - Could be no nodes that allow pod to exist (tolerations)
+- Check logs of the pods (could have multiple pods)
+  - `kubectl logs -f <pod name> -c <container name>`
+  - Could be database migration failure (Appication will fail to start?)
+  - Could be configuration error
+- Try a "restart" first
+  - `kubectl delete pods <pod name>`
+  - OR
+  - `kubectl rollout restart deployment <deployment name>`
+- If issue with other components connecting to it
+  - Check if can enter shell of image
+  - `kubectl exec -it <pod name> -- /bin/bash`
+  - Can check if application works
