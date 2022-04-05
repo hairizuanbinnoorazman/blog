@@ -30,6 +30,7 @@ I will update this post as time goes by - if there is more information on this
   - [What are the fallacies of distributed computing?](#what-are-the-fallacies-of-distributed-computing)
   - [Any useful guidelines when deciding on what metrics that application should have?](#any-useful-guidelines-when-deciding-on-what-metrics-that-application-should-have)
   - [What are some useful linux commands?](#what-are-some-useful-linux-commands)
+  - [What's the meaning of some of the following terms when handling systems:](#whats-the-meaning-of-some-of-the-following-terms-when-handling-systems)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
   - [How is isolation achieved in Docker?](#how-is-isolation-achieved-in-docker)
@@ -175,6 +176,14 @@ dig
 tcpdump #only if traffic is http or non-encrypted
 ```
 
+### What's the meaning of some of the following terms when handling systems:
+
+- SLI - service level indicator
+- SLO - service level objective
+- SLA - service level agreement
+- MTBF - Mean time between failures
+- MTTR - Mean time to recovery or repair or respond (they all mean different things)
+
 {{< ads_header >}}
 
 ## Docker
@@ -204,7 +213,17 @@ Docker CLI will communicate with Docker local "server" daemon, reference: https:
 
 ### Assume you have an application that requires MySQL database. Assume that the app and database is deployed in 2 separated containers. Why can't the application use "localhost:3306" to connect to the database?
 
-Coming
+- Firstly, need to understand the following aspects:
+  - On mac/windows, all docker containers are run in a mini linux vms that is provided via docker desktop
+  - When an app is exposed from docker container to host using `-p` flag; it is traversing from the app -> mini linux VM (Docker vm) -> exposed vm's port -> Host machine -> expose it on host machine
+- Docker's network is designed that each container is referred to its own ip address
+- Applications in a single container's localhost won't have MySQL installed in it
+- The application in that container need to reach to the other container to access MySQL
+- In default docker network bridge - need to use IP address (Apparently service discovery is not done properly in the past and is now probably kept for backward compatability)
+  - https://docs.docker.com/network/network-tutorial-standalone/
+  - https://stackoverflow.com/questions/41400603/dockers-embedded-dns-on-the-default-bridged-network
+- Create a separate new bridge network and one can connect via names (don't forget to use `--name` flag when running docker container)
+- Or alternatively, use docker-compose
 
 
 {{< ads_header >}}
@@ -224,12 +243,24 @@ Control plane components
 - cloud-controller-manager (manager that would communicate with the hosting provider)
 - cAdvisor (component that actual pull metrics about container cpu/metrics from cgroup linux fs)
 - heapster/metrics server (to be used to serve metrics about k8s components, taken up by kube-apiserver etc - to handle horizontal pod autoscaling etc)
+- kubeDNS/coreDNS - handles the DNS of the cluster. For CoreDNS, it startups by connecting to kubeapi and then watching endpoint objects and map it accordingly
 
 Node components
 
 - kubelet (agent that make sure pod is running on node)
-- kube-proxy (pod that maintains network rules)
-- container runtime
+- Kube-proxy
+  - Refer to the video: https://www.youtube.com/watch?v=BxDnv7MpJ0I
+  - (No longer valid - userspace mode) Intercepts connections to clusterIP of pods (Does not actually do proxying of rules)
+  - (No longer valid - userspace mode) Does load balancing of traffic to k8s services
+  - Kube-proxy maintains iptables rules (if iptables mode is used) -> relies on linux capabilities
+  - Kube-proxy does this by watching endpoints -> once endpoint pops into existance, it adds it to be a place that can be proxied
+  - For requests that come in with DNS -> resolved with coredns
+- Container runtime (Default is now containerd) - doesn't matter as long as runtime supports OCI spec
+- Container Networking Interface (CNI) - run daemon that sets up the overlay network for the cluster
+  - Main responsibility of setting up overlay network
+  - Manage IP address (IPAM) - IP Address Management plugin is included in it
+- Container Storage Interface (Managing of storage mounts)
+  - Watching of PV and PVC objects and the controller will report to the daemon to handle the mounting/unmounting as well as cleanup of it
 
 Reference: https://kubernetes.io/docs/concepts/overview/components/
 
@@ -262,7 +293,7 @@ https://kubernetes.io/blog/2021/08/09/run-nodes-with-swap-alpha/
 - Statefulsets has ordinal number at the back of pod name
 - Stable pod name/name reference (can call specific pod in the stateful set)
 - Pods in statefulsets can be accessed via headless services (no IP address for that service, you can access a specific pod via that service)
-- If there are volumes to be mounted to it (via Persistent Volumes + Persistent Volume Claim) - each pod will have its own volume (unlike deployment where the persistent volume/volume claim is shared across the pods in deployment)
+- If there are volumes to be mounted to it (via Persistent Volumes + Persistent Volume Claim) - each pod will have its own volume (unlike deployment where the persistent volume/volume claim is shared across the pods in deployment). This is done via VolumeClaimTemplates instead of VOlumeClaim
 
 ### How does a external network request reach into a pod via Ingress?
 
@@ -270,7 +301,7 @@ Coming
 
 ### How is volume mounting handled in Kubernetes?
 
-Coming
+Depends but nowadays, Container Storage Interface (CSI) is one of the ways that seems to becoming mainstream. CSI all
 
 ### What is a headless service?
 
