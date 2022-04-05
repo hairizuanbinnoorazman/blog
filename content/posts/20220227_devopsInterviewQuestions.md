@@ -196,7 +196,21 @@ tcpdump #only if traffic is http or non-encrypted
 
 ### How is isolation achieved in Docker?
 
-Coming
+- Refer to the following video: https://www.youtube.com/watch?v=8fi7uSYlOdc
+- Refer to the following code for the video here: https://github.com/lizrice/containers-from-scratch
+- A container is essentially:
+  - Linux namespaces
+    - These act as a filter on what you can see from within the container
+    - E.g. For `ps` command - you can only see pids within that container
+    - E.g. For networks interfaces `ifconfig` command - you can only see network interfaces relevant to that container within it
+  - Cgroups
+    - Mechanism that allows one to limit resources to a process
+    - E.g. cpu/memory etc
+- Building that container runtime might involve:
+  - Setting the hostname
+  - Changing root fs to something to another folder (different from host)
+  - Ensure that directory on top level is /
+  - Mount "proc" into container so that ps works
 
 ### How does volume mounting work in Docker?
 
@@ -301,7 +315,13 @@ Coming
 
 ### How is volume mounting handled in Kubernetes?
 
-Depends but nowadays, Container Storage Interface (CSI) is one of the ways that seems to becoming mainstream. CSI all
+Depends but nowadays, Container Storage Interface (CSI) is one of the ways that seems to becoming mainstream was to get volume mounting into Kubernetes. Previously, for some of the code - this code is "in-tree" but its slowly being moved out.
+
+In the Kubernetes cluster, you can define multiple "storage classes" - which you can then put into Kubernetes PV definition on which class of storage you want for the application. E.g. SSD (which is definitely more expensive) vs HDD storage class.
+
+For some storage types (e.g. Local) - require manual creation of disks that needs to be managed by an administrator. A lot of effort and very hard to scale out
+
+For other storage types (e.g. GCE-PD) - supports dynamic mode and a controller can be made available that would be able to create the disk and mount it to the node accordingly. This definition is based of PVC - no need to create PV for this (controller probably creates for the user of the PVC)
 
 ### What is a headless service?
 
