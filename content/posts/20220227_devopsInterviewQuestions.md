@@ -183,6 +183,9 @@ tcpdump #only if traffic is http or non-encrypted
 - SLA - service level agreement
 - MTBF - Mean time between failures
 - MTTR - Mean time to recovery or repair or respond (they all mean different things)
+- Incident Handling
+- Post Mortem
+- Root Cause Analysis
 
 {{< ads_header >}}
 
@@ -255,7 +258,7 @@ Control plane components
 - kube-controller-manager (has multiple controller for various k8s assets e.g. jobs, endpoints etc)
 - kube-scheduler (handles scheduling of pods taking into account of taints, annotations, constraints, affinities)
 - cloud-controller-manager (manager that would communicate with the hosting provider)
-- cAdvisor (component that actual pull metrics about container cpu/metrics from cgroup linux fs)
+- cAdvisor (component that actual pull metrics about container cpu/metrics from cgroup linux fs) -> inbuilt into kubelet
 - heapster/metrics server (to be used to serve metrics about k8s components, taken up by kube-apiserver etc - to handle horizontal pod autoscaling etc)
 - kubeDNS/coreDNS - handles the DNS of the cluster. For CoreDNS, it startups by connecting to kubeapi and then watching endpoint objects and map it accordingly
 
