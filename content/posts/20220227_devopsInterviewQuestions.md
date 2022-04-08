@@ -33,6 +33,8 @@ I will update this post as time goes by - if there is more information on this
   - [What's the meaning of some of the following terms when handling systems:](#whats-the-meaning-of-some-of-the-following-terms-when-handling-systems)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
+  - [What's the difference between CMD and ENTRYPOINT](#whats-the-difference-between-cmd-and-entrypoint)
+  - [Why use Execution form over Shell form in Dockerfile](#why-use-execution-form-over-shell-form-in-dockerfile)
   - [How is isolation achieved in Docker?](#how-is-isolation-achieved-in-docker)
   - [How does volume mounting work in Docker?](#how-does-volume-mounting-work-in-docker)
   - [Assume you have an application that requires MySQL database. Assume that the app and database is deployed in 2 separated containers. Why can't the application use "localhost:3306" to connect to the database?](#assume-you-have-an-application-that-requires-mysql-database-assume-that-the-app-and-database-is-deployed-in-2-separated-containers-why-cant-the-application-use-localhost3306-to-connect-to-the-database)
@@ -197,6 +199,21 @@ tcpdump #only if traffic is http or non-encrypted
 - COPY can only do local filesystem into container
 - COPY is the more "secure" solution here of sorts
 
+### What's the difference between CMD and ENTRYPOINT
+
+- CMD -> Set default parameters that can be over-rided from CLI
+- ENTRYPOINT -> Set default parameters that cannot be over-rided from CLI
+- CMD used when building applications but ENTRYPOINT could be used for "utility" containers (e.g. yq container - only need to pass in flags)
+
+Reference: https://www.bmc.com/blogs/docker-cmd-vs-entrypoint/
+
+### Why use Execution form over Shell form in Dockerfile
+
+- Shell form in dockerfile -> e.g. `CMD ./app`
+- Executable form in dockerfile -> e.g. `CMD ["./app"]`
+- Shell command form always passes within a shell and goes through various shell validation before returning results - its like a shell that warps the string provided to it
+- Executable form skips shell validation and processing - immediately invokes commands
+- Issues when running app with shell command form - the "sh" command is invoke, cancelling it doesn't exactly cancel the app, it kills the app but not the shell -> causing issues (hang on terminal)
 ### How is isolation achieved in Docker?
 
 - Refer to the following video: https://www.youtube.com/watch?v=8fi7uSYlOdc
@@ -370,8 +387,9 @@ How do we start debugging an application that is deployed on Kubernetes
   - Check if can enter shell of image
   - `kubectl exec -it <pod name> -- /bin/bash`
   - Can check if application works from within application
-  - Run same check from other pods
-- More elaborate debugging steps
+  - Run same check from other pods (Could be that app was compiled to listen only to "127.0.0.1")
+  - If other component is using service, ensure that matchLabels is service match pod labels (NOT deployment labels)
+- More elaborate debugging steps (In case shell not present)
   - Copy pod while adding new container: `kubectl debug <pod name> -it --image=ubuntu --share-process --copy-to=debugging-pod`
   - Copy pod while changing its command: `kubectl debug <pod name> -it --copy-to=debugging-pod --container=<pod name> -- sh`
   - Debug with shell on node: `kubectl debug node/<node name> -it --image=ubuntu`
