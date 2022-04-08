@@ -239,3 +239,6 @@ cd /proc/7/root
 That will put us in the file system of the container that is running the /app command. This would useful to kind of inspect possibly rendering of configuration files or seeing how the application responds to live traffic and how it manipulates the file system.
 
 The above is a tiny exercise of how Kubernetes continues to be improved to make it easier to debug applications. Unfortunately, the debug subcommand still has issues here and there (you can't debug an actual "live" application by maybe creating a temporary image alongside the live container?). The functionality is still under development work (possible to use but it seems certain flags need to be turned on? Or it could be I misunderstand if that's the functionality being offered)
+
+The following source code is also available in the following Github repo as well:
+https://github.com/hairizuanbinnoorazman/Go_Programming/tree/master/Web/basicWeb
