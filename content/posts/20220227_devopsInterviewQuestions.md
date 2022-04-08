@@ -390,6 +390,6 @@ How do we start debugging an application that is deployed on Kubernetes
   - Run same check from other pods (Could be that app was compiled to listen only to "127.0.0.1")
   - If other component is using service, ensure that matchLabels is service match pod labels (NOT deployment labels)
 - More elaborate debugging steps (In case shell not present)
-  - Copy pod while adding new container: `kubectl debug <pod name> -it --image=ubuntu --share-process --copy-to=debugging-pod`
+  - Copy pod while adding new container: `kubectl debug <pod name> -it --image=ubuntu --share-processes --copy-to=debugging-pod`
   - Copy pod while changing its command: `kubectl debug <pod name> -it --copy-to=debugging-pod --container=<pod name> -- sh`
   - Debug with shell on node: `kubectl debug node/<node name> -it --image=ubuntu`
