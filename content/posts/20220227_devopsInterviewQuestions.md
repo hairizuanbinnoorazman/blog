@@ -393,3 +393,4 @@ How do we start debugging an application that is deployed on Kubernetes
   - Copy pod while adding new container: `kubectl debug <pod name> -it --image=ubuntu --share-processes --copy-to=debugging-pod`
   - Copy pod while changing its command: `kubectl debug <pod name> -it --copy-to=debugging-pod --container=<pod name> -- sh`
   - Debug with shell on node: `kubectl debug node/<node name> -it --image=ubuntu`
+- Additional cheatsheet for reference: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
