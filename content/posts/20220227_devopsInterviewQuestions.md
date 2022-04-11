@@ -47,6 +47,7 @@ I will update this post as time goes by - if there is more information on this
   - [How is volume mounting handled in Kubernetes?](#how-is-volume-mounting-handled-in-kubernetes)
   - [What is a headless service?](#what-is-a-headless-service)
   - [When creating operator - how are reconcilition loops started?](#when-creating-operator---how-are-reconcilition-loops-started)
+  - [Why you can't ping a service?](#why-you-cant-ping-a-service)
   - [Debugging steps for Kubernetes Applications](#debugging-steps-for-kubernetes-applications)
 
 
@@ -362,6 +363,11 @@ Reference for watch documentation: https://kubernetes.io/docs/reference/using-ap
 
 Possible youtube video on details of this: https://www.youtube.com/watch?v=PLSDvFjR9HY
 
+
+### Why you can't ping a service?
+
+(NEED TO CONFIRM - BEHAVIOUR FOR THIS IS NOT CONSISTENT)
+https://nigelpoulton.com/why-you-cant-ping-a-kubernetes-service/
 ### Debugging steps for Kubernetes Applications
 
 How do we start debugging an application that is deployed on Kubernetes
