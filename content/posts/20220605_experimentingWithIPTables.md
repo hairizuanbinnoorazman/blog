@@ -76,10 +76,16 @@ iptables -t nat -A OUTPUT -o lo -p tcp --dport 8080 -j REDIRECT --to-port 80
 
 ## Cleanup
 
+A default GCE VM instance doesn't have any initial ruleset for IPTables (it's more governed by Google's networking stack - managed by adding networking tags to Virtual Machines)
+
 ```bash
 iptables -F
 iptables -t nat -F
 ```
+
+## References
+
+The following links refer 
 
 ## After install docker 
 
