@@ -25,7 +25,8 @@ https://www.youtube.com/c/GDGCloudSingapore
 
 Talk on introducing people unfamiliar with cloud to cloud technologies/platforms. Used angle of understanding cloud from feature set available
 
-Video Stream: https://www.twitch.tv/videos/1039052712
+Video Stream: https://www.twitch.tv/videos/1039052712  
+Video: https://www.youtube.com/watch?v=N0UA7DgeFBY  
 
 ## Kubernetes HPA with Custom Metrics
 
