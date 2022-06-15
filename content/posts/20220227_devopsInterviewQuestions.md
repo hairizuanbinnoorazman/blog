@@ -31,6 +31,10 @@ I will update this post as time goes by - if there is more information on this
   - [Any useful guidelines when deciding on what metrics that application should have?](#any-useful-guidelines-when-deciding-on-what-metrics-that-application-should-have)
   - [What are some useful linux commands?](#what-are-some-useful-linux-commands)
   - [What's the meaning of some of the following terms when handling systems:](#whats-the-meaning-of-some-of-the-following-terms-when-handling-systems)
+- [System Design](#system-design)
+  - [References](#references)
+  - [Design a code-deployment system](#design-a-code-deployment-system)
+  - [Design a API rate limiter system](#design-a-api-rate-limiter-system)
 - [Docker](#docker)
   - [What's the difference between COPY and ADD?](#whats-the-difference-between-copy-and-add)
   - [What's the difference between CMD and ENTRYPOINT](#whats-the-difference-between-cmd-and-entrypoint)
@@ -191,6 +195,46 @@ tcpdump #only if traffic is http or non-encrypted
 - Root Cause Analysis
 
 {{< ads_header >}}
+
+## System Design
+
+### References
+
+https://mecha-mind.medium.com/
+
+### Design a code-deployment system
+
+- Which aspect of the code deployment pipeline?
+  - Need to involve CI portion? E.g. testing to ensure that application is fine before deployment? testing to ensure that application is fine after deployment
+- What kind of code are we shipping?
+  - Packaged into binary packages etc?
+  - Packaged into VMs (e.g. Using packer)
+  - Packaged into Container images?
+- What sort of environment will the code be deployed into?
+  - Public Cloud?
+  - Privately owned datacentres?
+- How to get artifacts into target environments?
+  - Allowed to rely on public cloud?
+  - Need to be able to sync large objects across datacentres
+- How to ensure releases a synced across datacentres?
+  - Config file that are synced to ensure that all are of the same version
+  - Not all datacentres are of same size (Different DCs have different set of performance) - need to adjust datacentre configuration accordingly
+- Monitoring of all process/pipelines
+  - Syncing of artifacts between the various datacentres?
+  - Syncing of data centre configurations (Either manually start the process to sync up? Or automatically have the dc have some sort of binary/controller to update the process accordingly)
+
+### Design a API rate limiter system
+
+https://medium.com/geekculture/system-design-basics-rate-limiter-351c09a57d14
+
+- Algorithms
+  - Leaky bucket (Need a big cache to store items to be outflowed?)
+  - Token bucket (Have a token generator -> service to serve traffic will fetch token before serving it into system)
+  - Fixed Window Counter (Have a counter for each duration of time, reset once next counter begins)
+  - Sliding Log (Cache all requests with timestamp, and serve sufficient traffic to hit request rate)
+  - Sliding Window (Combines concept of fixed window counter and sliding log)
+- Handling API rate limiting in a large distributed system
+  - Centralized datastore to store api request count? Introduces potential amount of latency?
 
 ## Docker
 
