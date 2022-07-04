@@ -161,9 +161,18 @@ sudo journalctl -u <component> -f --since "10 minutes ago" --no-pager
 
 # Viewing which folder is taking the most logs
 sudo du -sh $(ls)
+df -h
+
+# Finding a file
+# https://www.tecmint.com/35-practical-examples-of-linux-find-command/
+find / -name hosts
 
 # Viewing performance at the moment (For quick debugging)
+# apt install -y procps
 top
+# M (by Memory), N (by PID), P (by CPU), T (by time)
+# E (change units)
+# t (cpu graph), m (memory graph), k (kill signal), c (show full command line), r (renice)
 
 # Handling permission issues
 sudo chmod +x <binary file>
@@ -175,12 +184,18 @@ head
 tail
 less
 
-# Network commands
+# Network commands?
 ifconfig
 ping
 nslookup
-dig
+dig # apt install -y dnsutils
 tcpdump #only if traffic is http or non-encrypted
+nmap -O localhost # Find out which port is open
+nmap -sU -O localhost # UDP Traffic port
+nmap -sT -O localhost # TCP Traffic port
+
+# Open files
+lsof -i -P -n # Find which process connected to which port
 ```
 
 ### What's the meaning of some of the following terms when handling systems:
