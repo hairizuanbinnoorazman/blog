@@ -33,7 +33,7 @@ Taking the above pieces of code snippets, we can come out with the following cod
 
 You can embed by creating a Google Sites and then clicking to "embed" a new element on the page of the site 
 
-{{< img src="20220620_customJSInGoogleSites/sites-embed.png" alt="Showcase of embed custom JS in Google Sites" >}}
+![embed-custom-js-google-sites](/20220620_customJSInGoogleSites/sites-embed.png)
 
 An interesting point here is that rather than embedding the Javascript code that encapsultates the functionality of the BMI calculator, we can just pull it in via the `<script>` tag and pointing to a potential source that holds the javascript code. (An example would be this website; this website would hold links that have that piece of code snippet)
 

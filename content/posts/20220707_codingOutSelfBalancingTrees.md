@@ -16,13 +16,13 @@ A self balancing binary tree is kind of a extension of the usual binary tree. In
 
 Let's say we have a binary tree where data that is less that root is inserted to the left of the root and data that is more than the right is sorted to the right. If we are to insert data into tree in the following order: 20, 30, 10; we will get the following tree.
 
-{{< img src="20220707_codingOutSelfBalancingTrees/balanced-tree.png" alt="Example of balanced binary tree" >}}
+![balanced-binary-tree](/20220707_codingOutSelfBalancingTrees/balanced-tree.png)
 
 If we attempt to do inserts or searching whether an element exists in the tree, we would ideal hit a time complexity of O(log(n))
 
 However, if the order of the input changed to 10, 20 and then 30, the tree (following the above logic) would result in the following structure.
 
-{{< img src="20220707_codingOutSelfBalancingTrees/imbalanced-tree.png" alt="Example of balanced binary tree" >}}
+![imbalanced-binary-tree](/20220707_codingOutSelfBalancingTrees/imbalanced-tree.png)
 
 In this case, assuming a worst case scenario, potentially, our binary tree would almost become like a Singly Linked list if the item being fed to the tree is a ordered list. Potential time complexity in this scenario is O(n).
 
