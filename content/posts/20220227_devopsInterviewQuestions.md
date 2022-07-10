@@ -31,6 +31,7 @@ I will update this post as time goes by - if there is more information on this
   - [Any useful guidelines when deciding on what metrics that application should have?](#any-useful-guidelines-when-deciding-on-what-metrics-that-application-should-have)
   - [What are some useful linux commands?](#what-are-some-useful-linux-commands)
   - [What's the meaning of some of the following terms when handling systems:](#whats-the-meaning-of-some-of-the-following-terms-when-handling-systems)
+  - [What are inodes, hard links and symlinks, file descriptions (FD) in linux filesystem?](#what-are-inodes-hard-links-and-symlinks-file-descriptions-fd-in-linux-filesystem)
 - [System Design](#system-design)
   - [References](#references)
   - [Design a code-deployment system](#design-a-code-deployment-system)
@@ -208,6 +209,13 @@ lsof -i -P -n # Find which process connected to which port
 - Incident Handling
 - Post Mortem
 - Root Cause Analysis
+
+### What are inodes, hard links and symlinks, file descriptions (FD) in linux filesystem?
+
+- Inodes are metadata for a file
+- Hard links are the physical reference to a file - limited to one per file
+- Symlinks - symbolic links are soft links to a file (essentially, its like a reference to a actual hard link)
+- File Descriptions (Coming soon)
 
 {{< ads_header >}}
 
