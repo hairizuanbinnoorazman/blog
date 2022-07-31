@@ -27,6 +27,7 @@ I will update this post as time goes by - if there is more information on this
   - [What is Swap space used for?](#what-is-swap-space-used-for)
   - [What are Huge pages in linux used for?](#what-are-huge-pages-in-linux-used-for)
   - [What is the difference between TCP/UDP?](#what-is-the-difference-between-tcpudp)
+  - [What is ICMP?](#what-is-icmp)
   - [What are the fallacies of distributed computing?](#what-are-the-fallacies-of-distributed-computing)
   - [Any useful guidelines when deciding on what metrics that application should have?](#any-useful-guidelines-when-deciding-on-what-metrics-that-application-should-have)
   - [What are some useful linux commands?](#what-are-some-useful-linux-commands)
@@ -127,6 +128,11 @@ UDP = User Datagram Protocol
   - TCP is used for HTTP/HTTPS, SMTP, FTP etc
   - UDP is used for video streaming, VoIP, DNS?
 
+### What is ICMP?
+
+ICMP - Internet Control Message Protocol. Generally used for diagonostic purposes during IP operations.  
+Used via Ping commands or traceroute commands. From this, it would probably contain diagnostic information on what happen between source client and server - maybe one of the routing servers drop? Or packet got blcoked? Or port got blocked?  
+
 ### What are the fallacies of distributed computing?
 
 - The network is reliable
@@ -171,9 +177,13 @@ find / -name hosts
 # Viewing performance at the moment (For quick debugging)
 # apt install -y procps
 top
-# M (by Memory), N (by PID), P (by CPU), T (by time)
+# M (by Memory), N (by PID), P (by CPU - proceessor), T (by time)
 # E (change units)
 # t (cpu graph), m (memory graph), k (kill signal), c (show full command line), r (renice)
+
+# Cleaning up logs
+journalctl --vacuum-time=10d
+journalctl --vacuum-size=500m
 
 # Handling permission issues
 sudo chmod +x <binary file>
