@@ -33,6 +33,7 @@ I will update this post as time goes by - if there is more information on this
   - [What are some useful linux commands?](#what-are-some-useful-linux-commands)
   - [What's the meaning of some of the following terms when handling systems:](#whats-the-meaning-of-some-of-the-following-terms-when-handling-systems)
   - [What are inodes, hard links and symlinks, file descriptions (FD) in linux filesystem?](#what-are-inodes-hard-links-and-symlinks-file-descriptions-fd-in-linux-filesystem)
+  - [How does one improve security posture of deployments?](#how-does-one-improve-security-posture-of-deployments)
 - [System Design](#system-design)
   - [References](#references)
   - [Design a code-deployment system](#design-a-code-deployment-system)
@@ -53,6 +54,7 @@ I will update this post as time goes by - if there is more information on this
   - [How is volume mounting handled in Kubernetes?](#how-is-volume-mounting-handled-in-kubernetes)
   - [What is a headless service?](#what-is-a-headless-service)
   - [When creating operator - how are reconcilition loops started?](#when-creating-operator---how-are-reconcilition-loops-started)
+  - [How does one achieve multi-tenancy in Kubernetes environment?](#how-does-one-achieve-multi-tenancy-in-kubernetes-environment)
   - [Why you can't ping a service?](#why-you-cant-ping-a-service)
   - [Debugging steps for Kubernetes Applications](#debugging-steps-for-kubernetes-applications)
 
@@ -226,6 +228,34 @@ lsof -i -P -n # Find which process connected to which port
 - Hard links are the physical reference to a file - limited to one per file
 - Symlinks - symbolic links are soft links to a file (essentially, its like a reference to a actual hard link)
 - File Descriptions (Coming soon)
+
+
+### How does one improve security posture of deployments?
+
+Note: Attestation means evidence or proof of something
+
+- Ensure that dependencies that applications rely on is scanned to ensure that it doesn't contain malware
+- Ensure that no secrets are in Git
+- Utilizes services that allow secret rotation more easily (e.g Secrets Manager, vault etc)
+- If applications are in containers
+  - Ensure no secrets within it
+  - Reduce attack surface by reducing amount of dependencies (use smaller images - e.g. slim or alpine or distroless images)
+  - Scan container images to check for vulnerabilities
+  - Maybe consider micro-vms (since if containers are broken out, can affect host's kernel)
+  - Ensure container is non-root
+- If applications are in Virtual Machines
+  - Try to ensure that VMs are not exposed to internet unnecessarily. E.g. Google Compute Engine by default has public interface; if it doesn't need it, it shouldn't have it
+  - Maybe consider the SPIFFE project - ensure that nodes can only talk to nodes that are within the "trusted" circle and have gone through the appropiate "attestation" to ensure that people know who the node is etc
+- If applications are in Kubernetes
+  - Use network policies to restrict applications that can communicate with each other
+  - Possibility to utilize service mesh to somehow get users to communicate with each other using mTLS
+  - Possibility to utilize Binary authorization with attested images (maybe to prove security scan is done etc)
+  - Use separate service account and RBAC for applications (more granular permission control)
+  - Set container such that it needs to be non-root to run it
+  - Set container such that it doesn't need linux permsisions (unless required)
+- For all deployments
+  - Ensure that logs emitted from all applications do not print out security tokens/credentials or user information - need to have constant scanning of information
+  - Ensure resource policies are set (to ensure no runaway application)
 
 {{< ads_header >}}
 
@@ -440,6 +470,16 @@ Reference for watch documentation: https://kubernetes.io/docs/reference/using-ap
 
 Possible youtube video on details of this: https://www.youtube.com/watch?v=PLSDvFjR9HY
 
+
+### How does one achieve multi-tenancy in Kubernetes environment?
+
+Aim of multi-tenancy is to try to ensure that multiple application teams can share a single cluster and their usage of resources of the cluster does not have a wide blast zone
+
+- Utilizing rbac on developer accounts attempting to access Kubernetes cluster to ensure that they have restricted access to certain resources
+- Namespaces between teams
+- Introduce resource quota and restrict it on per team basis
+- Utilizing pod affinity rules to ensure that pods from different teams are not deployed to same nodes
+- Utilizing taints and tolerations to probably try to book certain nodes for certain teams
 
 ### Why you can't ping a service?
 
