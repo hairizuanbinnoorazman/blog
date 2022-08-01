@@ -67,9 +67,9 @@ I will update this post as time goes by - if there is more information on this
 
 - DNS Resolving
   - Check again local's `/etc/hosts` file to determine first level of dns resolve
-  - Reach out the dhcp server (if it was setup)
-  - If dhcp not available, reach out to further out to provider/etc or other root authorative name servers
-  - All above would be skip if dns server to be lookup-ed is set in network configurations (e.g. 8.8.8.8, 8.8.4.4, 1.1.1.1)
+  - Reach out the dns server on current local network if setup (e.g. running your own DNS server etc - router having its own DNS server)
+  - If local network's DNS not available, reach out to further out to provider/etc or other root authorative name servers. Possibly the network provider (e.g. In singapore, could be Starhub/Singtel's DNS servers)
+  - All above would be skip if dns server to be lookup-ed on workstation is set in network configurations (e.g. 8.8.8.8, 8.8.4.4, 1.1.1.1)
 - SSL Handshake
   - If website to be accessed is accessed via https
   - Refer to the following website for more details
