@@ -159,6 +159,103 @@ This service would involve the following:
 
 Reference: https://github.com/hairizuanbinnoorazman/Go_Programming/tree/master/Web/sendEmail
 
+## Actually setting up the workflow
+
+The last step would be to coordinate all of the above services together. Technically, we can kind of write up some scripts which we would need to manually go in and run but with scripts, they come with their own host of problems:
+
+- If script to coordinate the services is only on a "someone's" work computer; if any issue comes about, we won't be able to resolve it easily
+- If it's on that one person's work computer, then its somewhat troublesome to ensure that the person's work computer is up and running and would run the script with no issue when it is required for us to run it. We would need ways to properly monitor the running of this "script" to ensure that it's completed successfully and in time to meet business requirements
+- Not sure if script involves managing any state changes. In the case of the current example, we don't need to store state but imagine if there is a need for it; we'll need to ensure that it should be backed-up (just in case)
+
+For the above workflow, we can program it like so - a somewhat linear workflow:
+
+```
+main:
+  params: [args]
+  steps:
+    - initializeWorkflow:
+        assign:
+          - sourceData: ${args.sourceData}
+          - sendEmail: ${args.sendEmail}
+          - reportTitle: ${args.reportTitle}
+          - reportDescription: ${args.reportDescription}
+    - runAnalysis:
+        call: http.post
+        args:
+          url: https://run-analysis-xxxxx.a.run.app/run-analysis
+          body:
+            source_data: ${sourceData}
+        result: runAnalysisResults          
+    - viewRunAnalysisBody:
+        call: sys.log
+        args:
+          text: ${runAnalysisResults.body}
+    - decodeRunAnalysisResults:
+        call: json.decode
+        args:
+          data: ${runAnalysisResults.body}
+        result: runAnalysisResultsBody
+    - createChartImage:
+        call: http.post
+        args:
+          url: https://make-charts-xxxxx.a.run.app/screenshot
+          body:
+            title: Sales Report 
+            x_axis_title: Product Names
+            labels: ${runAnalysisResultsBody.products}
+            data: ${runAnalysisResultsBody.revenue}
+        result: createChartImageResults
+    - decodeChartImageResults:
+        call: json.decode
+        args:
+          data: ${createChartImageResults.body}
+        result: createChartImageResultsBody
+    - zzz:
+        call: sys.log
+        args:
+          text: ${createChartImageResults.body}
+    - createReport:
+        call: http.post
+        args:
+          url: https://create-report-xxxxx.a.run.app/create-report
+          body:
+            title: ${reportTitle}
+            description: ${reportDescription}
+            template_file_name: haha.md
+            image: ${createChartImageResultsBody.filename}
+        result: createReportResults
+    - decodeCreateReport:
+        call: json.decode
+        args:
+          data: ${createReportResults.body}
+        result: createReportResultsBody
+    - sendEmailDecider:
+        switch:
+          - condition: ${sendEmail == false}
+            steps:
+              - earlyTerminatedStep:
+                  return: ${"Email is not sent. Please check " + createReportResultsBody.generated_report_name + " in GCS"}
+    - sendEmail:
+        call: http.post
+        args:
+          url: https://send-email-xxxxx.a.run.app/send-email
+          body:
+            to: test@test.com
+            subject: This is another test
+            body: Report Generated
+            report_filename: ${createReportResultsBody.generated_report_name}
+    - finalStep:
+        return: "Report Generated. Please request receiver to check his email"
+```
+
+To deploy it, we can run the following command:
+
+```bash
+gcloud workflows deploy myFirstWorkflow --source=zzz.yaml 
+```
+
+And that would have the workflow pop into existance in the Google Cloud Project of our choice.
+
 ## Conclusion
 
 The cloud workflow tool is definitely interesting tool to try out but throughout the entire experience of "attempting" to use it, it does seem like a lot more time was spent in order to build out the services that would be consumed by the cloud workflows tool. More complex workflow tools would require more intricate services to be developed and hence, more effort is needed before we get to try more complicated features in Cloud Workflows products.
