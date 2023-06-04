@@ -5,12 +5,14 @@ tags = [
     "hugo",
     "elm",
     "golang",
+    "slides-to-video",
 ]
 date = "2022-01-02"
 categories = [
     "hugo",
     "elm",
     "golang",
+    "slides-to-video",
 ]
 +++
 

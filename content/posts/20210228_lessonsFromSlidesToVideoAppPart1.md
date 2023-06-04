@@ -3,10 +3,12 @@ title = "Lessons from building Slides to Video App - Part 1"
 description = "Lessons from building Slides to Video App. A review on Application structure, devops practises, CI practises"
 tags = [
     "golang",
+    "slides-to-video",
 ]
 date = "2021-02-28"
 categories = [
     "golang",
+    "slides-to-video",
 ]
 +++
 
