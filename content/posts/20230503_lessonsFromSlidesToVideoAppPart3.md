@@ -1,3 +1,4 @@
++++
 title = "Rethinking migrations in Golang Applications"
 description = "Migrations are a critical part of an application. Taking shortcuts with convenient library functions will eventually bite you back. Lessons from building Slides to Video App Part 3"
 tags = [
