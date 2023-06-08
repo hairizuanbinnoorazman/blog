@@ -31,6 +31,8 @@ Taking the above pieces of code snippets, we can come out with the following cod
 </script>
 ```
 
+## Steps to embed code snippet
+
 You can embed the code snippet by doing the following:
 
 First, we would need to create a Google Site. We would  and then clicking to “embed” a new element on the page of the site.
@@ -48,6 +50,8 @@ Use the Next button to preview how your code will look
 Use the Insert button to add the code to the page. If there isn't a preview of the expected html, that would mean that there might be an error in the javascript or html - you probably need to fix it. You can simply use the Edit code button (looks like a pencil) that overlays the middle of the preview and edit the code to correct the code so that it works fine.
 
 ![embed-custom-js-google-sites](/20220620_customJSInGoogleSites/sites-embed.png)
+
+## Some interesting points
 
 An interesting point here is that rather than embedding the Javascript code that encapsulates the functionality of the BMI calculator, we can just pull it in via the `<script>` tag and pointing to a potential source that holds the javascript code. (An example would be this website; this website would hold links that have that piece of code snippet)
 
