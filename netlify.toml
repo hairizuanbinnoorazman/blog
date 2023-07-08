@@ -7,11 +7,13 @@
   force = false
   status = 200
 
+[[redirects]]
   from = "/api/shopping-list/v1/*"
   to = "https://shopping-list-sj5kqt5fxq-as.a.run.app/api/shopping-list/v1/:splat"
   force = false
   status = 200
 
+[[redirects]]
   from = "/tools/shopping-list/*"
   to = "https://shopping-list-sj5kqt5fxq-as.a.run.app/tools/shopping-list"
   force = false
