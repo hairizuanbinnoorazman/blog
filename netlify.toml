@@ -6,3 +6,13 @@
   to = "https://bus-arrival-sj5kqt5fxq-as.a.run.app/api/lta-datamall/:splat"
   force = false
   status = 200
+
+  from = "/api/shopping-list/v1/*"
+  to = "https://shopping-list-sj5kqt5fxq-as.a.run.app/api/shopping-list/v1/:splat"
+  force = false
+  status = 200
+
+  from = "/tools/shopping-list/*"
+  to = "https://shopping-list-sj5kqt5fxq-as.a.run.app/tools/shopping-list"
+  force = false
+  status = 200
