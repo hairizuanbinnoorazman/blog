@@ -15,6 +15,6 @@
 
 [[redirects]]
   from = "/tools/shopping-list/*"
-  to = "https://shopping-list-sj5kqt5fxq-as.a.run.app/tools/shopping-list"
+  to = "https://shopping-list-sj5kqt5fxq-as.a.run.app/tools/shopping-list/:splat"
   force = false
   status = 200
