@@ -65,7 +65,6 @@ Video Recording: https://youtu.be/F71rvTQ8unA
 
 Using Google Cloud Run to create a bunch of services which when combined together would convert presentation slide pdfs and scripts (not programming script but a script on what to say during a presentation) into a video. The following set of services is build by using Google Cloud Run and Google Text to Speech and Google Cloud Storage and Google Datastore; all deployed via Google Cloud Build
 
-Event Link: https://events.withgoogle.com/la-kopi-serverless/  
 Slides: https://docs.google.com/presentation/d/1Vuv7C1rNGbKdOvpJji5QNiqwvsPvHF6uWzNNEsIthlQ/
 
 ### GCSFuse; Heard of it
@@ -118,6 +117,7 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2020-03-20 | Fossasia 2020                         | https://2020.fossasia.org/event/schedule.html#6098          | [Quick tour of Knative](/speaker-profile#quick-tour-of-knative) |
 | 2019-10-23 | La Kopi - Serverless                  | https://events.withgoogle.com/la-kopi-serverless/           | [Generating videos from slides on applications served from Google Cloud Run](/speaker-profile#generating-videos-from-slides-on-applications-served-from-google-cloud-run) |
 | 2019-07-24 | GDG Cloud Singapore Meetup July 2019  | https://www.meetup.com/gdg-cloud-singapore/events/262726983 | [GCSFuse; Heard of it](/speaker-profile#gcsfuse-heard-of-it) |
 | 2019-06-22 | io19 Extended                         | https://www.meetup.com/gdg-singapore/events/261587580/      | [Introduction to Cloud Run](/speaker-profile#introduction-to-cloud-run) |
