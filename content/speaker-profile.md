@@ -35,11 +35,17 @@ A demo of how to utilize an application's custom metrics
 Slides: https://docs.google.com/presentation/d/159fA2Q12nSaldHD--0Ypln_tzruVNiM36edAAUaRoY0/edit?usp=sharing  
 Video Recording: https://www.youtube.com/watch?v=IxDqs7387YI
 
+### Deploy via spreadsheet? Thats a bad idea
+
+Demo of deploying apps into k8s clusters but controlled via Google Spreadsheets
+
+Slides: https://docs.google.com/presentation/d/1YFnL9oirzsaVvqTVM6HshnfVFwqboRzv1KhytqCNQO0/edit#slide=id.p
+Video Recording: https://www.youtube.com/watch?v=4KZkBJFOgrQ&t=5106s
+
 ### Interesting Features in GKE
 
 Covering on Workload Identity, Config Connector, Managed Application Delivery etc
-
-Event Link: https://www.meetup.com/GDG-Cloud-Singapore/events/270423553/  
+ 
 Slides: https://docs.google.com/presentation/d/1ptjcfpRuoKGqAsSr7O-USulBEcu9JdQpEZ3y3yQ7Tuk/edit?usp=sharing  
 Video Recording: https://www.youtube.com/watch?v=xlWX7iNKag8
 
@@ -47,9 +53,13 @@ Video Recording: https://www.youtube.com/watch?v=xlWX7iNKag8
 
 Introductory session to skaffold, reasons for using it as well as how to quickly get started with the tool
 
-Event Link: https://www.meetup.com/GDG-Cloud-Singapore/events/264449620/  
-Event Link: https://www.meetup.com/Singapore-Kubernetes-User-Group/events/268492981/  
 Video: https://www.youtube.com/watch?v=xNq-aFohfgk
+
+### Skaffold with Google Cloud Build
+
+Talk on using Skaffold to deploy applications to Kubernetes Clusters. Instead of using local docker engine runtime; one would use the Google Cloud Build as the platform to build the image artifacts that would deployed to the cluster
+
+This is mostly a demo session
 
 ### Quick tour of Knative
 
@@ -117,7 +127,16 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2023-02-20 | KubernetesSG Meetup Feb 2023          | https://www.meetup.com/k8s-sg/events/291463340/             | [Kubernetes HPA with Custom Metrics](/speaker-profile#kubernetes-hpa-with-custom-metrics) |
+| 2022-12-15 | GDSC MUM x Google Singapore           | https://gdsc.community.dev/events/details/developer-student-clubs-monash-university-malaysia-presents-gdsc-mum-x-google-singapore/ | [Introduction to Cloud Run](/speaker-profile#introduction-to-cloud-run) |
+| 2022-05-12 | Introduction to Cloud                 | https://www.youtube.com/watch?v=N0UA7DgeFBY&ab_channel=GoogleDeveloperStudentClubPSBAcademy | [Introduction to Cloud](/speaker-profile#introduction-to-cloud) |
+| 2021-06-24 | GDG Cloud Extended KL 2021            | https://gdg.community.dev/events/details/google-gdg-cloud-kl-presents-google-io-extended-gdg-cloud-kl/ | [Introduction to Cloud Run](/speaker-profile#introduction-to-cloud-run) |
+| 2020-10-31 | GDG Cloud Devfest 2020                | https://www.youtube.com/watch?v=4KZkBJFOgrQ                 | [Deploy via spreadsheet? Thats a bad idea](/speaker-profile#deploy-via-spreadsheet-thats-a-bad-idea) |
+| 2020-06-23 | June Devrel Google Cloud Talks        | No event link                                               | [Skaffold with Google Cloud Build](/speaker-profile#skaffold-with-google-cloud-build) |
+| 2020-06-11 | Kubernetes June 2020 Meetup           | https://www.meetup.com/Singapore-Kubernetes-User-Group/events/268492981/ | [Introduction to Skaffold](/speaker-profile#introduction-to-skaffold) |
+| 2020-05-07 | GDG Cloud Singapore Webinar           | https://www.meetup.com/GDG-Cloud-Singapore/events/270423553 | [Interesting Features in GKE](/speaker-profile#interesting-features-in-gke) |
 | 2020-03-20 | Fossasia 2020                         | https://2020.fossasia.org/event/schedule.html#6098          | [Quick tour of Knative](/speaker-profile#quick-tour-of-knative) |
+| 2019-11-09 | GDG Cloud Singapore Devfest           | https://www.meetup.com/GDG-Cloud-Singapore/events/264449620 | [Introduction to Skaffold](/speaker-profile#introduction-to-skaffold) |
 | 2019-10-23 | La Kopi - Serverless                  | https://events.withgoogle.com/la-kopi-serverless/           | [Generating videos from slides on applications served from Google Cloud Run](/speaker-profile#generating-videos-from-slides-on-applications-served-from-google-cloud-run) |
 | 2019-07-24 | GDG Cloud Singapore Meetup July 2019  | https://www.meetup.com/gdg-cloud-singapore/events/262726983 | [GCSFuse; Heard of it](/speaker-profile#gcsfuse-heard-of-it) |
 | 2019-06-22 | io19 Extended                         | https://www.meetup.com/gdg-singapore/events/261587580/      | [Introduction to Cloud Run](/speaker-profile#introduction-to-cloud-run) |
