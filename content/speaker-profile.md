@@ -72,14 +72,12 @@ Slides: https://docs.google.com/presentation/d/1Vuv7C1rNGbKdOvpJji5QNiqwvsPvHF6u
 
 An lightning talk to give an introduction to GCSFuse and the Fuse common interface.
 
-Event Link: https://www.meetup.com/GCPUGSG/events/262726983/  
 Slides: https://docs.google.com/presentation/d/1MWEhJIHRgO60Bc-4HhjdIFSA1L2Z3aOu1lIZl6fWVqE
 
 ### Introduction to Stackdriver
 
 An introduction to stackdriver, a feature in the Google Cloud Platform. It provides monitoring, logging, profiling services. A golang web application is used an example to demonstrate on how to get such capbilities set up.
 
-Event Link: https://www.meetup.com/GCPUGSG/events/258359490/  
 Slides: https://docs.google.com/presentation/d/1JtV8N9in039VdtJzz7XN4UcxGHYuowxJQ0b8TOfGn54  
 Video Recording: https://engineers.sg/video/google-cloud-next-2019-singapore-using-stackdriver-effectively--3402
 
@@ -87,8 +85,6 @@ Video Recording: https://engineers.sg/video/google-cloud-next-2019-singapore-usi
 
 An introduction to Google Cloud Run, a newly announced serverless solution which allows one to deploy any runtime and any software and let Google manage it. The main piece of this presentation is a demonstration of how to deploy a service onto Google Cloud Run via Google Cloud Console GUI
 
-Event Link: https://www.meetup.com/GCPUGSG/events/259734957/  
-Event Link: https://www.meetup.com/gdg-singapore/events/261587580/  
 Slides: https://docs.google.com/presentation/d/1M8EhARDBY33IefEz356NhdUkkSyUZo1tHZBkMt-NtpE  
 Video: https://www.youtube.com/watch?v=n1wtjEmb7eI  
 Blog Post: https://www.hairizuan.com/introduction-to-google-cloud-run/
@@ -97,14 +93,12 @@ Blog Post: https://www.hairizuan.com/introduction-to-google-cloud-run/
 
 Using the various serverless functions to trigger different workflows. Demonstrate the usage of different triggers from Google Cloud Platform to run analytical workloads. Presented during Google Cloud Devfest 2018, October 2018
 
-Event Link: https://www.meetup.com/GCPUGSG/events/253546454/  
 Slides: https://docs.google.com/presentation/d/1trt8SyQYSgUfx8AfHZ7Pt8_VzfIqEsJerpQYqhQ-MIw
 
 ### Using Google Cloud Functions for Analytics Workloads
 
 Creating a slack bot that could analyze and return graphs on meetup stats on a single meetup event. This is done by creating an API via Google Cloud Functions. Presented during Google Cloud Next Extended Singapore 2018, August 2018
 
-Event Link: https://www.meetup.com/GCPUGSG/events/251921227/  
 Video Recording: https://www.youtube.com/watch?v=OYv8nyA8pj8  
 Slides: https://docs.google.com/presentation/d/1H05sgx7W83_NlNV2cGdjBUBsU1q1PuRSxwe3E88Ybyg/
 
@@ -112,7 +106,6 @@ Slides: https://docs.google.com/presentation/d/1H05sgx7W83_NlNV2cGdjBUBsU1q1PuRS
 
 An overview of a variety of concepts such as docker containers as well as Kubernetes terminology which is needed before introducing someone to the Kubernetes tool. Presented during Google Devfest Singapore 2017, October 2017
 
-Event Link: http://www.gdg-sg.org/2017/10/gdg-devfest-2017.html  
 Slides: https://docs.google.com/presentation/d/1KW9jwpD10vNm7itrDZD8m0X9zya8jwISl_bPpYcw1_M
 
 ### From Analysis to Boardroom: Google Slides presentations via R
@@ -123,7 +116,14 @@ This is a Demo only session. No slides are available here.
 
 ## Sessions
 
-| Date       | Event Name                  | Event Link                      | Topic |
-| :--------: | :-------------------------- | :------------------------------ | ----- |
-| 2017-10-28 | GDG Devfest 2017 Singapore  | https://devfest17.peatix.com/   | [Quickstart Kubernetes](/speaker-profile#quickstart-kubernetes) |
-| 2017-07-01 | I/O Extended 2017 Singapore | https://peatix.com/event/258914 | [From Analysis to Boardroom: Google Slides presentations via R](/speaker-profile#from-analysis-to-boardroom-google-slides-presentations-via-r) |
+| Date       | Event Name                            | Event Link                                                  | Topic |
+| :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2019-10-23 | La Kopi - Serverless                  | https://events.withgoogle.com/la-kopi-serverless/           | [Generating videos from slides on applications served from Google Cloud Run](/speaker-profile#generating-videos-from-slides-on-applications-served-from-google-cloud-run) |
+| 2019-07-24 | GDG Cloud Singapore Meetup July 2019  | https://www.meetup.com/gdg-cloud-singapore/events/262726983 | [GCSFuse; Heard of it](/speaker-profile#gcsfuse-heard-of-it) |
+| 2019-06-22 | io19 Extended                         | https://www.meetup.com/gdg-singapore/events/261587580/      | [Introduction to Cloud Run](/speaker-profile#introduction-to-cloud-run) |
+| 2019-06-01 | Cloud Next Extended SG - Data Edition | https://www.meetup.com/gdg-cloud-singapore/events/258359490 | [Introduction to Stackdriver](/speaker-profile#introduction-to-stackdriver) |
+| 2019-04-24 | Cloud Next Extended SG                | https://www.meetup.com/gdg-cloud-singapore/events/259734957 | [Introduction to Cloud Run](/speaker-profile#introduction-to-cloud-run) |
+| 2018-10-27 | Cloud Devfest 2018                    | https://www.meetup.com/GCPUGSG/events/253546454/            | [Triggering analytics with serverless functions](/speaker-profile#triggering-analytics-with-serverless-functions) |
+| 2018-08-25 | Google Cloud Next 2018                | https://www.meetup.com/GCPUGSG/events/251921227/            | [Using Google Cloud Functions for Analytics Workloads](/speaker-profile#using-google-cloud-functions-for-analytics-workloads) |
+| 2017-10-28 | GDG Devfest 2017 Singapore            | https://devfest17.peatix.com/                               | [Quickstart Kubernetes](/speaker-profile#quickstart-kubernetes) |
+| 2017-07-01 | I/O Extended 2017 Singapore           | https://peatix.com/event/258914                             | [From Analysis to Boardroom: Google Slides presentations via R](/speaker-profile#from-analysis-to-boardroom-google-slides-presentations-via-r) |
