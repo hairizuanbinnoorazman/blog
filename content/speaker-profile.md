@@ -121,10 +121,9 @@ Went through the reasons for automating analysis work and provided several code 
 
 This is a Demo only session. No slides are available here.
 
-Event Link: https://peatix.com/event/258914
-
 ## Sessions
 
 | Date       | Event Name                  | Event Link                      | Topic |
 | :--------: | :-------------------------- | :------------------------------ | ----- |
+| 2017-10-28 | GDG Devfest 2017 Singapore  | https://devfest17.peatix.com/   | [Quickstart Kubernetes](/speaker-profile#quickstart-kubernetes) |
 | 2017-07-01 | I/O Extended 2017 Singapore | https://peatix.com/event/258914 | [From Analysis to Boardroom: Google Slides presentations via R](/speaker-profile#from-analysis-to-boardroom-google-slides-presentations-via-r) |
