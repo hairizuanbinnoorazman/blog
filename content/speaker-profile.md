@@ -19,6 +19,12 @@ https://www.facebook.com/hairizuan.noorazman
 Is one of the co-host for the webinars hosted on GDG Cloud Singapore Webinar  
 https://www.youtube.com/c/GDGCloudSingapore
 
+## Books
+
+Author for the following books
+
+- [Golang for Jobseekers](https://www.amazon.com/Golang-Jobseekers-Unleash-programming-advancement-ebook/dp/B0C7ZVS44M)
+
 ## Talks
 
 ### Introduction to Cloud
