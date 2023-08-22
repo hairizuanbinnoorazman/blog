@@ -261,3 +261,4 @@ There are a few points that came up in my head as I go through the steps above:
 - The issue for closing compiling `GOOS=wasip1 GOARCH=wasm` to create wasi binaries https://github.com/golang/go/issues/58141
 - Instructions for installing tinygo: https://tinygo.org/getting-started/install/macos/
 - Stack overflow article for "exported" functions issue. https://stackoverflow.com/questions/67978442/go-wasm-export-functions
+- Example python script: https://github.com/wasmerio/wasmer-python/blob/master/examples/engine_universal.py
