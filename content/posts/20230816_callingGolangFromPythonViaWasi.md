@@ -262,3 +262,5 @@ There are a few points that came up in my head as I go through the steps above:
 - Instructions for installing tinygo: https://tinygo.org/getting-started/install/macos/
 - Stack overflow article for "exported" functions issue. https://stackoverflow.com/questions/67978442/go-wasm-export-functions
 - Example python script: https://github.com/wasmerio/wasmer-python/blob/master/examples/engine_universal.py
+- https://github.com/wasmerio/wasmer-python/issues/657
+- https://github.com/wasmerio/wasmer-python/issues/712
