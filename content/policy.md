@@ -2,6 +2,7 @@
 title = "Privacy Policy"
 description = "Privacy Policy for www.hairizuan.com"
 date = "2023-09-05"
+menu = "main"
 weight = "20"
 meta = "false"
 +++
