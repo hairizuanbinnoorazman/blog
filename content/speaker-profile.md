@@ -27,6 +27,18 @@ Author for the following books
 
 ## Talks
 
+### Using Emulators for Testing Google Cloud Datastore
+
+Talk is about the situation where we would want to test an application that relies on Google Cloud Datastore locally. Google Cloud Datastore is a cloud based service - which raises the question of how a developer can test it locally, ideally without requiring to create a separate Google Cloud Project to safely test the changes. 
+
+Slides: https://docs.google.com/presentation/d/1qtzs2n5ChbXwi-ZhZtqwf_bSYApM1_5q49_mvrFRMrY/edit#slide=id.p
+
+### Deploying apps using workload identity on GKE
+
+Talk on introducing audience to deployment of applications on Google Kubernetes Engine. The application being used for demo would need to contact a Google APIs. The demo would consist having the application deployed in a Kubernetes cluster without needing a service account file for authentication of api requests.
+
+Slides: https://docs.google.com/presentation/d/1-Vsy_1PpQV5wJNyTYuw4OKhyLTt_w_imaT4XPoyIStg/edit#slide=id.p
+
 ### Introduction to Cloud
 
 Talk on introducing people unfamiliar with cloud to cloud technologies/platforms. Used angle of understanding cloud from feature set available
@@ -133,6 +145,8 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2023-07-29 | I/O Extended Singapore 2023           | https://gdg.community.dev/events/details/google-gdg-cloud-singapore-presents-google-io-extended-cloud-edition-2023/ | [Using Emulators for Testing Google Cloud Datastore](/speaker-profile#using-emulators-for-testing-google-cloud-datastore) |
+| 2023-07-18 | KubernetesSG Meetup Jul 2023          | https://www.meetup.com/k8s-sg/events/294559504/             | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
 | 2023-02-20 | KubernetesSG Meetup Feb 2023          | https://www.meetup.com/k8s-sg/events/291463340/             | [Kubernetes HPA with Custom Metrics](/speaker-profile#kubernetes-hpa-with-custom-metrics) |
 | 2022-12-15 | GDSC MUM x Google Singapore           | https://gdsc.community.dev/events/details/developer-student-clubs-monash-university-malaysia-presents-gdsc-mum-x-google-singapore/ | [Introduction to Cloud Run](/speaker-profile#introduction-to-cloud-run) |
 | 2022-05-12 | Introduction to Cloud                 | https://www.youtube.com/watch?v=N0UA7DgeFBY&ab_channel=GoogleDeveloperStudentClubPSBAcademy | [Introduction to Cloud](/speaker-profile#introduction-to-cloud) |
