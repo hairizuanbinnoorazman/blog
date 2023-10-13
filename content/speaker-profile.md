@@ -27,6 +27,13 @@ Author for the following books
 
 ## Talks
 
+### Block Youtube shorts with Chrome Extensions
+
+A quick introduction on how to build a chrome extension in order to block youtube shorts on the youtube website. https://www.hairizuan.com/chrome-extension-to-get-rid-of-youtube-shorts/
+
+Slides: https://docs.google.com/presentation/d/1W6HUNWFyH0SE2PKPbfwWl6k7EBIJ66FQKQr_OAj47N0/edit#slide=id.p  
+Code: https://github.com/hairizuanbinnoorazman/youtube-cleanup  
+
 ### Using Emulators for Testing Google Cloud Datastore
 
 Talk is about the situation where we would want to test an application that relies on Google Cloud Datastore locally. Google Cloud Datastore is a cloud based service - which raises the question of how a developer can test it locally, ideally without requiring to create a separate Google Cloud Project to safely test the changes. 
@@ -145,6 +152,7 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2023-10-14 | Geekcamp SG 2023                      | https://geekcamp.sg/                                        | [Block Youtube shorts with Chrome Extensions](/speaker-profile#block-youtube-shorts-with-chrome-extensions) |
 | 2023-07-29 | I/O Extended Singapore 2023           | https://gdg.community.dev/events/details/google-gdg-cloud-singapore-presents-google-io-extended-cloud-edition-2023/ | [Using Emulators for Testing Google Cloud Datastore](/speaker-profile#using-emulators-for-testing-google-cloud-datastore) |
 | 2023-07-18 | KubernetesSG Meetup Jul 2023          | https://www.meetup.com/k8s-sg/events/294559504/             | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
 | 2023-02-20 | KubernetesSG Meetup Feb 2023          | https://www.meetup.com/k8s-sg/events/291463340/             | [Kubernetes HPA with Custom Metrics](/speaker-profile#kubernetes-hpa-with-custom-metrics) |
