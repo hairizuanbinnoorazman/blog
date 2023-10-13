@@ -19,6 +19,9 @@ https://www.facebook.com/hairizuan.noorazman
 Is one of the co-host for the webinars hosted on GDG Cloud Singapore Webinar  
 https://www.youtube.com/c/GDGCloudSingapore
 
+Sessionize - Call for papers  
+https://sessionize.com/hairizuan/
+
 ## Books
 
 Author for the following books
