@@ -543,3 +543,4 @@ How do we start debugging an application that is deployed on Kubernetes
 
 - https://www.hairizuan.com/experimenting-with-ip-tables/
 - https://www.hairizuan.com/application-performance-isnt-the-most-important-factor-in-application-development/
+- https://www.hairizuan.com/basic-ssl-setup-server-and-client-ssl-certificate-setup/
