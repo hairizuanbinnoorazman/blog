@@ -70,21 +70,27 @@ I will update this post as time goes by - if there is more information on this
   - Client computer broadcast a DHCP Broadcast Message (since no IP Address)
   - DHCP Server (Usually router) - responds with an IP Address to offer + Default gateway + Subnet Masks etc
   - Client computer responds with a request to "claim" the IP Address
-  - DHCP responds with acknowledge that IP Address has been claimed, leases for a few hours (based on configuration of router)
+  - DHCP responds with acknowledge that IP Address has been claimed, leases for a few hours (based on configuration of router). Acknowledge message may contain some additional "options" information such as DNS server etc. Technically, DHCP servers can be configured to issue such information accordingly. 
+
+References: https://support.huawei.com/enterprise/en/doc/EDOC1000178170/225eec10/dhcp-messages
 
 ### What happens when a user accesses a website from a website browser?
 
 - DNS Resolving
   - Check again local's `/etc/hosts` file to determine first level of dns resolve
-  - Reach out the dns server on current local network if setup (e.g. running your own DNS server etc - router having its own DNS server)
-  - If local network's DNS not available, reach out to further out to provider/etc or other root authorative name servers. Possibly the network provider (e.g. In singapore, could be Starhub/Singtel's DNS servers)
+  - Reach out the dns server on current local network if setup (e.g. running your own DNS server etc or usually hit the router) - all this information set during DHCP
+  - If local network's DNS not available, the router hop would reach out to further out to provider/etc or other root authorative name servers. Possibly the network provider (e.g. In singapore, could be Starhub/Singtel's DNS servers)
   - All above would be skip if dns server to be lookup-ed on workstation is set in network configurations (e.g. 8.8.8.8, 8.8.4.4, 1.1.1.1)
+- Connect to remote IP Address
+  - Process start to connect to remote IP Address
+  - Utilize some of the information to decide how to do the first hop
+  - Utilize the subnetwork mask and check with IP Address - If "network" part is different for remote server - that would mean that request has to be sent to the Default Gateway (for local workstations - that would be the wifi router)
 - TCP Handshake
   - It comes before TLS/SSL step
   - Client sends SYN (Synchronize Sequence Number)
   - Server sends SYN/ACK (Synchronize + Acknowledged)
   - Client sends ACK (To say that it has received the message)
-- SSL Handshake
+- SSL Handshake or TLS Handshake
   - If website to be accessed is accessed via https
   - Refer to the following website for more details
     - Client Hello (Includes TLS version that client browser support + random string client)
