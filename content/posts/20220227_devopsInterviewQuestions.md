@@ -63,6 +63,15 @@ I will update this post as time goes by - if there is more information on this
 
 ## Generic
 
+### How is a computer assigned an IP Address in a LAN?
+
+- Either statically assigned an IP Address
+- Generally, most computers on home networks/office network work with DHCP
+  - Client computer broadcast a DHCP Broadcast Message (since no IP Address)
+  - DHCP Server (Usually router) - responds with an IP Address to offer + Default gateway + Subnet Masks etc
+  - Client computer responds with a request to "claim" the IP Address
+  - DHCP responds with acknowledge that IP Address has been claimed, leases for a few hours (based on configuration of router)
+
 ### What happens when a user accesses a website from a website browser?
 
 - DNS Resolving
@@ -70,6 +79,11 @@ I will update this post as time goes by - if there is more information on this
   - Reach out the dns server on current local network if setup (e.g. running your own DNS server etc - router having its own DNS server)
   - If local network's DNS not available, reach out to further out to provider/etc or other root authorative name servers. Possibly the network provider (e.g. In singapore, could be Starhub/Singtel's DNS servers)
   - All above would be skip if dns server to be lookup-ed on workstation is set in network configurations (e.g. 8.8.8.8, 8.8.4.4, 1.1.1.1)
+- TCP Handshake
+  - It comes before TLS/SSL step
+  - Client sends SYN (Synchronize Sequence Number)
+  - Server sends SYN/ACK (Synchronize + Acknowledged)
+  - Client sends ACK (To say that it has received the message)
 - SSL Handshake
   - If website to be accessed is accessed via https
   - Refer to the following website for more details
