@@ -57,6 +57,7 @@ I will update this post as time goes by - if there is more information on this
   - [How does one achieve multi-tenancy in Kubernetes environment?](#how-does-one-achieve-multi-tenancy-in-kubernetes-environment)
   - [Why you can't ping a service?](#why-you-cant-ping-a-service)
   - [Debugging steps for Kubernetes Applications](#debugging-steps-for-kubernetes-applications)
+- [Useful Links](#useful-links)
 
 
 {{< ads_header >}}
@@ -537,3 +538,8 @@ How do we start debugging an application that is deployed on Kubernetes
   - Copy pod while changing its command: `kubectl debug <pod name> -it --copy-to=debugging-pod --container=<pod name> -- sh`
   - Debug with shell on node: `kubectl debug node/<node name> -it --image=ubuntu`
 - Additional cheatsheet for reference: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+## Useful links
+
+- https://www.hairizuan.com/experimenting-with-ip-tables/
+- https://www.hairizuan.com/application-performance-isnt-the-most-important-factor-in-application-development/
