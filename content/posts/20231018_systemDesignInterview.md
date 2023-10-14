@@ -19,6 +19,17 @@ From the following website: https://www.youtube.com/watch?v=i7twT3x5yv8
 - Deep dive to specific "interesting" pieces of the components
 - Wrap up
 
+- Usual points:
+  - Request for estimated users for the application to determine scale of the application
+    - To help find out ratio of reader to writers.
+  - Any "feed" need to ask about "freshness" of data. How frequently does it need to be updated? (But does this matter here?)
+  - Technical requirements:
+    - Availability of system
+    - Ok for data to be eventually consistent or is consistent data a requirement here?
+    - Latency of content to be distributed
+    - Fault tolerance (able to withstand failures)
+  - Use Queue for potentially slow process or processes that may suddenly spike in requirements
+
 ## Design an "Instagram" app
 
 - Business requirements
@@ -74,3 +85,25 @@ TODO: Read up further on this
     - Data moving subcomponent. Move data between nodes in the cluster
     - Partitioning of data component. In this case, maybe consistent hashing is the best solution to prevent so much data from moving around.
     - Memberlist
+
+## Design Tiktok
+
+- Requirements
+  - User is able to submit in short clips of videos
+  - User is able to edit the short clips of videos
+  - User is able to follow other users to see what content they post etc
+  - User able to interact with the comment by liking or commenting on it
+  - User will be on a feed that will provide a list of short form videos that they will view
+  - User will be served ads in order to make money for the application
+  - There will be metrics that would collect business metrics based on how users interact with the application
+- Technical requirements
+  - Short videos served would need to be served at low latency with low bandwidth usage
+  - Amount of time between upload and content availability should be low?
+- High level components
+  - User service (deal with users following other users etc)
+  - Ads service
+  - Video submission service
+  - Video viewing service
+  - Video editing service
+  - Metrics service
+  - Feed generation service
