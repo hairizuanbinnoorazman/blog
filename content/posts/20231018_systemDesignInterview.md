@@ -40,3 +40,19 @@ From the following website: https://www.youtube.com/watch?v=i7twT3x5yv8
     - Number of posts user went through
     - Time spent on each post etc
   - Ads service. Involves with providing ads purchased by individuals/companies. Consumed within the feed.
+
+## Design a live-streaming application
+
+TODO: Read up further on this
+
+- Requirements
+  - Take video stream from user's web camera + microphone from browser/app and encode the data that is for live streaming
+  - User is able to select the stream that is to be watched
+  - User is able to download the right bitsized video for best viewing experience (e.g. handphone has smallest screen and doesn't need to watch it in "True HD" fashion.)
+- Technical Requirements
+  - Low latency between time when video inputs is captured to when viewers are watching the stream
+  - Video stream is available globally to everyone at the same time
+- High level components
+  - Client application (browser) that is able to access the camera + microphone to record information. It will then encode the data as RTMP/RTMPS to send the data over to the server.
+  - Transcoding component. Component that will take RTMP input and then run appropiate manipulations on it to downsize the data accordign to different bitrates. Apparently, ffmpeg seems to be able to immediately do such computations in a single jump.
+  - Client application (viewer) to view content via HLS format.
