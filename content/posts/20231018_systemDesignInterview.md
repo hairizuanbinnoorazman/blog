@@ -70,7 +70,8 @@ TODO: Read up further on this
 
 ## Design a key value store
 
-TODO: Read up further on this
+TODO: Research on the following:
+- Storage Engine: SStable, Bloom Filters
 
 - Requirements
   - To store set of keys mapped to its values in a persistent fashion. Data is not lost on shut down.
@@ -84,7 +85,11 @@ TODO: Read up further on this
     - Leader election. Needed when clusters are formed. Certain operations where only 1 operation can succeed requires leader to be available and to decide what to do next.
     - Data moving subcomponent. Move data between nodes in the cluster
     - Partitioning of data component. In this case, maybe consistent hashing is the best solution to prevent so much data from moving around.
-    - Memberlist
+    - Memberlist. To see who's part of it and who's not. If no longer healthy, need to start moving data around.
+  - Query Engine:
+    - Allow capability to handle further complex requests from clients
+  - Storage Engine:
+    - Consists of 3 things. Commit log, Memory Cache and Write to Disk
 
 ## Design Tiktok
 
