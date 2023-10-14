@@ -1,0 +1,42 @@
++++
+title = "System Design Notes"
+description = "Notes taken down for system design - part for system design interviews"
+tags = [
+    "microservices",
+]
+date = "2023-10-18"
+categories = [
+    "microservices",
+]
++++
+
+## General framework for system design interviews
+
+From the following website: https://www.youtube.com/watch?v=i7twT3x5yv8  
+
+- Specify Requirements
+- Design High Level Functional Components
+- Deep dive to specific "interesting" pieces of the components
+- Wrap up
+
+## Design an "Instagram" app
+
+- Business requirements
+  - User has a home screen which provides a feed of photos/videos of other people. Assumed that priority for the feed would be people "close" to the user
+  - User submits photos or videos and adds metadata to such assets when posting. E.g. tags
+  - User is able to vote for which photo they like best which would help identify which content is "good" content
+  - User is able to "follow" other fellow users
+  - Is this a global app? Or just simply a regional app?
+  - It is assumed that the model of the this "instagram" would have the same business model - serve Ads to make money
+- Technical requirements
+  - How many users are expected to use the app on daily basis?
+  - When accessing content, can it be assumed that we would want to reduce content sizes for users - in order to improve the responsiveness of the app and reduce amount of bandwidth needed to show the content?
+- High level components
+  - User service. Manages user information as well as the closeness of users to other users. Track the followers information.
+  - Content Submission service. Handles content being submitted by user. Involves processing the content for storage as well as future service as needed.
+  - Feed generation service. Involves in generating the feed that each user would be consuming. Some of the information that it requires to generate the feed would be the closeness of the user to other relevant user, recency of the post, the amount of likes of the post etc. Feed generation service would probably use an algorithm/ML to train on all these data to determine which feed would be best served to provide the greatest revenue/engagement.
+  - Metrics absorption service. Collect business metrics on how posts are engaged by users. Information such as:
+    - App usage time
+    - Number of posts user went through
+    - Time spent on each post etc
+  - Ads service. Involves with providing ads purchased by individuals/companies. Consumed within the feed.
