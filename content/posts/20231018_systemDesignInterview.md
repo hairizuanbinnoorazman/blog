@@ -56,3 +56,21 @@ TODO: Read up further on this
   - Client application (browser) that is able to access the camera + microphone to record information. It will then encode the data as RTMP/RTMPS to send the data over to the server.
   - Transcoding component. Component that will take RTMP input and then run appropiate manipulations on it to downsize the data accordign to different bitrates. Apparently, ffmpeg seems to be able to immediately do such computations in a single jump.
   - Client application (viewer) to view content via HLS format.
+
+## Design a key value store
+
+TODO: Read up further on this
+
+- Requirements
+  - To store set of keys mapped to its values in a persistent fashion. Data is not lost on shut down.
+  - Able to take in a moderate number of connections with no issues when pushing/getting data
+  - Data stored on disk cannot be in clear text format
+  - Able to operate as a cluster
+- Technical requirements
+  - Low latency when retrieving and saving data in the datastore
+- High level components:
+  - Cluster components:
+    - Leader election. Needed when clusters are formed. Certain operations where only 1 operation can succeed requires leader to be available and to decide what to do next.
+    - Data moving subcomponent. Move data between nodes in the cluster
+    - Partitioning of data component. In this case, maybe consistent hashing is the best solution to prevent so much data from moving around.
+    - Memberlist
