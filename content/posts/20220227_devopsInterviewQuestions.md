@@ -111,6 +111,15 @@ References: https://support.huawei.com/enterprise/en/doc/EDOC1000178170/225eec10
 References:  
 - https://www.youtube.com/watch?v=VONSx_ftkz8  
 
+### What are the different kind of DNS Records?
+
+- A Record - Mapping domain to IPv4 addresses
+- AAAA Record - Mapping domain to IPv6 addresses
+- CNAME Record - Mapping domain to another domain as an alias
+- NS Record - Provide information on the authorivative DNS server for that domain
+- MX Record - Provide information for where the emails meant for that domain is supposed to go
+- TXT Record - Adding text information to the domain records (e.g. adding text to prove that you own the domain etc)
+
 ### What's the difference between threads and processes?
 
 - Process is any program in execution vs threads being a segment of process
