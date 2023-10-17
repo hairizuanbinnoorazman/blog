@@ -21,7 +21,9 @@ Weirdly enough, a lot of the questions gather are usually "fringe" edge cases th
 I will update this post as time goes by - if there is more information on this
 
 - [Generic](#generic)
+  - [How is a computer assigned an IP Address in a LAN?](#how-is-a-computer-assigned-an-ip-address-in-a-lan)
   - [What happens when a user accesses a website from a website browser?](#what-happens-when-a-user-accesses-a-website-from-a-website-browser)
+  - [What are the different kind of DNS Records?](#what-are-the-different-kind-of-dns-records)
   - [What's the difference between threads and processes?](#whats-the-difference-between-threads-and-processes)
   - [How do we monitor Java applications?](#how-do-we-monitor-java-applications)
   - [What is Swap space used for?](#what-is-swap-space-used-for)
