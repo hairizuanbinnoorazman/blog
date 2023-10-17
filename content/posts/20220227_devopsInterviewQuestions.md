@@ -108,6 +108,9 @@ References: https://support.huawei.com/enterprise/en/doc/EDOC1000178170/225eec10
   - Javascript could be used to fetch results from APIs etc.
   - To prevent security issues, CORS rules are set in place in browser, difficult to call APIs across domains
 
+References:  
+- https://www.youtube.com/watch?v=VONSx_ftkz8  
+
 ### What's the difference between threads and processes?
 
 - Process is any program in execution vs threads being a segment of process
