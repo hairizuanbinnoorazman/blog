@@ -118,6 +118,7 @@ TODO: Research on the following:
 TODO: Further research needed
 - View videos presented at Re:invent conferences etc on how other companies are doing it?
 - https://youtu.be/ilgpzlE7Hds?t=1882
+- Vitess architecture + Planetscale
 
 - Requirements:
   - Reads for certain data such as user data would need to be global. Need to find out where each user is from
