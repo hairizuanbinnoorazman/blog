@@ -203,4 +203,4 @@ curl --cacert ca.pem --cert client.crt --key client.key  https://lol.testtest.co
 ## Additional Information
 
 - If we simply wish to setup SSL cert in nginx without needed client authentication - we would just need to need to copy the "root" `ca.pem` and copy it into `/usr/local/share/ca-certificates`. Ensure that the file ends with `.crt`. We can do so by copying (assuming we're in the folder where we created all the certs... - `mv ca.pem /usr/local/share/ca-certificates/ca.crt`). 
-- The next step would be to restore and update the ca-stores. This is done by running the following: `sudo update-ca-certificates`. Although, this would only affect on OS level. Browsers still require an update to their respective certs.
+- The next step would be to restore and update the ca-stores. This is done by running the following: `sudo update-ca-certificates`. Although, this would only affect on OS level. Browsers still require an update to their respective ca-stores.
