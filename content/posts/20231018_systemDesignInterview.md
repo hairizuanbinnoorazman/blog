@@ -71,7 +71,7 @@ TODO: Read up further on this
 ## Design a key value store
 
 TODO: Research on the following:
-- Storage Engine: SStable, Bloom Filters
+- Storage Engine: SStable, Bloom Filters, Btrees? (But sounds like more for relational db-s?)
 
 - Requirements
   - To store set of keys mapped to its values in a persistent fashion. Data is not lost on shut down.
@@ -112,3 +112,25 @@ TODO: Research on the following:
   - Video editing service
   - Metrics service
   - Feed generation service
+
+## Design a global accessible database
+
+TODO: Further research needed
+- View videos presented at Re:invent conferences etc on how other companies are doing it?
+- https://youtu.be/ilgpzlE7Hds?t=1882
+
+- Requirements:
+  - Reads for certain data such as user data would need to be global. Need to find out where each user is from
+  - Ok for some of the data to be regional. It is assumed that most data is regional in nature
+  - Replication of user data doesn't need to be immediate. It is ok for this data to be eventuall consistent. (But the data needs to be highly available as users can access the service any time)
+  - Writes for "other" data needs to be done with low latency (as much as possible)
+  - It is assumed that there is high ratio of reads:writes
+- High level components
+  - Distributed multi-regional nosql db
+    - Set the heartbeat interval to be pretty high - since we're having databases talking across huge regions
+  - Regional relational database clusters
+    - For storing user data and other data
+    - Cluster is needed in order to allow for high reads to writes. Reads done for replicas while writes done for the main primary
+    - Initial location of where the user creates his/her account would be the region where this would be first created
+  - Metrics service
+    - Collect latency information of how slow users accessing their data is. If it's slow and its determined that they've mostly started accessing their data from a different region - then begin propagating the data to another region?
