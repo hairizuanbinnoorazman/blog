@@ -122,6 +122,10 @@ References:
 - MX Record - Provide information for where the emails meant for that domain is supposed to go
 - TXT Record - Adding text information to the domain records (e.g. adding text to prove that you own the domain etc)
 
+### What is the purpose of a Certificate Authority?
+
+A certificate authority is usually an organization/private entity that would usually do validation of other websites by issuing digital certificates. A user who utilizes such third party certificate issuers would first need to create a private key and then a certificate signing request. The certificate signing request would be passed to the CA which would then be used to create the cert that the user can then use.
+
 ### What's the difference between threads and processes?
 
 - Process is any program in execution vs threads being a segment of process
