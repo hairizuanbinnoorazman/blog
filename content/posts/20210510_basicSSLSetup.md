@@ -62,6 +62,10 @@ DNS.2       = lol.testtest.com
 Refer to documentation for more details:  
 https://jamielinux.com/docs/openssl-certificate-authority/create-the-root-pair.html
 
+Another useful documentation:  
+https://www.openssl.org/docs/man3.0/man5/x509v3_config.html  
+This link pertains to the various portions for the x509 v3 certificate options available for use. It tells what are the various options in there, and what it is for etc.
+
 ```bash
 openssl genrsa -out ca.key 2048
 openssl rsa -in ca.key -pubout > ca.pub
@@ -195,3 +199,8 @@ We would need to pass the client ssl certificates
 ```bash
 curl --cacert ca.pem --cert client.crt --key client.key  https://lol.testtest.com
 ```
+
+## Additional Information
+
+- If we simply wish to setup SSL cert in nginx without needed client authentication - we would just need to need to copy the "root" `ca.pem` and copy it into `/usr/local/share/ca-certificates`. Ensure that the file ends with `.crt`. We can do so by copying (assuming we're in the folder where we created all the certs... - `mv ca.pem /usr/local/share/ca-certificates/ca.crt`). 
+- The next step would be to restore and update the ca-stores. This is done by running the following: `sudo update-ca-certificates`. Although, this would only affect on OS level. Browsers still require an update to their respective certs.
