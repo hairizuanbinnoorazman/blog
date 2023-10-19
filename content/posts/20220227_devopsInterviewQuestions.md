@@ -133,6 +133,7 @@ Both are caching tools that store items in memory; however, due to different imp
 References:
 - https://medium.com/@jychen7/sharing-redis-single-thread-vs-multi-threads-5870bd44d153
 - https://medium.com/@SkyscannerEng/scaling-memcached-cdef01e150a1
+- https://github.com/memcached/memcached/wiki/Commands
 
 ### What is the purpose of a Certificate Authority?
 
