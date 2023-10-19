@@ -122,6 +122,18 @@ References:
 - MX Record - Provide information for where the emails meant for that domain is supposed to go
 - TXT Record - Adding text information to the domain records (e.g. adding text to prove that you own the domain etc)
 
+### What are some differences between Redis and Memcached?
+
+Both are caching tools that store items in memory; however, due to different implementations, they come with their own set of restrictions or drawbacks.
+
+- Memcached is very simplistic; Redis is very feature reach, can store complex data models
+- Memcached doesn't even have cluster mode; Redis allows cluster mode to handle higher throughput. (Means for memcached - "cluster" mode would need to rely on clients - clients would need to implement all that logic)
+- Memcached is multi-threaded while redis is "single threaded". Means, if any operation is blocking, no requests can be served till it's done.
+
+References:
+- https://medium.com/@jychen7/sharing-redis-single-thread-vs-multi-threads-5870bd44d153
+- https://medium.com/@SkyscannerEng/scaling-memcached-cdef01e150a1
+
 ### What is the purpose of a Certificate Authority?
 
 A certificate authority is usually an organization/private entity that would usually do validation of other websites by issuing digital certificates. A user who utilizes such third party certificate issuers would first need to create a private key and then a certificate signing request. The certificate signing request would be passed to the CA which would then be used to create the cert that the user can then use.
