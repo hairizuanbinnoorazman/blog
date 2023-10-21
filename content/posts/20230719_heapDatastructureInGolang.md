@@ -129,28 +129,28 @@ For node 1, the left node is 3 and 4. By using the formula for left side node ->
 The golang code for building a heap is the following:  
 
 ```golang
-func ArrHeapify(nums []int, s int) {
-	leftSideIdx := 2*s + 1
-	rightSideIdx := 2*s + 2
+func ArrHeapify(nums []int, node int) {
+	lhsIdx := 2*node + 1
+	rhsIdx := 2*node + 2
+	largestIdx := node
 
-	if leftSideIdx >= len(nums) {
-		return
+	if lhsIdx < len(nums) {
+		if nums[lhsIdx] > nums[largestIdx] {
+			largestIdx = lhsIdx
+		}
 	}
-	ArrHeapify(nums, leftSideIdx)
-	if rightSideIdx >= len(nums) {
-		return
-	}
-	ArrHeapify(nums, rightSideIdx)
 
-	if nums[s] < nums[leftSideIdx] {
-		temp := nums[s]
-		nums[s] = nums[leftSideIdx]
-		nums[leftSideIdx] = temp
+	if rhsIdx < len(nums) {
+		if nums[rhsIdx] > nums[largestIdx] {
+			largestIdx = rhsIdx
+		}
 	}
-	if nums[s] < nums[rightSideIdx] {
-		temp := nums[s]
-		nums[s] = nums[rightSideIdx]
-		nums[rightSideIdx] = temp
+
+	if largestIdx != node {
+		tempVal := nums[node]
+		nums[node] = nums[largestIdx]
+		nums[largestIdx] = tempVal
+		ArrHeapify(nums, largestIdx)
 	}
 }
 ```
@@ -159,15 +159,18 @@ We can build the following driver code to test out our implementation:
 
 ```golang
 func main() {
-	a := []int{2, 3, 1, 0, 4, 5, 7}
+	a := []int{1, 3, 5, 3, 6, 13, 10, 9, 8, 15, 17}
 	fmt.Println(a)
-	ArrHeapify(a, 0)
+
+	for i := (len(a) - 1) / 2; i >= 0; i-- {
+		ArrHeapify(a, i)
+	}
 	fmt.Println(a)
-	a[0] = 0
-	ArrHeapify(a, 0)
-	fmt.Println(a)
-	a[0] = 0
-	ArrHeapify(a, 0)
+
+	a = append(a, 90)
+	for i := (len(a) - 1) / 2; i >= 0; i-- {
+		ArrHeapify(a, i)
+	}
 	fmt.Println(a)
 }
 ```
