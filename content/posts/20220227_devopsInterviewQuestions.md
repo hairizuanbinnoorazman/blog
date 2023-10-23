@@ -24,6 +24,8 @@ I will update this post as time goes by - if there is more information on this
   - [How is a computer assigned an IP Address in a LAN?](#how-is-a-computer-assigned-an-ip-address-in-a-lan)
   - [What happens when a user accesses a website from a website browser?](#what-happens-when-a-user-accesses-a-website-from-a-website-browser)
   - [What are the different kind of DNS Records?](#what-are-the-different-kind-of-dns-records)
+  - [What are some differences between Redis and Memcached?](#what-are-some-differences-between-redis-and-memcached)
+  - [What is the purpose of a Certificate Authority?](#what-is-the-purpose-of-a-certificate-authority)
   - [What's the difference between threads and processes?](#whats-the-difference-between-threads-and-processes)
   - [How do we monitor Java applications?](#how-do-we-monitor-java-applications)
   - [What is Swap space used for?](#what-is-swap-space-used-for)
@@ -59,7 +61,8 @@ I will update this post as time goes by - if there is more information on this
   - [How does one achieve multi-tenancy in Kubernetes environment?](#how-does-one-achieve-multi-tenancy-in-kubernetes-environment)
   - [Why you can't ping a service?](#why-you-cant-ping-a-service)
   - [Debugging steps for Kubernetes Applications](#debugging-steps-for-kubernetes-applications)
-- [Useful Links](#useful-links)
+  - [What are some of the security steps to harden Kubernetes deployments?](#what-are-some-of-the-security-steps-to-harden-kubernetes-deployments)
+- [Useful links](#useful-links)
 
 
 {{< ads_header >}}
