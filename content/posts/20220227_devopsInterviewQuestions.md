@@ -571,6 +571,23 @@ How do we start debugging an application that is deployed on Kubernetes
   - Debug with shell on node: `kubectl debug node/<node name> -it --image=ubuntu`
 - Additional cheatsheet for reference: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
+### What are some of the security steps to harden Kubernetes deployments?
+
+- NSA Hardening Guide: https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/2716980/nsa-cisa-release-kubernetes-hardening-guidance/
+  - Ensure each container has read only root filesystem
+  - Prevent containers from accessing host files using high GIDs
+  - Don't use k8s host path to mount volumes
+  - Prevent containers from escalating privileges (`securityContext.allowPrivilegeEscalation: false`)
+  - Prevent containers from running with root priviliges (`securityContext.runAsRoot: false` in k8s deployment)
+  - Prevent service acccount token (k8s service account) to be auto-mounted on pods
+  - Set requests and limits to prevent runaway containers
+- Do not run build process (e.g. Docker build) in production Kubernetes clusters (they have arbitrary commands to run commands)
+- Scan built docker images to ensure no security issues
+- Ensure you do not use the `--privileged` docker flags in docker and kubernetes
+- Ensure that secrets are encrypted at rest and transit (either encrypt etcd or use KMS or Hashicorp vault)
+- Prevent container drift (someone went into the container to modify the running image)
+- Implement network policies (set policy for which pod can talk to which pod)
+
 ## Useful links
 
 - https://www.hairizuan.com/experimenting-with-ip-tables/
