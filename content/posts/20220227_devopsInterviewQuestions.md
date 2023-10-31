@@ -274,6 +274,8 @@ lsof -i -P -n # Find which process connected to which port
 - SLA - service level agreement
 - MTBF - Mean time between failures
 - MTTR - Mean time to recovery or repair or respond (they all mean different things)
+- RTO - Recovery Time Objective. Max amount of time since downtime allowed for services to recover to working order
+- RPO - Recovery Point Objective. Max amount of time for which data is lost that the organization is willing or ok to lose 
 - Incident Handling
 - Post Mortem
 - Root Cause Analysis
