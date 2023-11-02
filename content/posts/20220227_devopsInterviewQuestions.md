@@ -38,6 +38,7 @@ I will update this post as time goes by - if there is more information on this
   - [What's the meaning of some of the following terms when handling systems:](#whats-the-meaning-of-some-of-the-following-terms-when-handling-systems)
   - [What are inodes, hard links and symlinks, file descriptions (FD) in linux filesystem?](#what-are-inodes-hard-links-and-symlinks-file-descriptions-fd-in-linux-filesystem)
   - [How does one improve security posture of deployments?](#how-does-one-improve-security-posture-of-deployments)
+  - [IPTables Commands](#iptables-commands)
 - [System Design](#system-design)
   - [References](#references)
   - [Design a code-deployment system](#design-a-code-deployment-system)
@@ -292,6 +293,21 @@ diff <filename1> <filename2>
 
 # Check cpuinformation
 cat /proc/cpuinfo
+
+# Performance Troubleshooting Demos
+# https://www.youtube.com/watch?v=rwVLa9me7e4&ab_channel=grobelDev
+# https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55?gi=3d8d7960fce4
+uptime
+dmesg -T | tail
+vmstat 1
+mpstat -P ALL 1
+pidstat 1
+iostat -xz 1
+free -m
+sr -n DEV 1
+sar -n TCP,ETCP 1
+top
+
 ```
 
 ### What's the meaning of some of the following terms when handling systems:
@@ -341,6 +357,68 @@ Note: Attestation means evidence or proof of something
 - For all deployments
   - Ensure that logs emitted from all applications do not print out security tokens/credentials or user information - need to have constant scanning of information
   - Ensure resource policies are set (to ensure no runaway application)
+
+### IPTables Commands
+
+Here is a list of iptables commands (with explanations of what it's doing)
+
+View the following youtube series: https://www.youtube.com/watch?v=xHwtG9S8Fwo&list=PLvadQtO-ihXt5k8XME2iv0cKpKhcYqe7i&index=2&ab_channel=SysEngQuick
+
+```bash
+apt install iptables-persistent
+iptables-save > /etc/iptables/rules.v4
+
+# Accept all input and output to be accepted
+iptables -A INPUT -j ACCEPT
+iptables -A OUTPUT -j ACCEPT
+
+# Set default policies for input, forward and output chains
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
+
+# Accept localhost interface (from ifconfig - view network interface)
+iptables -A INPUT -j ACCEPT -i lo
+iptables -A OUTPUT -j ACCEPT -o lo
+
+# Easier to view and debug iptables rules - default is filter table
+iptables -L -n -v --line-numbers
+
+# View the NAT tables
+iptables -L -n -v --line-numbers -t nat
+
+# Allow currently established connections to continue
+iptables -A INPUT -j ACCEPT -m conntrack --ctstate ESTABLISHED,RELATED
+iptables -A INPUT -j OUTPUT -m conntrack --ctstate ESTABLISHED,RELATED
+
+# Adding comments
+iptables -A INPUT -j ACCEPT -p tcp --dport -m comment --comment "Test comment"
+
+# Deleting rules
+iptables -D INPUT 1
+iptables -D OUTPUT 1
+
+# Adding specific examples for adding specific protocoles
+iptables -A INPUT -j ACCEPT -p icmp --icmp-type=8
+iptables -A INPUT -j ACCEPT -p tcp --dport 22
+iptables -A OUTPUT -j ACCEPT -p icmp --icmp-type=8
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 22
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 80
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 443
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 53
+iptables -A OUTPUT -j ACCEPT -p udp --dport 53
+iptables -A OUTPUT -j ACCEPT -p udp --dport 123 # NTP traffic
+
+iptables -A FORWARD -m comment --comment "established traffic" -j ACCEPT -m conntrack --ctstate ESTABLISHED,RELATED
+iptables -A FORWARD -j ACCEPT -i lan -o wan
+
+# To allow forward
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -t nat -A POSTROUTING -o wan -j MASQUERADE
+
+iptables -t nat -A PREROUTING -p tcp --dport 22 -d 192.168.5.201 -j DNAT --to-destination 172.16.1.102
+iptables -A FORWARD -p tcp --dport 22 -d 172.16.1.102 -j ACCEPT
+```
 
 {{< ads_header >}}
 
