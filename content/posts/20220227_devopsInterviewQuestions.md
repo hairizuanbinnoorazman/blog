@@ -238,6 +238,18 @@ top
 # M (by Memory), N (by PID), P (by CPU - proceessor), T (by time)
 # E (change units)
 # t (cpu graph), m (memory graph), k (kill signal), c (show full command line), r (renice)
+#
+# First line in top: e.g. 
+# 13:27:26 up 2 days, 18 min,  1 user,  load average: 0.00, 0.07, 0.09
+# <uptime info> <load average by 1min, 5min, 15min - more than 1 is overworked>
+#
+# Third line in top: e.g.
+# %Cpu(s):  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.1 si,  0.0 st
+# us - % user processes
+# sy - % system processes
+# id - % idle time
+# wa - % wait time for IO
+# st - % wait for virtual CPU to access physical cpu
 
 # Cleaning up logs
 journalctl --vacuum-time=10d
