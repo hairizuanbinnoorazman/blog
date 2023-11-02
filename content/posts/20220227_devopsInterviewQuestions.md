@@ -255,16 +255,31 @@ less
 
 # Network commands?
 ifconfig
+ip a # View logs
 ping
-nslookup
-dig # apt install -y dnsutils
+nslookup <hostname>
+dig <hostname> # apt install -y dnsutils
 tcpdump #only if traffic is http or non-encrypted
 nmap -O localhost # Find out which port is open
 nmap -sU -O localhost # UDP Traffic port
 nmap -sT -O localhost # TCP Traffic port
+nmap -A <remote ip address> # Get details of remote server
+netstat -tunlp # Check which ports are open
+traceroute # There was a time where traffic for laptops for Starhub (while working) was dropping traffic?
+arp # Get network equipment details
+hostname # Get info of how the machine is presented to network
+
+# Linux firewalls
+iptables -L
 
 # Open files
 lsof -i -P -n # Find which process connected to which port
+
+# Compare files
+diff <filename1> <filename2>
+
+# Check cpuinformation
+cat /proc/cpuinfo
 ```
 
 ### What's the meaning of some of the following terms when handling systems:
