@@ -265,6 +265,8 @@ vim # Use j, k commands to jump up and down
 head
 tail
 less
+grep -c "INFO" logname.log
+grep -ic "INFO" logname.log # inverse of above
 
 # Network commands?
 ifconfig
@@ -299,15 +301,18 @@ cat /proc/cpuinfo
 # https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55?gi=3d8d7960fce4
 uptime
 dmesg -T | tail
-vmstat 1
-mpstat -P ALL 1
-pidstat 1
-iostat -xz 1
+vmstat 1            # Virtual Memory stats - if r > no of processes. bad
+mpstat -P ALL 1     # Report processor stats - if one is busy but the rest is not - could be single threaded app
+pidstat 1           # PID stats - check on pid level - which processes taking resources?
+iostat -xz 1        # IO stats - check if io devices are the bottleneck?
 free -m
-sr -n DEV 1
-sar -n TCP,ETCP 1
-top
-
+sar -n DEV 1        # (System Activity Report) Networking check
+sar -n TCP,ETCP 1   # Networking check
+top                 # General overview of system - hard to capture short-lived processes
+atop                # Top but with historical info
+strace -tp `pgrep lab003` 2>&1 | head -100 # Check system calls (for detailed reasons for why app is so busy on system)
+perf record -F 99 -a -g -- sleep 10 # Capture perf info
+perf report -n --stdio
 ```
 
 ### What's the meaning of some of the following terms when handling systems:
