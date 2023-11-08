@@ -218,6 +218,10 @@ RED might be used for something that comes at a rate and theoretically have "no 
 Not in terms of importance:
 
 ```bash
+# Important tooling to install (if missing)
+sudo apt update
+sudo apt install -y iputils-ping vim sysstat net-tools
+
 # Management of components
 sudo systemctl status <component>
 sudo systemctl list-unit-files | grep enabled
