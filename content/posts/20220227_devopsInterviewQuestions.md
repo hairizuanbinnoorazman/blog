@@ -268,6 +268,14 @@ less
 grep -c "INFO" logname.log
 grep -ic "INFO" logname.log # inverse of above
 
+# Disk related commands
+sudo fdisk /dev/sdb -> Create a new partition
+sudo fdisk -l
+sudo mkfs -t ext4 /dev/sdb1
+lsblk -f
+sudo mount /dev/sdb1 /var/lib/mysql
+# Make sure to edit /etc/fstab
+
 # Network commands?
 ifconfig
 ip a # View logs
