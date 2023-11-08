@@ -370,6 +370,10 @@ Note: Attestation means evidence or proof of something
 - For all deployments
   - Ensure that logs emitted from all applications do not print out security tokens/credentials or user information - need to have constant scanning of information
   - Ensure resource policies are set (to ensure no runaway application)
+- Utilize linux tooling
+  - Apparmor: Mandatory Access Control framework that functions as an LSM (Linux Security Module). It is used to whitelist or blacklist a subject's (program's) access to an object (file, path, etc.).
+  - Seccomp: a Linux feature that allows a userspace program to set up syscall filters.
+  - Dropping capabilities
 
 ### IPTables Commands
 
