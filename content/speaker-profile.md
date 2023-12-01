@@ -30,6 +30,12 @@ Author for the following books
 
 ## Talks
 
+### Feature flags can be surprisingly complicated
+
+Feature flags are usually an after-thought when it comes to building applications. However, there is an entire army of developers that think otherwise. There is now an small set of companies that aim to provide feature flags as a service. There is now even a project in CNCF that aims to standardize this in order to ensure that users are not bound to a single provider. This talk aims to cover this (and more if time permits)
+
+Slides: https://docs.google.com/presentation/d/1fNXmnvnCRZ5Wn9NOzqpX2SwJRjGzFXZuT9EtaY_IWlI/edit#slide=id.p  
+
 ### Block Youtube shorts with Chrome Extensions
 
 A quick introduction on how to build a chrome extension in order to block youtube shorts on the youtube website. https://www.hairizuan.com/chrome-extension-to-get-rid-of-youtube-shorts/
@@ -48,6 +54,7 @@ Slides: https://docs.google.com/presentation/d/1qtzs2n5ChbXwi-ZhZtqwf_bSYApM1_5q
 Talk on introducing audience to deployment of applications on Google Kubernetes Engine. The application being used for demo would need to contact a Google APIs. The demo would consist having the application deployed in a Kubernetes cluster without needing a service account file for authentication of api requests.
 
 Slides: https://docs.google.com/presentation/d/1-Vsy_1PpQV5wJNyTYuw4OKhyLTt_w_imaT4XPoyIStg/edit#slide=id.p
+Slides (Devfest edition): https://docs.google.com/presentation/d/1MYLJDINrvph-XBW08oITfftWy0g9HE8lu2qoeF7ObMU/edit#slide=id.g26290ab0c45_0_86  
 
 ### Introduction to Cloud
 
@@ -155,6 +162,8 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2023-12-02 | GDG KL Devfest 2023                   | https://gdg.community.dev/events/details/google-gdg-kuala-lumpur-presents-devfest-2023-kuala-lumpur/ | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
+| 2023-11-18 | GDG Singapore Devfest 2023            | https://sites.google.com/view/devfest-singapore-2023/speakers | [Feature flags can be surprisingly complicated](/speaker-profile#feature-flags-can-be-surprisingly-complicated) |
 | 2023-10-14 | Geekcamp SG 2023                      | https://geekcamp.sg/                                        | [Block Youtube shorts with Chrome Extensions](/speaker-profile#block-youtube-shorts-with-chrome-extensions) |
 | 2023-07-29 | I/O Extended Singapore 2023           | https://gdg.community.dev/events/details/google-gdg-cloud-singapore-presents-google-io-extended-cloud-edition-2023/ | [Using Emulators for Testing Google Cloud Datastore](/speaker-profile#using-emulators-for-testing-google-cloud-datastore) |
 | 2023-07-18 | KubernetesSG Meetup Jul 2023          | https://www.meetup.com/k8s-sg/events/294559504/             | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
