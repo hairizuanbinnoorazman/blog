@@ -39,8 +39,17 @@ I will update this post as time goes by - if there is more information on this
   - [What are inodes, hard links and symlinks, file descriptors (FD) in linux filesystem?](#what-are-inodes-hard-links-and-symlinks-file-descriptors-fd-in-linux-filesystem)
   - [How does one improve security posture of deployments?](#how-does-one-improve-security-posture-of-deployments)
   - [IPTables Commands](#iptables-commands)
+  - [How does MITM (Man in the Middle) attack work?](#how-does-mitm-man-in-the-middle-attack-work)
+  - [How does TLS prevent MITM attack?](#how-does-tls-prevent-mitm-attack)
+  - [What are Anycast IPs?](#what-are-anycast-ips)
+  - [How does Anycast IPs work?](#how-does-anycast-ips-work)
+  - [What is Apparmour and what does it do?](#what-is-apparmour-and-what-does-it-do)
+  - [What is Seccomp and what does it do?](#what-is-seccomp-and-what-does-it-do)
+  - [What are some of the steps one could take to harden a linux instance?](#what-are-some-of-the-steps-one-could-take-to-harden-a-linux-instance)
 - [System Design](#system-design)
   - [References](#references)
+  - [Design a commenting system](#design-a-commenting-system)
+  - [Design a CDN](#design-a-cdn)
   - [Design a code-deployment system](#design-a-code-deployment-system)
   - [Design a API rate limiter system](#design-a-api-rate-limiter-system)
 - [Docker](#docker)
@@ -63,6 +72,8 @@ I will update this post as time goes by - if there is more information on this
   - [Why you can't ping a service?](#why-you-cant-ping-a-service)
   - [Debugging steps for Kubernetes Applications](#debugging-steps-for-kubernetes-applications)
   - [What are some of the security steps to harden Kubernetes deployments?](#what-are-some-of-the-security-steps-to-harden-kubernetes-deployments)
+- [Databases](#databases)
+  - [How does one go about to "reshard" a database](#how-does-one-go-about-to-reshard-a-database)
 - [Useful links](#useful-links)
 
 
@@ -441,6 +452,34 @@ iptables -t nat -A PREROUTING -p tcp --dport 22 -d 192.168.5.201 -j DNAT --to-de
 iptables -A FORWARD -p tcp --dport 22 -d 172.16.1.102 -j ACCEPT
 ```
 
+### How does MITM (Man in the Middle) attack work?
+
+TODO: Add content
+
+### How does TLS prevent MITM attack?
+
+TODO: Add content
+
+### What are Anycast IPs?
+
+TODO: Add content
+
+### How does Anycast IPs work?
+
+TODO: Add content
+
+### What is Apparmour and what does it do?
+
+TODO: Add content
+
+### What is Seccomp and what does it do?
+
+TODO: Add content
+
+### What are some of the steps one could take to harden a linux instance?
+
+TODO: Add content
+
 {{< ads_header >}}
 
 ## System Design
@@ -448,6 +487,14 @@ iptables -A FORWARD -p tcp --dport 22 -d 172.16.1.102 -j ACCEPT
 ### References
 
 https://mecha-mind.medium.com/
+
+### Design a commenting system
+
+TODO: Add content
+
+### Design a CDN
+
+TODO: Add content
 
 ### Design a code-deployment system
 
@@ -718,6 +765,12 @@ How do we start debugging an application that is deployed on Kubernetes
 - Ensure that secrets are encrypted at rest and transit (either encrypt etcd or use KMS or Hashicorp vault)
 - Prevent container drift (someone went into the container to modify the running image)
 - Implement network policies (set policy for which pod can talk to which pod)
+
+## Databases
+
+### How does one go about to "reshard" a database
+
+TODO: Add content
 
 ## Useful links
 
