@@ -8,7 +8,7 @@ tags = [
 ]
 date = "2023-08-23"
 categories = [
-    "python",
+    "docker",
     "kubernetes",
     "golang",
 ]
