@@ -130,4 +130,131 @@ Due to `sshd` being a "root" level binary - we have no choice but to be root - p
 
 Also, similar to Jenkins controller's Dockerfile, we would also create the `.ssh` folder and set the owner to Jenkins.
 
+The final bit to get it all working together in a single command would be to write up `docker-compose.yaml`. With the above Dockerfiles, it should hopefully work with the following `docker-compose.yaml` definition.
 
+```yaml
+version: '3.3'
+
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8090:8080
+    restart: always
+    volumes:
+      - type: bind
+        source: ./secrets/private
+        target: /home/jenkins/.ssh/
+        read_only: true
+  agent:
+    build:
+      context: .
+      dockerfile: agent.Dockerfile
+    restart: always
+    volumes:
+      - type: bind
+        source: ./secrets/public
+        target: /home/jenkins/.ssh/
+        read_only: true
+```
+
+In order to ensure that we're not baking our ssh keys in the docker image, we need to ensure that it is mounted instead rather than adding it in a Dockerfile - during my first attempt at this, I added it within a Dockerfile but only realized quite a while later that that'll be a very very bad move (in the case someone managed to get the access to the internal terminal app of the docker container.)
+
+Do make sure that we have the folders available for use within the same folder that contains our main Jenkins controller's Dockerfile (which is named `Dockerfile`) as well as our agent's Dockerfile (which is named `agent.Dockerfile`). Our ssh keys should be in the `/secrets` folder with one `public` folder and one `private` folder. The public folder would only contain the `authorized_keys` file that would serve as the file that our main Jenkinsfile would authorize against with the private ssh key file. Our `private` folder would simply have the `ultimate_ssh_key` ssh key.
+
+One more thing of note that is changed as compared to previous blog post would be our Jenkins configuration as code yaml file. Naturally, there will be a slight focus on how to connect our main Jenkins main controller node to other nodes.
+
+```yaml
+jenkins:
+  systemMessage: Jenkins managed via Configuration as Code
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: admin
+         password: password
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            description: "Jenkins administrators"
+            permissions:
+              - "Overall/Administer"
+            entries:
+              - user: "admin"
+          - name: "readonly"
+            description: "Read-only users"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+            entries:
+              - user: "authenticated"
+  crumbIssuer: "standard" 
+  numExecutors: 0
+  nodes:
+    - permanent:
+        labelString: "linux"
+        mode: NORMAL
+        name: "zzz"
+        numExecutors: 4
+        remoteFS: "/home/jenkins"
+        launcher:
+          ssh:
+            host: "agent"
+            port: 22
+            javaPath: "/opt/java/openjdk/bin/java"
+            credentialsId: ultimate_ssh_key
+            launchTimeoutSeconds: 60
+            maxNumRetries: 3
+            retryWaitTime: 30
+            sshHostKeyVerificationStrategy:
+              manuallyTrustedKeyVerificationStrategy:
+                requireInitialManualTrust: false
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: SYSTEM
+              id: admin
+              username: admin
+              password: password
+          - basicSSHUserPrivateKey:
+              scope: SYSTEM
+              id: ultimate_ssh_key
+              username: jenkins
+              description: "SSH private key file. Provided via file"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${readFile:${SSH_PRIVATE_FILE_PATH}}" 
+jobs:
+  - file: /home/jobs/firstjob.groovy
+  - file: /home/jobs/secondjob.groovy
+
+unclassified:
+  # scmGit:
+  #   addGitTagAction: false
+  #   allowSecondFetch: false
+  #   createAccountBasedOnEmail: true
+  #   disableGitToolChooser: false
+  #   globalConfigEmail: jenkins@domain.local
+  #   globalConfigName: jenkins
+  #   hideCredentials: true
+  #   showEntireCommitSummaryInChanges: true
+  #   useExistingAccountWithSameEmail: false
+  location:
+    url: http://localhost:8090
+    adminAddress: admin@jenkins.com
+```
+
+The new parts would be the `credentials` section where a new credential was added - a ssh key credential. For our permanent nodes, we would connect it via our ssh keys - this is done via ssh launcher configuration.
+
+Another impact of the change in configuration is the need to install the following plugin as well. This plugin is to allow the Jenkins controller node to connect to agent nodes: `ssh-slaves`
+
+## Afterthoughts
+
+So far, our setup is only done on a single machine. For future setups, I will probably look into expanding to multi node setups or even one where we have Jenkins that connect to a Kubernetes cluster - one where it can utilize the entire cluster as its build worker (assumption based on Kubernetes plugin seen in Jenkins list of plugins page)
