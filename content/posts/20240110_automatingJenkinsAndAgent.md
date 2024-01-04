@@ -61,5 +61,73 @@ Once we have configured it, we can then run the following docker Jenkins agent t
 docker run --name agent -d --network cicd jenkins/agent java -jar /usr/share/jenkins/agent.jar -url http://jenkins:8080/ -secret <new secret always generated> -name zzz -workDir "/home/jenkins"
 ```
 
-With that, the Jenkins node should be available for use.
+With that, the Jenkins node should be available for use. However, the above setup is only via manual means - we can definitely do better.
+
+## Docker-compose setup of Jenkins
+
+TLDR - the setup will be maintained here: https://github.com/hairizuanbinnoorazman/Go_Programming/tree/master/Environment/jenkins. However, there is a chance that it might look different as compared to what we have on the blog, it will updated to keep up with thet times or maybe, there might be new features introduced to it.
+
+This setup is a more "automated" setup of Jenkins main controller node as well as a worker node. This would probably be a "better" way to setup some Jenkins clusters since with such automation in place, we would need to specify almost everything that our Jenkins node need - e.g. secrets/keys that we would be using in order for the nodes would connect to each other.
+
+The first part for this is to alter our controller Jenkins node's dockerfile.
+
+```Dockerfile
+FROM jenkins/jenkins:latest
+COPY plugins.txt /var/jenkins_home/plugins.txt
+RUN /bin/jenkins-plugin-cli -f /var/jenkins_home/plugins.txt
+COPY jenkins.yaml /var/jenkins_home/jenkins.yaml
+ENV JAVA_OPTS "-Djenkins.install.runSetupWizard=false ${JAVA_OPTS:-}"
+ENV CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
+ENV SSH_PRIVATE_FILE_PATH=/home/jenkins/.ssh/ultimate_ssh_key
+RUN git config --global user.email "you@example.com" && \
+    git config --global user.name "Your Name"
+COPY jobs /home/jobs
+COPY pipelines /home/pipelines
+USER root
+RUN mkdir -p /home/jenkins/.ssh && chown jenkins:jenkins /home/jenkins/.ssh
+USER jenkins
+```
+
+The first few lines are probably something that you've would have seen in previous blog posts on the jenkins topic. However, there are several new lines of code that might be of interest:
+
+```Dockerfile
+ENV SSH_PRIVATE_FILE_PATH=/home/jenkins/.ssh/ultimate_ssh_key
+...
+USER root
+RUN mkdir -p /home/jenkins/.ssh && chown jenkins:jenkins /home/jenkins/.ssh
+USER jenkins
+```
+
+These set of lines are partly to setup up the main Jenkins controller node to be able to utilize ssh keys in order to communicate with other Jenkins node. It's definitely a pain to connect Jenkins node together in the manual fashion from the above portion of this blog post. SSH keys seem to be more saner (and possibly safer option here)
+
+Important thing to note here is to create the `.ssh` directory at `/home/jenkins` and to ensure that we set the owner of that folder to jenkins. This is to ensure that our the user that'll be in controll of our Docker container would be able to access ssh files.
+
+```Dockerfile
+RUN git config --global user.email "you@example.com" && \
+    git config --global user.name "Your Name"
+COPY jobs /home/jobs
+COPY pipelines /home/pipelines
+```
+
+The lines mentioned here are mostly focused on us being able to set up pipeline jobs on the Jenkins and have it available immediately. One of the Jenkins job would require us to do some git operations to read pipeline Jenkinsfile code into Jenkins - that needs the git tool. However, the git tool is somewhat unusable unless we set the initial configuration such as setting global `user.email` and `user.name`.
+
+The jobs mentioned here are mostly here to assist in creating in the Jenkins pipelines. Jenkins pipelines configurations are not immediately available on Jenkins Configuration as Code - however, the there is a Jobs DSL which we can use to define simple Jenkins job that would help us to define Jenkins pipeline jobs.
+
+That's for the our main Jenkins controller node Dockerfile
+
+The next portion would be our Jenkin agent's Dockerfile
+
+```Dockerfile
+FROM jenkins/agent
+USER root
+RUN mkdir -p /home/jenkins/.ssh && chown jenkins:jenkins /home/jenkins/.ssh
+RUN apt update && apt install -y openssh-server
+RUN ssh-keygen -A && service ssh --full-restart
+CMD ["/usr/sbin/sshd", "-D"]
+```
+
+Due to `sshd` being a "root" level binary - we have no choice but to be root - probably need to figure how we can try avoid that, but that'll be a problem for another day.
+
+Also, similar to Jenkins controller's Dockerfile, we would also create the `.ssh` folder and set the owner to Jenkins.
+
 
