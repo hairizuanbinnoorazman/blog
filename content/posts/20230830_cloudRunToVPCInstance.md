@@ -5,12 +5,14 @@ tags = [
     "docker",
     "google-cloud",
     "python",
+    "serverless",
 ]
 date = "2023-08-30"
 categories = [
     "docker",
     "google-cloud",
     "python",
+    "serverless",
 ]
 +++
 

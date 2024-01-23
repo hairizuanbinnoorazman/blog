@@ -4,11 +4,13 @@ description = "Serverless with Google Cloud Workflows and Google Cloud Run"
 tags = [
     "golang",
     "google-cloud",
+    "serverless",
 ]
 date = "2022-10-10"
 categories = [
     "golang",
     "google-cloud",
+    "serverless",
 ]
 +++
 
