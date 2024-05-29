@@ -9,7 +9,7 @@ meta = "false"
 
 ## Bio
 
-Hairizuan is a Devops Engineer at Acronis. He is a avid fan of tools and technologies and has dabbled in various programming languages such as Golang, Python and R. He is currently one of the co-organizer for the GDG Cloud Singapore meetup group.
+Hairizuan is a Devops Engineer at Kiteworks. He is a avid fan of tools and technologies and has dabbled in various programming languages such as Golang, Python, Elm and R. He is currently one of the co-organizer for the GDG Cloud Singapore meetup group.
 
 ## Social Profiles
 
