@@ -30,6 +30,19 @@ Author for the following books
 
 ## Talks
 
+### Build your own redis
+
+Redis changed their license and that resulted in some companies needing to switch away from Redis. It might be a good opportunity to look at Redis to see how it clicks under the hood - how data is passed from server to redis servers etc (looking and trying to understand the redis protocol). We will then attempt to build a small redis based on that (only covering the critical redis api-s)
+
+Slides: https://docs.google.com/presentation/d/1qM8LUksshhiAkpdg6MLVRuWmY8gJ0beWU2IhWricFa8/edit?usp=sharing  
+Videos: https://www.youtube.com/live/BaNEKiJ7blA?si=ga4jSZ0mAN9GA76J&t=3220  
+
+### Build your own code assessment platform
+
+A session about building your own code assessment platform. Particular focus on the sandbox environment to run submitted code which will be implemented via docker for this particular talk. There will be a focus on security configurations needed for docker setup
+
+Slides: https://docs.google.com/presentation/d/1aIRND0mP-42b2ZKcvEJXtEX-31UT66v1BwL61khl-Yo/edit?usp=sharing  
+
 ### Feature flags can be surprisingly complicated
 
 Feature flags are usually an after-thought when it comes to building applications. However, there is an entire army of developers that think otherwise. There is now an small set of companies that aim to provide feature flags as a service. There is now even a project in CNCF that aims to standardize this in order to ensure that users are not bound to a single provider. This talk aims to cover this (and more if time permits)
@@ -162,6 +175,8 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2024-06-22 | GDG Cloud KL IO Extended 2024         | https://gdg.community.dev/events/details/google-gdg-cloud-kl-presents-gdg-cloud-kl-io-extended-2024/ | [Build your own redis](/speaker-profile#build-your-own-redis) |
+| 2024-06-01 | GDG Cloud Singapore IO Extended 2024  | https://gdg.community.dev/events/details/google-gdg-cloud-singapore-presents-google-io-extended-singapore-2024/ | [Build your own code assessment platform](/speaker-profile#build-your-own-code-assessment-platform) |
 | 2023-12-02 | GDG KL Devfest 2023                   | https://gdg.community.dev/events/details/google-gdg-kuala-lumpur-presents-devfest-2023-kuala-lumpur/ | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
 | 2023-11-18 | GDG Singapore Devfest 2023            | https://sites.google.com/view/devfest-singapore-2023/speakers | [Feature flags can be surprisingly complicated](/speaker-profile#feature-flags-can-be-surprisingly-complicated) |
 | 2023-10-14 | Geekcamp SG 2023                      | https://geekcamp.sg/                                        | [Block Youtube shorts with Chrome Extensions](/speaker-profile#block-youtube-shorts-with-chrome-extensions) |
