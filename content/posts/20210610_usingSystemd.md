@@ -10,11 +10,13 @@ categories = [
 ]
 +++
 
-Systemd is a convenient set of tooling that can be used to manage services and applications on a linux server.
+Systemd is a convenient set of tooling that can be used to manage services and applications on a linux server. When we are managing applications on a server, we would want the following properties automatically for most application - the requirements are somewhat for most applications:
+
+- Application should be able to restart if application panics/errors out
+- Application should start even if we rebooted the server
+- Logs should be able to handled by a tool that should hopefully do log rotation
 
 It would be good to follow the filesystem when putting the files on the server https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard 
-
-For `[Install]` section, refer to https://unix.stackexchange.com/questions/404667/systemd-service-what-is-multi-user-target
 
 The golang application that is to be deployed is this. It is just a simple golang application serving some quick text data:
 
@@ -79,6 +81,8 @@ KillSignal=SIGTERM
 [Install]
 WantedBy=multi-user.target
 ```
+
+For `[Install]` section, refer to https://unix.stackexchange.com/questions/404667/systemd-service-what-is-multi-user-target
 
 To test the application on the server, we would need to be in the terminal of the linux server and use `wget` or `curl` to get a http response against the application.
 
