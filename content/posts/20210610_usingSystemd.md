@@ -10,6 +10,8 @@ categories = [
 ]
 +++
 
+## What and why systemd?
+
 Systemd is a convenient set of tooling that can be used to manage services and applications on a linux server. When we are managing applications on a server, we would want the following properties automatically for most application - the requirements are somewhat for most applications:
 
 - Application should be able to restart if application panics/errors out
@@ -17,6 +19,8 @@ Systemd is a convenient set of tooling that can be used to manage services and a
 - Logs should be able to handled by a tool that should hopefully do log rotation
 
 It would be good to follow the filesystem when putting the files on the server https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard 
+
+## Managing golang app with systemd
 
 The golang application that is to be deployed is this. It is just a simple golang application serving some quick text data:
 
@@ -53,13 +57,20 @@ GOOS=linux GOARCH=amd64 go build -o golang-app app.go
 We would need to create the `golang-app` linux user. The user needs to be created to be used to run the application. We would also probably need to copy the application binary for 
 
 ```bash
-sudo useradd golang-app
+# In the case we need to generate new ssh keygen
+# NOTE: We may need to connect to public ip
+ssh-keygen -t ed25519
 scp -i <ssh file> <local file> <remote file location>
+ssh -i <ssh file> <username>@<local ip address>
+
+sudo useradd golang-app
 sudo mv ~/golang-app /usr/local/bin/golang-app
 sudo vim /etc/systemd/system/golang-app.service
 sudo systemctl enable golang-app
 sudo systemctl start golang-app
 sudo systemctl status golang-app
+
+# To view logs of the application
 sudo journalctl -u golang-app -f
 ```
 
@@ -89,6 +100,46 @@ To test the application on the server, we would need to be in the terminal of th
 ```bash
 curl http://localhost:8888
 ```
+
+## Bonus Content: Use nginx to access application
+
+Port 8888 is not a common port that is being used by most people. It is best to stick to well known ports for accessing websites - for insecure http websites; it will be port 80. For accessing websites in secure fashion protected by ssl certificates, it will be port 443.
+
+If we simply just change our code to use port 80, we will see the following error:
+
+```bash
+Nov 20 14:55:08 instance-20241120-143311 systemd[1]: Stopped golang-app.service - Golang Application.
+Nov 20 14:55:08 instance-20241120-143311 systemd[1]: Started golang-app.service - Golang Application.
+Nov 20 14:55:08 instance-20241120-143311 golang-app[1367]: 2024/11/20 14:55:08 Server starting on port 80
+Nov 20 14:55:08 instance-20241120-143311 golang-app[1367]: 2024/11/20 14:55:08 listen tcp :80: bind: permission denied
+Nov 20 14:55:08 instance-20241120-143311 systemd[1]: golang-app.service: Main process exited, code=exited, status=1/FAILURE
+```
+
+Reason for this is because the initial set of ports below 1000 being priviliged ports.
+
+Instead of doing some trickery/hackery to get this to work, we can simply rely on nginx - nginx already has developed a mechanism where nginx (a pretty mature application) - it is a common ways to do this
+
+```bash
+sudo apt install nginx
+```
+
+We then need to add some configuration in nginx to point nginx to our application.
+
+```text
+        server_name _;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+				# We simply need to comment out the following line and then add proxy_pass
+                #try_files $uri $uri/ =404;
+                proxy_pass http://localhost:8888;
+        }
+```
+
+This would then allow us to access the web application from port 80 without changing the user for our application to be root user.
+
+## Limiting resources via systemd
 
 The above set of files and configuration is to setup a basic golang application that can be managed with systemctl. Let's change it up and see another feature that comes along with systemd - it can be used to restrict resources for a application. We can limit cpu, memory, io, tasks etc.
 
@@ -191,6 +242,8 @@ With that, if we run the following curl commands multiple times, we would eventu
 ```bash
 curl localhost:8888?number=1000000
 ```
+
+## Using systemd for cron jobs
 
 Let's switch up things once more and show another interesting capability; apparently, systemctl can be used to handle periodic task type of application.
 
