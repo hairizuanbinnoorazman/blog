@@ -139,6 +139,83 @@ We then need to add some configuration in nginx to point nginx to our applicatio
 
 This would then allow us to access the web application from port 80 without changing the user for our application to be root user.
 
+## Configuration via Environment variables
+
+There are a couple of ways to configure our application:
+
+- Extract configuration from a external provider (e.g. Secrets Manager?)
+- Configuration file
+- Environment variables
+
+For extracting configuration from external provider, if we're using a cloud provider, we can have utilize the service account attached to virtual machine to access the apis accordingly.
+
+In the case of a configuration file, we would usually code out our application to be able to read files via usual functions that would read and parse the files. The configuration files can be in various formats such as yaml, json, toml etc. This mechanism isn't too affected by us deploying a service and managing it via systemd.
+
+However, when it comes environment variables - this is the one that would be different. Systemd has a approach to pass environment variables on a per service level (e.g. we can 2 or 3 different long lived serivces managed by systemd and each of them can have entirely different configured environment setups)
+
+```golang
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+	"net/http"
+)
+
+func main() {
+	port := 8888
+
+	applicationName := os.Getenv("APPLICATION_NAME")
+	if applicationName == "" {
+		fmt.Println("APPLICATION_NAME environment variable is unset")
+	} else {
+		fmt.Printf("APPLICATION_NAME environment set: %v\n", applicationName)
+	}
+
+	http.HandleFunc("/", helloWorldHandler)
+
+	log.Printf("Server starting on port %v\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
+}
+
+func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("serving", r.URL)
+	fmt.Fprint(w, "This is a test. Hello World Miaoza!!\n")
+}
+```
+
+We need to alter our systemd file slightly by adding the following in the `[Service]` section.
+
+```bash
+Environment="APPLICATION_NAME=miao"
+```
+
+```bash
+[Unit]
+Description=Golang Application
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Environment="APPLICATION_NAME=miao"
+User=golang-app
+Group=golang-app
+Restart=on-failure
+ExecStart=/usr/local/bin/golang-app
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Once we made the change, we would then need to reload it and then restart the service.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart golang-app
+```
+
 ## Limiting resources via systemd
 
 The above set of files and configuration is to setup a basic golang application that can be managed with systemctl. Let's change it up and see another feature that comes along with systemd - it can be used to restrict resources for a application. We can limit cpu, memory, io, tasks etc.
