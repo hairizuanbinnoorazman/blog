@@ -30,6 +30,13 @@ Author for the following books
 
 ## Talks
 
+### Back to Basics: Deploying an application on a server
+
+A workshop session that covers the basics of application deployment on a server such as:
+
+- scp of application artifacts to the server
+- Setup of systemd for the application on server
+
 ### Build your own redis
 
 Redis changed their license and that resulted in some companies needing to switch away from Redis. It might be a good opportunity to look at Redis to see how it clicks under the hood - how data is passed from server to redis servers etc (looking and trying to understand the redis protocol). We will then attempt to build a small redis based on that (only covering the critical redis api-s)
@@ -175,6 +182,10 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2024-11-30 | GDG Cloud Devfest KL 2024             | https://gdg.community.dev/events/details/google-gdg-cloud-kl-presents-gdg-cloud-kl-devfest-2024/ | [Feature flags can be surprisingly complicated](/speaker-profile#feature-flags-can-be-surprisingly-complicated) |
+| 2024-11-23 | GDG Devfest Singapore 2024            | https://gdg.community.dev/events/details/google-gdg-singapore-presents-devfest-singapore-2024-workshop/cohost-gdg-singapore | [Back to Basics: Deploying an application on a server](/speaker-profile#back-to-basics-deploying-an-application-on-a-server) |
+| 2024-11-16 | GDG Cloud Devfest Surabaya 2024       | https://gdg.community.dev/events/details/google-gdg-cloud-surabaya-presents-devfest-cloud-surabaya-2024/ | [Build your own redis](/speaker-profile#build-your-own-redis) |
+| 2024-08-29 | GDG Cloud Singapore August Meetup     | https://gdg.community.dev/events/details/google-gdg-cloud-singapore-presents-gdg-cloud-singapore-august-meetup/ | [Build your own redis](/speaker-profile#build-your-own-redis) |
 | 2024-06-22 | GDG Cloud KL IO Extended 2024         | https://gdg.community.dev/events/details/google-gdg-cloud-kl-presents-gdg-cloud-kl-io-extended-2024/ | [Build your own redis](/speaker-profile#build-your-own-redis) |
 | 2024-06-01 | GDG Cloud Singapore IO Extended 2024  | https://gdg.community.dev/events/details/google-gdg-cloud-singapore-presents-google-io-extended-singapore-2024/ | [Build your own code assessment platform](/speaker-profile#build-your-own-code-assessment-platform) |
 | 2023-12-02 | GDG KL Devfest 2023                   | https://gdg.community.dev/events/details/google-gdg-kuala-lumpur-presents-devfest-2023-kuala-lumpur/ | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
