@@ -129,3 +129,18 @@ $ sudo zfs diff new-pool@testing03 new-pool@testing04
 M       /usr/share/pool/data/testing02.txt
 M       /usr/share/pool/data/example02.txt
 ```
+
+Some interesting things:
+- We can't set a symbolic link to a snapshot - it'll complain that the file system being linked to is a read only file system and that won't for it.
+
+## Untested 
+
+This is some commands I haven't fully understood or tested it yet
+
+```bash
+# To bind mount a snapshot
+# A previous attempt to mount the snapshot resulted in difficulties to unmount (due to busy device)
+# Also, forcing an unmount via umount -l also led to us not being able to access the dir on .zfs snapshot folder. It complains of too many symbolic links (probably due to bad commnads and procedures)
+mkdir /mnt/snap1
+sudo mount --bind /tank/mydata/.zfs/snapshot/snap1 /mnt/snap1
+```
