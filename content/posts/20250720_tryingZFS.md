@@ -133,6 +133,10 @@ M       /usr/share/pool/data/example02.txt
 Some interesting things:
 - We can't set a symbolic link to a snapshot - it'll complain that the file system being linked to is a read only file system and that won't for it.
 
+## Cleanup
+
+We can simply delete the instance once we are done. An important thing to note here is that we also would need to remove the additional disks being used to power the zfs file systems - these are not automatically removed.
+
 ## Untested 
 
 This is some commands I haven't fully understood or tested it yet
