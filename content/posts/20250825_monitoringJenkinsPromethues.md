@@ -57,3 +57,9 @@ Technically this is enough to get something started with data collection. Actual
 ## Important step 3: Viewing of jenkins data on grafana
 
 We can then hook the grafana setup to the prometheus server. To check that metrics are collected correctly. Once the metrics collected, we can then use the following dashboard: https://grafana.com/grafana/dashboards/9964-jenkins-performance-and-health-overview/ to try to get something going.
+
+This could be a good promql that we can use to get average duration of job:
+
+```
+increase(default_jenkins_builds_duration_milliseconds_summary_sum{jenkins_job="firstjob"}[5m])/increase(default_jenkins_builds_duration_milliseconds_summary_count{jenkins_job="firstjob"}[5m])/1000
+```
