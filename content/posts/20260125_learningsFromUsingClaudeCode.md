@@ -61,6 +61,12 @@ E.g. Let's say if we have a huge dataset to process. We shouldn't dump the entir
 
 Another E.g. Let's say if we have a large log to collect. The log is accessible via some particular endpoint which could have been provided in the CLAUDE.md. If we let the model to collect the log on its own - it might proceed to curl and then pull the log and the entire log would easily end up in model context. If we alter the angle to have the model call a particular function that is standardized to retrieve the log that could be written as a file - that could be a better approach? And with that approach - there is no need for the model to try guessing how to receive the log
 
+## Sned image instead of describing the problem
+
+Inspiration from this: https://www.youtube.com/watch?v=M8kZLuukZgk  
+
+Apparently, Claude understands images quite well - but it can't generate images unfortunately. We can do things like taking screenshots or drawings and then pass it to the model. (Reference the feedback loop sections with playwright - some of the operations it might do is to take screenshot to confirm that the task is done or to understand context of the problem)
+
 ## Running multiple claude code runs at one go
 
 This one is also an inspiration from this video: https://www.youtube.com/watch?v=B-UXpneKw6M&pp=ygUUYm9yaXMgY2hlcm55IGFpIGxhYnPYBvwC  
