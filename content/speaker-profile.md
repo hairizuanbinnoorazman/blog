@@ -30,6 +30,12 @@ Author for the following books
 
 ## Talks
 
+### Introducing LLMs in Devops
+
+Introducing LLMs in order to automate Devops Processes within Kiteworks. The focus for this is the deployment of Chatbot that is backed by a Vector database and is able to retrieve better responses via RAG mechanism.  
+
+Slides: https://docs.google.com/presentation/d/141Yh_XS9u5g3CLgySv21eQj7fULB3hw4s-rJle75OvQ/edit?usp=sharing  
+
 ### Build your own code assessment platform but on Kubernetes
 
 Creating your own code assessment platform but on Kubernetes. This involves creating an application that would be deployed on Kubernetes. This application has the capability to spin up pods that would be able to run submitted code to check for "correctness" of the code etc.
@@ -188,6 +194,7 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2025-11-22 | GDG Singapore Devfest 2025            | https://gdg.community.dev/events/details/google-gdg-singapore-presents-devfest-singapore-2025-conference-1/cohost-gdg-singapore/ | [Introducing LLMs in Devops](/speaker-profile#introducing-llms-in-devops) |
 | 2025-06-14 | GDG Next Extended SG 2025             | https://gdg.community.dev/events/details/google-gdg-singapore-presents-google-cloud-next-extended-singapore-2025/cohost-gdg-singapore | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
 | 2024-11-30 | GDG Cloud Devfest KL 2024             | https://gdg.community.dev/events/details/google-gdg-cloud-kl-presents-gdg-cloud-kl-devfest-2024/ | [Feature flags can be surprisingly complicated](/speaker-profile#feature-flags-can-be-surprisingly-complicated) |
 | 2024-11-23 | GDG Devfest Singapore 2024            | https://gdg.community.dev/events/details/google-gdg-singapore-presents-devfest-singapore-2024-gemini-conference/ | [Build your own code assessment platform but on Kubernetes](/speaker-profile#build-your-own-code-assessment-platform-but-on-kubernetes) |
