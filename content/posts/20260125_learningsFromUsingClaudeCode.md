@@ -57,7 +57,9 @@ Other examples of feedback loops:
 
 AI models is not cheap. If there is a somewhat solved problem - we can introduce abstractions so that we can reduce the amount of tokens being used just to do fetching of such data.
 
-E.g. Let's say if we have a large log to collect. The log is accessible via some particular endpoint which could have been provided in the CLAUDE.md. If we let the model to collect the log on its own - it might proceed to curl and then pull the log and the entire log would easily end up in model context. If we alter the angle to have the model call a particular function that is standardized to retrieve the log that could be written as a file - that could be a better approach? And with that approach - there is no need for the model to try guessing how to receive the log
+E.g. Let's say if we have a huge dataset to process. We shouldn't dump the entire dataset into the model - that'll just be a waste of money in terms of input and output. The answer we're getting also doesn't have a good chance of being correct as well - models are not known to do math very well (remember the count the number of r in strawberry). Instead, what we can do is to have the model write script that can do such tasks - we'll get an intermediate output which we can inspect - and if that intermediate output is good, we can simply use it to get the result we want. - a concrete example would be to have the model to generate a sql script which we can then use to query the dataset.
+
+Another E.g. Let's say if we have a large log to collect. The log is accessible via some particular endpoint which could have been provided in the CLAUDE.md. If we let the model to collect the log on its own - it might proceed to curl and then pull the log and the entire log would easily end up in model context. If we alter the angle to have the model call a particular function that is standardized to retrieve the log that could be written as a file - that could be a better approach? And with that approach - there is no need for the model to try guessing how to receive the log
 
 ## Running multiple claude code runs at one go
 
