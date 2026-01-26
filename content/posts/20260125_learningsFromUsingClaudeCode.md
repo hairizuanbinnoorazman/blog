@@ -34,9 +34,26 @@ CLAUDE.md is the main file that we would use for understanding a particular code
 
 An example could be a situation where a python codebase started out without any typing information as parameters in functions. However, let's say we have done tasks to introduce typing across the codebase - if the CLAUDE.md doesn't have this explicitly - then it could have a chance to generate functions that might not fit that coding standards. If this was done more explicitly - it should know and will be conform in a better way
 
+## Try Planning mode
+
+This is an inspiration from this video:: https://www.youtube.com/watch?v=B-UXpneKw6M&pp=ygUUYm9yaXMgY2hlcm55IGFpIGxhYnPYBvwC  
+
+Use planning mode when trying an implementation. Reason for why planning produces pretty good output is due to the exploratory steps being run before hand. The explore steps help to build up the context which can then be used to draft a deeper through plan. A nice part is that at the end of planning mode, there is an option to clear context and ask the model to one shot the implementation based on the models
+
+## Establish feedback loops
+
+Claude model can easily write up the code at one go but sometimes - how would we know that the output works? This is where we can supercharge the process and remove the manual parts (especially QA parts)
+
+The easiest straight forward path is to have integration tests - and also mention it in CLAUDE.md. Once the model knows this - it will automatically know to run this and ensure that the integration tests passed. First it'll implement the code, then it'll run the integration tests. Once all tests passed, then the model will declare that the task is done.
+
+Other examples of feedback loops:
+
+- UI changes by either have playwrite UI tests. Or just give the model playwright mcp server
+- Creation of Jenkins jobs and have the model run the newly created jenkins job until it succeeds
+
 ## Running multiple claude code runs at one go
 
-This is an inspiration from this video: https://www.youtube.com/watch?v=B-UXpneKw6M&pp=ygUUYm9yaXMgY2hlcm55IGFpIGxhYnPYBvwC  
+This one is also an inspiration from this video: https://www.youtube.com/watch?v=B-UXpneKw6M&pp=ygUUYm9yaXMgY2hlcm55IGFpIGxhYnPYBvwC  
 
 We can setup a 4 screen iterm on mac os to run 4 different process run at one go  
 
