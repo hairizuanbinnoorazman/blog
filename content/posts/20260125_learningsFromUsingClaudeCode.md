@@ -53,6 +53,12 @@ Other examples of feedback loops:
 - UI changes by either have playwrite UI tests. Or just give the model playwright mcp server
 - Creation of Jenkins jobs and have the model run the newly created jenkins job until it succeeds
 
+## Introducing abstractions
+
+AI models is not cheap. If there is a somewhat solved problem - we can introduce abstractions so that we can reduce the amount of tokens being used just to do fetching of such data.
+
+E.g. Let's say if we have a large log to collect. The log is accessible via some particular endpoint which could have been provided in the CLAUDE.md. If we let the model to collect the log on its own - it might proceed to curl and then pull the log and the entire log would easily end up in model context. If we alter the angle to have the model call a particular function that is standardized to retrieve the log that could be written as a file - that could be a better approach? And with that approach - there is no need for the model to try guessing how to receive the log
+
 ## Running multiple claude code runs at one go
 
 This one is also an inspiration from this video: https://www.youtube.com/watch?v=B-UXpneKw6M&pp=ygUUYm9yaXMgY2hlcm55IGFpIGxhYnPYBvwC  
