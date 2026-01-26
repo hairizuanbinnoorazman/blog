@@ -10,7 +10,9 @@ categories = [
 ]
 +++
 
-Here are some of the learnings for using Claude Code
+Here are some of the learnings for using Claude Code. This will be a running document of learnings as we go along for the ride of using this tool  
+
+Last update: 26 January 2026  
 
 ## Utilizing Claude Plugins/Skills/Commands
 
