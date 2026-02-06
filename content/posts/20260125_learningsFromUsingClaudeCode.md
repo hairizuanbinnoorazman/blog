@@ -61,7 +61,7 @@ E.g. Let's say if we have a huge dataset to process. We shouldn't dump the entir
 
 Another E.g. Let's say if we have a large log to collect. The log is accessible via some particular endpoint which could have been provided in the CLAUDE.md. If we let the model to collect the log on its own - it might proceed to curl and then pull the log and the entire log would easily end up in model context. If we alter the angle to have the model call a particular function that is standardized to retrieve the log that could be written as a file - that could be a better approach? And with that approach - there is no need for the model to try guessing how to receive the log
 
-## Sned image instead of describing the problem
+## Send image instead of describing the problem
 
 Inspiration from this: https://www.youtube.com/watch?v=M8kZLuukZgk  
 
@@ -73,4 +73,14 @@ This one is also an inspiration from this video: https://www.youtube.com/watch?v
 
 We can setup a 4 screen iterm on mac os to run 4 different process run at one go  
 
-This allows faster code or output generation but it show bottlenecks in different place - which in this case - that would be at the pull request stage
+This allows faster code or output generation but it show bottlenecks in different place - which in this case - that would be at the pull request 
+
+## Keep Claude Code coding harness updated consistently
+
+Claude code improves at high speed over the past few weeks. Some of the latest and greatest feature simply get introduce very recently (beginning of this year). Some interesting examples of such concepts would be:
+
+- Skills (A differentiated approach to mcp tooling - progressive disclosure)
+- Task management
+- Swarms
+
+I'm still struggling to keep up with all the things that is happening in the market
