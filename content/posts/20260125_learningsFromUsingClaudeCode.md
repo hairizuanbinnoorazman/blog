@@ -84,3 +84,13 @@ Claude code improves at high speed over the past few weeks. Some of the latest a
 - Swarms
 
 I'm still struggling to keep up with all the things that is happening in the market
+
+## Spec-driven development vs one shot vs breaking up tasks for agents
+
+There are numerous ways to work with all the AI tooling.
+
+- Spec driven development - essentially, do a Product Management task to develop in-depth requirements document to cover the various features and edge cases of each feature. The entire document crafted can then be passed to AI tooling and potentially, an entire swarm of AI agents can cooperate to work on it.
+- One shot prompt - the ones that sometimes big companies market about constantnly - e.g. Anthropic on creating C compiler or Cloudflare creating a JS runtime based off Next.js
+- Breaking up tasks for agents and passing one small task to agent one at a time
+
+I lean more on the last option of the way for developing tools/products - the first option involves too much work to decide on the various aspects of the product - which could potentially go wrong as implementation starts (e.g library not available to support the feature?) - not 100% coverage while implementation is done on spec - too big of a massive change to review for a human. Second option feels like you're gambling - you're simply relying on the AI to plan and research - it does get better but highly likely, there will be various assumption that one does not agree on during implementation.
