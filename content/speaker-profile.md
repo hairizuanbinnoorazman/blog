@@ -30,6 +30,13 @@ Author for the following books
 
 ## Talks
 
+### Using Command-Line Tools to Power Smarter Content Strategy
+
+Everyone is rushing to build MCP servers and browser integrations for their AI agents — but sometimes the humble CLI is the smarter choice. In this session, Hairizuan will walk through how he wired a pre-built AI agent to two simple CLI tools: one pulling Google Analytics data, another querying Google Search Console. No servers, no OAuth dance on every run, just composable, scriptable, auditable pipelines. The result? An agent that reads what your audience is actually searching for and generating blog topic ideas grounded in real traffic signals — not vibes. We'll cover when CLIs beat MCP, and when they don't.  
+
+Slides: https://docs.google.com/presentation/d/18uTVAW_O2LNNt2bDnE3DYFonbpJvMxynKK6cBTNprbU/edit?usp=sharing
+
+
 ### Introducing LLMs in Devops
 
 Introducing LLMs in order to automate Devops Processes within Kiteworks. The focus for this is the deployment of Chatbot that is backed by a Vector database and is able to retrieve better responses via RAG mechanism.  
@@ -194,6 +201,7 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2026-04-28 | GDG Singapore April Meetup            | https://gdg.community.dev/events/details/google-gdg-singapore-presents-gdg-monthly-meetup-2604-supercharge-your-agents/ | [Using Command-Line Tools to Power Smarter Content Strategy](/speaker-profile#using-command-line-tools-to-power-smarter-content-strategy) |
 | 2025-11-22 | GDG Singapore Devfest 2025            | https://gdg.community.dev/events/details/google-gdg-singapore-presents-devfest-singapore-2025-conference-1/cohost-gdg-singapore/ | [Introducing LLMs in Devops](/speaker-profile#introducing-llms-in-devops) |
 | 2025-06-14 | GDG Next Extended SG 2025             | https://gdg.community.dev/events/details/google-gdg-singapore-presents-google-cloud-next-extended-singapore-2025/cohost-gdg-singapore | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
 | 2024-11-30 | GDG Cloud Devfest KL 2024             | https://gdg.community.dev/events/details/google-gdg-cloud-kl-presents-gdg-cloud-kl-devfest-2024/ | [Feature flags can be surprisingly complicated](/speaker-profile#feature-flags-can-be-surprisingly-complicated) |
