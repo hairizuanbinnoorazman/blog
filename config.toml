@@ -1,28 +1,51 @@
-pygmentsCodeFences = true
-baseurl = "https://www.hairizuan.com/"
+baseURL = "https://www.hairizuan.com/"
 title = "Experiment, Fail, Learn, Repeat"
-copyright = "Copyright &copy; 2017 - Hairizuan Noorazman"
-canonifyurls = true
-theme = "kiera"
-disqusShortname = 'www-hairizuan-com'
-
-paginate = 50
-
-summaryLength = 30
+theme = "blowfish"
+defaultContentLanguage = "en"
+languageCode = "en"
 enableEmoji = true
+enableRobotsTXT = true
+summaryLength = 30
+buildDrafts = false
+buildFuture = false
+disqusShortname = "www-hairizuan-com"
 
-googleAnalytics = "" #Google Analytics ID
+[pagination]
+  pagerSize = 20
 
 [permalinks]
-    posts = "/:title/"
+  posts = "/:title/"
 
-[author]
-    name = "Hairizuan Noorazman"       #Author name
-    github = "hairizuanbinnoorazman"     #Github username
-    linkedin = "hairizuan-noorazman"   #LinkedIn username
-    facebook = "hairizuan.noorazman"   #Facebook username
-    twitter = ""    #Twitter username
-    instagram = ""  #Instagram username
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
 
-[params]
-    tagline = "Life is too exciting to just keep still!"
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[related]
+  threshold = 40
+  includeNewer = true
+  toLower = true
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 80
+
+  [[related.indices]]
+    name = "series"
+    weight = 70
+
+  [[related.indices]]
+    name = "date"
+    weight = 10

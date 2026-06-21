@@ -1,0 +1,22 @@
+disabled = false
+locale = "en"
+label = "English"
+weight = 1
+title = "Experiment, Fail, Learn, Repeat"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  dateFormat = "2 January 2006"
+  description = "Practical notes and experiments on Kubernetes, Golang, Google Cloud, DevOps, observability, and software engineering."
+  copyright = "Copyright © { year } Hairizuan Noorazman"
+
+[params.author]
+  name = "Hairizuan Noorazman"
+  headline = "Life is too exciting to just keep still!"
+  bio = "Software engineering experiments, implementation notes, and lessons learned."
+  links = [
+    { github = "https://github.com/hairizuanbinnoorazman" },
+    { linkedin = "https://www.linkedin.com/in/hairizuan-noorazman" },
+    { facebook = "https://www.facebook.com/hairizuan.noorazman" },
+  ]
