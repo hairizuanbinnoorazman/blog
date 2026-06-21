@@ -1,9 +1,15 @@
 {{/* get file that matches the filename as specified as src="" in shortcode */}}
 {{ $src := resources.Get (.Get "src") }}
 
-{{ $mediumw := default "1200x q100 webp" }}
-{{ .Scratch.Set "medium" ($src.Resize $mediumw) }}
-{{ $medium := .Scratch.Get "medium" }}
-
-{{/* only use images smaller than or equal to the src (original) image size */}}
-<img src="{{ $medium.RelPermalink }}" {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{ end }} loading="lazy">
+{{ with $src }}
+  {{ $medium := .Resize "1200x webp q85" }}
+  <img
+    src="{{ $medium.RelPermalink }}"
+    width="{{ $medium.Width }}"
+    height="{{ $medium.Height }}"
+    {{ with $.Get "alt" }}alt="{{ . }}"{{ else }}alt=""{{ end }}
+    loading="lazy"
+    decoding="async">
+{{ else }}
+  {{ errorf "img shortcode could not find asset %q" ($.Get "src") }}
+{{ end }}

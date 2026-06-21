@@ -1,29 +1,34 @@
 # Blog
 
-Blog posts on hugo
+Hugo blog published at https://www.hairizuan.com.
 
-In order to simplify some of the hugo commands, we would use a makefile contains a couple of commands
+## Prerequisites
+
+- Git with submodule support
+- Hugo Extended 0.159.1 or a compatible newer version supported by the pinned Blowfish theme
+
+Initialize the theme after cloning:
+
+```bash
+git submodule update --init --recursive
+```
+
+## Development
+
+Build the site:
 
 ```bash
 make build
 ```
 
-After running the above command, we can try running a local instance and to see how it looks like before deploying to a public domain.
+Run a local server:
 
 ```bash
-make local
+hugo server --buildFuture=false
 ```
 
-The online content of this is available on https://www.hairizuan.com
+Netlify uses the Hugo version pinned in `netlify.toml`.
 
-# Weird hacks
+## Custom components
 
-Just a sidenote; attempted to add elm elements to the following pages - however, it seems quite troublesome to configure the build environment to run elm commands - no clear documentation on netlify on usage of elm (I guess the language is pretty obscure so I guess this is to be expected).
-
-So, currently taking the lazy way by just generating the `*.min.js` files are dumping it into the static folder
-
-Regarding image optimization - the following blog post is a good guide:  
-https://alexlakatos.com/web/2020/07/17/hugo-image-processing/
-
-Refer to the last comment in this page:  
-https://discourse.gohugo.io/t/are-asset-pipelines-working-on-netlify-for-anyone/12953/10
+The site includes locally maintained shortcodes for Elm tools, advertisements, legacy Mermaid diagrams, and Hugo asset-processed images. Generated Elm JavaScript remains checked into `static/toolsjs` because Elm is not part of the Netlify build.

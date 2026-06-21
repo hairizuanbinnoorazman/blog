@@ -1,0 +1,49 @@
+[[main]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 10
+
+[[main]]
+  name = "Categories"
+  pageRef = "categories"
+  weight = 20
+
+[[main]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 30
+
+[[main]]
+  name = "Tools"
+  pageRef = "tools"
+  weight = 40
+
+[[main]]
+  name = "Speaker"
+  pageRef = "speaker-profile"
+  weight = 50
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 60
+
+[[main]]
+  identifier = "search"
+  pre = "search"
+  weight = 70
+
+[[footer]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 10
+
+[[footer]]
+  name = "Privacy"
+  pageRef = "policy"
+  weight = 20
+
+[[footer]]
+  name = "RSS"
+  url = "/index.xml"
+  weight = 30

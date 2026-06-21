@@ -1,0 +1,75 @@
+colorScheme = "blowfish"
+defaultAppearance = "light"
+autoSwitchAppearance = true
+
+enableSearch = true
+enableCodeCopy = true
+enableStructuredBreadcrumbs = true
+mainSections = ["posts"]
+disableImageOptimization = false
+disableImageOptimizationMD = false
+fingerprintAlgorithm = "sha512"
+
+[seo]
+  metaDescriptionOrder = ["description", "summary", "site"]
+
+[header]
+  layout = "basic"
+
+[footer]
+  showMenu = true
+  showCopyright = true
+  showThemeAttribution = true
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[homepage]
+  layout = "profile"
+  showRecent = true
+  showRecentItems = 10
+  showMoreLink = true
+  showMoreLinkDest = "/posts/"
+  cardView = false
+
+[article]
+  showDate = true
+  showDateUpdated = true
+  showAuthor = true
+  showBreadcrumbs = true
+  showHeadingAnchors = true
+  showPagination = true
+  showReadingTime = true
+  showTableOfContents = true
+  showRelatedContent = true
+  showComments = true
+  relatedContentLimit = 4
+  showTaxonomies = true
+  showCategories = true
+  showTags = true
+  showWordCount = true
+  sharingLinks = ["linkedin", "reddit", "facebook", "email"]
+
+[list]
+  showBreadcrumbs = true
+  showSummary = true
+  showTableOfContents = false
+  groupByYear = true
+  cardView = false
+  constrainItemsWidth = true
+
+[taxonomy]
+  showTermCount = true
+  showBreadcrumbs = true
+  cardView = false
+
+[term]
+  showBreadcrumbs = true
+  showTableOfContents = true
+  groupByYear = false
+  cardView = false
+
+[sitemap]
+  excludedKinds = []
+
+[advertisement]
+  adsense = "ca-pub-2996737023778330"
