@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div class="w-full">
+  <div class="homepage-index w-full">
     {{ $partial := print "home/" .Site.Params.homepage.layout ".html" }}
     {{ if templates.Exists (printf "partials/%s" $partial) }}
       {{ partial $partial . }}

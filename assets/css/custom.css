@@ -8,6 +8,10 @@
   max-width: 100%;
 }
 
+.homepage-index .article-link--simple {
+  max-width: none;
+}
+
 #bmi-calculator,
 #busarrival,
 #sample-elm {
