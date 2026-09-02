@@ -125,3 +125,4 @@ Even with those limits, Runtime v2 changes the experiment substantially. Multike
 - [Persistent ext4 Roots for Multikernel Linux on Google Compute Engine]({{< ref "20260830_ext4ForMultikernelLinuxOnGCE.md" >}})
 - [Turning Container Images into Multikernel Linux Roots]({{< ref "20260831_containerImagesForMultikernelLinux.md" >}})
 - [Networking Containers in Multikernel Linux Child Kernels]({{< ref "20260831_networkingMultikernelLinuxContainers.md" >}})
+- [Anatomy of a Multikernel Container from the Primary Linux Host]({{< ref "20260901_observingMultikernelContainersFromPrimaryLinux.md" >}})
