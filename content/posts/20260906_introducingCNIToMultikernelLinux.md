@@ -111,6 +111,225 @@ The child kernel does not boot during CNI `ADD`. Network allocation and sandbox 
 
 This indirection also creates a conformance question that should not be hidden. In the current topology, the interface inside `CNI_NETNS` carries the primary-side gateway address, while the `ADD` result describes the child-side workload address. A conventional CNI caller expects the result to describe the interface it asked the plugin to configure in that namespace. Treating the namespace as a proxy for an interface in another kernel is the core Multikernel adaptation, but it still needs an explicit integration contract and end-to-end tests against the caller. Implementing the command names alone is not proof of complete CNI conformance.
 
+## The TUN interface is a doorway for IP packets
+
+A normal network interface connects the Linux network stack to some mechanism that can transmit packets. A physical interface such as the GCE NIC sends them through virtual hardware. One end of a veth pair sends Ethernet frames directly to its peer inside the same Linux kernel. A TUN interface is different: it sends layer-three IP packets to a userspace program through a file descriptor.
+
+The direction of reads and writes can initially feel reversed:
+
+```text
+Linux routes a packet out through a TUN
+  -> userspace reads that complete IP packet from the TUN descriptor
+
+userspace writes a complete IP packet to the TUN descriptor
+  -> Linux receives it as a packet arriving on the TUN interface
+```
+
+There is no Ethernet header and no emulated Ethernet cable on this boundary. TAP devices carry layer-two Ethernet frames; TUN devices carry layer-three IP packets. The runtime uses TUN because its packet pump needs complete IP packets and the link is point-to-point rather than a shared Ethernet segment.
+
+The current CNI topology uses both a veth and a TUN because they solve different problems:
+
+- The veth pair connects the primary root network namespace to the CNI-provided namespace. Both ends are managed by the primary kernel.
+- The TUN connects that namespace to the shim's userspace packet pump.
+- The packet pump carries the IP packet over the authenticated Multikernel transport.
+- `mk-agent` writes the packet into a second TUN owned by the child kernel.
+
+For an example child allocation of `172.30.30.2/30`, the namespace-side TUN is configured with gateway address `172.30.30.1/30`. The child-side TUN uses `172.30.30.2/30` and treats `.1` as its gateway. The two TUN devices are not one shared kernel object. They are endpoints in different kernels connected by the packet pump.
+
+The MTU controls the largest IP packet Linux should send through the interface without fragmentation. This runtime records one negotiated MTU and applies it to the host veth, namespace veth, namespace TUN, and child TUN. A conservative value such as 1400 leaves room for transport overhead. Inconsistent MTUs would produce failures that look application-specific: small HTTP requests might work while larger transfers stall or fragment.
+
+On the primary, an operator can inspect the pieces with commands like:
+
+```sh
+ip link show mkv0123456789a
+ip netns list
+ip -n mk-0123456789ab link show
+ip -n mk-0123456789ab address show
+```
+
+The exact names are generation-derived. `mknetd` verifies that the interfaces are present, up, and configured with the recorded MTU rather than assuming that a durable state file proves the Linux objects still exist.
+
+## Routes tell each Linux stack where the next hop is
+
+An IP address identifies an endpoint; it does not by itself tell Linux how to reach every other address. Linux consults its routing table for each packet, chooses the most specific matching destination prefix, and sends the packet through the selected interface toward an optional next-hop gateway.
+
+This design crosses three separate routing domains:
+
+```text
+child kernel routing table
+  default via 172.30.30.1 dev mkn0
+
+CNI namespace routing table in the primary kernel
+  172.30.30.0/30 is attached to the TUN
+  default via 100.64.30.1 dev mkhost0
+
+primary root-namespace routing table
+  172.30.30.0/30 via 100.64.30.2 dev mkv<generation>
+  existing default route via the GCE NIC
+```
+
+The `100.64.30.1/30` and `100.64.30.2/30` pair is a transit network for the veth. It is not the address exposed to the child workload. Its purpose is to give the primary root namespace and the CNI namespace an explicit next-hop relationship.
+
+Consider an outbound packet from `172.30.30.2` to `93.184.216.34`:
+
+1. The child has no more specific route, so it selects its default route through `mkn0` and gateway `172.30.30.1`.
+2. `mk-agent` and the shim carry the packet to the namespace TUN.
+3. The namespace receives the packet on the TUN. Its default route sends the packet through `mkhost0` to transit peer `100.64.30.1`.
+4. The veth delivers it to `mkv<generation>` in the primary root namespace.
+5. The primary's normal default route sends it through the GCE NIC.
+
+The return path needs the explicit route installed in the primary root namespace. After the destination server replies, the primary sees a packet for `172.30.30.2`. The route for `172.30.30.0/30` sends it through the generation's veth to `100.64.30.2`. The CNI namespace then directs it to the TUN, where the shim reads it and transports it into the child.
+
+Without one of these routes, the packet is not automatically discovered elsewhere. It is normally dropped or follows an unrelated default route. Useful inspection commands are:
+
+```sh
+ip route show 172.30.30.0/30
+ip -n mk-0123456789ab route show
+```
+
+`CHECK` verifies both the child-network route in the root namespace and the default route in the CNI namespace. This detects configuration drift such as an operator deleting a route while leaving all interfaces up.
+
+## NAT gives private child addresses an external identity
+
+The child address comes from a private range. An internet server does not have a route back to `172.30.30.2`, and GCE's surrounding network expects traffic from the VM's configured address rather than an unknown child subnet.
+
+On Linux, the kernel's packet-filtering and address-translation framework is called Netfilter. `iptables` is the command-line tool used by this runtime to install rules into that framework. The vocabulary has several layers:
+
+| Term | Meaning |
+|---|---|
+| Table | A collection of chains for one broad purpose. The `filter` table controls permission; the `nat` table changes addresses. |
+| Chain | An ordered list of rules examined at one packet-processing stage. |
+| Rule | A set of matches followed by an action. |
+| Match | A condition such as source address, incoming interface, outgoing interface, or connection state. |
+| Target | The action selected with `-j`, such as `ACCEPT`, `DROP`, `REJECT`, or `MASQUERADE`. |
+
+Built-in chains are named for where they occur in the packet's journey. A simplified traversal is:
+
+```text
+packet arriving for the primary itself
+  -> PREROUTING -> routing decision -> INPUT
+
+packet passing through the primary
+  -> PREROUTING -> routing decision -> FORWARD -> POSTROUTING
+
+packet created by a primary process
+  -> OUTPUT -> routing decision -> POSTROUTING
+```
+
+`PREROUTING` is reached before Linux decides where an arriving packet should go. `INPUT` handles a packet whose destination is the primary machine itself. `FORWARD` handles a packet being routed through the primary between interfaces. `OUTPUT` handles packets created locally. `POSTROUTING` is reached after Linux has selected the outgoing route and interface, immediately before the packet leaves that networking domain.
+
+The child packet is forwarded traffic: it enters through the generation's veth, crosses the primary, and leaves through the GCE interface. It therefore encounters the `FORWARD` chain for permission and the `POSTROUTING` chain for final source-address translation.
+
+Network Address Translation changes the packet as it leaves the primary. The runtime installs a `POSTROUTING` `MASQUERADE` rule for the exact child source address and the configured egress interface:
+
+```text
+before NAT
+  source 172.30.30.2:49152
+  destination 93.184.216.34:80
+
+after NAT on the GCE NIC
+  source <primary-VM-address>:<translated-port>
+  destination 93.184.216.34:80
+```
+
+The corresponding command has this shape when the primary egress interface is `ens4`:
+
+```sh
+iptables -t nat -A POSTROUTING \
+  -s 172.30.30.2/32 -o ens4 -j MASQUERADE
+```
+
+Each argument describes one part of the rule:
+
+- `-t nat` selects the address-translation table. Without `-t`, iptables operates on the `filter` table by default.
+- `-A POSTROUTING` appends the rule to the end of the `POSTROUTING` chain.
+- `-s 172.30.30.2/32` matches only the exact child source address. A `/32` represents one IPv4 address.
+- `-o ens4` matches packets whose selected output interface is the primary's external interface.
+- `-j MASQUERADE` jumps to the action that replaces the private source with the current address of `ens4`.
+
+`MASQUERADE` is a form of source NAT, commonly shortened to SNAT. Source NAT changes the sender address. Destination NAT, or DNAT, changes the destination and is commonly used for port forwarding. This runtime needs outbound SNAT; it does not publish an inbound child service with DNAT.
+
+Using the interface's current address is convenient for a cloud VM whose address is part of host configuration rather than a value the runtime should duplicate. It also explains why this rule belongs in `POSTROUTING`: Linux must first choose `ens4` before `MASQUERADE` can use that interface's address.
+
+Linux connection tracking, often called conntrack, remembers flows that pass through Netfilter. For TCP and UDP, a flow is distinguished using protocol plus source and destination addresses and ports. When NAT changes `172.30.30.2:49152` into the primary address and a translated port, conntrack records both forms. When the reply returns, the primary can reverse the mapping and restore destination `172.30.30.2:49152`. The route described above then carries the packet back toward the child.
+
+This state is why the reply does not need a second manually configured reverse-NAT rule for every connection. The first packet establishes the translation; later packets belonging to that flow reuse it.
+
+NAT solves address reachability; it does not decide whether traffic is allowed. Routing can select the GCE NIC and NAT can translate the source, but the firewall can still reject forwarding. These are separate Linux subsystems even though they participate in the same packet path.
+
+The active translation rule can be inspected with:
+
+```sh
+iptables -t nat -S POSTROUTING
+```
+
+Deletion removes the exact generation's NAT rule. Leaving it behind could cause a later workload reusing the address to inherit stale behavior, which is why the rule is part of endpoint ownership rather than general host setup.
+
+## Firewall rules define which routed traffic is permitted
+
+Enabling IP forwarding allows Linux to route packets between interfaces, but it does not express the isolation policy. `mknetd` adds a dedicated iptables chain for every endpoint generation and jumps to it when traffic enters the root namespace from that endpoint's host veth.
+
+These firewall rules use the default `filter` table. Its built-in `FORWARD` chain is specifically for traffic routed through the machine. It is different from `INPUT`, which protects services running on the primary itself, and `OUTPUT`, which handles traffic created by a primary process.
+
+Rules in a chain are evaluated from top to bottom until a terminating target decides the packet's fate. The important targets here are:
+
+- `ACCEPT`: allow the packet to continue;
+- `DROP`: silently discard it;
+- `REJECT`: discard it and normally return an error response; and
+- a custom chain name: jump into that chain and evaluate its more specific rules.
+
+`mknetd` inserts a rule near the beginning of `FORWARD` with this general shape:
+
+```sh
+iptables -I FORWARD 1 \
+  -i mkv0123456789a -j MK-0123456789ab
+```
+
+Here, `-I FORWARD 1` inserts at position one instead of appending, `-i` matches the interface on which the packet entered the root namespace, and `-j` sends the packet into the endpoint's private chain. The interface and chain names are derived from the endpoint generation, preventing two live endpoints from sharing policy objects accidentally.
+
+The chain applies its rules in order:
+
+1. Drop packets whose source is not the exact allocated child address. This is an anti-spoofing check: the child cannot claim to be a sibling or some arbitrary primary-network address.
+2. Permit DNS over UDP or TCP to `169.254.169.254` when that address supplies the configured resolver behavior.
+3. Reject other traffic to `169.254.169.254`, preventing general access to the GCE metadata service through the DNS exception.
+4. Drop traffic whose output interface matches another Multikernel veth. This prevents direct routing from one sandbox to a sibling.
+5. Accept traffic leaving through the configured external interface.
+6. Drop everything else as the chain's final fallback.
+
+There is a separate return rule. It uses `-i` for the external incoming interface, `-o` for the endpoint's outgoing veth, and the conntrack match `--ctstate RELATED,ESTABLISHED`.
+
+`ESTABLISHED` means the packet belongs to a flow already seen in both directions, or to the continuing tracked conversation created by the child's outbound packet. `RELATED` means it belongs to a separate flow that conntrack can associate with an existing one, such as certain protocol error or helper-generated traffic. `NEW` would describe the beginning of an unrelated connection and is deliberately absent from this return rule.
+
+Packets arriving from the external interface may therefore go back to the endpoint veth only when connection tracking associates them with permitted existing traffic. An arbitrary new inbound connection is not accepted merely because outbound NAT exists.
+
+```text
+child starts outbound connection
+  -> endpoint chain validates source and egress
+  -> connection tracking records the flow
+  -> NAT translates it
+
+reply arrives
+  -> connection tracking recognizes ESTABLISHED traffic
+  -> return rule permits it toward the endpoint
+
+unrelated inbound packet
+  -> no matching established flow
+  -> not permitted by the endpoint return rule
+```
+
+An operator can inspect the generation-specific policy with:
+
+```sh
+iptables -S FORWARD
+iptables -S MK-0123456789ab
+```
+
+The generation in the chain name ties the rules to one endpoint incarnation. During `DEL`, `mknetd` removes the jump rules, flushes and deletes the private chain, and removes the NAT rule. During `CHECK`, it verifies each expected rule individually. A chain existing under the right name is insufficient if its anti-spoofing or final-drop rule has disappeared.
+
+The distinction between `DROP` and `REJECT` is intentional in the metadata rules. `REJECT` gives an immediate failure for prohibited metadata access instead of making the workload wait for a timeout. The final catch-all uses `DROP`, ensuring that traffic not explicitly described by the endpoint policy does not escape through an unexpected interface.
+
+These rules provide the current narrow policy: an exact child source may initiate traffic through the primary's external interface, receive replies to tracked connections, and use the allowed DNS path, but it may not route directly to another Multikernel endpoint. They are not a general Kubernetes NetworkPolicy implementation.
+
 ## Two generations solve two different reuse problems
 
 The endpoint has its own generation, while the child sandbox has a sandbox generation:
