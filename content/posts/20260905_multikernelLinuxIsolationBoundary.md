@@ -48,6 +48,79 @@ They do not create a hostile-kernel memory boundary. The child runs at ring 0 an
 
 The Multikernel DMA heap is even more explicit: it maps selected pool pages for sharing between userspace, kernels, and devices. Shared memory is a transport mechanism, not isolation.
 
+## What setting memory aside actually protects
+
+The reservation still has value. It prevents the primary's normal page allocator from handing the same physical pages to an unrelated primary process while the child is using them. It also gives the approved child kernel a truthful E820 description and initial page tables containing only its assigned range.
+
+For normal software, the layers look like this:
+
+```text
+child userspace process
+  -> child virtual address selected by the process
+  -> child page tables selected by the child kernel
+  -> assigned physical page
+```
+
+A child userspace process cannot ordinarily name an arbitrary physical address. Its load and store instructions use virtual addresses. The CPU walks page tables controlled by the child kernel, checks user-versus-kernel and read/write/execute permissions, and raises a page fault when the access is not permitted. A buffer overrun in an ordinary process therefore does not simply continue into the primary kernel's memory.
+
+The weakness appears at the next trust boundary. The child kernel owns those page tables and runs with kernel privilege. If the child kernel is malicious—or a workload exploits it and obtains kernel execution—it can replace its page tables, load a new CR3 value, and attempt to map physical addresses outside the range advertised by E820. E820 tells a cooperative kernel which memory it should use; it is not a hardware access-control list applied to every memory reference.
+
+The distinction is:
+
+| Situation | What the reservation provides |
+|---|---|
+| Correct child kernel and ordinary process | Normal process isolation plus non-overlapping child allocation |
+| Accidental primary allocation | Primary allocator avoids pages recorded as belonging to the child |
+| Buggy child kernel using only its normal allocators | Good chance of remaining inside the described range, depending on the bug |
+| Malicious or compromised child kernel | No enforced barrier against constructing mappings to other guest-physical addresses |
+| Malicious primary kernel | No confidentiality for child memory; the trusted primary can deliberately map or inspect it |
+
+The primary is trusted in this design. “The primary will not use the child's pages” is an operational rule enforced through its cooperative allocator, not protection of the child from the primary. This is also normal for a conventional non-confidential VM: the host and hypervisor are trusted and can generally inspect guest memory. Confidential-VM technology addresses that different direction of trust.
+
+## What a virtual machine adds
+
+A proper virtual machine places another memory-enforcement layer beneath the guest kernel. The guest controls its own page tables, but the hypervisor controls a second translation from guest-physical to host-physical memory. Intel EPT, AMD NPT, Arm Stage 2, shadow page tables, and software emulation are different ways to preserve this core property: the guest kernel must not control the final boundary around its memory.
+
+This project runs inside a GCE virtual machine, so the cloud hypervisor still isolates the complete GCE VM from the cloud host and other VMs. It does not create a boundary between the primary kernel and its Multikernel children. To the outer hypervisor, they are all execution within one guest-physical address space.
+
+I cover how the main hypervisor implementations enforce this distinction in [How Hypervisors Isolate Virtual Machine Memory]({{< ref "20260907_hypervisorMemoryIsolation.md" >}}).
+
+## What a container escape means here
+
+“Container escape” can refer to different boundaries, so it helps to trace the privileges gained at each step.
+
+The workload begins as a process inside the child. Its immediate controls include its child-side credentials, chroot or root filesystem, supported OCI restrictions, process groups, and the child kernel's normal user/kernel separation. Escaping only the filesystem root or process policy could expose `mk-agent` or other resources inside the same child without yet reaching the primary.
+
+The more serious path is a child-kernel exploit:
+
+```text
+attacker controls a workload process
+  -> triggers a vulnerability in the child kernel
+  -> gains ring-0 execution in the child
+  -> creates page-table mappings outside the assigned child range
+  -> reads or modifies primary/sibling guest-physical memory
+  -> targets credentials, code, page tables, or runtime state
+  -> gains execution or control in the primary
+```
+
+This is not necessarily an easy exploit. The attacker still needs a child-kernel vulnerability, useful knowledge of memory layout, and a reliable way to turn physical-memory access into control. Kernel address randomization, reduced child devices, minimal bootstrap userspace, mediated I/O, and strict protocols can make the path harder. They are defense in depth, not the missing hardware check.
+
+The important security difference from a normal container is that the workload makes syscalls into the child kernel rather than the primary kernel. A kernel exploit initially compromises a disposable child, not directly the primary's running kernel. This can reduce exposure of primary-kernel state and services and can contain many non-adversarial failures.
+
+The important difference from a proper VM is what happens after that first kernel compromise. In a VM, EPT/NPT continues enforcing the guest's memory assignment even when the guest kernel is hostile. In this Multikernel design, the same software that has just been compromised controls the only page tables between the child and the GCE VM's broader guest-physical memory.
+
+There are other possible escape paths that do not begin with arbitrary memory mappings:
+
+- exploit a parser or lifecycle bug in the primary-side agent, storage, or network service through an authenticated shared transport;
+- corrupt intentionally shared Multikernel control or DMA memory;
+- abuse APIC, MSR, I/O-port, or other privileged platform operations not interposed by a hypervisor between siblings;
+- exhaust shared cache, memory bandwidth, interrupts, or other machine resources; or
+- exploit a mistakenly passed-through device or shared controller.
+
+This explains the runtime's layers of validation even though the workload is labeled trusted. Bounded frames, strict JSON, generations, HMACs, safe path handling, primary-owned devices, and failure reconciliation reduce accidental and exploitable interfaces. None changes the central conclusion: the current memory allocation must not be used as the sole security boundary for a hostile workload.
+
+So the requirement is stronger than “ensure child processes do not spill beyond the maximum.” For unprivileged child processes, the child kernel already enforces virtual-memory boundaries. For a compromised child kernel, the maximum must be enforced by something the child kernel cannot modify. That is the role EPT/NPT plays in a proper hypervisor-backed VM, and it is the enforcement layer missing between the Multikernel siblings.
+
 ## CPU handoff is exclusive but shares the platform
 
 Before assigning a CPU, the primary takes it offline and parks it. The implementation records pool membership and rejects invalid returns. After a successful handoff, the logical CPU executes the child rather than ordinary primary work.
@@ -147,5 +220,6 @@ For the current runtime, precision is the most useful security feature. “Trust
 - [Pinned Multikernel isolation audit](https://github.com/hairizuanbinnoorazman/multikernel-linux-expt/blob/main/docs/runtime/research/g1-pinned-isolation-audit.md)
 - [Ownership and trust contract](https://github.com/hairizuanbinnoorazman/multikernel-linux-expt/blob/main/docs/runtime/contracts/ownership-and-trust.md)
 - [Host qualification and isolation learnings](https://github.com/hairizuanbinnoorazman/multikernel-linux-expt/blob/main/docs/runtime/learnings/01-g1-host-and-isolation.md)
+- [How Hypervisors Isolate Virtual Machine Memory]({{< ref "20260907_hypervisorMemoryIsolation.md" >}})
 - [Can Multikernel Linux Run on Google Compute Engine?]({{< ref "20260828_multikernelLinuxOnGoogleComputeEngine.md" >}})
 - [Persistent ext4 Roots for Multikernel Linux on Google Compute Engine]({{< ref "20260830_ext4ForMultikernelLinuxOnGCE.md" >}})
