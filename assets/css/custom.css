@@ -18,3 +18,140 @@
   max-width: 100%;
   overflow-x: auto;
 }
+
+/* Offline Access Indicator Badge (Article Header) */
+.offline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  line-height: 1.3;
+  user-select: none;
+  transition: all 0.25s ease-in-out;
+  cursor: default;
+}
+
+.offline-badge-available {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.dark .offline-badge-available {
+  background-color: rgba(6, 78, 59, 0.35);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.offline-badge-offline {
+  background-color: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.dark .offline-badge-offline {
+  background-color: rgba(120, 53, 15, 0.35);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.offline-badge-syncing {
+  background-color: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
+.dark .offline-badge-syncing {
+  background-color: rgba(30, 58, 138, 0.35);
+  color: #93c5fd;
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.offline-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-online,
+.offline-badge-available .offline-badge-dot {
+  background-color: #10b981;
+}
+
+.dot-offline,
+.offline-badge-offline .offline-badge-dot {
+  background-color: #f59e0b;
+}
+
+.dot-syncing,
+.offline-badge-syncing .offline-badge-dot {
+  background-color: #3b82f6;
+  animation: pulse-dot 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+/* Global Connection Status Toast Notification */
+.offline-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  max-width: 420px;
+  background-color: #ffffff;
+  color: #0f172a;
+  padding: 0.75rem 1.1rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 99999;
+  transform: translateY(140%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.dark .offline-toast {
+  background-color: #1e293b;
+  color: #f8fafc;
+  border-color: #334155;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.offline-toast.toast-show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.offline-toast.toast-warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.offline-toast.toast-success {
+  border-left: 4px solid #10b981;
+}
+
+.offline-toast.toast-info {
+  border-left: 4px solid #0284c7;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

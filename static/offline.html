@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline · Experiment, Fail, Learn, Repeat</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --text-color: #0f172a;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --primary: #0284c7;
+      --muted: #64748b;
+      --badge-bg: #e0f2fe;
+      --badge-text: #0369a1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #0f172a;
+        --text-color: #f8fafc;
+        --card-bg: #1e293b;
+        --border-color: #334155;
+        --primary: #38bdf8;
+        --muted: #94a3b8;
+        --badge-bg: #0c4a6e;
+        --badge-text: #bae6fd;
+      }
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 3rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-color);
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+    .saved-list-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .saved-list-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .saved-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .saved-item a {
+      display: block;
+      color: var(--primary);
+      text-decoration: none;
+      word-break: break-word;
+      font-weight: 500;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.02);
+      border: 1px solid var(--border-color);
+    }
+    .saved-item a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="badge">
+        <span>⚡</span> Offline Mode
+      </div>
+      <h1>You are currently offline</h1>
+      <p>
+        This specific post or page has not been saved to your local disk storage yet.
+      </p>
+      <p>
+        Once you're back online, this page will automatically reconnect and refetch the latest content.
+      </p>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="window.history.back()">Go Back</button>
+        <button class="btn" onclick="window.location.reload()">Retry Connection</button>
+        <a class="btn" href="/">Homepage</a>
+      </div>
+    </div>
+
+    <div class="saved-list-card" id="saved-posts-section" style="display: none;">
+      <h2 class="saved-list-title">💾 Articles saved on this device</h2>
+      <p style="font-size: 0.9rem; margin-bottom: 1rem;">
+        You can read any of these posts without an internet connection:
+      </p>
+      <ul class="saved-list" id="saved-posts-list"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Auto-reload when back online
+    window.addEventListener('online', function () {
+      window.location.reload();
+    });
+
+    // Populate list of cached articles stored on disk
+    if ('caches' in window) {
+      caches.open('blog-offline-v1').then(function (cache) {
+        return cache.keys();
+      }).then(function (requests) {
+        var list = document.getElementById('saved-posts-list');
+        var section = document.getElementById('saved-posts-section');
+        var paths = new Set();
+
+        requests.forEach(function (req) {
+          try {
+            var url = new URL(req.url);
+            var p = url.pathname;
+            if (p && p.length > 1 && !p.includes('.') && p !== '/offline.html') {
+              paths.add(p);
+            }
+          } catch (e) {}
+        });
+
+        if (paths.size > 0) {
+          paths.forEach(function (path) {
+            var li = document.createElement('li');
+            li.className = 'saved-item';
+            var link = document.createElement('a');
+            link.href = path;
+            var cleanTitle = path.replace(/^\//, '').replace(/\/$/, '').replace(/[-_]/g, ' ');
+            link.textContent = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+            li.appendChild(link);
+            list.appendChild(li);
+          });
+          section.style.display = 'block';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
