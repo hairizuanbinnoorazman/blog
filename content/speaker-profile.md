@@ -29,6 +29,18 @@ Author for the following books
 
 ## Talks
 
+### Building a Software Factory with GenAI
+
+Sharing how to build and operate a GenAI-powered software factory using autonomous AI agents to streamline and scale software engineering workflows.
+
+
+### Agent Sandbox on GKE
+
+Deploying and running Agent Sandbox on Google Kubernetes Engine (GKE) to provide isolated execution environments for AI agents using gVisor and GKE Pod Snapshots.
+
+Blog Post: https://www.hairizuan.com/deploying-agent-sandbox-with-gvisor-and-memory-snapshots-on-gke-standard/
+
+
 ### Using Command-Line Tools to Power Smarter Content Strategy
 
 Everyone is rushing to build MCP servers and browser integrations for their AI agents — but sometimes the humble CLI is the smarter choice. In this session, Hairizuan will walk through how he wired a pre-built AI agent to two simple CLI tools: one pulling Google Analytics data, another querying Google Search Console. No servers, no OAuth dance on every run, just composable, scriptable, auditable pipelines. The result? An agent that reads what your audience is actually searching for and generating blog topic ideas grounded in real traffic signals — not vibes. We'll cover when CLIs beat MCP, and when they don't.  
@@ -200,6 +212,8 @@ This is a Demo only session. No slides are available here.
 
 | Date       | Event Name                            | Event Link                                                  | Topic |
 | :--------: | :------------------------------------ | :---------------------------------------------------------- | ----- |
+| 2026-07-22 | Beyond the Vibes: AI In The Wild      | https://luma.com/btv?period=past&e=evt-lRV1Av2G5ERq1jE      | [Building a Software Factory with GenAI](/speaker-profile#building-a-software-factory-with-genai) |
+| 2026-06-27 | GDG Next Extended SG 2026             | https://gdg.community.dev/events/details/google-gdg-singapore-presents-google-cloud-next-extended-singapore-2026/cohost-gdg-singapore/ | [Agent Sandbox on GKE](/speaker-profile#agent-sandbox-on-gke) |
 | 2026-04-28 | GDG Singapore April Meetup            | https://gdg.community.dev/events/details/google-gdg-singapore-presents-gdg-monthly-meetup-2604-supercharge-your-agents/ | [Using Command-Line Tools to Power Smarter Content Strategy](/speaker-profile#using-command-line-tools-to-power-smarter-content-strategy) |
 | 2025-11-22 | GDG Singapore Devfest 2025            | https://gdg.community.dev/events/details/google-gdg-singapore-presents-devfest-singapore-2025-conference-1/cohost-gdg-singapore/ | [Introducing LLMs in Devops](/speaker-profile#introducing-llms-in-devops) |
 | 2025-06-14 | GDG Next Extended SG 2025             | https://gdg.community.dev/events/details/google-gdg-singapore-presents-google-cloud-next-extended-singapore-2025/cohost-gdg-singapore | [Deploying apps using workload identity on GKE](/speaker-profile#deploying-apps-using-workload-identity-on-gke) |
