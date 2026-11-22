@@ -30,13 +30,15 @@ This post covers a different approach: **keep the jobs as they are, and change w
 
 It took me a while to get the layering straight, so here it is:
 
-```text
-Docker / containerd (or the Kubernetes CRI) - asks an OCI runtime to start the container
-  Kata Containers (shim + kata-agent in the guest) - an OCI runtime like runc, but starts a VM
-    VMM: QEMU | Cloud Hypervisor | Dragonball | Firecracker - the program that creates the VM
-      KVM (/dev/kvm) - hardware-assisted virtualisation in the Linux kernel
-        EC2 instance with nested virtualisation enabled - the "host" is itself a cloud guest
-```
+{{<mermaid>}}
+graph TD
+    A["Docker / containerd (or the Kubernetes CRI)<br/>asks an OCI runtime to start the container"]
+    B["Kata Containers (shim + kata-agent in the guest)<br/>an OCI runtime like runc, but starts a VM"]
+    C["VMM: QEMU, Cloud Hypervisor, Dragonball or Firecracker<br/>the program that creates the VM"]
+    D["KVM (/dev/kvm)<br/>hardware-assisted virtualisation in the Linux kernel"]
+    E["EC2 instance with nested virtualisation enabled<br/>the host is itself a cloud guest"]
+    A --> B --> C --> D --> E
+{{</mermaid>}}
 
 Two things follow from this. Firecracker is not an alternative to Kata; it is one of the VMMs Kata can drive. And on a cloud provider you need **nested virtualisation**, because the node is already a VM. Not every instance type offers it. I used an `m7i-flex.2xlarge` on AWS, which I initially assumed could not do it. The EC2 API says it can, and it can. Bare metal instances are the other route and avoid the nesting cost, but I did not compare them.
 

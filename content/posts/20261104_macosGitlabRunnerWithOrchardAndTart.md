@@ -28,14 +28,15 @@ The setup in this post gets one clean VM per job on a small number of Macs, with
 
 ## The Pieces
 
-```text
-GitLab ──(runner polls)──▶ runner pod (custom executor) ──▶ Orchard controller ◀── Orchard worker (on each Mac)
- job (tag: macos)            runs in Kubernetes               one small service      launchd service, dials OUT
-                                                                   │                       │
-                                                                   └── schedules VM ──────▶ Tart VM (job runs here)
-
- reaper CronJob: deletes leaked or expired VMs
-```
+{{<mermaid>}}
+graph LR
+    A["GitLab job (tag: macos)"] -->|"runner polls"| B["Runner pod (custom executor, in Kubernetes)"]
+    B --> C["Orchard controller"]
+    W["Orchard worker (launchd service on each Mac)"] -->|"dials out"| C
+    C -->|"schedules VM"| W
+    W --> V["Tart VM (job runs here)"]
+    R["Reaper CronJob"] -->|"deletes leaked or expired VMs"| C
+{{</mermaid>}}
 
 - **[Tart](https://tart.run)** runs macOS and Linux VMs on Apple Silicon using Apple's Virtualization framework. Images are OCI artifacts, so you can store and pull them from a normal container registry.
 - **[Orchard](https://github.com/cirruslabs/orchard)** is the orchestrator for Tart. A *controller* holds the desired state (which VMs should exist), and a *worker* process on each Mac creates and deletes VMs to match. Workers connect out to the controller, so the Macs do not need to be reachable from the cluster.

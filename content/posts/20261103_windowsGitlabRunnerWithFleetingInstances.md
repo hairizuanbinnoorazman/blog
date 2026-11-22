@@ -30,16 +30,15 @@ A full VM brings its own problems: it is slow to boot, it costs money while it r
 
 ## The Moving Parts
 
-```text
-GitLab job ──▶ runner manager (a small Linux pod) ──▶ fleeting AWS plugin
-                                                          │  scale ASG up by one
-                                                          ▼
-                                             EC2 Auto Scaling group (Windows Server + Docker)
-                                                          │  new instance
-                                                          ▼
-                       manager connects over WinRM, runs the job in PowerShell,
-                       then terminates the instance (max_use_count = 1)
-```
+{{<mermaid>}}
+graph TD
+    A["GitLab job"] --> B["Runner manager (a small Linux pod)"]
+    B --> C["Fleeting AWS plugin"]
+    C -->|"scale ASG up by one"| D["EC2 Auto Scaling group (Windows Server + Docker)"]
+    D -->|"new instance"| E["Fresh Windows instance"]
+    B -->|"WinRM: run the job in PowerShell"| E
+    E -->|"job done, max_use_count = 1"| F["Instance terminated"]
+{{</mermaid>}}
 
 - **The runner manager** is an ordinary `gitlab-runner` process. It does not run jobs itself and it does not need to run on Windows. I run it as a Linux pod in a cluster I already have, but it could just as well be a systemd service on a small VM.
 - **Fleeting** is the library GitLab Runner uses to talk to "something that provides instances". The AWS plugin treats an **Auto Scaling group** as that something. Scaling out a job means raising the group's desired capacity by one.
