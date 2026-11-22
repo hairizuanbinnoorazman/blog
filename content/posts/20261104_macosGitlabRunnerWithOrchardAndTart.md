@@ -29,13 +29,12 @@ The setup in this post gets one clean VM per job on a small number of Macs, with
 ## The Pieces
 
 {{<mermaid>}}
-graph LR
-    A["GitLab job (tag: macos)"] -->|"runner polls"| B["Runner pod (custom executor, in Kubernetes)"]
+graph TD
+    A["GitLab job<br/>tag: macos"] -->|"runner polls"| B["Runner pod<br/>custom executor, in Kubernetes"]
     B --> C["Orchard controller"]
-    W["Orchard worker (launchd service on each Mac)"] -->|"dials out"| C
-    C -->|"schedules VM"| W
-    W --> V["Tart VM (job runs here)"]
-    R["Reaper CronJob"] -->|"deletes leaked or expired VMs"| C
+    R["Reaper CronJob<br/>deletes leaked or expired VMs"] --> C
+    C -->|"schedules VM"| W["Orchard worker<br/>launchd service on each Mac<br/>dials out to the controller"]
+    W --> V["Tart VM<br/>the job runs here"]
 {{</mermaid>}}
 
 - **[Tart](https://tart.run)** runs macOS and Linux VMs on Apple Silicon using Apple's Virtualization framework. Images are OCI artifacts, so you can store and pull them from a normal container registry.
