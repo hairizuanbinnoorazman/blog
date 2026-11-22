@@ -29,6 +29,11 @@ Author for the following books
 
 ## Talks
 
+### Running Docker Workflows on Kubernetes Without Privileged Mode
+
+Running Docker inside Kubernetes traditionally requires Docker-in-Docker in privileged mode or mounting the host container runtime socket, both of which weaken cluster isolation and bypass Kubernetes security controls. This talk explores the motivation behind building `dockube`—a Kubernetes-native CLI and controller that brings familiar Docker workflows to Pods without needing privileged mode or socket access, translating container operations into namespace-scoped Kubernetes resources so teams keep RBAC, admission policies, and resource quotas intact.
+
+
 ### Building a Software Factory with GenAI
 
 Sharing how to build and operate a GenAI-powered software factory using autonomous AI agents to streamline and scale software engineering workflows.
